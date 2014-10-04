@@ -3,7 +3,9 @@
 var mongoose = require('mongoose'),
     Announcement = mongoose.model('Announcement');
 
-
+/*
+ * Create Announcement
+ */
 exports.create = function(req,res){
     var announcement = new Announcement(req.body);
 
