@@ -6,7 +6,6 @@ var ManifestSchema = new Schema({
     conformationID: { type: String, required: true },
     basePrice: {  type: String, required: true },
     eventDesc: {  type: String, required: true },
-    eventID: { type: String,required: true },
     rideAlong: { type: String, required: false },
     riderWanted: {  type: String,  required: true },
     skillClass: {  type: String, required: true },
@@ -15,7 +14,10 @@ var ManifestSchema = new Schema({
         required: true },
     vehicleID: { type: Schema.ObjectId,
         ref:'Vehicle',
-        required: false }
+        required: false },
+    eventID: { type: Schema.ObjectId,
+        ref: 'Event',
+        required: true }
 });
 
 
