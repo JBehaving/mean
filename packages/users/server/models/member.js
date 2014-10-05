@@ -14,7 +14,7 @@ var MemberSchema = new Schema({
     userCreatedDate: { type: String, required: true },
     streetAddress: { type: String, required: true },
     userFirstName: { type: String, required: true },
-    userID: { type: Object.SchemaId,
+    userID: { type: Schema.ObjectId,
         ref:'User',
         required: true },
     userLastName: { type: String, required: true },
