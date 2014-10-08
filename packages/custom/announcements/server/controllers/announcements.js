@@ -19,6 +19,50 @@ exports.create = function(req,res){
         });
 };
 
+/**
+ * Update an announcement
+ */
+exports.update = function (req, res) {
+    var announcement = req.announcement;
+
+    announcement = _.extend(announcement, req.body);
+
+    announcement.save(function(err) {
+        if(err) {
+            return res.json(500, {
+                error: 'Cannot update the announcement'
+            });
+        }
+        res.json(announcement);
+
+    });
+};
+
+/**
+ * Delete an announcement
+ */
+exports.destroy = function(req, res) {
+  var announcement = req.announcement;
+
+  announcement.remove(function(err) {
+    if (err) {
+      return res.json(500, {
+        error: 'Cannot delete the announcement'
+      });
+    }
+    res.json(announcement);
+
+  });
+};
+
+/**
+ * Show an article
+ */
+exports.show = function(req, res) {
+  res.json(req.announcement);
+};
+
+
 
 exports.all = function(req,res) {
     Announcement.find().exec(function(err, announcements) {
