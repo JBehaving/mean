@@ -10,8 +10,8 @@
 }
 
 .omb_login .omb_socialButtons a {
-    color: white; // In yourUse @body-bg
-opacity:0.9;
+    color: white;
+    opacity:0.9;
 }
 .omb_login .omb_socialButtons a:hover {
     color: white;
@@ -33,8 +33,6 @@ opacity:0.9;
 .omb_login .omb_loginOr .omb_hrOr {
     background-color: #cdcdcd;
     height: 1px;
-    margin-top: 0px !important;
-    margin-bottom: 0px !important;
 }
 .omb_login .omb_loginOr .omb_spanOr {
     display: block;
