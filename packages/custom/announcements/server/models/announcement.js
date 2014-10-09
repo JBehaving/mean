@@ -1,3 +1,8 @@
+'use strict';
+
+/**
+ * Module dependencies
+ */
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
@@ -15,6 +20,16 @@ var AnnouncementSchema = new Schema({
     newsTitle: { type: String, required: true }}
     );
 
+/**
+ * Field validations
+ */
+AnnouncementSchema.path('newsTitle').validate(function(newsTitle) {
+    return !!newsTitle;
+}, 'Title cannot be blank');
+
+AnnouncementSchema.path('newsBody').validate(function(newsBody) {
+    return !!newsBody;
+}, 'Announcement content cannot be blank');
 
 
 mongoose.model('Announcement',AnnouncementSchema);

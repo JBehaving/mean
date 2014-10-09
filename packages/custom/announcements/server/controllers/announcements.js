@@ -25,7 +25,7 @@ exports.create = function(req,res){
 exports.update = function (req, res) {
     var announcement = req.announcement;
 
-    announcement = _.extend(announcement, req.body);
+/*    announcement = _.extend(announcement, req.body);*/
 
     announcement.save(function(err) {
         if(err) {
@@ -56,7 +56,7 @@ exports.destroy = function(req, res) {
 };
 
 /**
- * Show an article
+ * Show an announcement
  */
 exports.show = function(req, res) {
   res.json(req.announcement);
