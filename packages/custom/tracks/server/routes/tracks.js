@@ -23,4 +23,9 @@ module.exports = function(Tracks, app, auth, database) {
       res.send(html);
     });
   });
+
+    var events = require('../controllers/events');
+
+    app.get('/tracks', tracks.all);
+    app.post('/tracks:trackName', tracks.create);
 };

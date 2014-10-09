@@ -23,4 +23,8 @@ module.exports = function(Events, app, auth, database) {
       res.send(html);
     });
   });
+    var events = require('../controllers/events');
+
+    app.get('/events', events.all);
+    app.post('/events:eventName', events.create);
 };
