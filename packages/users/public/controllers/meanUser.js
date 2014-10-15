@@ -1,6 +1,23 @@
 'use strict';
 angular.module('mean.users')
-  .controller('LoginCtrl', ['$scope', '$rootScope', '$http', '$location',
+    /*.controller('SwitcherCtrl', ['$scope', '$document', '$olvidado', '$acceso',
+        function ($scope, $document) {
+    angular.element(document).ready(function () {
+        var e1 = document.getElementById('olvidado');
+        var e2 = document.getElementById('acceso');
+        var e3 = document.getElementById('form-olvidado');
+
+        e1.click(function (e) {
+            e.preventDefault();
+            e3.toggle('500');
+        });
+        e2.click(function (e) {
+            e.preventDefault();
+            e3.toggle('500');
+        });
+    });
+}])*/
+    .controller('LoginCtrl', ['$scope', '$rootScope', '$http', '$location',
     function($scope, $rootScope, $http, $location) {
       // This object will be filled by the form
       $scope.user = {};
@@ -112,3 +129,19 @@ angular.module('mean.users')
       };
     }
   ]);
+function Switcher($scope) {
+    angular.element(document).ready(function () {
+        var e1 = document.getElementById('olvidado');
+        var e2 = document.getElementById('acceso');
+        var e3 = document.getElementById('form-olvidado');
+
+        e1.click(function (e) {
+            e.preventDefault();
+            e3.toggle('500');
+        });
+        e2.click(function (e) {
+            e.preventDefault();
+            e3.toggle('500');
+        });
+    });
+};
