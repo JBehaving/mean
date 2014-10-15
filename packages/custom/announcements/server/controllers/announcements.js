@@ -62,6 +62,12 @@ exports.show = function(req, res) {
   res.json(req.announcement);
 };
 
+/**
+ * Default Display of 5 latest Announcments
+ */
+//exports.latest = function(req, res) {
+//
+//};
 
 
 exports.all = function(req,res) {
