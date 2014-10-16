@@ -24,8 +24,8 @@ module.exports = function(Tracks, app, auth, database) {
     });
   });
 
-    var events = require('../controllers/events');
+    //var events = require('../controllers/events');
 
-    app.get('/tracks', tracks.all);
-    app.post('/tracks:trackName', tracks.create);
+    //app.get('/tracks', tracks.all);
+    //app.post('/tracks:trackName', tracks.create);
 };

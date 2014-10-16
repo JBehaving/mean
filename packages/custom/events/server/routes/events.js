@@ -1,5 +1,6 @@
 'use strict';
 
+
 // The Package is past automatically as first parameter
 module.exports = function(Events, app, auth, database) {
 
@@ -26,5 +27,16 @@ module.exports = function(Events, app, auth, database) {
     var events = require('../controllers/events');
 
     app.get('/events', events.all);
-    app.post('/events:eventName', events.create);
+    app.post('/events/:eventName', events.create);
+
+   // app.route('/events/:eventId')
+     //   .get(events.show);
+
+    app.route('/events/:eventId/register/')
+        .post(auth.requiresLogin,events.registerForEvent);
+
+    //app.route('/events/completeRegistration')
+       // .post(events.completeRegistration);
+
+    app.param('eventId',events.event);
 };

@@ -40,7 +40,7 @@ exports.create = function(req, res) {
             console.log('failed to create a track ' + err);
             return res.send('/index');
         } else {
-            res.jsonp(events);
+            res.jsonp(tracks);
             console.log('tried to create a track' + err);
         }
     });
