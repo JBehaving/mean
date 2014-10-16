@@ -6,15 +6,13 @@
 
           <div class="row omb_row-sm-offset-3 omb_socialButtons">
               <div class="col-xs-4 col-sm-3">
-                  <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
-                      <i class="fa fa-facebook visible-xs"></i>
-                      <span class="hidden-xs">Facebook</span>
+                  <a href="#">
+                      <img src="/system/assets/img/fblogin.png" class="btn btn-lg btn-block">
                   </a>
               </div>
               <div class="col-xs-4 col-sm-3">
-                  <a href="#" class="btn btn-lg btn-block omb_btn-google">
-                      <i class="fa fa-google-plus visible-xs"></i>
-                      <span class="hidden-xs">Google+</span>
+                  <a href="#">
+                      <img src="/system/assets/img/g+login.png" class="btn btn-lg btn-block">
                   </a>
               </div>
           </div>
@@ -35,14 +33,14 @@
                                   <span class="input-group-addon">
                                     @
                                   </span>
-                                  <input class="form-control" ng-model="user.email" placeholder="Email" name="email" type="email" required="" autofocus="">
+                                  <input class="form-control glowing-border" ng-model="user.email" placeholder="Email" name="email" type="email" required="" autofocus="">
                               </div>
                               <div class="form-group input-group">
                                   <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-lock">
                                     </i>
                                   </span>
-                                  <input class="form-control" ng-model="user.password" placeholder="Password" name="password" type="password" value="" required="">
+                                  <input class="form-control glowing-border" ng-model="user.password" placeholder="Password" name="password" type="password" value="" required="">
                               </div>
                               <div class="form-group">
                                   <button type="submit" class="btn btn-primary btn-block btn-default">
@@ -52,7 +50,7 @@
                               <label class="form-group">
                                   <input type="checkbox" value="remember-me" checked> Remember Me
                               </label>
-                              <a ng-click="active=!active" class="pull-right text-muted" href="#" id="olvidado"><small>Forgot your password?</small></a>
+                              <a ng-click="active=!active" class="pull-right text-muted" href="#"><small>Forgot your password?</small></a>
                           </fieldset>
                       </form>
                   </div>
@@ -60,7 +58,7 @@
                       <h4 class="">
                           Forgot your password?
                       </h4>
-                      <form accept-charset="UTF-8" role="form" id="login-recordar" method="post">
+                      <form ng-submit="forgotpw()" accept-charset="UTF-8" role="form" id="forgotpw" method="post">
                           <fieldset>
                               <span class="help-block">
                                 Input the email address you use to log in to your account.
@@ -71,13 +69,13 @@
                                   <span class="input-group-addon">
                                     @
                                   </span>
-                                  <input class="form-control" placeholder="Email" name="email" type="email" required="">
+                                  <input class="form-control glowing-border" placeholder="Email" name="email" type="email" required="">
                               </div>
-                              <button type="submit" class="btn btn-primary btn-block btn-default" id="btn-olvidado">
+                              <button type="submit" class="btn btn-primary btn-block btn-default">
                                   continue
                               </button>
                               <p class="help-block">
-                                  <a ng-click="active=!active" class="pull-right text-muted"  href="#" id="acceso"><small>Return to Login</small></a>
+                                  <a ng-click="active=!active" class="pull-right text-muted"  href="#"><small>Return to Login</small></a>
                               </p>
                           </fieldset>
                       </form>

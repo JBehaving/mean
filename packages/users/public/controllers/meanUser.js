@@ -31,6 +31,17 @@ angular.module('mean.users')
             $scope.loginerror = 'Authentication failed.';
           });
       };
+      $scope.forgotpw = function() {
+        $http.post('/forgot-password', {
+          text: $scope.text
+        })
+          .success(function(response) {
+            $scope.response = response;
+          })
+          .error(function(error) {
+            $scope.response = error;
+          });
+      };
     }
   ])
   .controller('RegisterCtrl', ['$scope', '$rootScope', '$http', '$location',
@@ -65,7 +76,7 @@ angular.module('mean.users')
       };
     }
   ])
-  .controller('ForgotPasswordCtrl', ['$scope', '$rootScope', '$http', '$location',
+  /*.controller('ForgotPWCtrl', ['$scope', '$rootScope', '$http', '$location',
     function($scope, $rootScope, $http, $location) {
       $scope.user = {};
       $scope.forgotpassword = function() {
@@ -80,7 +91,7 @@ angular.module('mean.users')
           });
       };
     }
-  ])
+  ])*/
   .controller('ResetPasswordCtrl', ['$scope', '$rootScope', '$http', '$location', '$stateParams',
     function($scope, $rootScope, $http, $location, $stateParams) {
       $scope.user = {};

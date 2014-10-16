@@ -13,3 +13,9 @@
     color: black;
     opacity: 1;
 }
+
+.glowing-border:focus {
+    outline: none;
+    border-color: gray;
+    box-shadow: 0 0 10px gray;
+}
