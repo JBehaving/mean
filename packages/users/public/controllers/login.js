@@ -1,41 +1,34 @@
 /**
  * Created by Cody on 10/7/2014.
  */
-/*'use strict';
-angular.module('mean.users', []);
-
-function Switcher($scope) {
-    angular.element(document).ready(function () {
-        $('#olvidado').click(function (e) {
-            e.preventDefault();
-            $('div#form-olvidado').toggle('500');
-        });
-        $('#acceso').click(function (e) {
-            e.preventDefault();
-            $('div#form-olvidado').toggle('500');
-        });
+'use strict';
+angular.module('mean.users')
+    .controller('SwitcherCtrl', function($scope) {
+        $scope.active = true;
     })
-};*/
-    /*
-    .controller('SwitcherCtrl', ['$scope', '$document', function($scope, $document) {
-        $scope.swap = function() {
-        $('#olvidado').click(function (e) {
-            e.preventDefault();
-            $('div#form-olvidado').toggle('500');
-        });
-        $('#acceso').click(function (e) {
-            e.preventDefault();
-            $('div#form-olvidado').toggle('500');
-        });
-    };
-});*/
-/*$(document).ready(function() {
-    $('#olvidado').click(function(e) {
-        e.preventDefault();
-        $('div#form-olvidado').toggle('500');
+    /*.directive('switcher', function() {
+        return {
+            link: function(scope, elem, attr){
+                scope.active = true;
+                scope.toggle = function(){
+                    scope.active = !scope.active;
+                };
+            }
+        };
+    })*/
+    .directive('foldToggle', function() {
+        return {
+            restrict: 'A',
+            scope:{
+                isOpen: '=foldToggle'
+            },
+            link: function(scope, element) {
+
+                scope.$watch('isOpen', function(newVal,oldVal){
+                    if(newVal !== oldVal){
+                        element.toggle(200);
+                    }
+                });
+            }
+        };
     });
-    $('#acceso').click(function(e) {
-        e.preventDefault();
-        $('div#form-olvidado').toggle('500');
-    });
-});*/

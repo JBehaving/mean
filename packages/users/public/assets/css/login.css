@@ -63,13 +63,6 @@
     color: black;
     opacity:1;
 }
-.omb_login .omb_btn-default {
-    background: #ffffff;
-    border-color: red;
-    color: #000000;
-    font-size: 22px;
-    font-family: Impact, Charcoal, sans-serif;
-}
 
 @media (min-width: 768px) {
     .omb_login .omb_forgotPwd {
