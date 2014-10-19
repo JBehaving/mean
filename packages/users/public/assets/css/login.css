@@ -11,15 +11,14 @@
 
 .omb_login .omb_socialButtons a {
     color: white;
+    padding:0;
     opacity:0.9;
 }
 .omb_login .omb_socialButtons a:hover {
     color: white;
+    padding:0;
     opacity:1;
 }
-.omb_login .omb_socialButtons .omb_btn-facebook {background: #3b5998;}
-.omb_login .omb_socialButtons .omb_btn-google {background: #c32f10;}
-
 
 .omb_login .omb_loginOr {
     position: relative;
@@ -53,15 +52,6 @@
 
 .omb_login .omb_loginForm  .help-block {
     color: red;
-}
-
-.omb_login .omb_defaultButtons a {
-    color: black;
-    opacity:0.9;
-}
-.omb_login .omb_defaultButtons a:hover {
-    color: black;
-    opacity:1;
 }
 
 @media (min-width: 768px) {
