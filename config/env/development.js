@@ -1,10 +1,11 @@
 'use strict';
 
 module.exports = {
-  db: 'mongodb://localhost/mean-dev',
-  mongoose: {
-    debug: true
-  },
+    //db: 'mongodb://dev:dev@ds035750.mongolab.com:35750/gtddev',
+    db: 'mongodb://localhost:27017',
+    mongoose: {
+        debug: true
+    },
   app: {
     name: 'MEAN - FullStack JS - Development'
   },
@@ -40,5 +41,12 @@ module.exports = {
       user: 'EMAIL_ID',
       pass: 'PASSWORD'
     }
+  },
+  paypal: {
+      'mode' : 'sandbox',
+      'client_id' : 'ARblYBAFKYEnLKmBkrnMGlhX70gpNwIBX0GtbBXC5fVeiAWHC9c4tVeXn23K',
+      'client_secret' : 'EDvGjhBwlIbHFDwhy8S7bz04r-l6krTyxtf0O2xtovBH4sb1DkSgOuUA_X06',
+      'return_url' : 'http://localhost:3000/events/completeRegistration',
+      'cancel_url' : 'http://localhost:3000/events/cancelRegistration'
   }
 };

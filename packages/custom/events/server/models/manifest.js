@@ -3,9 +3,8 @@ var mongoose = require('mongoose'),
 
 var ManifestSchema = new Schema({
     amtPaid: { type: String, required: false },
-    conformationID: { type: String, required: true },
-    basePrice: {  type: String, required: true },
-    eventDesc: {  type: String, required: true },
+    basePrice: {  type: String, required: false },
+    eventDesc: {  type: String, required: false },
     rideAlong: { type: String, required: false },
     riderWanted: {  type: String,  required: true },
     skillClass: {  type: String, required: true },
@@ -17,7 +16,12 @@ var ManifestSchema = new Schema({
         required: false },
     eventID: { type: Schema.ObjectId,
         ref: 'Event',
-        required: true }
+        required: true },
+
+    status : String,
+    paymentResponse : Schema.Types.Mixed,
+    paymentMethod : String,
+
 });
 
 
