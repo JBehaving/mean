@@ -16,6 +16,46 @@ exports.all = function(req, res) {
     });
 };
 
+//-- search by event spefics .. to be finished later
+exports.findEvent = function(req, res) {
+    var fields = [
+        req.query.advancedCap,
+        req.query.albumLink,
+        req.query.basePrice,
+        req.query.eventDesc,
+        req.query.eventState,
+        req.query.eventStatus,
+        req.query.eventSartTime,
+        req.query.eventStartDate,
+        req.query.noviceCap,
+        req.query.trackID
+        ];
+    if (fields !== undefined) {
+
+        GTDEvent.find().where('advancedCap').equals(fields[0]).exec(function (err, events) {
+            if (err) {
+                res.render('error', {
+                    status: 500
+                });
+            } else {
+                res.jsonp(events);
+            }
+        });
+    }
+    else {
+        GTDEvent.find(function (err, events) {
+            if (err) {
+                console.log('failed to find events ' + err);
+                res.send(err);
+            } else {
+                console.log('found events');
+                res.jsonp(events);
+            }
+        });
+    }
+
+};
+
 exports.create = function(req, res) {
     //-- assumed content-type of application/JSON (in header)
     var gtdEvent = new GTDEvent(req.body);

@@ -20,21 +20,39 @@ exports.all = function(req, res) {
 };
 
 //-- search by track name
-exports.search = function(req, res) {
-    Track.find().where('trackName').equals(req.body.text).exec(function(err, tracks) {
-        if (err) {
-            res.render('error', {
-                status: 500
-            });
-        } else {
-            res.jsonp(tracks);
-        }
-    });
-};
+exports.findTrack = function(req, res) {
+    var trackName = req.query.trackName;
+    if (trackName !== undefined) {
 
+        Track.find().where('trackName').equals(trackName).exec(function (err, tracks) {
+            if (err) {
+                res.render('error', {
+                    status: 500
+                });
+            } else {
+                res.jsonp(tracks);
+            }
+        });
+    }
+    else {
+        Track.find(function (err, tracks) {
+            if (err) {
+                console.log('failed to find tracks ' + err);
+                res.send(err);
+            } else {
+                console.log('found tracks');
+                res.jsonp(tracks);
+            }
+        });
+    }
+
+};
+exports.show = function(req, res) {
+    res.json(req.track);
+};
 //-- create a track
 exports.create = function(req, res) {
-    var tracks = new Track({trackName: req.body.text});
+    var tracks = new Track(req.body);
     tracks.save(function (err) {
         if (err) {
             console.log('failed to create a track ' + err);
@@ -44,6 +62,4 @@ exports.create = function(req, res) {
             console.log('tried to create a track' + err);
         }
     });
-};/**
- * Created by watsonm on 10/8/14.
- */
+};
