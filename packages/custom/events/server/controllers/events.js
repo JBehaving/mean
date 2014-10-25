@@ -2,11 +2,10 @@
  * Created by watsonm on 10/8/14.
  */
 'use strict';
-
 var mongoose = require('mongoose'),
-    Event = mongoose.model('Event');
+    GTDEvent = mongoose.model('Event');
 exports.all = function(req, res) {
-    Event.find(function(err, events) {
+    GTDEvent.find(function(err, events) {
         if (err) {
             console.log('failed to create an event ' + err);
             res.send(err);
@@ -18,14 +17,17 @@ exports.all = function(req, res) {
 };
 
 exports.create = function(req, res) {
-    var events = new Event({eventName: req.body.text});
-    events.save(function (err) {
+    //-- assumed content-type of application/JSON (in header)
+    var gtdEvent = new GTDEvent(req.body);
+    console.log(req.body);
+    gtdEvent.save(function (err) {
+        console.log('failed to create an event ' + err);
         if (err) {
             console.log('failed to create an event ' + err);
-            return res.send('/index');
-        } else {
-            res.jsonp(events);
-            console.log('tried to create an event ' + err);
+            return res.json(500, {
+                error: 'Cannot save the event' + err
+            });
         }
+        res.json(gtdEvent);
     });
 };

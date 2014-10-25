@@ -3,15 +3,15 @@
 // The Package is past automatically as first parameter
 module.exports = function(Tracks, app, auth, database) {
 
-  app.get('/tracks/example/anyone', function(req, res, next) {
+  app.get('/tracks/anyone', function(req, res, next) {
     res.send('Anyone can access this');
   });
 
-  app.get('/tracks/example/auth', auth.requiresLogin, function(req, res, next) {
+  app.get('/tracks/auth', auth.requiresLogin, function(req, res, next) {
     res.send('Only authenticated users can access this');
   });
 
-  app.get('/tracks/example/admin', auth.requiresAdmin, function(req, res, next) {
+  app.get('/tracks/admin', auth.requiresAdmin, function(req, res, next) {
     res.send('Only users with Admin role can access this');
   });
 
@@ -24,7 +24,7 @@ module.exports = function(Tracks, app, auth, database) {
     });
   });
 
-    var events = require('../controllers/events');
+    var tracks = require('../controllers/tracks');
 
     app.get('/tracks', tracks.all);
     app.post('/tracks:trackName', tracks.create);
