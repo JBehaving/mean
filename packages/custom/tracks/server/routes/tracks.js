@@ -1,31 +1,16 @@
 'use strict';
 
+var tracks = require('../controllers/tracks');
 // The Package is past automatically as first parameter
 module.exports = function(Tracks, app, auth, database) {
 
-  app.get('/tracks/example/anyone', function(req, res, next) {
-    res.send('Anyone can access this');
-  });
+    app.route('/tracks')
+        .get(tracks.findTrack)
+        .post(tracks.create);
 
-  app.get('/tracks/example/auth', auth.requiresLogin, function(req, res, next) {
-    res.send('Only authenticated users can access this');
-  });
+    app.route('/tracks/:trackName')
+        .get(tracks.findTrack);
 
-  app.get('/tracks/example/admin', auth.requiresAdmin, function(req, res, next) {
-    res.send('Only users with Admin role can access this');
-  });
+    app.param('trackName', tracks.findTrack);
 
-  app.get('/tracks/example/render', function(req, res, next) {
-    Tracks.render('index', {
-      package: 'tracks'
-    }, function(err, html) {
-      //Rendering a view from the Package server/views
-      res.send(html);
-    });
-  });
-
-    //var events = require('../controllers/events');
-
-    //app.get('/tracks', tracks.all);
-    //app.post('/tracks:trackName', tracks.create);
 };

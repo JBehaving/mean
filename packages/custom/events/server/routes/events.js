@@ -3,6 +3,11 @@
 
 // The Package is past automatically as first parameter
 module.exports = function(Events, app, auth, database) {
+    var events = require('../controllers/events');
+
+    app.route('/events')
+        .get(events.all)
+        .post(events.create);
 
   app.get('/events/example/anyone', function(req, res, next) {
     res.send('Anyone can access this');
@@ -24,19 +29,5 @@ module.exports = function(Events, app, auth, database) {
       res.send(html);
     });
   });
-    var events = require('../controllers/events');
 
-    app.get('/events', events.all);
-    app.post('/events/:eventName', events.create);
-
-   // app.route('/events/:eventId')
-     //   .get(events.show);
-
-    app.route('/events/:eventId/register/')
-        .post(auth.requiresLogin,events.registerForEvent);
-
-    //app.route('/events/completeRegistration')
-       // .post(events.completeRegistration);
-
-    app.param('eventId',events.event);
 };

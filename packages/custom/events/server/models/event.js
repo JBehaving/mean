@@ -6,16 +6,16 @@ var EventSchema = new Schema({
     advancedRemaining: {type : String, required: false},
     albumLink: { type: String, required: false },
     basePrice: {  type: String, required: false },
-    eventDesc: {  type: String, required: true },
+    eventDesc: {  type: String, required: false },
     eventState: { type: String,required: false },
-    eventStatus: {  type: String,  required: true },
-    eventSartTime: {  type: String, required: true },
-    eventStartDate: { type: String, required: true },
+    eventStatus: {  type: String,  required: false },
+    eventSartTime: {  type: String, required: false },
+    eventStartDate: { type: String, required: false },
     noviceCap: { type: String,  required: false },
     noviceRemaining: {type: String, required: false},
     trackID: { type: Schema.ObjectId,
         ref: 'Track',
-        required: true }
+        required: false }
     });
 
-mongoose.model('Event',EventSchema);
+mongoose.model('Event', EventSchema);
