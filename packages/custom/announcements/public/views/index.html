@@ -1,8 +1,13 @@
 <div data-ng-controller="AnnouncementsController" data-ng-init="defaultShow()">
-  <h1>Announcements</h1>
+  <h2>
+      <a class="btn" data-ng-click="open()">
+          <i class="glypicon glyphicon-plus-sign"></i>
+      </a>
+      Announcements
+  </h2>
     <div class="container">
         <div class="col-md-12">
-            <h1>{{announcements.newsTitle}}</h1>
+            <h3>{{announcements.newsTitle}}</h3>
             <p>{{announcements.newsBody}}</p>
             <div>
                 <span class="badge">Posted {{announcements.newsEditedDate}} {{announcements.newsEditedTime}}</span>

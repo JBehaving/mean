@@ -47,9 +47,7 @@ angular.module('mean.announcements').controller('AnnouncementsController', ['$sc
     };
 
     $scope.defaultShow = function() {
-          Announcements.get(function(announcement) {
-            $scope.announcements = announcement;
-          });
+          $scope.announcements = Announcements.get();
     };
   }
 ]);
