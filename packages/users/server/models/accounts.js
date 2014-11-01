@@ -9,7 +9,6 @@ var AccountSchema = new Schema({
     city: { type: String, required: true },
     deletionFlag: { type: String, required: false },
     emergencyContactName: {  type: String, required: false },
-	isEmployee: { type: boolean, required: true, default: false }, //Set default false
     personalEmail: { type: String, required: true },
     primaryEmergencyPhoneNumber: { type: String, required: false },
     primaryPhoneNumber: {  type: String,  required: true },
