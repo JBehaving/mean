@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('mean.announcements').controller('ModalDemoCtrl', function ($scope, $modal, $log) {
 
   $scope.open = function (size) {
@@ -9,8 +11,8 @@ angular.module('mean.announcements').controller('ModalDemoCtrl', function ($scop
 /*      resolve: {
         items: function () {
           return $scope.items;
-        }*/
-      }
+        }
+      }*/
     });
 
     modalInstance.result.then(function (selectedItem) {
