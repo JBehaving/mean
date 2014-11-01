@@ -1,27 +1,23 @@
-<div class="" data-ng-controller="AnnouncementsController">
-  <h1>Example view from your new awesome package</h1>
-  <h2>Package: {{package.name}}</h2>
-  <ol>
-    <li>
-      <a href="announcements/example/anyone">Server route that anyone can access</a>
-    </li>
-    <li>
-      <a href="announcements/example/auth">Server route that requires authentication</a>
-    </li>
-    <li>
-      <a href="announcements/example/admin">Server route that requires admin user</a>
-    </li>
-    <li>
-      <a href="announcements/example/render">Raw Html rendering example from using swig</a>
-    </li>
-  </ol>
-  <h3><img src="/announcements/assets/img/logo.png" /></h3>
-  </br>
-  <p class="alert alert-info">You can find your package in /packages/announcements</p>
-  </br>
-  <p class="alert alert-warning">MEAN versions prior to 0.3.2 will be in /node_modules/announcements</p>
-  </br>
-  <h3><a href="http://www.mean.io/#!/docs">Documentation</a></h3>
-  </br>
+<div data-ng-controller="AnnouncementsController" data-ng-init="defaultShow()">
+  <h1>Announcements</h1>
+    <div class="container">
+        <div class="col-md-12">
+            <h1>{{announcements.newsTitle}}</h1>
+            <p>{{announcements.newsBody}}</p>
+            <div>
+                <span class="badge">Posted {{announcements.newsEditedDate}} {{announcements.newsEditedTime}}</span>
+            </div>
+            <div data-ng-if="hasAuthorization(announcement)">
+                <a class="btn" href="/#!/announcements/{{announcements._id}}/edit">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </a>
+                <a class="btn" data-ng-click="remove(announcement);">
+                    <i class="glyphicon glyphicon-remove-circle"></i>
+                </a>
+            </div>
+            <hr>
+        </div>
+    </div>
 </div>
+
 
