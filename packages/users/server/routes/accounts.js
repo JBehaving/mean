@@ -16,11 +16,11 @@ var hasAuthorization = function(req, res, next) {
 module.exports = function(Accounts, app, auth) {
 
   app.route('/accounts') //Basic listing for employees Need to require authorization for this one
-    .get(accounts.all)	 //No limit on number? Handled elsewhere? No authorization for now...
+    .get(account.all);	 //No limit on number? Handled elsewhere? No authorization for now...
 	
   app.route('/account/:articleId')
     .get(account.show)
-    .put(auth.requiresLogin, hasAuthorization, account.update)
+    .put(auth.requiresLogin, hasAuthorization, account.update);
 
 
   // Finish with setting up the articleId param
