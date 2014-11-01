@@ -103,7 +103,13 @@ var createPayment = function(req,res) {
 
 var updateEventSlots = function (req,res) {
     // Get desired skill level
+
+    var skillClasses = ['advanced','intermediate','novice'];
     var skillClass = req.body.skillClass;
+
+    if (skillClasses.indexOf(skillClass) <= -1) {
+        res.status(500).json( {error: 'Invalid skill class specified'});
+    }
 
     if (req.event[skillClass + 'Registered'] >= req.event[skillClass + 'Cap']) {
         res.json(500, {error : 'No more slots for + ' + skillClass + ' available'});
