@@ -29,14 +29,6 @@ Account = mongoose.model('Account');
  * Update Account TODO
  */
  
- exports.update = function(req, res) {
- var account = new Account(req.body);
- 
- 
- 
- 
-
- };
  
 /**
  * Find all accounts
