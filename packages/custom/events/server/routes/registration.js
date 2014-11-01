@@ -3,8 +3,7 @@
 
 module.exports = function(Events, app, auth, database) {
 
-    var events = require('../controllers/events'),
-        registration = require('../controllers/registration');
+    var registration = require('../controllers/registration');
 
     app.route('/events/register/')
         .post(auth.requiresLogin, registration.registerForEvent);
@@ -14,8 +13,4 @@ module.exports = function(Events, app, auth, database) {
 
     app.route('/events/register/cancel')
         .get(auth.requiresLogin, registration.cancelRegistration);
-
-    app.param('eventId', events.event);
-
-
 };
