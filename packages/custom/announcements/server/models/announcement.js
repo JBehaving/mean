@@ -16,7 +16,7 @@ var AnnouncementSchema = new Schema({
     newsBody: { type: String, required: true, trim: true },
     newsEditedDate: { type: String, required: false },
     newsEditedTime: { type: String, required: false },
-    newsEnteredTime: { type: String, required: false },
+    newsCreatedDate: { type: String, required: false },
     newsTitle: { type: String, required: true }}
     );
 

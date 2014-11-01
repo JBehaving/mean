@@ -24,7 +24,7 @@ exports.create = function(req,res){
     announcement.save(function(err) {
         if (err) {
           return res.json(500, {
-            error: 'Cannot save the announcement'
+            error: 'Cannot save the announcement'+err
           });
         }
         res.json(announcement);
@@ -81,7 +81,7 @@ exports.show = function(req, res) {
  *
  */
 exports.defaultShow = function(req, res) {
-    Announcement.find().sort({newsEnteredTime:-1}).limit(5).exec(function(err, announcements) {
+    Announcement.find().sort({newsCreatedDate:-1}).limit(5).exec(function(err, announcements) {
         if(err) {
             return res.json(500, {
                 error: 'Cannot list the announcements'

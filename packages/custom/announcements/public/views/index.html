@@ -5,32 +5,17 @@
             <h1>{{announcements.newsTitle}}</h1>
             <p>{{announcements.newsBody}}</p>
             <div>
-                <span class="badge">Posted {{announcements.newsEditedDate}} {{announcements.newsEnteredTime}}</span>
-                <!--<div class="pull-right">
-                    <span class="label label-default">alice</span>
-                    <span class="label label-primary">story</span>
-                    <span class="label label-success">blog</span>
-                    <span class="label label-info">personal</span>
-                    <span class="label label-warning">Warning</span>
-                    <span class="label label-danger">Danger</span>
-                </div>-->
+                <span class="badge">Posted {{announcements.newsEditedDate}} {{announcements.newsEditedTime}}</span>
             </div>
             <div data-ng-if="hasAuthorization(announcement)">
                 <a class="btn" href="/#!/announcements/{{announcements._id}}/edit">
                     <i class="glyphicon glyphicon-edit"></i>
                 </a>
                 <a class="btn" data-ng-click="remove(announcement);">
-                    <i class="glyphicon glyphicon-trash"></i>
+                    <i class="glyphicon glyphicon-remove-circle"></i>
                 </a>
             </div>
             <hr>
-<!--            <h1>Announcement 2</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent finibus, urna vel scelerisque pretium, ante est consectetur risus, nec maximus purus enim et nisl.</p>
-            <div>
-                <span class="badge">Posted 2012-08-02 20:47:04</span><div class="pull-right"><span class="label label-default">alice</span> <span class="label label-primary">story</span> <span class="label label-success">blog</span> <span class="label label-info">personal</span> <span class="label label-warning">Warning</span>
-                <span class="label label-danger">Danger</span></div>
-            </div>
-            <hr>-->
         </div>
     </div>
 </div>
