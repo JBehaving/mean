@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var EventSchema = new Schema({
     advancedCap: { type: Number, required: false },
-    advancedRegistered: {type : Number, default: 0},
+    advancedRegistered: { type : Number, default: 0},
     albumLink: { type: String, required: false },
     basePrice: {  type: String, required: false },
     eventDesc: {  type: String, required: false },

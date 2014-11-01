@@ -102,10 +102,46 @@ var createPayment = function(req,res) {
 };
 
 var updateEventSlots = function (req,res) {
-
     // Get desired skill level
+    var skillClass = req.body.skillClass;
+
+    if (req.event[skillClass + 'Registered'] >= req.event[skillClass + 'Cap']) {
+        res.json(500, {error : 'No more slots for + ' + skillClass + ' available'});
+        return;
+    }
+
+    //build query for updating
+    var query = {};
+    query._id = req.event._id;
+    query[skillClass+'Registered'] = { $lt : req.event[skillClass+'Cap']};
+
+    //build update object
+    var update =  {};
+    update.$inc = {};
+    update.$inc[skillClass + 'Registered'] = 1;
+
+    _Event.findOneAndUpdate(query, update,
+        function(err, event) {
+            if (err) {
+                console.log(err);
+                res.json(500, {error : 'Error updating event when registering'});
+                return;
+            }
+            if (event) {
+                req.event = event;
+                createPayment(req, res);
+            }
+            else {
+                res.status(404).json({error : 'No event found with ID: ' + query._id});
+            }
+        });
+
+
+
+    /*
     switch(req.body.skillClass) {
         case 'advanced' :
+
             if (req.event.advancedRegistered >= req.event.advancedCap) {
                 res.json(500, {error : 'No more slots of this kind available'});
                 return;
@@ -124,10 +160,9 @@ var updateEventSlots = function (req,res) {
                 });
             break;
 
-
         default:
             res.json(500, {error : 'Invalid or missing skill level'});
-    }
+    }*/
 };
 
 
