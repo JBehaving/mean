@@ -3,7 +3,7 @@
 // The Package is past automatically as first parameter
 module.exports = function(Account, app, auth, database) {
 
-var account = require('../controllers/accounts');
+var accounts = require('../controllers/accounts');
 
 //Authorization helper
 var hasAuthorization = function(req, res, next) {
@@ -16,11 +16,11 @@ var hasAuthorization = function(req, res, next) {
 module.exports = function(Accounts, app, auth) {
 
   app.route('/accounts') //Basic listing for employees Need to require authorization for this one
-    .get(account.all);	 //No limit on number? Handled elsewhere? No authorization for now...
+    .get(accounts.all);	 //No limit on number? Handled elsewhere? No authorization for now...
 	
   app.route('/account/:articleId')
-    .get(account.show)
-    .put(auth.requiresLogin, hasAuthorization, account.update);
+    .get(accounts.show)
+    .put(auth.requiresLogin, hasAuthorization, accounts.update);
 
 
   // Finish with setting up the articleId param

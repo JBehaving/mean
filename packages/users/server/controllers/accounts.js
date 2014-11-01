@@ -59,7 +59,7 @@ Account = mongoose.model('Account');
  */
  
  exports.account = function(req, res, id) {
- Account.find( {"userID": id} ).populate('userID').exec(function(err, account) { 
+ Account.find( {'userID': id} ).populate('userID').exec(function(err, account) { 
     if (err) {
       return res.json(500, {
         error: 'Error in listing Account information'
@@ -75,13 +75,15 @@ Account = mongoose.model('Account');
  */
  
  exports.account = function(req, res) {
- Account.find( {"userID": req.user} ).populate('userID').exec(function(err, account) { 
+ Account.find( {'userID': req.user} ).populate('userID').exec(function(err, account) { 
     if (err) {
       return res.json(500, {
         error: 'Error in listing Account information'
       });
     }
     res.json(account);
+});
+};
 
 /**
  * Show account info
