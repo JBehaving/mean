@@ -47,10 +47,16 @@
                                       login
                                   </button>
                               </div>
-                              <label class="form-group">
-                                  <input type="checkbox" value="remember-me" checked> Remember Me
-                              </label>
-                              <a ng-click="active=!active" class="pull-right text-muted" href="#"><small>Forgot your password?</small></a>
+                              <div style="float:left">
+                                  <label class="form-group" style="border:0">
+                                      <input type="checkbox" value="remember-me" checked> Remember Me
+                                  </label>
+                              </div>
+                              <div>
+                                  <a ng-click="active=!active" class="pull-right text-muted" href="#"><small>Forgot your password?</small></a>
+                                  <br>
+                                  <a ui-sref='auth.register' class="pull-right text-muted"><small>New User? Register</small></a>
+                              </div>
                           </fieldset>
                       </form>
                   </div>
