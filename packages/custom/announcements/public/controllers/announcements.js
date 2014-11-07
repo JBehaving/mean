@@ -13,6 +13,8 @@ angular.module('mean.announcements').controller('AnnouncementsController', ['$sc
         return $scope.global.isAdmin || announcements.user._id === $scope.global.user._id;
     };
 
+    $scope.announcements =
+
     $scope.create = function(isValid) {
         if (isValid) {
             var announcement = new Announcements({
@@ -47,7 +49,9 @@ angular.module('mean.announcements').controller('AnnouncementsController', ['$sc
     };
 
     $scope.defaultShow = function() {
-          $scope.announcements = Announcements.get();
+        Announcements.query(function(announcements) {
+            $scope.announcements = announcements;
+        });
     };
   }
 ]);
