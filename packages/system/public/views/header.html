@@ -1,96 +1,46 @@
-<!--<div class="page-header" data-ng-controller="HeaderController">
+    <div class="container-fluid" data-ng-controller="HeaderController">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
 
-
-
-  <nav class="navbar-nav" role="navigation">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="#">events</a></li>
-          <li><a href="#">faq</a></li>
-          <li><a ui-sref="home" mean-token="'site-title'"><img style="margin-top: -10px" src="/system/assets/img/blacklogo.jpg" width="140" height="60"/></a></li>
-          <li><a href="#">about</a></li>
-          <li><a href="#">contact</a></li>
-          <li class="navbar-right" data-ng-hide="global.authenticated"><a ui-sref='auth.login'>login</a></li>
-        </ul>
-      </div>
-
-  </nav>
-</div>
--->
-
- <!--
- <div class="page-header" data-ng-controller="HeaderController">
-    <div class="container">
-
-      <ul class="nav navbar-nav">
-        <li><a href="#">events</a></li>
-        <li><a href="#">faq</a></li>
-      </ul>
-
-        <li class="nav navbar-nav navbar-brand-centered"><a ui-sref="home" mean-token="'site-title'"><img style="" src="/system/assets/img/blacklogo.jpg" width="120" height="50"/></a></li>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">about</a></li>
-        <li><a href="#">contact</a></li>
-      </ul>
-
-      <ul class="nav navbar-nav pull-right">
-        <li><a ui-sref='auth.login'>Login</a></li>
-      </ul>
-
+        <div class="navbar-collapse collapse" data-ng-controller="ActiveCtrl">
+            <div style="float:left; width: 40%;">
+                <ul style="text-align:right" class="nav navbar-nav">
+                    <li ng-class="{'is-active': isActive('/events')}"><a ui-sref='events'>events</a></li>
+                    <li ng-class="{'is-active': isActive('/faq')}"><a ui-sref='faq'>faq</a></li>
+                </ul>
+            </div>
+            <div style="float:left; width: 20%;">
+                <a ui-sref="home" mean-token="'site-title'"><img src="/system/assets/img/blacklogo.jpg" width="140" height="60"/></a>
+            </div>
+            <div style="float:left; width: 40%;">
+                <div style="float:left;">
+                    <ul style="text-align:left" class="nav navbar-nav">
+                        <li ng-class="{'is-active': isActive('/about')}"><a href="#">about</a></li>
+                        <li ng-class="{'is-active': isActive('/contact')}"><a href="#">contact</a></li>
+                        <li data-ng-hide="global.authenticated"><a href="#">tools</a></li>
+                    </ul>
+                </div>
+                <div class="navbar-right">
+                    <ul style="text-align:right" class="navbar-nav nav" data-ng-hide="global.authenticated">
+                        <li><a ui-sref='auth.login'>login</a></li>
+                    </ul>
+                    <ul style="text-align:right" class="navbar-nav nav" data-ng-show="global.authenticated">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                {{global.user.name}} <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/logout">Sign out</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
--->
-
-
-
-
-
-
-<!--<div class="page-header" data-ng-controller="HeaderController">
-<div class="logo pull-left">
-<a class="navbar-brand" ui-sref="home" mean-token="'site-title'"><img src="/system/assets/img/blacklogo.jpg" width="100" height="40"/></a>
-</div>
-
-<div class="left pull-left">
-<ul class="navbar-nav nav">
-<li data-ng-repeat="item in menus.main" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
-<a mean-token="item.link" ui-sref='{{item.link}}'>{{item.title}}</a>
-</li>
-</ul>
-</div>
-
-<div class="account">
-<div class="text-edit">
-<div class="pull-right" data-ng-show="global.authenticated" mean-token-editable></div>
-<div class="pull-right" data-ng-show="global.authenticated" mean-translate></div>
-</div>
-<ul class="navbar-nav nav" data-ng-hide="global.authenticated">
-<li><a ui-sref='auth.register'>Register</a>
-</li>
-<li class="divider-vertical"></li>
-<li><a ui-sref='auth.login'>Login</a>
-</li>
-</ul>
-<ul class="navbar-nav nav" data-ng-show="global.authenticated">
-<li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-  {{global.user.name}} <b class="caret"></b>
-</a>
-<ul class="dropdown-menu">
-  <li><a href="/logout">Sign out</a>
-  </li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
--->

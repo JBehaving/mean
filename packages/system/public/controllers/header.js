@@ -33,6 +33,13 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
         user: $rootScope.user
       };
     });
-
   }
+])
+.controller('ActiveCtrl', ['$scope', '$location',
+      function ($scope, $location) {
+        $scope.isActive = function (viewLocation) {
+          var active = (viewLocation === $location.path());
+          return active;
+        };
+      }
 ]);
