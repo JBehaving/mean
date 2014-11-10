@@ -18,9 +18,9 @@ Events.register(function(app, auth, database) {
 
   //We are adding a link to the main menu for all authenticated users
   Events.menus.add({
-    title: 'events example page',
-    link: 'events example page',
-    roles: ['authenticated'],
+    title: 'events',
+    link: 'event detail',
+   // roles: ['authenticated'],
     menu: 'main'
   });
   

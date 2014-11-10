@@ -7,15 +7,33 @@
 var mongoose = require('mongoose'),
     GTDEvent = mongoose.model('Event');
 exports.all = function(req, res) {
-    GTDEvent.find(function(err, events) {
-        if (err) {
-            console.log('failed to create an event ' + err);
-            res.send(err);
-        } else {
-            console.log('tried to create an event ' + err);
-            res.jsonp(events);
-        }
-    });
+
+    if (req.query.trackID !== undefined && req.query.eventStartDate !== undefined) {
+       // console.log('Searched for ' + req.query.trackID + ' ' + req.query.eventStartDate);
+        GTDEvent.find().where('eventStartDate').equals(req.query.eventStartDate).where('trackID').equals(req.query.trackID).exec(function (err, events) {
+            if (err) {
+                res.render('error', {
+                    status: 500
+                });
+            } else {
+                return res.jsonp(events);
+            }
+        });
+        console.log('Error retrieving event.');
+    }
+    else {
+        GTDEvent.find(function (err, events) {
+            if (err) {
+                console.log('failed to find an event ' + err);
+                res.send(err);
+            } else {
+                console.log('tried find an event ' + err);
+                res.jsonp(events);
+            }
+        });
+    }
+
+
 };
 
 //-- search by event spefics .. to be finished later
@@ -75,6 +93,29 @@ exports.create = function(req, res) {
 
 };
 
+
+//-- update one event using  _id field
+exports.updateEvent = function(req, res) {
+    //-- assumed content-type of application/JSON (in header)
+   // var gtdEvent = new GTDEvent(req.body);
+    var updatedEvent = req.body;
+
+    //-- assumes validated request
+    if (updatedEvent._id !== undefined) {
+        var query = updatedEvent._id;
+        delete updatedEvent._id;
+        GTDEvent.update(query, updatedEvent, function (err, res) {
+            if (err) {
+                console.log('failed to update event ' + err);
+                return res.json(500, {
+                error: 'Cannot update the event' + err
+                });
+            }
+        });
+        res.send('Event successfully updated. ' + query);
+    }
+    res.send('error updating event');
+};
 
 
 
