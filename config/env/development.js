@@ -9,8 +9,8 @@ module.exports = {
     name: 'MEAN - FullStack JS - Development'
   },
   facebook: {
-    clientID: 'APP_ID',
-    clientSecret: 'APP_SECRET',
+    clientID: '859108697456544',
+    clientSecret: '099c0d893a91867a1b951044f1a18641',
     callbackURL: 'http://localhost:3000/auth/facebook/callback'
   },
   twitter: {
