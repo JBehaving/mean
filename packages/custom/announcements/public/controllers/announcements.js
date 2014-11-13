@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mean.announcements').controller('AnnouncementsController', ['$scope', 'Global', 'Announcements',
-  function($scope, $stateParams, $location, Global, Announcements) {
+  function($scope, $stateParams, $location, Global, Announcements,$http) {
     $scope.global = Global;
 
     $scope.package = {
@@ -49,9 +49,21 @@ angular.module('mean.announcements').controller('AnnouncementsController', ['$sc
     };
 
     $scope.defaultShow = function() {
-        Announcements.query(function(announcements) {
-            $scope.announcements = announcements;
+        $http.get('/announcements')
+        .success(function(data) {
+        $scope.announcement = data;
+        })
+        .error(function(data) {
+        console.log('Error: ' + data);
         });
     };
+
+     $scope.findOne = function() {
+          Announcements.get({
+            announcementsId: $stateParams.announcementsId
+          }, function(announcement) {
+            $scope.announcement = announcement;
+          });
+        };
   }
 ]);
