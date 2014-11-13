@@ -23,8 +23,12 @@ Financial.register(function(app, auth, database) {
     roles: ['authenticated'],
     menu: 'main'
   });
+
+  Financial.angularDependencies(['ngCsv']);
   
   Financial.aggregateAsset('css', 'financial.css');
+  Financial.aggregateAsset('js', 'ng-csv.js');
+  Financial.aggregateAsset('js','angular-sanitize.js');
 
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above

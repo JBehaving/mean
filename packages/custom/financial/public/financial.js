@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('mean.financial', []);
+angular.module('mean.financial', ['ngCsv']);
