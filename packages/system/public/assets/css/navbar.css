@@ -8,9 +8,21 @@
     font-size: 18px;
     font-family: Impact, Charcoal, sans-serif;
 }
+.navbar .navbar-left {
+    float:left;
+    width: 40%;
+}
+.navbar .navbar-center {
+    float:left;
+    width: 20%;
+}
+.navbar .navbar-right {
+    float:left;
+    width: 40%;
+}
 .navbar .nav > li > a.brand {
     padding-left: 20px;
-    margin-left: 0
+    margin-left: 0;
 }
 
 /* link */
@@ -46,10 +58,14 @@
 }
 
 /* dropdown */
-.navbar .navbar-nav .open .dropdown-menu > li > a {
+.navbar .navbar-nav .dropdown {
+    text-align: right;
     font-size: 14px;
     line-height: 20px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: white;
+}
+.navbar .navbar-nav .open .dropdown-menu > li > a {
     color: #777;
 }
 .navbar .navbar-nav .open .dropdown-menu > li > a:hover,
