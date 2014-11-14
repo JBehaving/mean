@@ -16,6 +16,21 @@
 
 .glowing-border:focus {
     outline: none;
-    border-color: gray;
-    box-shadow: 0 0 10px gray;
+    border-color: lightgray;
+    box-shadow: 0 0 10px lightgray;
+}
+.table {
+    table-layout: fixed;
+}
+.table-title {
+    color: #080808;
+    font-size: 26px;
+    font-family: Impact, Charcoal, sans-serif;
+}
+.table-title-bg {
+    background-color: #f5f5f5;
+}
+.table-search {
+    width: 50%;
+    min-width: 250px;
 }
