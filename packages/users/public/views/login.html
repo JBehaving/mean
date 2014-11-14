@@ -26,7 +26,7 @@
 
           <div class="row omb_row-sm-offset-3">
               <div ng-controller="SwitcherCtrl" class="col-xs-12 col-sm-6">
-                  <div data-fold-toggle="active" style="padding: 20px; padding-top: 35px">
+                  <div data-fold-toggle="active" class="primary-form">
                       <form ng-submit="login()" class="omb_loginForm" action="" autocomplete="off" accept-charset="UTF-8" role="form" id="login-form" method="post">
                           <fieldset>
                               <div class="form-group input-group">
@@ -47,8 +47,8 @@
                                       login
                                   </button>
                               </div>
-                              <div style="float:left">
-                                  <label class="form-group" style="border:0">
+                              <div class="pull-left">
+                                  <label class="form-group">
                                       <input type="checkbox" value="remember-me" checked> Remember Me
                                   </label>
                               </div>
@@ -60,10 +60,8 @@
                           </fieldset>
                       </form>
                   </div>
-                  <div data-fold-toggle="active" style="display: none; padding: 20px; padding-top: 0">
-                      <h4 class="">
-                          Forgot your password?
-                      </h4>
+                  <div data-fold-toggle="active" class="secondary-form">
+                      <h4>Forgot your password?</h4>
                       <form ng-submit="forgotpw()" accept-charset="UTF-8" role="form" id="forgotpw" method="post">
                           <fieldset>
                               <span class="help-block">
@@ -80,9 +78,7 @@
                               <button type="submit" class="btn btn-primary btn-block btn-default">
                                   continue
                               </button>
-                              <p class="help-block">
-                                  <a ng-click="active=!active" class="pull-right text-muted"  href="#"><small>Return to Login</small></a>
-                              </p>
+                              <a ng-click="active=!active" class="pull-right text-muted"  href="#"><small>Return to Login</small></a>
                           </fieldset>
                       </form>
                   </div>

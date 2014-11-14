@@ -1,33 +1,6 @@
 <div class="container" data-ng-controller="EventsController">
-  <div class="panel panel-default">
-    <div class="panel-heading table-title-bg">
-      <div class="table-search pull-right">
-        <input ng-model="searchText" type="search" class="form-control glowing-border" placeholder="Search Upcoming Events" />
-      </div>
-      <div class="table-title panel-title">upcoming events</div>
-    </div>
-
-    <table class="table table-hover table-bordered">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Track</th>
-          <th>Location</th>
-          <th>Spots</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-      <tr ng-repeat="event in events.upcoming | filter: searchText">
-        <td>{{event.date}}</td>
-        <td>{{event.track}}</td>
-        <td>{{event.location}}</td>
-        <td>{{event.novice}}/{{event.intermediate}}/{{event.advanced}}</td>
-        <td>{{event.price | currency}}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+  <div data-ng-include="'events/views/upcoming.html'"></div>
+  <div data-ng-include="'events/views/past.html'"></div>
 </div>
 
 
