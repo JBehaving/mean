@@ -24,6 +24,11 @@
     padding-left: 20px;
     margin-left: 0;
 }
+.nav-border {
+    border-bottom: medium;
+    border-color: gray;
+    box-shadow: 0 0 10px black;
+}
 
 /* link */
 .navbar .navbar-nav > li > a {
