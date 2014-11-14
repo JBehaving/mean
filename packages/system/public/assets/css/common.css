@@ -44,14 +44,3 @@ footer p {
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
 }
-
-/* login css */
-.secondary-form {
-	display: none;
-	padding: 20px;
-	padding-top: 0;
-}
-.primary-form {
-	padding: 20px;
-	padding-top: 35px;
-}
