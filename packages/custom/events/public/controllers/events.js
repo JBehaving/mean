@@ -18,6 +18,21 @@ angular.module('mean.events').controller('EventsController', ['$scope', 'Global'
         .error(function (data) {
             console.log('Error: ' + data);
         });
+      $http.get('/events')
+          .success(function (data) {
+              $scope.events =  data;
+          })
+          .error(function (data) {
+              console.log('Error: ' + data);
+          });
+
+      $http.get('/events')
+          .success(function (data) {
+              $scope.events =  data;
+          })
+          .error(function (data) {
+              console.log('Error: ' + data);
+          });
 //-- 546045c251d6b51818cb8a17/
       /*
       $http.get('/tracks?trackID='+trackID)

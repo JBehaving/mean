@@ -5,7 +5,7 @@ module.exports = function(Forumlogs, app, auth, database) {
 
   var forumlogs = require('../controllers/forumlogs');
   app.route('/forumlogs')
-      .get(forumlogs.all)
+      .get(forumlogs.findLog)
       .post(forumlogs.create);
   app.get('/forumlogs/example/anyone', function(req, res, next) {
     res.send('Anyone can access this');

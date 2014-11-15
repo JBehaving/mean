@@ -4,4 +4,28 @@
        {{eventD}}
    </h1>
 
+    <div class="form-group">
+        <button style="background-color:white; border-width:2px; border-color:red; height:40px; width:200px;"
+                type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">update</font></button>
+    </div>
+    <div class="form-group">
+        <button style="background-color:white; border-width:2px; border-color:red; height:40px; width:200px;"
+                type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">cancel</font></button>
+    </div>
+    <div class="form-group">
+        <button style="background-color:white; border-width:2px; border-color:red; height:40px; width:200px;"
+                type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">track day calculator</font></button>
+    </div>
+    <div>
+        <table ng-table="tableParams" class="table">
+            <tr ng-model="eventer" ng-repeat="attendees in events">
+                <td data-title="'Event'" sortable="'event'">{{eventer.eventName}}</td>
+                <td data-title="'Date'" sortable="'date'">{{eventer.eventDate}}</td>
+                <td data-title="'State'" sortable="'state'">{{eventer.eventState}}</td>
+                <td data-title="'Event Status'" sortable="'status'">{{eventer.eventStatus}}</td>
+                <td data-title="'Cost'" sortable="'cost'">{{eventer.eventCost}}</td>
+                <td><form><button ng-submit="filterEvents()" type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">track day calculator</font></button></td>
+            </tr>
+        </table>
+    </div>
 </section>
