@@ -5,7 +5,7 @@
 
 
 var mongoose = require('mongoose'),
-    Event = mongoose.model('Event'),
+    GTDEvent = mongoose.model('Event'),
     _ = require('lodash');
     /*GTDEvent = mongoose.model('Event');
 
@@ -82,7 +82,7 @@ exports.create = function(req, res) {
  * Find event by id
  */
 exports.event = function(req, res, next, id) {
-    Event.load(id, function(err, event) {
+    GTDEvent.load(id, function(err, event) {
         if (err) return next(err);
         if (!event) return next(new Error('Failed to load event ' + id));
         req.event = event;
@@ -103,7 +103,7 @@ exports.show = function(req, res) {
  * List of Events
  */
 exports.all = function(req, res) {
-    Event.find().sort('-eventStartDate').exec(function(err, events) {
+    GTDEvent.find().sort('-eventStartDate').exec(function(err, events) {
         if (err) {
             return res.json(500, {
                 error: 'Cannot list the events'
