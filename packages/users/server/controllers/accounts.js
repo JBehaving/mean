@@ -32,7 +32,7 @@ exports.create = function(req,res)
 exports.update = function(req, res) 
 {
 	var updatedAccount = new Account(req.body); 
-
+	
     if (updatedAccount._id !== undefined) 
 	{ 
 		//Mongodb does not like it when you try to update a doc by _id when the object still exists, so we have to delete the original
@@ -81,14 +81,21 @@ exports.all = function(req, res)
  
 exports.account = function(req, res, id) 
 {
-	var search = { userID: new ObjectId(id) };
-	Account.find( (search).populate('userID').exec(function(err, account) { 
-    if (err) 
+	if(id !== undefined)
 	{
-		return res.json(500, { error: 'Error in listing Account information' });
-    }
-    res.json(account);
-	});
+		var search = { userID: new ObjectId(id) };
+		Account.find( (search).populate('userID').exec(function(err, account) { 
+		if (err) 
+		{
+			return res.json(500, { error: 'Error in listing Account information' });
+		}
+		res.json(account);
+		});
+	}
+	else
+	{
+		//Error: no id specified
+	}
 };
 
 /**
