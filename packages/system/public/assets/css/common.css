@@ -44,3 +44,9 @@ footer p {
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
 }
+.no-validate {
+	border-color: lightgray !important;
+}
+.valign-middle {
+	vertical-align: middle;
+}

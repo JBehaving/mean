@@ -15,6 +15,18 @@
     opacity: 1;
 }
 
+/* glyphicons */
+.glyphicon-space {
+    color: transparent;
+}
+
+.glyphlink-red {
+    color:red;
+    vertical-align:20%;
+    font-size:16px;
+    text-decoration: none;
+}
+
 /* input css */
 .glowing-border:focus {
     outline: none;
@@ -24,7 +36,7 @@
 
 /* table css */
 .table {
-    table-layout: fixed;
+    table-layout: auto;
 }
 .table-title {
     color: #080808;
@@ -37,4 +49,6 @@
 .table-search {
     width: 30%;
     min-width: 250px;
-}    
+}
+
+
