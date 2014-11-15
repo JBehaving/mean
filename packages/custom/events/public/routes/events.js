@@ -16,7 +16,7 @@ angular.module('mean.events').config(['$stateProvider',
           templateUrl: 'events/views/details.html'
         })
         .state('event detail', {
-          rsurl: '/events/details/',
+          url: '/events/details/',
           templateUrl: 'events/views/details.html'
         });
 

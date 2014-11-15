@@ -71,9 +71,5 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
         $scope.event = event;
       });
     };
-
-    //$scope.package = {
-    //  name: 'events'
-    //};
   }
 ]);
