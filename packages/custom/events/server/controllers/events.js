@@ -5,7 +5,10 @@
 
 
 var mongoose = require('mongoose'),
-    GTDEvent = mongoose.model('Event');
+    Event = mongoose.model('Event'),
+    _ = require('lodash');
+    /*GTDEvent = mongoose.model('Event');
+
 exports.all = function(req, res) {
     GTDEvent.find(function(err, events) {
         if (err) {
@@ -27,7 +30,7 @@ exports.findEvent = function(req, res) {
         req.query.eventDesc,
         req.query.eventState,
         req.query.eventStatus,
-        req.query.eventSartTime,
+        req.query.eventStartTime,
         req.query.eventStartDate,
         req.query.noviceCap,
         req.query.trackID
@@ -73,10 +76,80 @@ exports.create = function(req, res) {
         res.json(gtdEvent);
     });
 
+};*/
+
+/**
+ * Find event by id
+ */
+exports.event = function(req, res, next, id) {
+    Event.load(id, function(err, event) {
+        if (err) return next(err);
+        if (!event) return next(new Error('Failed to load event ' + id));
+        req.event = event;
+        next();
+    });
 };
 
 
+/**
+ * Show an event
+ */
+exports.show = function(req, res) {
+    res.json(req.event);
+};
 
 
+/**
+ * List of Events
+ */
+exports.all = function(req, res) {
+    Event.find().sort('-eventStartDate').exec(function(err, events) {
+        if (err) {
+            return res.json(500, {
+                error: 'Cannot list the events'
+            });
+        }
+        res.json(events);
 
+    });
+};
+
+
+/**
+ * Create an event
+ */
+exports.create = function(req, res) {
+    var event = new Event(req.body);
+    event.eventStartDate = req.date;
+
+    event.save(function(err) {
+        if (err) {
+            return res.json(500, {
+                error: 'Cannot save the event'
+            });
+        }
+        res.json(event);
+
+    });
+};
+
+
+/**
+ * Update an event
+ */
+exports.update = function(req, res) {
+    var event = req.event;
+
+    event = _.extend(event, req.body);
+
+    event.save(function(err) {
+        if (err) {
+            return res.json(500, {
+                error: 'Cannot update the event'
+            });
+        }
+        res.json(event);
+
+    });
+};
 

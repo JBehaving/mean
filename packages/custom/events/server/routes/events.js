@@ -9,6 +9,13 @@ module.exports = function(Events, app, auth, database) {
         .get(events.all)
         .post(events.create);
 
+    app.route('/events/:eventId')
+      .get(events.show);
+
+    // Finish with setting up the eventId param
+    app.param('eventId', events.event);
+
+  /*
   app.get('/events/example/anyone', function(req, res, next) {
     res.send('Anyone can access this');
   });
@@ -29,5 +36,6 @@ module.exports = function(Events, app, auth, database) {
       res.send(html);
     });
   });
+  */
 
 };
