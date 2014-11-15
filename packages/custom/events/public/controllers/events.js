@@ -1,5 +1,6 @@
 'use strict';
 
+
 angular.module('mean.events').controller('EventsController', ['$scope', '$stateParams', '$location', 'Global', 'Events',
   function($scope, $stateParams, $location, Global, Events) {
     $scope.global = Global;

@@ -11,6 +11,13 @@ module.exports = function(Tracks, app, auth, database) {
     app.route('/tracks/:trackName')
         .get(tracks.findTrack);
 
+   // app.route('/tracks/:trackID')
+   //     .get(tracks.findTrack);
+
+
+
+
     app.param('trackName', tracks.findTrack);
+ //   app.param('trackID', tracks.findTrack);
 
 };
