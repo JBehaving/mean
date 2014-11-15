@@ -4,7 +4,7 @@ angular.module('mean.announcements').config(['$stateProvider',
   function($stateProvider) {
     $stateProvider
     .state('announcements page', {
-      url: '/announcements/example',
+      url: '/announcements',
       templateUrl: 'announcements/views/index.html'
     })
     .state('create announcement', {
