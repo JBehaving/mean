@@ -18,10 +18,10 @@ Financial.register(function(app, auth, database) {
 
   //We are adding a link to the main menu for all authenticated users
   Financial.menus.add({
-    title: 'financial example page',
-    link: 'financial example page',
-    roles: ['authenticated'],
-    menu: 'main'
+    title: 'financial',
+    link: 'financial',
+    roles: ['authenticated']
+  //  menu: 'main'
   });
   
   Financial.aggregateAsset('css', 'financial.css');

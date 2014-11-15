@@ -18,7 +18,7 @@
     </div>
     <div>
         <table ng-table="tableParams" class="table">
-            <tr ng-model="eventer" ng-repeat="attendees in events">
+            <tr ng-model="eventer" ng-repeat="attendees in manifests">
                 <td data-title="'Event'" sortable="'event'">{{eventer.eventName}}</td>
                 <td data-title="'Date'" sortable="'date'">{{eventer.eventDate}}</td>
                 <td data-title="'State'" sortable="'state'">{{eventer.eventState}}</td>
@@ -28,4 +28,31 @@
             </tr>
         </table>
     </div>
+    <div>
+        <table ng-table="tableParams" class="table">
+            <tr ng-model="log" ng-repeat="log in logs">
+                <td data-title="''" >{{log.comment}}</td>
+
+            </tr>
+        </table>
+    </div>
+
+    <div class="container" ng-controller="AccordionCtrl">
+        <img class="center-block" src="/system/assets/img/logo.jpg" width="400" height="175" />
+        <label class="checkbox">
+            <input type="checkbox" ng-model="oneAtATime">
+            Open only one at a time
+        </label>
+        <accordion close-others="oneAtATime">
+            <accordion-group ng-repeat="group in groups" is-open="group.expanded">
+                <accordion-heading>
+                    <span class="glyphicon pull-left" ng-class="{'glyphicon-minus': groups[$index].expanded, 'glyphicon-plus': !group[$index].expanded}"></span>
+                    <span class="pull-left glyphicon-asterisk glyphicon-space"></span>
+                    <strong class="valign-middle">{{group.title}}</strong>
+                    <!--<span class="glyphicon glyphicon-remove-circle pull-right" style="color: red" ng-click="removeGroup(group)"></span>-->
+                </accordion-heading>
+                {{group.content}}
+            </accordion-group>
+        </accordion>
+        </div>
 </section>

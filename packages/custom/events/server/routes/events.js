@@ -12,6 +12,9 @@ module.exports = function(Events, app, auth, database) {
     app.route('/events/update')
         .post(events.updateEvent);
 
+    app.route('/manifests')
+        .get(events.findManifest);
+
   app.get('/events/example/anyone', function(req, res, next) {
     res.send('Anyone can access this');
   });

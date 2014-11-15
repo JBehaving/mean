@@ -18,10 +18,10 @@ Vehicles.register(function(app, auth, database) {
 
   //We are adding a link to the main menu for all authenticated users
   Vehicles.menus.add({
-    title: 'vehicles example page',
-    link: 'vehicles example page',
-    roles: ['authenticated'],
-    menu: 'main'
+    title: 'vehicles',
+    link: 'vehicles',
+    roles: ['authenticated']
+  //  menu: 'main'
   });
   
   Vehicles.aggregateAsset('css', 'vehicles.css');

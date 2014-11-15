@@ -1,4 +1,5 @@
 <section data-ng-controller="ArticlesController" data-ng-init="find()">
+   <h1> {{foo}} </h1>
   <ul class="articles unstyled">
     <li data-ng-repeat="article in articles">
       <span>{{article.created | date:'medium'}}</span> /
@@ -17,5 +18,5 @@
       <div>{{article.content}}</div>
     </li>
   </ul>
-  <h1 data-ng-hide="!articles || articles.length">No articles yet. <br> Why don't you <a href="/#!/articles/create">Create One</a>?</h1>
+  <h3 data-ng-hide="!articles || articles.length">No articles yet. <br> Why don't you <a href="/#!/articles/create">Create One</a>?</h3>
 </section>

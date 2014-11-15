@@ -26,9 +26,9 @@ angular.module('mean.events').controller('EventsController', ['$scope', 'Global'
               console.log('Error: ' + data);
           });
 
-      $http.get('/events')
+      $http.get('/manifests')
           .success(function (data) {
-              $scope.events =  data;
+              $scope.manifest =  data;
           })
           .error(function (data) {
               console.log('Error: ' + data);

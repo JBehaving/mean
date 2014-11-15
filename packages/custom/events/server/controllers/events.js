@@ -5,7 +5,29 @@
 
 
 var mongoose = require('mongoose'),
-    GTDEvent = mongoose.model('Event');
+    GTDEvent = mongoose.model('Event'),
+    Manifest = mongoose.model('Manifest'),
+    ObjectId = require('mongoose').Types.ObjectId;
+
+exports.findManifest = function(req, res) {
+    if (req.query.eventID !== undefined) {
+        var query = {eventID: new ObjectId(req.query.eventID)};
+        Manifest.find(query, function (err, tracks) {
+            if (err) {
+                console.log('failed to find a manifest ' + err);
+                res.status(500).json( {error: 'Error while searching ' + err});
+            } else {
+                console.log('tried to find a manifest' + err);
+                res.jsonp(tracks);
+
+            }
+        });
+    }
+    else {
+        console.log('No Track found by that ID');
+    }
+};
+
 exports.all = function(req, res) {
 
     if (req.query.trackID !== undefined && req.query.eventStartDate !== undefined) {
