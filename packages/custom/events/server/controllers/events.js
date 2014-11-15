@@ -161,7 +161,7 @@ exports.updateEvent = function(req, res) {
  * Create an event
  */
 exports.create = function(req, res) {
-    var event = new Event(req.body);
+    var event = new GTDEvent(req.body);
 
     event.save(function(err) {
         if (err) {
