@@ -1,4 +1,4 @@
-<div class="panel panel-default" data-ng-controller="EventsController" data-ng-init="find()">
+<div style="width:70%;" class="panel panel-default center-block" data-ng-controller="EventsController" data-ng-init="find()">
     <div class="panel-heading table-title-bg">
         <div class="table-search pull-right">
             <div class="form-group input-group">
@@ -7,18 +7,15 @@
                 </span>
                 <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search upcoming events"/></div>
         </div>
-        <div class="panel-title table-title">upcoming events <a href="#!/events/create"><span class="glyphicon glyphicon-plus glyphlink-red"></span></a></div>
+        <div class="panel-title table-title">past events</div>
     </div>
 
-    <table class="table table-hover table-bordered">
+    <table class="table table-hover table-striped">
         <thead>
         <tr>
             <th>Date</th>
             <th>Track</th>
             <th>Location</th>
-            <th>Spots Remaining<br><small>(Novice :: Intermediate :: Advanced)</small></th>
-            <th>Price</th>
-            <th>Attend Event</th>
         </tr>
         </thead>
         <tbody>
@@ -27,10 +24,19 @@
             <td>{{event.date}}</td>
             <td>{{event.track}}</td>
             <td>{{event.location}}</td>
-            <td>{{event.novice}} :: {{event.intermediate}} :: {{event.advanced}}</td>
-            <td>{{event.price | currency}}</td>
-            <td><button class="btn btn-default center-block">attend</button></td>
         </tr>
         </tbody>
     </table>
 </div>
+
+<section data-ng-controller="EventsController" data-ng-init="find()">
+    <ul class="articles unstyled">
+        <li data-ng-repeat="event in events">
+            <span>{{event.eventStartDate | date:'medium'}}</span>
+            <h2>
+                <a data-ng-href="#!/events/{{event._id}}">{{event._id}}</a>
+            </h2>
+        </li>
+    </ul>
+    <h1 data-ng-hide="!events || events.length">No events yet. <br> Why don't you <a href="/#!/events/create">Create One</a>?</h1>
+</section>
