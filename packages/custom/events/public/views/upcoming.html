@@ -7,7 +7,7 @@
                 </span>
                 <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search upcoming events"/></div>
         </div>
-        <div class="panel-title table-title">upcoming events <a href="#!/events/create"><span class="glyphicon glyphicon-plus glyphlink-red"></span></a></div>
+        <div class="panel-title table-title">upcoming events<a href="#!/events/create"><span class="glyphicon glyphicon-plus glyphlink-red"></span></a></div>
     </div>
 
     <table class="table table-hover table-bordered">
@@ -23,8 +23,8 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="event in events | filter: searchText">
-            <!--<td>{{event.eventStartDate}}</td>-->
-            <td>{{event.date}}</td>
+            <td>{{event.eventStartDate | date:'MM/dd/yyyy'}}</td>
+            <!--<td>{{event.date}}</td>-->
             <td>{{event.track}}</td>
             <td>{{event.location}}</td>
             <td>{{event.novice}} :: {{event.intermediate}} :: {{event.advanced}}</td>

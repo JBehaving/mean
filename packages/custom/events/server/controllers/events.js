@@ -119,8 +119,10 @@ exports.all = function(req, res) {
  * Create an event
  */
 exports.create = function(req, res) {
+    console.log(req.body);
+    console.log(req.query);
     var event = new Event(req.body);
-    event.eventStartDate = req.date;
+    //event.eventStartDate = req.eventStartDate;
 
     event.save(function(err) {
         if (err) {
@@ -129,7 +131,6 @@ exports.create = function(req, res) {
             });
         }
         res.json(event);
-
     });
 };
 

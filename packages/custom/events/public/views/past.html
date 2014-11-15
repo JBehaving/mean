@@ -32,7 +32,7 @@
 <section data-ng-controller="EventsController" data-ng-init="find()">
     <ul class="articles unstyled">
         <li data-ng-repeat="event in events">
-            <span>{{event.eventStartDate | date:'medium'}}</span>
+            <span>{{event.eventStartDate | date:'MM/dd/yyyy'}}</span>
             <h2>
                 <a data-ng-href="#!/events/{{event._id}}">{{event._id}}</a>
             </h2>
