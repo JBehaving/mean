@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
 Account = mongoose.model('Account');
+ObjectId = require('mongoose').Types.ObjectId;
   
 /**
  * Create Account (Note: This requires that the user object be created ahead of time)
@@ -64,7 +65,7 @@ exports.update = function(req, res)
  
 exports.all = function(req, res) 
 {
-	Account.find().sort('userLastName userFirstName').populate('userID').exec(function(err, account) { //Sort by last,first ascending, get user information
+	Account.find().sort('userLastName userFirstName').populate('userID').exec(function(err, account) { //Sort by last,first ascending, should I actually populate?
     if (err) 
 	{
 		return res.json(500, { error: 'Error in listing Account information' });
@@ -80,7 +81,8 @@ exports.all = function(req, res)
  
 exports.account = function(req, res, id) 
 {
-	Account.find( {'userID': id} ).populate('userID').exec(function(err, account) { 
+	var search = { userID: new ObjectId(id) };
+	Account.find( (search).populate('userID').exec(function(err, account) { 
     if (err) 
 	{
 		return res.json(500, { error: 'Error in listing Account information' });
@@ -95,7 +97,8 @@ exports.account = function(req, res, id)
  
 exports.own = function(req, res) 
 {
-	Account.find( {'userID': req.user} ).populate('userID').exec(function(err, account) { 
+	var search = { userID: new ObjectId(req.user.id) };
+	Account.find(search).populate('userID').exec(function(err, account) { 
     if (err) 
 	{
 		return res.json(500, { error: 'Error in listing Account information' });

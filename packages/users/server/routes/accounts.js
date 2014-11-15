@@ -5,9 +5,10 @@ module.exports = function(Account, app, auth, database) {
 
 var accounts = require('../controllers/accounts');
 
+
 //Authorization helper
 var hasAuthorization = function(req, res, next) {
-  if (!req.user.isAdmin && req.account.userID.id !== req.user.id) { //Not sure about syntax on second condition
+  if (!req.user.isAdmin && req.account.userID.id !== req.user.id && !req.user.hasRole('event manager')) { //Not sure about syntax on second condition
     return res.send(401, 'User is not authorized');
   }
   next();
