@@ -5,7 +5,21 @@
 
 var mongoose = require('mongoose'),
     Track = mongoose.model('Track'),
-    ObjectId = require('mongoose').Types.ObjectId;
+    ObjectId = require('mongoose').Types.ObjectId,
+    _ = require('lodash');
+
+/**
+ * Find event by id
+ */
+exports.track = function(req, res, next, id) {
+    Track.load(id, function(err, track) {
+        if (err) return next(err);
+        if (!track) return next(new Error('Failed to load track ' + id));
+        req.track = track;
+        next();
+    });
+};
+
 //-- get all tracks
 exports.all = function(req, res) {
     Track.find(function(err, tracks) {
@@ -84,5 +98,45 @@ exports.findTrack = function(req, res) {
             }
         });
     }
+};
+/**
+ * Update a track
+ */
+exports.update = function(req, res) {
+    var track = req.track;
 
+    track = _.extend(track, req.body);
+
+    track.save(function(err) {
+        if (err) {
+            return res.json(500, {
+                error: 'Cannot update the track'
+            });
+        }
+        res.json(track);
+
+    });
+};
+
+//-- update one event using  _id field
+exports.updateTrack = function(req, res) {
+    //-- assumed content-type of application/JSON (in header)
+    // var gtdEvent = new GTDEvent(req.body);
+    var updatedTrack = req.body;
+
+    //-- assumes validated request
+    if (updatedTrack._id !== undefined || updatedTrack.trackID !== undefined) {
+        var query = updatedTrack._id;
+        delete updatedTrack._id;
+        Track.update(query, updatedTrack, function (err, res) {
+            if (err) {
+                console.log('failed to update event ' + err);
+                return res.json(500, {
+                    error: 'Cannot update the event' + err
+                });
+            }
+        });
+        res.send('Event successfully updated. ' + query);
+    }
+    res.send('error updating event');
 };

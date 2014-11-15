@@ -30,7 +30,7 @@ exports.all = function(req, res) {
     }
     else if (req.query.eventID !== undefined) {
         var eventid = new ObjectId(req.query.eventID);
-        GTDEvent.find().where('eventID').equals(eventid).sort('-eventStartDate').exec(function (err, events) {
+        GTDEvent.find({_id: eventid}, function (err, events) {
             if (err) {
                 res.render('error', {
                     status: 500

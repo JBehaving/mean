@@ -12,4 +12,14 @@ var TrackSchema = new Schema({
     timeEntered: { type: String, required: true },
     trackName: { type: String, required: true }});
 
+
+/**
+ * Statics
+ */
+TrackSchema.statics.load = function(id, cb) {
+    this.findOne({
+        _id: id
+    }).exec(cb);
+
+};
 mongoose.model('Track',TrackSchema);
