@@ -1,8 +1,17 @@
+/*  */
+.page-title {
+    font-size: 40px;
+    color: #080808;
+    font-family: Impact, Charcoal, sans-serif;
+    text-align: center;
+}
+
+/* button css */
 .btn-default {
     background: #ffffff;
     border-color: red;
-    color: #000000;
     font-size: 22px;
+    color: #080808;
     font-family: Impact, Charcoal, sans-serif;
     opacity: 0.9;
 }
@@ -10,12 +19,44 @@
 .btn-default:hover {
     border-color: red;
     background: #f5f5f5;
-    color: black;
+    color: #080808;
     opacity: 1;
 }
 
+/* glyphicons */
+.glyphicon-space {
+    color: transparent;
+}
+
+.glyphlink-red {
+    color:red;
+    vertical-align:20%;
+    font-size:16px;
+    text-decoration: none;
+}
+
+/* input css */
 .glowing-border:focus {
     outline: none;
-    border-color: gray;
-    box-shadow: 0 0 10px gray;
+    border-color: lightgray;
+    box-shadow: 0 0 10px lightgray;
 }
+
+/* table css */
+.table {
+    table-layout: auto;
+}
+.table-title {
+    color: #080808;
+    font-size: 26px;
+    font-family: Impact, Charcoal, sans-serif;
+}
+.table-title-bg {
+    background-color: #f5f5f5;
+}
+.table-search {
+    width: 30%;
+    min-width: 250px;
+}
+
+

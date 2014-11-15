@@ -1,23 +1,32 @@
 <div data-ng-controller="AnnouncementsController" data-ng-init="defaultShow()">
-  <h1>Announcements</h1>
-    <div class="container">
-        <div class="col-md-12">
-            <h1>{{announcements.newsTitle}}</h1>
-            <p>{{announcements.newsBody}}</p>
+  <h2>
+      Announcements
+      <a class="btn">
+          <i class="glyphicon glyphicon-plus-sign"></i>
+      </a>
+  </h2>
+
+<!--    <select name="sort" data-ng-model="sort" id="sort">
+        <option value="10perPage">10 per page</option>
+        <option value="20perPage">20 per page</option>
+    </select>-->
+    <div class="container" >
+        <div class="col-md-12" data-ng-repeat="announcement in announcements">
+            <h3>{{announcement.newsTitle}}</h3>
+            <p>{{announcement.newsBody}}</p>
             <div>
-                <span class="badge">Posted {{announcements.newsEditedDate}} {{announcements.newsEditedTime}}</span>
+                <span class="badge">Posted {{announcement.newsEditedDate}} {{announcement.newsEditedTime}}</span>
             </div>
-            <div data-ng-if="hasAuthorization(announcement)">
+            <!--<div data-ng-if="hasAuthorization(announcement)">-->
                 <a class="btn" href="/#!/announcements/{{announcements._id}}/edit">
                     <i class="glyphicon glyphicon-edit"></i>
                 </a>
                 <a class="btn" data-ng-click="remove(announcement);">
                     <i class="glyphicon glyphicon-remove-circle"></i>
                 </a>
-            </div>
+            <!--</div>-->
             <hr>
         </div>
     </div>
 </div>
-
 

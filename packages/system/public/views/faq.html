@@ -1,14 +1,5 @@
-<!doctype html>
-<html ng-app="ui.bootstrap.demo">
-<head>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.2.js"></script>
-    <script src="../controllers/faq.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-
-<div class="col-xs-12 col-sm-6" ng-controller="AccordionCtrl">
+<div class="container" ng-controller="AccordionCtrl">
+    <img class="center-block" src="/system/assets/img/logo.jpg" width="400" height="175" />
     <label class="checkbox">
         <input type="checkbox" ng-model="oneAtATime">
         Open only one at a time
@@ -16,22 +7,20 @@
     <accordion close-others="oneAtATime">
         <accordion-group ng-repeat="group in groups" is-open="group.expanded">
             <accordion-heading>
-                <i class="glyphicon" ng-class="{'glyphicon-minus': groups[$index].expanded, 'glyphicon-plus': !group[$index].expanded}"></i>
-                <i></i>
-                 {{group.title}}
-                <i class="glyphicon glyphicon-remove-circle pull-right" style="color: red" ng-click="removeGroup(group)"></i>
+                <span class="glyphicon pull-left" ng-class="{'glyphicon-minus': groups[$index].expanded, 'glyphicon-plus': !group[$index].expanded}"></span>
+                <span class="pull-left glyphicon-asterisk glyphicon-space"></span>
+                <strong class="valign-middle">{{group.title}}</strong>
+                <!--<span class="glyphicon glyphicon-remove-circle pull-right" style="color: red" ng-click="removeGroup(group)"></span>-->
             </accordion-heading>
             {{group.content}}
         </accordion-group>
     </accordion>
 
-    <div class="">
+    <!--<div class="">
         <form ng-submit="addGroup()">
            <input type="text" ng-model="newQuestion" name="question" placeholder="Question" class="form-control glowing-border" required>
            <textarea ng-model="newAnswer" name="answer" rows="3" placeholder="Answer" class="form-control glowing-border" required></textarea>
-           <button type="submit" class="btn btn-default btn-sm pull-right">Add</button>
+           <button type="submit" class="btn btn-default btn-sm pull-right">add</button>
         </form>
-    </div>
+    </div>-->
 </div>
-</body>
-</html>

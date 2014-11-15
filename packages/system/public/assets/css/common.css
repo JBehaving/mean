@@ -20,10 +20,6 @@
 .account>ul {
 	text-align: left;
 }
-.navbar .nav>li>a.brand {
-	padding-left: 20px;
-	margin-left: 0
-}
 .content {
 	margin-top: 70px;
 	width: 100%
@@ -47,4 +43,10 @@ footer p {
 }
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
+}
+.no-validate {
+	border-color: lightgray !important;
+}
+.valign-middle {
+	vertical-align: middle;
 }

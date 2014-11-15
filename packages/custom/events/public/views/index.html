@@ -1,4 +1,10 @@
-<div class="" data-ng-controller="EventsController">
+<div class="container" data-ng-controller="EventsController">
+  <div data-ng-include="'events/views/upcoming.html'"></div>
+  <div data-ng-include="'events/views/past.html'"></div>
+</div>
+
+
+<!--<div class="" data-ng-controller="EventsController">
   <h1>Example view from your new awesome package</h1>
   <h2>Package: {{package.name}}</h2>
   <ol>

@@ -60,3 +60,13 @@
         margin-top:10px;
     }
 }
+
+.secondary-form {
+    display: none;
+    padding: 20px;
+    padding-top: 0;
+}
+.primary-form {
+    padding: 20px;
+    padding-top: 35px;
+}
