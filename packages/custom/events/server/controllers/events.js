@@ -121,14 +121,16 @@ exports.show = function(req, res) {
  * List of Events
  */
 exports.all = function(req, res) {
-    GTDEvent.find().sort('-eventStartDate').exec(function(err, events) {
+    GTDEvent.find().sort('-eventStartDate').exec(function (err, events) {
         if (err) {
             return res.json(500, {
                 error: 'Cannot list the events'
             });
         }
         res.json(events);
-=======
+    });
+};
+
 //-- update one event using  _id field
 exports.updateEvent = function(req, res) {
     //-- assumed content-type of application/JSON (in header)
@@ -152,10 +154,7 @@ exports.updateEvent = function(req, res) {
     res.send('error updating event');
 };
 
->>>>>>> origin/eventsDevMike
 
-    });
-};
 
 
 /**
