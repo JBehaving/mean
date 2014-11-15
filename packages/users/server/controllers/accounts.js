@@ -7,27 +7,54 @@ var mongoose = require('mongoose'),
 Account = mongoose.model('Account');
   
 /**
- * Create Account
+ * Create Account (Note: This requires that the user object be created ahead of time)
  */ 
  
- exports.create = function(req,res) {
- var account = new Account(req.body); //Why does this work?
- account.userID = req.user;
+exports.create = function(req,res) 
+{
+	var account = new Account(req.body); //Why does this work?
+	account.userID = req.user;
  
- account.save(function(err) {
-    if (err) {
-      return res.json(500, {
-        error: 'Error in creating new account'
-      });
+	account.save(function(err) {
+    if (err) 
+	{
+      return res.json(500, { error: 'Error in creating new account' });
     }
     res.json(account);
-
-  });
- };
+	});
+};
 
 /**
- * Update Account TODO
+ * Update Account
  */
+ 
+exports.update = function(req, res) 
+{
+	var updatedAccount = new Account(req.body); 
+
+    if (updatedAccount._id !== undefined) 
+	{ 
+		//Mongodb does not like it when you try to update a doc by _id when the object still exists, so we have to delete the original
+		var searchID = updatedAccount._id; 
+        delete updatedAccount._id;
+			
+		
+        Account.update(searchID, updatedAccount, function (err) { 
+            if (err) 
+			{ 
+                console.log('Account info update failed: ' + err); 
+                return res.json(500, { error: 'Failed to update account' + err } ); 
+            } 
+        }); 
+        res.send('Account successfully updated. '); 
+    } 
+	else 
+	{ //We're updating a non existant account
+		res.send('ERROR: Attempted to update non-existant account');
+	}
+
+
+};
 
  
  
@@ -35,12 +62,12 @@ Account = mongoose.model('Account');
  * Find all accounts
  */
  
- exports.all = function(req, res) {
-  Account.find().sort('userLastName userFirstName').populate('userID').exec(function(err, account) { //Sort by last,first ascending, get user information
-    if (err) {
-      return res.json(500, {
-        error: 'Error in listing Account information'
-      });
+exports.all = function(req, res) 
+{
+	Account.find().sort('userLastName userFirstName').populate('userID').exec(function(err, account) { //Sort by last,first ascending, get user information
+    if (err) 
+	{
+		return res.json(500, { error: 'Error in listing Account information' });
     }
     res.json(account);
 
@@ -51,38 +78,38 @@ Account = mongoose.model('Account');
  * Find account by USER id
  */
  
- exports.account = function(req, res, id) {
- Account.find( {'userID': id} ).populate('userID').exec(function(err, account) { 
-    if (err) {
-      return res.json(500, {
-        error: 'Error in listing Account information'
-      });
+exports.account = function(req, res, id) 
+{
+	Account.find( {'userID': id} ).populate('userID').exec(function(err, account) { 
+    if (err) 
+	{
+		return res.json(500, { error: 'Error in listing Account information' });
     }
     res.json(account);
-
-  });
+	});
 };
 
 /**
  * Find user's own account
  */
  
- exports.account = function(req, res) {
- Account.find( {'userID': req.user} ).populate('userID').exec(function(err, account) { 
-    if (err) {
-      return res.json(500, {
-        error: 'Error in listing Account information'
-      });
+exports.own = function(req, res) 
+{
+	Account.find( {'userID': req.user} ).populate('userID').exec(function(err, account) { 
+    if (err) 
+	{
+		return res.json(500, { error: 'Error in listing Account information' });
     }
     res.json(account);
-});
+	});
 };
 
 /**
  * Show account info
  */
  
- exports.show = function(req, res) {
-  res.json(req.account);
+exports.show = function(req, res) 
+{
+	res.json(req.account);
 };
  

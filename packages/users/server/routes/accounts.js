@@ -21,10 +21,11 @@ module.exports = function(Accounts, app, auth) {
   app.route('/account/:articleId')
     .get(accounts.show)
     .put(auth.requiresLogin, hasAuthorization, accounts.update);
-
-
-  // Finish with setting up the articleId param
   app.param('accountId', accounts.account);
-};
+  
+  app.route('/account/')
+    .get(accounts.own)
+	.put(auth.requiresLogin, hasAuthorization, accounts.update);
 
- };
+
+};
