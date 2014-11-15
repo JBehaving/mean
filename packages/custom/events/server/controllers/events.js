@@ -162,7 +162,6 @@ exports.updateEvent = function(req, res) {
  */
 exports.create = function(req, res) {
     var event = new Event(req.body);
-    event.eventStartDate = req.date;
 
     event.save(function(err) {
         if (err) {
