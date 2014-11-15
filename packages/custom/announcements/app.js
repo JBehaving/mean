@@ -18,8 +18,8 @@ Announcements.register(function(app, auth, database) {
 
   //We are adding a link to the main menu for all authenticated users
   Announcements.menus.add({
-    title: 'announcements example page',
-    link: 'announcements example page',
+    title: 'announcements page',
+    link: 'announcements page',
     roles: ['authenticated'],
     menu: 'main'
   });
