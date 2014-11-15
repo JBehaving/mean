@@ -1,5 +1,12 @@
 
-<div class="" data-ng-controller="FinancialController">
+<div class="" data-ng-controller="FinancialController" ng-init="init()">
+    <h1>Financial Reports</h1>
+    <span>Annual
+        <select>
+            <option ng-repeat="year in years">{{year}}</option>
+        </select>
+    </span>
+
     <button type="button" ng-csv="test_csv" filename="test.csv">Export</button>
 </div>
 
