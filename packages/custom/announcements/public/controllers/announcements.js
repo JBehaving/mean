@@ -1,8 +1,9 @@
 'use strict';
 
-angular.module('mean.announcements').controller('AnnouncementsController', ['$scope', 'Global', 'Announcements',
+angular.module('mean.announcements').controller('AnnouncementsController', ['$scope','$stateParams', '$location', 'Global', 'Announcements','$http',
   function($scope, $stateParams, $location, Global, Announcements,$http) {
     $scope.global = Global;
+    $scope.announcements=[];
 
     $scope.package = {
       name: 'announcements'
@@ -12,8 +13,6 @@ angular.module('mean.announcements').controller('AnnouncementsController', ['$sc
         if (!announcements || !announcements.user) return false;
         return $scope.global.isAdmin || announcements.user._id === $scope.global.user._id;
     };
-
-    $scope.announcements =
 
     $scope.create = function(isValid) {
         if (isValid) {
@@ -51,7 +50,7 @@ angular.module('mean.announcements').controller('AnnouncementsController', ['$sc
     $scope.defaultShow = function() {
         $http.get('/announcements')
         .success(function(data) {
-        $scope.announcement = data;
+        $scope.announcements = data;
         })
         .error(function(data) {
         console.log('Error: ' + data);
@@ -73,7 +72,7 @@ angular.module('mean.announcements').controller('ModalDemoCtrl', function ($scop
   $scope.open = function (size) {
 
     var modalInstance = $modal.open({
-      templateUrl: 'myModalContent.html',
+      templateUrl: 'announcements/views/create.html',
       controller: 'ModalInstanceCtrl',
       size: size,
 /*      resolve: {
