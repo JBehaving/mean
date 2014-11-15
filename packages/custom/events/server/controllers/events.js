@@ -6,14 +6,31 @@
 
 var mongoose = require('mongoose'),
     GTDEvent = mongoose.model('Event'),
+    ObjectId = require('mongoose').Types.ObjectId,
+ //   MongoDate = require('mongoose').Types.Date,
     _ = require('lodash');
-    /*GTDEvent = mongoose.model('Event');
+
 
 exports.all = function(req, res) {
 
     if (req.query.trackID !== undefined && req.query.eventStartDate !== undefined) {
+        var trackid = new ObjectId(req.query.trackID);
+        var startdate = new Date(req.query.eventStartDate);
        // console.log('Searched for ' + req.query.trackID + ' ' + req.query.eventStartDate);
-        GTDEvent.find().where('eventStartDate').equals(req.query.eventStartDate).where('trackID').equals(req.query.trackID).exec(function (err, events) {
+        GTDEvent.find().where('eventStartDate').equals(startdate).where('trackID').equals(trackid).sort('-eventStartDate').exec(function (err, events) {
+            if (err) {
+                res.render('error', {
+                    status: 500
+                });
+            } else {
+                return res.jsonp(events);
+            }
+        });
+        console.log('Error retrieving event.');
+    }
+    else if (req.query.eventID !== undefined) {
+        var eventid = new ObjectId(req.query.eventID);
+        GTDEvent.find().where('eventID').equals(eventid).sort('-eventStartDate').exec(function (err, events) {
             if (err) {
                 res.render('error', {
                     status: 500
@@ -25,76 +42,17 @@ exports.all = function(req, res) {
         console.log('Error retrieving event.');
     }
     else {
-        GTDEvent.find(function (err, events) {
+        GTDEvent.find().sort('-eventStartDate').exec(function (err, events) {
             if (err) {
-                console.log('failed to find an event ' + err);
-                res.send(err);
-            } else {
-                console.log('tried find an event ' + err);
-                res.jsonp(events);
-            }
-        });
-    }
-
-
-};
-
-//-- search by event spefics .. to be finished later
-exports.findEvent = function(req, res) {
-    var fields = [
-        req.query.advancedCap,
-        req.query.albumLink,
-        req.query.basePrice,
-        req.query.eventDesc,
-        req.query.eventState,
-        req.query.eventStatus,
-        req.query.eventStartTime,
-        req.query.eventStartDate,
-        req.query.noviceCap,
-        req.query.trackID
-        ];
-    if (fields !== undefined) {
-
-        GTDEvent.find().where('advancedCap').equals(fields[0]).exec(function (err, events) {
-            if (err) {
-                res.render('error', {
-                    status: 500
+                return res.json(500, {
+                    error: 'Cannot list the events'
                 });
-            } else {
-                res.jsonp(events);
             }
+            res.json(events);
         });
     }
-    else {
-        GTDEvent.find(function (err, events) {
-            if (err) {
-                console.log('failed to find events ' + err);
-                res.send(err);
-            } else {
-                console.log('found events');
-                res.jsonp(events);
-            }
-        });
-    }
-
 };
 
-exports.create = function(req, res) {
-    //-- assumed content-type of application/JSON (in header)
-    var gtdEvent = new GTDEvent(req.body);
-    console.log(req.body);
-    gtdEvent.save(function (err) {
-        console.log('failed to create an event ' + err);
-        if (err) {
-            console.log('failed to create an event ' + err);
-            return res.json(500, {
-                error: 'Cannot save the event' + err
-            });
-        }
-        res.json(gtdEvent);
-    });
-
-};*/
 
 /**
  * Find event by id
@@ -120,6 +78,8 @@ exports.show = function(req, res) {
 /**
  * List of Events
  */
+
+/*
 exports.all = function(req, res) {
     GTDEvent.find().sort('-eventStartDate').exec(function (err, events) {
         if (err) {
@@ -130,7 +90,7 @@ exports.all = function(req, res) {
         res.json(events);
     });
 };
-
+*/
 //-- update one event using  _id field
 exports.updateEvent = function(req, res) {
     //-- assumed content-type of application/JSON (in header)
