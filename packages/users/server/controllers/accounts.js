@@ -4,7 +4,9 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-Account = mongoose.model('Account');
+Account = mongoose.model('Account'),
+User = mongoose.model('User'),
+_ = require('lodash'),
 ObjectId = require('mongoose').Types.ObjectId;
   
 /**
@@ -15,6 +17,24 @@ exports.create = function(req,res)
 {
 	var account = new Account(req.body); //Why does this work?
 	account.userID = req.user;
+ 
+	account.save(function(err) {
+    if (err) 
+	{
+      return res.json(500, { error: 'Error in creating new account' });
+    }
+    res.json(account);
+	});
+};
+
+/**
+ * Register test (attempting to bypass the need to create the user object beforehand by creating the user in the account
+ */
+ exports.register = function(req,res)
+ {
+	var account = new Account(req.body); 
+	//Need to test
+	account.userID.push({'email': req.body.email, 'password': req.body.password });
  
 	account.save(function(err) {
     if (err) 
@@ -94,7 +114,7 @@ exports.account = function(req, res, id)
 	}
 	else
 	{
-		//Error: no id specified
+		res.send('ERROR: No account id specified');
 	}
 };
 

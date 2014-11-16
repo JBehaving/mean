@@ -16,8 +16,11 @@ var hasAuthorization = function(req, res, next) {
 
 module.exports = function(Accounts, app, auth) {
 
+  app.route('/register')
+	.post(accounts.create);
+
   app.route('/accounts') //Basic listing for employees Need to require authorization for this one
-    .get(accounts.all);	 //No limit on number? Handled elsewhere? No authorization for now...
+    .get(accounts.all);	 //No authorization for now...
 	
   app.route('/account/:accountId')
     .get(accounts.show)
