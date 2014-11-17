@@ -23,9 +23,17 @@ var ManifestSchema = new Schema({
     paymentMethod : String,
     created : {
         type : Date,
-        default : Date.now,
-    },
+        default : Date.now
+    }
 });
 
+/**
+ * Statics
+ */
+ManifestSchema.statics.load = function(id, cb) {
+    this.findOne({
+        _id: id
+    }).exec(cb);
+};
 
 mongoose.model('Manifest', ManifestSchema);

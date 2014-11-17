@@ -13,6 +13,9 @@ module.exports = function(Events, app, auth, database) {
     app.route('/events/:eventId')
       .get(events.show);
 
+    app.route('/manifests/:eventId')
+        .get(events.findManifest);
+
     // Finish with setting up the eventId param
     app.param('eventId', events.event);
 
