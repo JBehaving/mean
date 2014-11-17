@@ -3,6 +3,8 @@
 // The Package is past automatically as first parameter
 module.exports = function(Vehicles, app, auth, database) {
 
+  var vehicles = require(../controllers/vehicles);
+
   app.get('/vehicles/example/anyone', function(req, res, next) {
     res.send('Anyone can access this');
   });
@@ -23,4 +25,13 @@ module.exports = function(Vehicles, app, auth, database) {
       res.send(html);
     });
   });
+
+  app.get('/vehicles', vehicles.all)
+      .post(vehicles.create);
+
+  app.route('/vehicles/:vehicleId')
+      .get(vehicles.show)
+      .put(vehicles.update);
+
+  app.param('vehicleId', vehicles.vehicle);
 };
