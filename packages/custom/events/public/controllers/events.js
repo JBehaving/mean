@@ -13,7 +13,7 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
     $scope.create = function(isValid) {
       if (isValid) {
         var event = new Events({
-          eventStartDate: this.date
+          eventStartDate: this.eventStartDate
         });
         event.$save(function(response) {
           $location.path('events/' + response._id);
