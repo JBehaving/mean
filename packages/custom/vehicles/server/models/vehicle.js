@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 
 var VehicleSchema = new Schema({
-    userID: { type: Schema.ObjectId,
+    userId: { type: Schema.ObjectId,
         ref: 'User',
         required: true },
     vehicleModel: { type: String, required: true },

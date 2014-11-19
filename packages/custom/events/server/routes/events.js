@@ -9,7 +9,6 @@ module.exports = function(Events, app, auth, database) {
         .get(events.all)
         .post(events.create);
 
-
     app.route('/events/:eventId')
       .get(events.show);
 
