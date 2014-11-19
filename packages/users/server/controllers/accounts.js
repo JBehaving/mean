@@ -96,26 +96,17 @@ exports.all = function(req, res)
 };
  
 /**
- * Find account by USER id
+ * Find account by account id (don't need userId, from list of accounts)
  */
  
-exports.account = function(req, res, id) 
+exports.account = function(req, res, next, id) 
 {
-	if(id !== undefined)
-	{
-		var search = { userID: new ObjectId(id) };
-		Account.find( (search).populate('userID').exec(function(err, account) { 
-		if (err) 
-		{
-			return res.json(500, { error: 'Error in listing Account information' });
-		}
-		res.json(account);
-		});
-	}
-	else
-	{
-		res.send('ERROR: No account id specified');
-	}
+	Account.findOne({ _id = id}).exec(function(err, account) {
+		if (err) return next(err);
+		if (!account) return next(new Error('Failed to load account ' + id));
+		req.account = account;
+		next();
+	}); 	
 };
 
 /**
