@@ -13,7 +13,7 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
     $scope.create = function(isValid) {
       if (isValid) {
         var event = new Events({
-          eventStartDate: this.eventStartDate
+          eventStartDate: this.date
         });
         event.$save(function(response) {
           $location.path('events/' + response._id);
@@ -80,7 +80,7 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
     var upcoming = [];
 
     angular.forEach(items, function(item){
-      if ( (new Date().getTime() - new Date(item.eventStartDate).getTime()) <= 0) {
+      if ( new Date() <= new Date(item.eventStartDate) ) {
         upcoming.push(item);
       }
     });
@@ -91,16 +91,16 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
   };
 }).filter('filterPast', function() {
     return function(items) {
-        var upcoming = [];
+        var past = [];
 
         angular.forEach(items, function(item){
-            if ( (new Date().getTime() - new Date(item.eventStartDate).getTime()) >= 0) {
-                upcoming.push(item);
+          if ( new Date() > new Date(item.eventStartDate) ) {
+                past.push(item);
             }
         });
 
         //console.log(upcoming);
         // return items.slice().reverse();
-        return upcoming;
+        return past;
     };
 });

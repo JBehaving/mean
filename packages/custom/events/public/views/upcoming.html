@@ -23,7 +23,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="clickable-row" data-ng-repeat="event in events | filterUpcoming" ng-click="showEvent(event)">
+        <tr class="clickable-row" data-ng-repeat="event in events | filterUpcoming | orderBy: 'eventStartDate' | filter: searchText" ng-click="showEvent(event)">
             <td style="vertical-align:middle">{{event.eventStartDate | date:'MM/dd/yyyy'}}</td>
             <td style="vertical-align:middle">{{event.trackName}}</td>
             <td style="vertical-align:middle">{{event.location}}</td>

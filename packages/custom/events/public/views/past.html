@@ -19,7 +19,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr data-ng-repeat="event in events |  filterPast">
+        <tr data-ng-repeat="event in events | filterPast | orderBy: '-eventStartDate' | filter: searchText"">
             <!--<td>{{event.eventStartDate}}</td>-->
             <td>{{event.eventStartDate | date:'MM/dd/yyyy'}}</td>
             <td>{{event.track}}</td>
@@ -28,15 +28,3 @@
         </tbody>
     </table>
 </div>
-
-<section data-ng-controller="EventsController" data-ng-init="find()">
-    <ul class="articles unstyled">
-        <li data-ng-repeat="event in events">
-            <span>{{event.eventStartDate | date:'MM/dd/yyyy'}}</span>
-            <h2>
-                <a data-ng-href="#!/events/{{event._id}}">{{event._id}}</a>
-            </h2>
-        </li>
-    </ul>
-    <h1 data-ng-hide="!events || events.length">No events yet. <br> Why don't you <a href="/#!/events/create">Create One</a>?</h1>
-</section>
