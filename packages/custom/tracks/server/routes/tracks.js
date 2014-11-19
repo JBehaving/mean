@@ -1,7 +1,7 @@
 'use strict';
 
 var tracks = require('../controllers/tracks');
-// The Package is past automatically as first parameter
+// The Package is passed automatically as first parameter
 module.exports = function(Tracks, app, auth, database) {
 
     app.route('/tracks')
