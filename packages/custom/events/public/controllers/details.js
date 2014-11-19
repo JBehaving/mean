@@ -3,7 +3,6 @@
 angular.module('mean.events').controller('EventDetailsController', ['$scope', 'Global', 'Events', '$http',
     function($scope, Global, Events, $http) {
         $scope.global = Global;
-        $scope.foo = 'bar';
 
 
       //  var eventStartDate = '12/12/14';
@@ -13,7 +12,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', 'G
         //-- set up variables
         $scope.eventD = [];
         $scope.trackN = [];
-
+        $scope.trackname = 'laguna seca';
 
         var getTrack = function (trackId) {
             if (trackId !== undefined && trackId !== null) {
@@ -77,7 +76,24 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', 'G
          .error(function (err) {
          console.log('Error: ' + err);
          });*/
-
+        $scope.oneAtATime = true;
+        $scope.groups = [
+            {
+                title: 'advanced',
+                content: 'wewrwer',
+                expanded: true
+            },
+            {
+                title: 'intermediate',
+                content: 'werwe',
+                expanded: false
+            },
+            {
+                title: 'novice',
+                content: 'wer',
+                expanded: false
+            }
+        ];
 
     }
 

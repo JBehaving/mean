@@ -5,12 +5,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <style type="text/css">
-        h4{
-            margin: 0;
-            padding-top: 30px;
-            font-size: 40px;
-        }
-
         .item{
             text-align: center;
             height: 300px;
@@ -43,7 +37,9 @@
         table.strapless{
             max-width: 30%;
         }
+
     </style>
+
 </head>>
 
 <section data-ng-controller="EventDetailsController">
@@ -59,7 +55,7 @@
         <div style="padding-left:50%">
             <table>
                 <tbody>
-                <tr><td style="text-align:center"><font face="impact" size="8"> {{track.name}} </font></td></tr>
+                <tr><td style="text-align:center"><font face="impact" size="8"> {{trackname}} </font></td></tr>
                 <tr><td style="text-align:center"><font face="impact" size="4"> date </font></td></tr>
                 <tr><td style="text-align:center"><font face="impact" size="2"> locations </font></td></tr>
                 </tbody>
@@ -79,13 +75,13 @@
                         <!-- Carousel items -->
                         <div class="carousel-inner">
                             <div class="active item">
-                                <h4><img src="http://drewphillipsphotography.com/blog/wp-content/uploads/2012/05/alms-laguna-seca-2012.jpg" width="300" height="200"/></h4>
+                                <span style=" margin: 0;  padding-top: 30px; font-size: 40px;"><img src="http://drewphillipsphotography.com/blog/wp-content/uploads/2012/05/alms-laguna-seca-2012.jpg" width="300" height="200"/></span>
                             </div>
                             <div class="item">
-                                <h4><img src="http://www.rfactorcentral.com/screenshots/lge/11-LagunaSeca-9759.jpg" width="300" height="200"/></h4>
+                                <span style=" margin: 0;  padding-top: 30px; font-size: 40px;"><img src="http://www.rfactorcentral.com/screenshots/lge/11-LagunaSeca-9759.jpg" width="300" height="200"/></span>
                             </div>
                             <div class="item">
-                                <h4><img src="http://www.rfactorcentral.com/screenshots/lge/11-LagunaSeca-9759.jpg" width="300" height="200"/></h4>
+                                <span style=" margin: 0;  padding-top: 30px; font-size: 40px;"><img src="http://www.rfactorcentral.com/screenshots/lge/11-LagunaSeca-9759.jpg" width="300" height="200"/></span>
                             </div>
                         </div>
                         <!-- Carousel nav -->
@@ -138,23 +134,23 @@
     </div>
 
 </div>
-    <div class="row"><div><br/><div></div></div>
-    <div class="row">
-        <div class="col-md-4 "><span style="font-family:impact"><h2>attendees</h2></span> </div>
-        <div class="col-md-4 col-md-offset-1">
-            <div class="table-search pull-right">
+    <div class="row"><div><br /><div></div></div>
+    <div class="row">"><span style="font-family:impact"><h2>attendees</h2></span> </div>
+        <div class="col-md-4 "></div>
+        <div class="col-md-1 col-md-offset-3">
+            <div class="table-search pull-right pull-down">
                 <div class="form-group input-group">
                 <span class="input-group-addon">
                     <i class="glyphicon glyphicon-search"></i>
                 </span>
-                    <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search Antendees"/></div>
+                    <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search Attendees"/></div>
             </div>
         </div>
     </div>
     <div class="container" id="eventAttendees">
         <div class="panel panel-default">
             <div class="panel-heading table-title-bg">
-                <div class="panel-title table-title">advanced <a href="#!/events/register"><span class="glyphicon"><button style="background-color:white; border-width:2px; border-color:red; height:40px; width:90px;"
+                <div class="panel-title table-title">advanced <a href="#!/events/register"><span class="glyphicon"><button style="background-color:white; border-width:2px; border-color:red; height:40px; width:80px;"
 
                                                                                                                           type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">attend</font></button></span></a></div>
             </div>
@@ -182,28 +178,8 @@
             </table>
         </div>
 
-    <div>
-        <table class="table table-hover table-striped">
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Track</th>
-                <th>Location</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr data-ng-repeat="event in events | filter: searchText">
-                <!--<td>{{event.eventStartDate}}</td>-->
-                <td>{{event.date}}</td>
-                <td>{{event.track}}</td>
-                <td>{{event.location}}</td>
-            </tr>
-            </tbody>
-        </table>
-
-    </div>
 <div class="container" id="forumLogs">
-        <div class="panel panel-default"">
+        <div class="panel panel-default">
             <div class="panel-heading table-title-bg">
                 <div class="panel-title table-title">forum log <a href="#!/forumlogs/create"><span class="glyphicon glyphicon-plus glyphlink-red"></span></a></div>
             </div>
@@ -211,7 +187,7 @@
             <table class="table table-hover table-bordered">
                 <thead>
                 <tr>
-                    <th>{forumlog.link}}}</th>
+                    <th>{{forumlog.link}}}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -230,16 +206,30 @@
 
 </div>
 
-        <div class="container" ng-controller="AccordionCtrl">
+        <div class="container" ng-controller="EventDetailsController">
             <accordion close-others="oneAtATime">
                 <accordion-group ng-repeat="group in groups" is-open="group.expanded">
-                    <accordion-heading>
+                    <accordion-heading class="table-title-bg">
                         <span class="glyphicon pull-left" ng-class="{'glyphicon-minus': groups[$index].expanded, 'glyphicon-plus': !group[$index].expanded}"></span>
-                        <span class="pull-left glyphicon-asterisk glyphicon-space"></span>
-                        <strong class="valign-middle">{{group.title}}</strong>
-                        <!--<span class="glyphicon glyphicon-remove-circle pull-right" style="color: red" ng-click="removeGroup(group)"></span>-->
+                        <span style="font-family:impact">{{group.title}}</span>
+                        <a href="#!/events/register"><span class="glyphicon"><button style="background-color:white;border-width:2px; border-color:red; height:30px; width:60px; padding:0px"
+
+                                                                                     type="submit" class="btn btn-small btn-block btn"><font face="impact" color="black" size="4">attend</font></button></span></a>
+
+
                     </accordion-heading>
-                    {{group.content}}
+                        <div>
+                            <table ng-table="tableParams" class="table">
+                                <tr ng-model="eventer" ng-repeat="attendees in manifests">
+                                    <td data-title="'Event'" sortable="'event'">{{eventer.eventName}}</td>
+                                    <td data-title="'Date'" sortable="'date'">{{eventer.eventDate}}</td>
+                                    <td data-title="'State'" sortable="'state'">{{eventer.eventState}}</td>
+                                    <td data-title="'Event Status'" sortable="'status'">{{eventer.eventStatus}}</td>
+                                    <td data-title="'Cost'" sortable="'cost'">{{eventer.eventCost}}</td>
+                                    <td><form><button ng-submit="filterEvents()" type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">track day calculator</font></button></td>
+                                </tr>
+                            </table>
+                        </div>
                 </accordion-group>
             </accordion>
         </div>
@@ -270,22 +260,4 @@
                 </table>
             </div>-->
 
-        <div class="container" ng-controller="AccordionCtrl">
-            <img class="center-block" src="/system/assets/img/logo.jpg" width="400" height="175" />
-            <label class="checkbox">
-                <input type="checkbox" ng-model="oneAtATime">
-                Open only one at a time
-            </label>
-            <accordion close-others="oneAtATime">
-                <accordion-group ng-repeat="group in groups" is-open="group.expanded">
-                    <accordion-heading>
-                        <span class="glyphicon pull-left" ng-class="{'glyphicon-minus': groups[$index].expanded, 'glyphicon-plus': !group[$index].expanded}"></span>
-                        <span class="pull-left glyphicon-asterisk glyphicon-space"></span>
-                        <strong class="valign-middle">{{group.title}}</strong>
-                        <!--<span class="glyphicon glyphicon-remove-circle pull-right" style="color: red" ng-click="removeGroup(group)"></span>-->
-                    </accordion-heading>
-                    {{group.content}}
-                </accordion-group>
-            </accordion>
-    </div>
 </section>

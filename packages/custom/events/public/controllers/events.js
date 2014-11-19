@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('mean.events').controller('EventsController', ['$scope', '$stateParams', '$location', 'Global', 'Events',
-  function($scope, $stateParams, $location, Global, Events) {
+angular.module('mean.events').controller('EventsController', ['$scope', '$stateParams', '$location', 'Global', 'Events', 'Tracks',
+  function($scope, $stateParams, $location, Global, Events, Tracks) {
     $scope.global = Global;
     //$scope.events = Events; //can remove when pulling events from backend
 
@@ -72,7 +72,13 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
       });
     };
 
-    //$scope.package = {
+      $scope.findAllTracks = function() {
+          Tracks.query(function(tracks) {
+              $scope.tracks = tracks;
+          });
+      };
+
+      //$scope.package = {
     //  name: 'events'
     //};
   }
