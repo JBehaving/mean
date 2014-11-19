@@ -21,12 +21,11 @@ angular.module('mean.announcements').controller('AnnouncementsController', ['$sc
               newsBody: this.newsBody
             });
             announcement.$save(function(response) {
-              $location.path('announcements/' + response._id);
+              $scope.defaultShow();
             });
 
             this.newsTitle = '';
             this.newsBody = '';
-//            $modal.close();
         } else {
             $scope.submitted = true;
         }

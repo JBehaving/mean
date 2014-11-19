@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('mean.announcements').controller('ModalController', function ($scope, $modal, $log){
+angular.module('mean.announcements').controller('ModalEventController', function ($scope, $modal, $log){
 
     $scope.open = function (size) {
         var modalInstance = $modal.open({
           backdrop: true,
           keyboard: true,
           templateUrl: 'events/views/register.html',
-          controller: 'ModalInstanceCtrl',
+          controller: 'ModalEventInstanceCtrl',
           size: size
         });
 
@@ -18,7 +18,7 @@ angular.module('mean.announcements').controller('ModalController', function ($sc
         });
     };
 })
-.controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
+.controller('ModalEventInstanceCtrl', function ($scope, $modalInstance) {
 
   $scope.ok = function () {
 

@@ -15,7 +15,7 @@ module.exports = function(Announcements, app, auth, database) {
 
   app.route('/announcements/')
     .get(announcement.defaultShow)
-    .post(auth.requiresLogin, announcement.create);
+    .post(announcement.create);
 
   app.route('announcements/:announcementId')
     .get(announcement.show)
