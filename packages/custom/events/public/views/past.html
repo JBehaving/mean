@@ -19,9 +19,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr data-ng-repeat="event in events | filter: searchText">
+        <tr data-ng-repeat="event in events |  filterPast">
             <!--<td>{{event.eventStartDate}}</td>-->
-            <td>{{event.date}}</td>
+            <td>{{event.eventStartDate | date:'MM/dd/yyyy'}}</td>
             <td>{{event.track}}</td>
             <td>{{event.location}}</td>
         </tr>

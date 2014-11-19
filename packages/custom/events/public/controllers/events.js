@@ -75,20 +75,32 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
       $location.path('/events/' + event._id);
     };
   }
-]);
-/*
-.filter('filterList', function() {
+]).filter('filterUpcoming', function() {
   return function(items) {
     var upcoming = [];
 
     angular.forEach(items, function(item){
-      if((new Date().getMonth()) - (item.eventStartDate) >= 0) {
+      if ( (new Date().getTime() - new Date(item.eventStartDate).getTime()) <= 0) {
         upcoming.push(item);
       }
     });
 
-    console.log(upcoming);
+    //console.log(upcoming);
     // return items.slice().reverse();
     return upcoming;
   };
-});*/
+}).filter('filterPast', function() {
+    return function(items) {
+        var upcoming = [];
+
+        angular.forEach(items, function(item){
+            if ( (new Date().getTime() - new Date(item.eventStartDate).getTime()) >= 0) {
+                upcoming.push(item);
+            }
+        });
+
+        //console.log(upcoming);
+        // return items.slice().reverse();
+        return upcoming;
+    };
+});
