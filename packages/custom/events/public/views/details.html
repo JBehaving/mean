@@ -43,6 +43,9 @@
 </head>>
 
 <section data-ng-controller="EventDetailsController">
+    <div class="container">
+        <div data-ng-include="'events/views/share.html'"></div>
+    </div>
     <div>
         <div class="pull-right">
             <button style="background-color:white; padding: 0px; border-width:2px; border-color:red; height:30px; width:80px;"
@@ -147,38 +150,40 @@
             </div>
         </div>
     </div>
-    <div class="container" id="eventAttendees">
-        <div class="panel panel-default">
-            <div class="panel-heading table-title-bg">
-                <div class="panel-title table-title">advanced <a href="#!/events/register"><span class="glyphicon"><button style="background-color:white; border-width:2px; border-color:red; height:40px; width:80px;"
 
-                                                                                                                          type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">attend</font></button></span></a></div>
-            </div>
 
-            <table class="table table-hover table-bordered">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Vehicle</th>
-                    <th>Wants Ride Along</th>
-                    <th>Allows Ride Alongs</th>
-                    <th>Checked-in</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr data-ng-repeat="attendee in attendees | filter: searchText">
-                    <!--<td>{{event.eventStartDate}}</td>-->
-                    <td>{{user.firstName}}</td>
-                    <td>{{vehicle.desc}}</td>
-                    <td>{{user.rideAlong}}</td>
-                    <td>{{event.riders}}</td>
-                    <td><button class="btn btn-default center-block">attend</button></td>
-                </tr>
-                </tbody>
-            </table>
+
+
+        <div class="container" ng-controller="EventDetailsController">
+            <accordion close-others="oneAtATime">
+                <accordion-group ng-repeat="group in groups" is-open="group.expanded">
+                    <accordion-heading class="table-title-bg">
+                        <span class="glyphicon pull-left" ng-class="{'glyphicon-minus': groups[$index].expanded, 'glyphicon-plus': !group[$index].expanded}"></span>
+                        <span style="font-family:impact">{{group.title}}</span>
+                        <a href="#!/events/register"><span class="glyphicon"><button style="background-color:white;border-width:2px; border-color:red; height:30px; width:60px; padding:0px"
+
+                                                                                     type="submit" class="btn btn-small btn-block btn"><font face="impact" color="black" size="4">attend</font></button></span></a>
+
+
+                    </accordion-heading>
+                        <div>
+                            <table ng-table="tableParams" class="table">
+                                <tr ng-model="attendees" ng-repeat="attendees in manifests">
+                                    <td data-title="'Name'" sortable="'event'">{{eventer.eventName}}</td>
+                                    <td data-title="'Vehicle'" sortable="'date'">{{eventer.eventDate}}</td>
+                                    <td data-title="'Ride Along Allowed'" sortable="'state'">{{eventer.eventState}}</td>
+                                    <td data-title="'Rider Wanted'" sortable="'status'">{{eventer.eventStatus}}</td>
+                                    <td data-title="'checked-in'" sortable="'cost'">{{eventer.eventCost}}</td>
+                                    <td><form><button ng-submit="filterEvents()" type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">track day calculator</font></button></td>
+                                </tr>
+                            </table>
+                        </div>
+                </accordion-group>
+            </accordion>
         </div>
 
-<div class="container" id="forumLogs">
+ <!-- inject forum logs here -->
+    <div class="container" id="forumLogs">
         <div class="panel panel-default">
             <div class="panel-heading table-title-bg">
                 <div class="panel-title table-title">forum log <a href="#!/forumlogs/create"><span class="glyphicon glyphicon-plus glyphlink-red"></span></a></div>
@@ -204,34 +209,39 @@
             </table>
         </div>
 
-</div>
-
-        <div class="container" ng-controller="EventDetailsController">
-            <accordion close-others="oneAtATime">
-                <accordion-group ng-repeat="group in groups" is-open="group.expanded">
-                    <accordion-heading class="table-title-bg">
-                        <span class="glyphicon pull-left" ng-class="{'glyphicon-minus': groups[$index].expanded, 'glyphicon-plus': !group[$index].expanded}"></span>
-                        <span style="font-family:impact">{{group.title}}</span>
-                        <a href="#!/events/register"><span class="glyphicon"><button style="background-color:white;border-width:2px; border-color:red; height:30px; width:60px; padding:0px"
-
-                                                                                     type="submit" class="btn btn-small btn-block btn"><font face="impact" color="black" size="4">attend</font></button></span></a>
+    </div>
 
 
-                    </accordion-heading>
-                        <div>
-                            <table ng-table="tableParams" class="table">
-                                <tr ng-model="eventer" ng-repeat="attendees in manifests">
-                                    <td data-title="'Event'" sortable="'event'">{{eventer.eventName}}</td>
-                                    <td data-title="'Date'" sortable="'date'">{{eventer.eventDate}}</td>
-                                    <td data-title="'State'" sortable="'state'">{{eventer.eventState}}</td>
-                                    <td data-title="'Event Status'" sortable="'status'">{{eventer.eventStatus}}</td>
-                                    <td data-title="'Cost'" sortable="'cost'">{{eventer.eventCost}}</td>
-                                    <td><form><button ng-submit="filterEvents()" type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">track day calculator</font></button></td>
-                                </tr>
-                            </table>
-                        </div>
-                </accordion-group>
-            </accordion>
+
+    <div class="container" id="eventAttendees">
+        <div class="panel panel-default">
+            <div class="panel-heading table-title-bg">
+                <div class="panel-title table-title">advanced <a href="#!/events/register"><span class="glyphicon"><button style="background-color:white; border-width:2px; border-color:red; height:40px; width:80px;"
+
+                                                                                                                           type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">attend</font></button></span></a></div>
+            </div>
+
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Vehicle</th>
+                    <th>Wants Ride Along</th>
+                    <th>Allows Ride Alongs</th>
+                    <th>Checked-in</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="attendee in attendees | filter: searchText">
+                    <!--<td>{{event.eventStartDate}}</td>-->
+                    <td>{{user.firstName}}</td>
+                    <td>{{vehicle.desc}}</td>
+                    <td>{{user.rideAlong}}</td>
+                    <td>{{event.riders}}</td>
+                    <td><button class="btn btn-default center-block">attend</button></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
         <!--

@@ -25,7 +25,7 @@ exports.findManifest = function(req, res) {
         });
     }
     else {
-        console.log('No Track found by that ID');
+        console.log('No Manifests found by that ID');
     }
 };
 
@@ -139,12 +139,15 @@ exports.updateEvent = function(req, res) {
  * Create an event
  */
 exports.create = function(req, res) {
+    if(req.body.trackID !== undefined ) {
+        req.body.trackID = new ObjectId(req.body.trackID);
+    }
     var event = new GTDEvent(req.body);
 
     event.save(function(err) {
         if (err) {
             return res.json(500, {
-                error: 'Cannot save the event'
+                error: err
             });
         }
         res.json(event);
