@@ -4,7 +4,6 @@
 angular.module('mean.events').controller('EventsController', ['$scope', '$stateParams', '$location', 'Global', 'Events',
   function($scope, $stateParams, $location, Global, Events) {
     $scope.global = Global;
-    //$scope.events = Events; //can remove when pulling events from backend
 
     /*$scope.hasAuthorization = function(event) {
       if (!event || !event.user) return false;
@@ -20,7 +19,7 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
           $location.path('events/' + response._id);
         });
 
-        this.eventStartDate = '';
+        this.date = '';
       } else {
         $scope.submitted = true;
       }
@@ -71,5 +70,25 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
         $scope.event = event;
       });
     };
+
+    $scope.showEvent = function(event) {
+      $location.path('/events/' + event._id);
+    };
   }
 ]);
+/*
+.filter('filterList', function() {
+  return function(items) {
+    var upcoming = [];
+
+    angular.forEach(items, function(item){
+      if((new Date().getMonth()) - (item.eventStartDate) >= 0) {
+        upcoming.push(item);
+      }
+    });
+
+    console.log(upcoming);
+    // return items.slice().reverse();
+    return upcoming;
+  };
+});*/

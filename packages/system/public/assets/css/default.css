@@ -10,7 +10,9 @@
 .btn-default {
     background: #ffffff;
     border-color: red;
-    font-size: 22px;
+    font-size: 16px;
+    line-height: 16px;
+    height: 32px;
     color: #080808;
     font-family: Impact, Charcoal, sans-serif;
     opacity: 0.9;
@@ -58,5 +60,7 @@
     width: 30%;
     min-width: 250px;
 }
-
+.clickable-row {
+    cursor: pointer;
+}
 
