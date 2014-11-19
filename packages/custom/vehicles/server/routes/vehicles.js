@@ -14,5 +14,8 @@ module.exports = function(Vehicles, app, auth, database) {
       .put(vehicles.update)
       .delete(vehicles.delete);
 
+  app.route('/user/garage/:userId')
+      .get(vehicles.findByUser);
+
   app.param('vehicleId', vehicles.vehicle);
 };

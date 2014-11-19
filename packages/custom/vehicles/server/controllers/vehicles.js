@@ -2,7 +2,8 @@
 
 var mongoose = require('mongoose'),
     Vehicle = mongoose.model('Vehicle'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    ObjectId = mongoose.Types.ObjectId;
 
 
 exports.all = function (req,res) {
@@ -20,7 +21,6 @@ exports.all = function (req,res) {
 
 
 exports.show = function(req,res) {
-    console.log(req.vehicle);
     if (req.vehicle) {
         res.status(200).json(req.vehicle);
     }
@@ -95,4 +95,8 @@ exports.delete = function(req,res) {
     }
 
     else res.status(404);
+};
+
+exports.findByUser = function(req,res,id) {
+    Vehicles.find({userId : ObjectId(id)}, function(err,vehicles));
 };
