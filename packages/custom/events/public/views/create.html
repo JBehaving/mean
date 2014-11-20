@@ -4,41 +4,41 @@
 
   <form style="float:none; left:25%" name="eventForm" class="form-horizontal col-md-6" role="form" data-ng-submit="create(eventForm.$valid)" novalidate>
 
-    <div data-ng-controller="TracksController" data-ng-init="findAll()" class="form-group" ng-class="{ 'has-error' : submitted && eventForm.track.value == null }">
+    <div data-ng-controller="TracksController" data-ng-init="findAll()" class="form-group" ng-class="{ 'has-error' : submitted && eventForm.evTrack.value == null }">
       <label class="col-md-3 control-label">Track</label>
       <div class="col-md-7">
-        <select name="track" class="form-control glowing-border" data-ng-model="track" required>
+        <select name="evTrack" class="form-control glowing-border" data-ng-model="evTrack" required>
           <option style="color:gray" value="">Select a track</option>
-          <option data-ng-repeat="track in tracks" value="{{track.trackName}}">{{track.trackName}}</option>
+          <option data-ng-repeat="track in tracks" value="{{track._id}}">{{track.trackName}}</option>
         </select>
       </div>
     </div>
 
-    <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.date.$invalid }">
+    <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.evDate.$invalid }">
       <label class="col-md-3 control-label">Date</label>
       <div class="col-md-4">
-        <input name="date" type="date" data-ng-model="date" placeholder="mm/dd/yyyy" class="form-control glowing-border" required>
+        <input name="evDate" type="date" data-ng-model="evDate" placeholder="mm/dd/yyyy" class="form-control glowing-border" required>
       </div>
     </div>
 
-    <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.price.$invalid }">
+    <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.evPrice.$invalid }">
       <label class="col-md-3 control-label">Price</label>
       <div class="col-md-3">
-        <input name="price" type="number" data-ng-model="price" min="0" placeholder="Price" class="form-control glowing-border" required>
+        <input name="evPrice" type="number" data-ng-model="evPrice" min="0" placeholder="Price" class="form-control glowing-border" required>
       </div>
     </div>
 
-    <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.city.$invalid }">
+    <!--<div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.city.$invalid }">
       <label class="col-md-3 control-label">City</label>
       <div class="col-md-5">
         <input name="city" data-ng-model="city" placeholder="City" class="form-control glowing-border" required>
       </div>
     </div>
 
-    <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.state.value == null }">
-      <label  class="col-md-3 control-label">State</label>
+    <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.st.value == null }">
+      <label class="col-md-3 control-label">State</label>
       <div class="col-md-5">
-        <select name="state" class="form-control glowing-border" data-ng-model="state" required>
+        <select name="st" class="form-control glowing-border" data-ng-model="st" required>
           <option style="color:gray" value="">Select a state
           <option value="AL">Alabama
           <option value="AK">Alaska
@@ -91,35 +91,35 @@
           <option value="WV">West Virginia
           <option value="WI">Wisconsin
           <option value="WY">Wyoming
-        </SELECT>
+        </select>
       </div>
-    </div>
+    </div>-->
 
     <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.novice.$invalid }">
       <label class="col-md-3 control-label">Novice</label>
       <div class="col-md-2">
-        <input name="novice" type="number" data-ng-model="novice" value="20" min="0" step="1" class="form-control glowing-border" required>
+        <input name="novice" type="number" data-ng-model="novice" min="0" step="1" class="form-control glowing-border" required>
       </div>
     </div>
 
     <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.intermediate.$invalid }">
       <label class="col-md-3 control-label">Intermediate</label>
       <div class="col-md-2">
-        <input name="intermediate" type="number" data-ng-model="intermediate" value="20" min="0" step="1" class="form-control glowing-border" required>
+        <input name="intermediate" type="number" data-ng-model="intermediate" min="0" step="1" class="form-control glowing-border" required>
       </div>
     </div>
 
     <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.advanced.$invalid }">
       <label class="col-md-3 control-label">Advanced</label>
       <div class="col-md-2">
-        <input name="advanced" type="number" data-ng-model="advanced" value="20" min="0" step="1" class="form-control glowing-border" required>
+        <input name="advanced" type="number" data-ng-model="advanced" min="0" step="1" class="form-control glowing-border" required>
       </div>
     </div>
 
     <div class="form-group">
       <label class="col-md-3 control-label">Description</label>
       <div class="col-md-9">
-        <textarea name="desc" type="text" data-ng-model="desc" class="form-control glowing-border" rows="4" placeholder="(optional)"></textarea>
+        <textarea name="evDesc" type="text" data-ng-model="evDesc" class="form-control glowing-border" rows="4" placeholder="(optional)"></textarea>
       </div>
     </div>
 

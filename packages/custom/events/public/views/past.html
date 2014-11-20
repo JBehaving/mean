@@ -10,7 +10,7 @@
         <div class="panel-title table-title">past events</div>
     </div>
 
-    <table class="table table-hover table-striped">
+    <table style="height: 250px" class="table table-hover table-striped" fixed-header>
         <thead>
         <tr>
             <th>Date</th>
@@ -19,8 +19,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr data-ng-repeat="event in events | filterPast | orderBy: '-eventStartDate' | filter: searchText"">
-            <!--<td>{{event.eventStartDate}}</td>-->
+        <tr data-ng-repeat="event in events | filterPast | orderBy: '-eventStartDate' | filter: searchText" ng-click="showEvent(event)">
             <td>{{event.eventStartDate | date:'MM/dd/yyyy'}}</td>
             <td>{{event.track}}</td>
             <td>{{event.location}}</td>

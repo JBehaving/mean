@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('mean.events').controller('EventsController', ['$scope', '$stateParams', '$location', 'Global', 'Events',
-  function($scope, $stateParams, $location, Global, Events) {
+angular.module('mean.events').controller('EventsController', ['$scope', '$stateParams', '$location', 'Global', 'Events', 'Tracks',
+  function($scope, $stateParams, $location, Global, Events, Tracks) {
     $scope.global = Global;
 
     /*$scope.hasAuthorization = function(event) {
@@ -10,16 +10,40 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
       return $scope.global.isAdmin || event.user._id === $scope.global.user._id;
     };*/
 
+    $scope.advanced = 20;
+    $scope.intermediate = 20;
+    $scope.novice = 20;
+
+    $scope.findTrackById = function(event) {
+      Tracks.get({trackId : event.trackId},
+          function (err,track) {
+            if (err) {
+              console.log(err);
+            }
+            if (event) {
+              event.track = track;
+            }
+          }
+      )
+    };
+
     $scope.create = function(isValid) {
       if (isValid) {
         var event = new Events({
-          eventStartDate: this.date
+          advancedCap: this.advanced,
+          albumLink: this.fblink,
+          //albumLink2: this.glink,
+          basePrice: this.evPrice,
+          eventDesc: this.evDesc,
+          eventStartDate: this.evDate,
+          intermediateCap: this.intermediate,
+          noviceCap: this.novice,
+          trackID: this.evTrack
         });
         event.$save(function(response) {
           $location.path('events/' + response._id);
         });
 
-        this.date = '';
       } else {
         $scope.submitted = true;
       }
@@ -85,8 +109,6 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
       }
     });
 
-    //console.log(upcoming);
-    // return items.slice().reverse();
     return upcoming;
   };
 }).filter('filterPast', function() {
@@ -99,8 +121,6 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
             }
         });
 
-        //console.log(upcoming);
-        // return items.slice().reverse();
         return past;
     };
 });
