@@ -1,7 +1,6 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <style type="text/css">
@@ -37,11 +36,11 @@
         table.strapless{
             max-width: 30%;
         }
-
+        .panel-body{
+            padding : 0px;
+        }
     </style>
-
 </head>>
-
 <section data-ng-controller="EventDetailsController">
     <div class="container">
         <div data-ng-include="'events/views/share.html'"></div>
@@ -65,8 +64,7 @@
             </table>
         </div>
     </div>
-
-        <div class="row">
+   <div class="row">
             <div class="col-md-4 ">
                     <div id="imageCarousel" class="carousel slide" data-interval="4000" data-ride="carousel">
                         <!-- Carousel indicators -->
@@ -102,11 +100,11 @@
                 this is the greatested sdsdflksdjflksd fasldkfsdl;kf jsad;lfjasdf;lkajsf;lksada sl;dksadlkfj
                 sdfaljjjjjjjjjjjjjj jjjjjjjjjjjj jjjjjjjj jjfjlasdkfjasd lkfjsdalfks djflkaaaaa aaaaaaaaa aaaaa
                 </span>
-                <div class="form-group pull-right ">
+                <div class="form-group  ">
                     <div ><br/><br/> </div>
-                    <div class="panel panel-default">
-                    <div class="panel-title table-title">past events</div>
-                    <table class="table table-striped table-bordered table-condensed" width="300" >
+                    <div class="panel panel-default" style="width: 450px">
+                    <div class="panel-heading table-title" style="padding: 5px">past events</div>
+                    <table class="table table-hover table-bordered " width="450" data-height="300" style="overflow-y: scroll;">
                         <thead>
                         <tr>
                             <th>date</th>
@@ -114,11 +112,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="event in events | filter: searchText">
-                            <!--<td>{{event.eventStartDate}}</td>-->
-                            <td>{{event.date}}</td>
-                            <td>{{event.track}}</td>
-                            <td>{{event.location}}</td>
+                        <tr data-ng-repeat="event in events">
+                            <td>{{event.eventStartDate |  date: "MM/dd/yyyy"}}</td>
+                            <td></td>
                         </tr>
                         </tbody>
                     </table>
@@ -133,15 +129,16 @@
         <button style="background-color:white; border-width:2px; border-color:red; height:40px; width:200px;"
                 type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">track day calculator</font></button>
     </div>
-    <div class="col-md-4 col-centered">
-    </div>
+    <div ><br/><br/> </div>
+    <div ><br/><br/> </div>
+    <div ><br/><br/> </div>
 
 </div>
     <div class="row"><div><br /><div></div></div>
-    <div class="row">"><span style="font-family:impact"><h2>attendees</h2></span> </div>
-        <div class="col-md-4 "></div>
-        <div class="col-md-1 col-md-offset-3">
-            <div class="table-search pull-right pull-down">
+    <div class="row" style="width: 900px;">
+        <div class="col-md-3" style="font-family:impact;font-size: 35px;">attendees</div>
+        <div class="col-md-5 col-sm-offset-1 pull-right">
+            <div class="table-search pull-right pull-down"></div>
                 <div class="form-group input-group">
                 <span class="input-group-addon">
                     <i class="glyphicon glyphicon-search"></i>
@@ -150,10 +147,6 @@
             </div>
         </div>
     </div>
-
-
-
-
         <div class="container" ng-controller="EventDetailsController">
             <accordion close-others="oneAtATime">
                 <accordion-group ng-repeat="group in groups" is-open="group.expanded">
@@ -162,88 +155,17 @@
                         <span style="font-family:impact">{{group.title}}</span>
                         <a href="#!/events/register"><span class="glyphicon"><button style="background-color:white;border-width:2px; border-color:red; height:30px; width:60px; padding:0px"
 
-                                                                                     type="submit" class="btn btn-small btn-block btn"><font face="impact" color="black" size="4">attend</font></button></span></a>
-
-
-                    </accordion-heading>
-                        <div>
-                            <table ng-table="tableParams" class="table">
-                                <tr ng-model="attendees" ng-repeat="attendees in manifests">
-                                    <td data-title="'Name'" sortable="'event'">{{eventer.eventName}}</td>
-                                    <td data-title="'Vehicle'" sortable="'date'">{{eventer.eventDate}}</td>
-                                    <td data-title="'Ride Along Allowed'" sortable="'state'">{{eventer.eventState}}</td>
-                                    <td data-title="'Rider Wanted'" sortable="'status'">{{eventer.eventStatus}}</td>
-                                    <td data-title="'checked-in'" sortable="'cost'">{{eventer.eventCost}}</td>
-                                    <td><form><button ng-submit="filterEvents()" type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">track day calculator</font></button></td>
-                                </tr>
-                            </table>
-                        </div>
+                                                                                     type="submit" class="btn btn-small btn-block btn"><font face="impact" color="black" size="4">attend</font></button></span></a>                   </accordion-heading>
+                    <div ng-repeat="contents in group.content" data-ng-include src="contents['page']" style="padding-left:0px;"></div>
                 </accordion-group>
             </accordion>
         </div>
 
+
+    <div class="container" ng-include="'events/views/parts/forumlogs.html'"></div>
+
+
  <!-- inject forum logs here -->
-    <div class="container" id="forumLogs">
-        <div class="panel panel-default">
-            <div class="panel-heading table-title-bg">
-                <div class="panel-title table-title">forum log <a href="#!/forumlogs/create"><span class="glyphicon glyphicon-plus glyphlink-red"></span></a></div>
-            </div>
-
-            <table class="table table-hover table-bordered">
-                <thead>
-                <tr>
-                    <th>{{forumlog.link}}}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr data-ng-repeat="elog in forumLog ">
-                    <!--<td>{{event.eventStartDate}}</td>-->
-                    <td>{{event.date}}</td>
-                    <td>{{event.track}}</td>
-                    <td>{{event.location}}</td>
-                    <td>{{event.novice}} :: {{event.intermediate}} :: {{event.advanced}}</td>
-                    <td>{{event.price | currency}}</td>
-                    <td><button class="btn btn-default center-block">attend</button></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-
-
-
-    <div class="container" id="eventAttendees">
-        <div class="panel panel-default">
-            <div class="panel-heading table-title-bg">
-                <div class="panel-title table-title">advanced <a href="#!/events/register"><span class="glyphicon"><button style="background-color:white; border-width:2px; border-color:red; height:40px; width:80px;"
-
-                                                                                                                           type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">attend</font></button></span></a></div>
-            </div>
-
-            <table class="table table-hover table-bordered">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Vehicle</th>
-                    <th>Wants Ride Along</th>
-                    <th>Allows Ride Alongs</th>
-                    <th>Checked-in</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr data-ng-repeat="attendee in attendees | filter: searchText">
-                    <!--<td>{{event.eventStartDate}}</td>-->
-                    <td>{{user.firstName}}</td>
-                    <td>{{vehicle.desc}}</td>
-                    <td>{{user.rideAlong}}</td>
-                    <td>{{event.riders}}</td>
-                    <td><button class="btn btn-default center-block">attend</button></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
         <!--
             <div class="form-group">
                 <button style="background-color:white; border-width:2px; border-color:red; height:40px; width:200px;"

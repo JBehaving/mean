@@ -1,0 +1,23 @@
+<div class="container" id="intermediateAttendees" data-ng-controller="EventDetailsController" style="padding-left:0px; ">
+    <div class="panel panel-default">
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th><th>Vehicle</th><th>Wants Rider</th><th>Allows Riders</th><th>Checked-in</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="attendee in attendees | filter: searchText | filter:{ skill: 'intermediate' }">
+                <!--<td>{{event.eventStartDate}}</td>-->
+                <td>{{attendee.name}}</td>
+                <td>{{attendee.vehicle}}</td>
+                <td><input type="checkbox" ng-model="attendee.wants" disabled="true"></td>
+                <td><input type="checkbox" ng-model="attendee.allows" disabled="true"></td>
+                <td><div class="row"><div class="col-sm-1"><input type="checkbox" ng-model="attendee.checkedin"
+                                                                  disabled="true"></div>
+                </div></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

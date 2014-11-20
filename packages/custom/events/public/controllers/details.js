@@ -1,12 +1,34 @@
 'use strict';
 
-angular.module('mean.events').controller('EventDetailsController', ['$scope', 'Global', 'Events', '$http',
-    function($scope, Global, Events, $http) {
+angular.module('mean.events').controller('EventDetailsController', ['$scope', '$stateParams', '$location', '$http', 'Global', 'Events', 'Manifests',
+    function($scope, $stateParams, $location, $http, Global, Events, Manifests) {
         $scope.global = Global;
 
+        $scope.findOne = function () {
+            Events.get({
+                eventId: $stateParams.eventId
+            }, function (event) {
+                $scope.event = event;
+            });
+        };
 
-      //  var eventStartDate = '12/12/14';
-      //  var trackID = '1';
+        $scope.find = function () {
+            Events.query(function (events) {
+                $scope.events = events;
+            });
+        };
+
+        $http.get('/events')
+            .success(function (data, status, header, config) {
+                console.log('made it' + data);
+                $scope.events = data;
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
+
+        //  var eventStartDate = '12/12/14';
+        //  var trackID = '1';
 
         var eventId = '1';
         //-- set up variables
@@ -14,7 +36,35 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', 'G
         $scope.trackN = [];
         $scope.trackname = 'laguna seca';
 
-        var getTrack = function (trackId) {
+
+        $scope.attendees = [
+            {
+                "skill": "advanced",
+                "name": "Jake Speed",
+                "vehicle": "2012 Ford Mustang",
+                "allows": true,
+                "wants": false,
+                "checkedin": false
+            },
+            {
+                "skill": "novice",
+                "name": "Allie Khat",
+                "vehicle": "2001 Mitsubishi Lancer",
+                "allows": false,
+                "wants": true,
+                "checkedin": true
+            },
+            {
+                "skill": "intermediate",
+                "name": "Allan Fedreich",
+                "vehicle": "2015 Hyundai Elantra",
+                "allows": false,
+                "wants": false,
+                "checkedin": true
+            }
+        ];
+
+        $scope.getTrack = function (trackId) {
             if (trackId !== undefined && trackId !== null) {
                 $http.get('/tracks/' + trackId)
                     .success(function (data) {
@@ -28,6 +78,8 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', 'G
             }
         };
 
+
+        Manifests.find()
         var getUsersFromManifests = function (manifests) {
             if (manifests !== undefined && manifests !== null) {
                 $http.get('/manifests/' + eventId)
@@ -42,29 +94,6 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', 'G
             }
         };
 
-        $http.get('/events/1')
-            .success(function (data) {
-                $scope.eventD = data[0].eventDesc;
-                $scope.track = getTrack(data[0].trackID);
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
-        $http.get('/events')
-            .success(function (data) {
-                $scope.events = data;
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
-
-        $http.get('/manifests/')
-            .success(function (data) {
-                $scope.manifest = data;
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
 
 //-- 546045c251d6b51818cb8a17/
         /*
@@ -80,21 +109,26 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', 'G
         $scope.groups = [
             {
                 title: 'advanced',
-                content: 'wewrwer',
+                content: [
+                    {'page': 'events/views/parts/advanced.html'}
+                ],
                 expanded: true
             },
             {
                 title: 'intermediate',
-                content: 'werwe',
+                content: [
+                    {'page': 'events/views/parts/intermediate.html'}
+                ],
                 expanded: false
             },
             {
                 title: 'novice',
-                content: 'wer',
+                content: [
+                    {'page': 'events/views/parts/novice.html'}
+                ],
                 expanded: false
             }
         ];
 
     }
-
 ]);

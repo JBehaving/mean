@@ -4,9 +4,24 @@
 module.exports = function(Forumlogs, app, auth, database) {
 
   var forumlogs = require('../controllers/forumlogs');
-  app.route('/forumlogs')
+
+    app.route('/forumlogs')
       .get(forumlogs.all)
       .post(forumlogs.create);
+
+    app.route('/forumlogs')
+        .get(forumlogs.all)
+        .post(forumlogs.create)
+        .put(forumlogs.update);
+
+    app.route('event/forumlogs/:eventId')
+        .get(forumlogs.findByEvent);
+
+    app.route('user/forumlogs/:userId')
+        .get(forumlogs.findByUser);
+
+    app.param('forumlogId', forumlogs.forumlog);
+
   app.get('/forumlogs/example/anyone', function(req, res, next) {
     res.send('Anyone can access this');
   });

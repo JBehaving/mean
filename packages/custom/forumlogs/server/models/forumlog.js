@@ -1,3 +1,4 @@
+'use strict';
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
@@ -14,5 +15,12 @@ var ForumLogSchema = new Schema({
         required: true }
 
 });
-
+/**
+ * Statics
+ */
+ForumLogSchema.statics.load = function(id, cb) {
+    this.findOne({
+        _id: id
+    }).exec(cb);
+};
 mongoose.model('ForumLog',ForumLogSchema);

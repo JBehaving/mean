@@ -11,6 +11,7 @@ var mongoose = require('mongoose'),
     _ = require('lodash');
 
 exports.findManifest = function(req, res) {
+    console.log('finding a manifest');
     if (req.query.eventID !== undefined) {
         var query = {eventID: new ObjectId(req.query.eventID)};
         Manifest.find(query, function (err, tracks) {
@@ -31,8 +32,8 @@ exports.findManifest = function(req, res) {
 
 exports.all = function(req, res) {
 
-    if (req.query.trackID !== undefined && req.query.eventStartDate !== undefined) {
-        var trackid = new ObjectId(req.query.trackID);
+    if (req.query.trackId !== undefined && req.query.eventStartDate !== undefined) {
+        var trackid = new ObjectId(req.query.trackId);
         var startdate = new Date(req.query.eventStartDate);
        // console.log('Searched for ' + req.query.trackID + ' ' + req.query.eventStartDate);
         GTDEvent.find().where('eventStartDate').equals(startdate).where('trackID').equals(trackid).sort('-eventStartDate').exec(function (err, events) {
@@ -46,8 +47,8 @@ exports.all = function(req, res) {
         });
         console.log('Error retrieving event.');
     }
-    else if (req.query.eventID !== undefined) {
-        var eventid = new ObjectId(req.query.eventID);
+    else if (req.query.eventId !== undefined) {
+        var eventid = new ObjectId(req.query.eventId);
         GTDEvent.find({_id: eventid}, function (err, events) {
             if (err) {
                 res.render('error', {

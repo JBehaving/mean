@@ -4,18 +4,25 @@
 var mongoose = require('mongoose'),
     GTDEvent = mongoose.model('Event'),
     Manifest = mongoose.model('Manifest'),
-    Account = mongoose.model('Accounts'),
+    Account = mongoose.model('Account'),
     Vehicle = mongoose.model('Vehicle'),
     ObjectId = require('mongoose').Types.ObjectId,
     _ = require('lodash');
 
 
+var attendees = function(manifests) {
+    var usersInAllManifests = null;
+    for(var i = 0; i < manifests.length; i++){
+        usersInAllManifests[i] = attendee(manifests[i]);
+    }
+    return usersInAllManifests;
+};
 
 var attendee = function (manifest) {
-    var userid = manifest._id;
-    var vehicleid = manifest._id;
+    var userid = manifest.userId;
+    var vehicleid = manifest.vehicleId;
 
-    var account = Account.find({_id: userid}, function (err, account) {
+    var account = Account.find({userId: userid}, function (err, account) {
         if (err) {
             console.log('Error retrieving account');
             return null;
@@ -26,7 +33,7 @@ var attendee = function (manifest) {
 
     var userName = account.userFirstName + ' ' + account.userFirstName;
 
-    var vehicle = Vehicle.find({_id: vehicleid}, function (err, vehicle) {
+    var vehicle = Vehicle.find({vehicleId: vehicleid}, function (err, vehicle) {
         if (err) {
             console.log('Error retrieving vehicle.');
             return null;
@@ -34,6 +41,7 @@ var attendee = function (manifest) {
             return vehicle;
         }
     });
+
     var thisAttendee = null;
     thisAttendee.userName = userName;
     thisAttendee.vehicleName = vehicle.vehicleYear + ' ' + vehicle.vehicleColor + ' ' + vehicle.vehicleMake + ' ' + vehicle.vehicleModel;
@@ -44,17 +52,11 @@ var attendee = function (manifest) {
 
 };
 
-var attendees = function(manifests) {
-    var usersInAllManifests = null;
-    for(var i = 0; i < manifests.length; i++){
-        var userid = new ObjectId(manifests[i]._id);
-        usersInAllManifests[i] = attendee(manifests[i]);
-    }
-};
+
 
 exports.findManifest = function(req, res) {
-    if (req.query.eventID !== undefined) {
-        var query = {eventID: new ObjectId(req.query.eventID)};
+    if (req.query.eventID!== undefined) {
+        var query = {eventId: new ObjectId(req.query.eventID)};
         Manifest.find(query, function (err, manifests) {
             if (err) {
                 console.log('failed to find a manifest ' + err);
@@ -71,15 +73,30 @@ exports.findManifest = function(req, res) {
     }
 };
 
+exports.findByUser = function(req, res) {
+    var query = {userId: new ObjectId(req.query.userId)};
+    Manifest.find(query, function(err, manifests){
+        if (err) {
+            console.log('failed to find a manifest ' + err);
+            res.status(500).json( {error: 'Error while searching ' + err});
+        } else {
+            console.log('tried to find a manifest' + err);
+            res.jsonp(manifests);
 
-/**
- * Find event by id
- */
-exports.account = function(req, res, next, id) {
-    Account.load(id, function(err, account) {
-        if (err) return next(err);
-        if (!account) return next(new Error('Failed to load account ' + id));
-        req.account = account;
-        next();
+        }
+    });
+};
+
+exports.findByEvent = function(req, res) {
+    var query = {eventId: new ObjectId(req.query.eventId)};
+    Manifest.find(query, function(err, manifests){
+        if (err) {
+            console.log('failed to find a manifest ' + err);
+            res.status(500).json( {error: 'Error while searching ' + err});
+        } else {
+            console.log('tried to find a manifest' + err);
+            res.jsonp(manifests);
+
+        }
     });
 };

@@ -19,7 +19,7 @@ var EventSchema = new Schema({
     noviceCap: { type: Number,  required: false },
     noviceRegistered: {type: Number, default: 0},
     state: {type: String, required: false},
-    trackID: { type: Schema.ObjectId,
+    trackId: { type: Schema.ObjectId,
         ref: 'Track',
         required: false }
     });
