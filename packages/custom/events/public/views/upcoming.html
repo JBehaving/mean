@@ -11,27 +11,26 @@
         <div class="panel-title table-title">upcoming events <a href="#!/events/create"><span class="glyphicon glyphicon-plus glyphlink-red"></span></a></div>
     </div>
 
-    <table style="height: 400px" class="table table-hover table-striped table-bordered" fixed-header>
+    <table style="height: 400px;" class="table table-hover table-striped table-bordered" fixed-header>
         <thead>
         <tr>
-            <th >Date</th>
+            <th>Date</th>
             <th>Track</th>
             <th>Location</th>
-            <th>Spots Remaining<br><small>(Novice :: Intermediate :: Advanced)</small></th>
+            <th>Spots Remaining<br><small>(Novice - Intermediate - Advanced)</small></th>
             <th>Price</th>
             <th style="text-align: right">Attend Event</th>
         </tr>
         </thead>
         <tbody>
-        <tr class="clickable-row" data-ng-repeat="event in events | filterUpcoming | orderBy: 'eventStartDate' | filter: searchText" ng-click="showEvent(event)">
+        <tr class="clickable-row" data-ng-repeat="event in events | filter: searchText | filterUpcoming | orderBy: 'eventStartDate'" ng-click="showEvent(event)">
             <td style="vertical-align:middle">{{event.eventStartDate | date:'MM/dd/yyyy'}}</td>
             <td style="vertical-align:middle">{{event.track.trackName}}</td>
             <td style="vertical-align:middle">{{event.location}}</td>
-            <td style="vertical-align:middle">{{event.novice}} :: {{event.intermediate}} :: {{event.advanced}}</td>
-            <td style="vertical-align:middle">{{event.price | currency}}</td>
+            <td style="vertical-align:middle">{{event.noviceCap - event.noviceRegistered}} - {{event.intermediateCap - event.intermediateRegistered}} - {{event.advancedCap - event.advancedRegistered}}</td>
+            <td style="vertical-align:middle">{{event.basePrice | currency}}</td>
             <td style="text-align: right"><button class="btn btn-default">attend</button></td></a>
         </tr>
         </tbody>
     </table>
-
 </div>
