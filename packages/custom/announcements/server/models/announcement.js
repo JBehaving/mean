@@ -12,7 +12,7 @@ var mongoose = require('mongoose'),
 var AnnouncementSchema = new Schema({
     userID: { type: Schema.ObjectId,
         ref:'User',
-        required: true },
+        required: false },
     newsBody: { type: String, required: true, trim: true },
     newsEditedDate: { type: String, required: false },
     newsEditedTime: { type: String, required: false },
