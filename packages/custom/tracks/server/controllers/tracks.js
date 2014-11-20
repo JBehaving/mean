@@ -5,6 +5,7 @@
 
 var mongoose = require('mongoose'),
     Track = mongoose.model('Track'),
+
     ObjectId = require('mongoose').Types.ObjectId,
     _ = require('lodash');
 
@@ -20,6 +21,7 @@ exports.track = function(req, res, next, id) {
     });
 };
 
+
 //-- get all tracks
 exports.all = function(req, res) {
     Track.find(function(err, tracks) {
@@ -33,10 +35,25 @@ exports.all = function(req, res) {
     });
 };
 
+/**
+ * Find track by id
+ */
+exports.track = function(req, res, next, id) {
+    Track.load(id, function(err, track) {
+        if (err) return next(err);
+        if (!track) return next(new Error('Failed to load event ' + id));
+        req.track = track;
+        next();
+    });
+};
 
+/**
+ * Show a track
+ */
 exports.show = function(req, res) {
     res.json(req.track);
 };
+
 //-- create a track
 exports.create = function(req, res) {
     var tracks = new Track(req.body);
@@ -69,6 +86,7 @@ var findByID = function(req, res) {
 
     }
 };
+
 //-- search by track name
 exports.findTrack = function(req, res) {
     var trackName = req.query.trackName;

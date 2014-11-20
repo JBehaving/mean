@@ -79,7 +79,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
         };
 
 
-        Manifests.find()
+        Manifests.find();
         var getUsersFromManifests = function (manifests) {
             if (manifests !== undefined && manifests !== null) {
                 $http.get('/manifests/' + eventId)

@@ -8,7 +8,6 @@ var EventSchema = new Schema({
     advancedRegistered: { type : Number, default: 0},
     albumLink: { type: String, required: false },
     basePrice: {  type: String, required: false },
-    city: {type: String, required: false},
     eventDesc: {  type: String, required: false },
     eventState: { type: String,required: false },
     eventStatus: {  type: String,  required: false },

@@ -98,5 +98,17 @@ exports.delete = function(req,res) {
 };
 
 exports.findByUser = function(req,res,id) {
-    Vehicles.find({userId : ObjectId(id)}, function(err,vehicles));
+    Vehicle.find({userId : new ObjectId(id)}, function(err,vehicles){
+        if (err) {
+            console.log('Error finding vehicles by userId');
+            console.log(err);
+            res.status(500).json({'error' : 'Error loading vehicles from database'});
+        }
+        else if (vehicles) {
+            res.status(200).json(vehicles);
+        }
+        else {
+            res.status(404).json({'error' : 'No vehicles found for this user'});
+        }
+    });
 };

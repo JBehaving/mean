@@ -3,7 +3,6 @@
  */
 'use strict';
 
-
 var mongoose = require('mongoose'),
     GTDEvent = mongoose.model('Event'),
     Manifest = mongoose.model('Manifest'),
@@ -31,9 +30,8 @@ exports.findManifest = function(req, res) {
 };
 
 exports.all = function(req, res) {
-
-    if (req.query.trackId !== undefined && req.query.eventStartDate !== undefined) {
-        var trackid = new ObjectId(req.query.trackId);
+    if (req.query.trackID !== undefined && req.query.eventStartDate !== undefined) {
+        var trackid = new ObjectId(req.query.trackID);
         var startdate = new Date(req.query.eventStartDate);
        // console.log('Searched for ' + req.query.trackID + ' ' + req.query.eventStartDate);
         GTDEvent.find().where('eventStartDate').equals(startdate).where('trackID').equals(trackid).sort('-eventStartDate').exec(function (err, events) {
