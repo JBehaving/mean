@@ -25,7 +25,7 @@
         <tbody>
         <tr class="clickable-row" data-ng-repeat="event in events | filterUpcoming | orderBy: 'eventStartDate' | filter: searchText" ng-click="showEvent(event)">
             <td style="vertical-align:middle">{{event.eventStartDate | date:'MM/dd/yyyy'}}</td>
-            <td style="vertical-align:middle">{{findTrackById(event).trackName}}</td>
+            <td style="vertical-align:middle">{{event.track.trackName}}</td>
             <td style="vertical-align:middle">{{event.location}}</td>
             <td style="vertical-align:middle">{{event.novice}} :: {{event.intermediate}} :: {{event.advanced}}</td>
             <td style="vertical-align:middle">{{event.price | currency}}</td>

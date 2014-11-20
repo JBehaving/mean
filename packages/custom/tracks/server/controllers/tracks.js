@@ -24,7 +24,7 @@ exports.all = function(req, res) {
  * Find track by id
  */
 exports.track = function(req, res, next, id) {
-    Track.load(id, function(err, track) {
+    Track.findById(id, function(err, track) {
         if (err) return next(err);
         if (!track) return next(new Error('Failed to load event ' + id));
         req.track = track;
@@ -74,6 +74,11 @@ var findByID = function(req, res) {
 
 //-- search by track name
 exports.findTrack = function(req, res) {
+    if (req.track !== undefined) {
+        console.log(req.track);
+        res.status(200).json(req.track);
+        return;
+    }
     var trackName = req.query.trackName;
     if (trackName !== undefined) {
 
@@ -103,3 +108,4 @@ exports.findTrack = function(req, res) {
     }
 
 };
+

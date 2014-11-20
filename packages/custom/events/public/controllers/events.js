@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('mean.events').controller('EventsController', ['$scope', '$stateParams', '$location', 'Global', 'Events', 'Tracks',
-  function($scope, $stateParams, $location, Global, Events, Tracks) {
+angular.module('mean.events').controller('EventsController', ['$scope', '$stateParams', '$location', 'Global', 'Events', 'Tracks', '$http',
+  function($scope, $stateParams, $location, Global, Events, Tracks, $http) {
     $scope.global = Global;
 
     /*$scope.hasAuthorization = function(event) {
@@ -15,16 +15,15 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
     $scope.novice = 20;
 
     $scope.findTrackById = function(event) {
-      Tracks.get({trackId : event.trackId},
-          function (err,track) {
-            if (err) {
-              console.log(err);
-            }
-            if (event) {
-              event.track = track;
+      $http.get('/tracks/'+event.trackId)
+          .success(
+          function (tracks) {
+            if (tracks) {
+              console.log(tracks);
+              event.track = tracks;
             }
           }
-      )
+      );
     };
 
     $scope.create = function(isValid) {
@@ -83,7 +82,13 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
 
     $scope.find = function() {
       Events.query(function(events) {
-        $scope.events = events;
+          //console.log(events);
+          $scope.events = events;
+          for (var i=0; i < events.length;i = i+1) {
+              console.log(events[i]);
+            if ($scope.events[i].trackId !== undefined)
+              $scope.findTrackById($scope.events[i]);
+          }
       });
     };
 
