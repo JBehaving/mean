@@ -5,8 +5,8 @@ var ManifestSchema = new Schema({
     amtPaid: { type: String, required: false },
     basePrice: {  type: String, required: false },
     eventDesc: {  type: String, required: false },
-    rideAlong: { type: String, required: false },
-    riderWanted: {  type: String,  required: false },
+    giveRideAlongs: { type: String, required: false },
+    requestRideAlongs: {  type: String,  required: false },
     skillClass: {  type: String, required: true },
     userId: { type: Schema.ObjectId,
         ref: 'User',
@@ -25,6 +25,7 @@ var ManifestSchema = new Schema({
         type : Date,
         default : Date.now,
     },
+    returnUrl : String,
 });
 
 
