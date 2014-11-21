@@ -17,7 +17,7 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
     $scope.eventScope = {};
 
     $scope.findTrackById = function(event) {
-      $http.get('/tracks/'+event.trackId)
+      $http.get('/tracks/'+event.trackID)
           .success(
           function (tracks) {
             if (tracks) {
@@ -39,7 +39,7 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
           eventStartDate: this.evDate,
           intermediateCap: this.intermediate,
           noviceCap: this.novice,
-          trackID: this.parentScope.evTrack
+          trackID: this.eventScope.evTrack
         });
         event.$save(function(response) {
           $location.path('events/' + response._id);
@@ -87,7 +87,7 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
           $scope.events = events;
           for (var i=0; i < events.length;i = i+1) {
               console.log(events[i]);
-            if ($scope.events[i].trackId !== undefined)
+            if ($scope.events[i].trackID !== undefined)
               $scope.findTrackById($scope.events[i]);
           }
       });
