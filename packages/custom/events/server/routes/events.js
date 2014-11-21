@@ -16,6 +16,8 @@ module.exports = function(Events, app, auth, database) {
     app.route('/manifests')
         .get(manifests.findByEvent);
 
+    app.route('/attendees')
+        .get(manifests.findAttendeesByEvent);
     // Finish with setting up the eventId param
     app.param('eventId', events.event);
   /*

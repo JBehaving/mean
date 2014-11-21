@@ -98,5 +98,5 @@ exports.delete = function(req,res) {
 };
 
 exports.findByUser = function(req,res,id) {
-    Vehicles.find({userId : ObjectId(id)}, function(err,vehicles));
+    Vehicles.find({userId : ObjectId(id)}, function(err,vehicles){});
 };

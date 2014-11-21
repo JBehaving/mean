@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.events').controller('EventDetailsController', ['$scope', '$stateParams', '$location', '$http', 'Global', 'Events', 'Manifests',
-    function($scope, $stateParams, $location, $http, Global, Events, Manifests) {
+angular.module('mean.events').controller('EventDetailsController', ['$scope', '$stateParams', '$location', '$http', 'Global', 'Events',
+    function($scope, $stateParams, $location, $http, Global, Events) {
         $scope.global = Global;
 
         $scope.findOne = function () {
@@ -36,33 +36,52 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
         $scope.trackN = [];
         $scope.trackname = 'laguna seca';
 
+        var myVar = {};
+        myVar['apples'] = 'red';
+        myVar['grapes'] = 'greed';
+        myVar['nuts'] = 'almonds';
+        $scope.fun = JSON.stringify(myVar);
+        console.log(JSON.stringify(myVar));
 
-        $scope.attendees = [
-            {
-                "skill": "advanced",
-                "name": "Jake Speed",
-                "vehicle": "2012 Ford Mustang",
-                "allows": true,
-                "wants": false,
-                "checkedin": false
-            },
-            {
-                "skill": "novice",
-                "name": "Allie Khat",
-                "vehicle": "2001 Mitsubishi Lancer",
-                "allows": false,
-                "wants": true,
-                "checkedin": true
-            },
-            {
-                "skill": "intermediate",
-                "name": "Allan Fedreich",
-                "vehicle": "2015 Hyundai Elantra",
-                "allows": false,
-                "wants": false,
-                "checkedin": true
-            }
-        ];
+
+            $http.get('/attendees')
+                .success(function (data) {
+                    console.log('Got a track: ' + data);
+                    $scope.attendees = data;
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });
+
+
+
+            /*  $scope.attendees = [
+                  {
+                      "skill": "advanced",
+                      "name": "Jake Speed",
+                      "vehicle": "2012 Ford Mustang",
+                      "allows": true,
+                      "wants": false,
+                      "checkedin": false
+                  },
+                  {
+                      "skill": "novice",
+                      "name": "Allie Khat",
+                      "vehicle": "2001 Mitsubishi Lancer",
+                      "allows": false,
+                      "wants": true,
+                      "checkedin": true
+                  },
+                  {
+                      "skill": "intermediate",
+                      "name": "Allan Fedreich",
+                      "vehicle": "2015 Hyundai Elantra",
+                      "allows": false,
+                      "wants": false,
+                      "checkedin": true
+                  }
+              ];*/
+
 
         $scope.getTrack = function (trackId) {
             if (trackId !== undefined && trackId !== null) {
@@ -78,13 +97,10 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
             }
         };
 
-
-        Manifests.find()
-        var getUsersFromManifests = function (manifests) {
-            if (manifests !== undefined && manifests !== null) {
+        var getUsersFromManifests = function (manifest) {
+            if (manifest !== undefined && manifest !== null) {
                 $http.get('/manifests/' + eventId)
                     .success(function (data) {
-
                         return data;
                     })
                     .error(function (data) {
