@@ -19,10 +19,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr data-ng-repeat="event in events | filterPast | orderBy: '-eventStartDate' | filter: searchText" ng-click="showEvent(event)">
+        <tr class="clickable-row" data-ng-repeat="event in events | filterPast | orderBy: '-eventStartDate' | filter: searchText" ng-click="showEvent(event)">
             <td>{{event.eventStartDate | date:'MM/dd/yyyy'}}</td>
-            <td>{{event.track}}</td>
-            <td>{{event.location}}</td>
+            <td>{{event.track.trackName}}</td>
+            <td>{{event.track.trackCity}}, {{event.track.trackState}}</td>
         </tr>
         </tbody>
     </table>

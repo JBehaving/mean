@@ -9,6 +9,7 @@ var EventSchema = new Schema({
     albumLink: { type: String, required: false },
     basePrice: {  type: String, required: false },
     eventDesc: {  type: String, required: false },
+    eventEndTime: {type: String, required: false },
     eventState: { type: String,required: false },
     eventStatus: {  type: String,  required: false },
     eventStartTime: {  type: String, required: false },
