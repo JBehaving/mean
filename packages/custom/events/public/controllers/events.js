@@ -14,7 +14,7 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
     $scope.intermediate = 20;
     $scope.novice = 20;
 
-    $scope.parentScope = {};
+    $scope.eventScope = {};
 
     $scope.findTrackById = function(event) {
       $http.get('/tracks/'+event.trackId)

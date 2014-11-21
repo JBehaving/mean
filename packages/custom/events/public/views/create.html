@@ -6,7 +6,7 @@
     <div data-ng-controller="TracksController" data-ng-init="findAll()" class="form-group" ng-class="{ 'has-error' : submitted && eventForm.evTrack.value == null }">
       <label class="col-md-3 control-label">Track</label>
       <div class="col-md-7">
-        <select name="evTrack" class="form-control glowing-border" data-ng-model="parentScope.evTrack" required>
+        <select name="evTrack" class="form-control glowing-border" data-ng-model="eventScope.evTrack" required>
           <option style="color:gray" value="">Select a track</option>
           <option data-ng-repeat="track in tracks" value="{{track._id}}">{{track.trackName}}</option>
         </select>
