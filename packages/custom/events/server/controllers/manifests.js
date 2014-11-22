@@ -61,50 +61,69 @@ function retrieveManifests(eventId, callback) {
             callback(err, null);
         } else {
             console.log('Call was good, calling back');
-            callback(null, manifests);
+            var foundManifests = manifests.toObject();
+            callback(null, foundManifests);
 
         }
     });
 };
 
-
-
 function extractUserNameFromAccount(manifest, callback) {
-    Account.find().where('userID').equals(manifest.userId).exec(function (err, account) {
+    findAccountByUserId(manifest, function(err, name) {
         if (err) {
-            console.log('Call was bad' + account.userFirstName + ' ' + account.userLastNName);
+            console.log(manifest.userId + 'Call was bad' );
             callback(err, null);
         } else {
-            console.log('Call was good, calling back' + account.userFirstName + ' ' + account.userLastNName);
-            callback(null, account.userFirstName + ' ' + account.userLastNName);
+            console.log(manifest.userId +'Call was good, calling back');
+            callback(null, name);
+        }
+    });
+}
+
+function findAccountByUserId(manifest, callback) {
+    Account.find({'userID':manifest.userId}, {'userFirstName':1, 'userLastName':1,  '_id':0}, function (err, name) {
+        if (err) {
+            console.log(manifest.userId + 'Call was bad' + err);
+            callback(err, null);
+        } else {
+            var thisName = name.toObject();
+            console.log(manifest.userId +'Call was good, calling back' + thisName);
+            callback(null, name);
         }
     });
 };
 
 function extractVehicleFromManifest(manifest, callback) {
-    Vehicle.find().where('vehicleId').equals(manifest.vehicleId).exec(function (err, vehicle) {
+    Vehicle.find().where('_id').equals(manifest.vehicleId).exec(function (err, vehicle) {
         if (err) { callback(err, null); }
         else {
             console.log('Call was good, calling back');
-            callback(null, vehicle.vehicleYear + vehicle.vehicleColor + ' ' + vehicle.vehicleMake + ' ' + vehicle.vehicleModel);
+         //   var thisVehicle = JSON.parse(JSON.stringify(vehicle));
+          //  var vehicleName = thisVehicle.vehicleYear + thisVehicle.vehicleColor + ' ' + thisVehicle.vehicleMake + ' ' + thisVehicle.vehicleModel;
+            callback(null, vehicle.toObject()());
         }
     });
 }
 
 function addAttendeeNammesToManifests(manifests, callback) {
-
-    var  m;
-
+    var m, thisManifests = {}, thisManifest = {};
+    thisManifests = manifests;
     //-- for each manifest, add username and vehicle name
     for(m in manifests) {
         extractUserNameFromAccount(manifests[m], function(err, name){
             if (err) {
                 manifests[m]['name'] = 'John Doe';
                 console.log(err);
+                callback(err, manifests)
             }
             else {
-                console.log('got name from manifest');
-                manifests[m]['name'] = name;
+
+                console.log('got name from manifest' + name);
+              //  manifests[m] = manifests[m].concat(name);
+
+                //thisManifest.concat( name );
+                console.log('got name from manifest' + manifests[m]);
+                callback(null, manifests);
             }
         });
     }
@@ -119,10 +138,9 @@ function addVehicleToManifests(manifests, callback) {
             }
             else {
                 console.log('Call was good, found ' + vehicle);
-                manifest[m]['vehicle'] = vehicle;
+                manifests[m]['vehicle'] = vehicle;
             }
         });
-        i++;
     }
 }
 function attendees(manifests) {
@@ -242,9 +260,10 @@ exports.findByUser = function(req, res) {
     });
 };
 
+//-- This function is the meat and potatoes of this controller
 exports.findByEvent = function(req, res) {
-    var query = {eventId: new ObjectId(req.query.eventId)};
-    Manifest.find(query, function(err, manifests){
+    Manifest.find().where('eventId').equals(new ObjectId(req.query.eventId)).populate('vehicleId')
+        .populate('userId', 'userFirstName userLastName').populate('trackId', 'trackName').exec(function(err, manifests){
         if (err) {
             console.log('failed to find a manifest ' + err);
             res.status(500).json( {error: 'Error while searching ' + err});

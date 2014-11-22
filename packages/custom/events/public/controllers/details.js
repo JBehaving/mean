@@ -4,19 +4,20 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
     function($scope, $stateParams, $location, $http, Global, Events) {
         $scope.global = Global;
 
-        $scope.findOne = function () {
+        var thisEventId = $stateParams.eventId;
+
+
             Events.get({
                 eventId: $stateParams.eventId
             }, function (event) {
                 $scope.event = event;
             });
-        };
 
-        $scope.find = function () {
+     /*   $scope.find = function () {
             Events.query(function (events) {
                 $scope.events = events;
             });
-        };
+        }; */
 
         $http.get('/events')
             .success(function (data, status, header, config) {
@@ -27,10 +28,11 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
                 console.log('Error: ' + data);
             });
 
+
         //  var eventStartDate = '12/12/14';
         //  var trackID = '1';
 
-        var eventId = '1';
+
         //-- set up variables
         $scope.eventD = [];
         $scope.trackN = [];
@@ -44,9 +46,9 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
         console.log(JSON.stringify(myVar));
 
 
-            $http.get('/attendees')
+            $http.get('/attendees?'+'eventId=' + thisEventId)
                 .success(function (data) {
-                    console.log('Got a track: ' + data);
+                    console.log('Got data: ' + data);
                     $scope.attendees = data;
                 })
                 .error(function (data) {

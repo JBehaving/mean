@@ -14,13 +14,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr data-ng-repeat="advanced in attendees | filter: searchText | filter:{ skill: 'advanced' }">
+            <tr data-ng-repeat="attendee in attendees | filter: searchText | filter:{ skillClass: 'advanced' }">
                 <!--<td>{{event.eventStartDate}}</td>-->
-                <td>{{advanced.name}}</td>
-                <td>{{advanced.vehicle}}</td>
-                <td><input type="checkbox" ng-model="advanced.wants" disabled="true"></td>
-                <td><input type="checkbox" ng-model="advanced.allows" disabled="true"></td>
-                <td><div class="row"><div class="col-sm-1"><input type="checkbox" ng-model="advanced.checkedin"
+                <td>{{attendee.userId.userFirstName}} {{attendee.userId.userLastName}}</td>
+                <td>{{attendee.vehicleId.vehicleYear}} {{attendee.vehicleId.vehicleColor}} {{attendee.vehicleId.vehicleMake}}</td>
+                <td><input type="checkbox" ng-model="attendee.riderWanted" disabled="true"></td>
+                <td><input type="checkbox" ng-model="advanced.rideAlong" disabled="true"></td>
+                <td><div class="row"><div class="col-sm-1"><input type="checkbox" ng-model="attendee.checkedin"
                                                                   disabled="true"></div>
                 </div></td>
             </tr>

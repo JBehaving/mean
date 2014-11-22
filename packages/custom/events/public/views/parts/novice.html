@@ -7,10 +7,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr data-ng-repeat="attendee in attendees | filter: searchText | filter:{ skill: 'novice' }">
+            <tr data-ng-repeat="attendee in attendees | filter: searchText | filter:{ skillClass: 'novice' }">
                 <!--<td>{{event.eventStartDate}}</td>-->
                 <td>{{attendee.name}}</td>
-                <td>{{attendee.vehicle}}</td>
+                <td>{{attendee.vehicleId.vehicleYear}} {{attendee.vehicleId.vehicleMake}} {{attendee.vehicleId.vehicleModel}}</td>
                 <td><input type="checkbox" ng-model="attendee.wants" disabled="true"></td>
                 <td><input type="checkbox" ng-model="attendee.allows" disabled="true"></td>
                 <td><div class="row"><div class="col-sm-1"><input type="checkbox" ng-model="attendee.checkedin"

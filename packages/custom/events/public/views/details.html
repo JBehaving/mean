@@ -57,7 +57,7 @@
         <div style="padding-left:50%">
             <table>
                 <tbody>
-                <tr><td style="text-align:center"><font face="impact" size="8"> {{trackname}} </font></td></tr>
+                <tr><td style="text-align:center"><font face="impact" size="8"> {{event.trackId.trackName}} </font></td></tr>
                 <tr><td style="text-align:center"><font face="impact" size="4"> date </font></td></tr>
                 <tr><td style="text-align:center"><font face="impact" size="2"> locations </font></td></tr>
                 </tbody>
@@ -97,6 +97,7 @@
             <div class="col-sm-2 col-md-offset-1">
                 <div ><br/><br/> <br/></div>
                 <span style="font-family: impact; width: 500px; display:block;">
+                    {{event.eventDesc}}}
                 this is the greatested sdsdflksdjflksd fasldkfsdl;kf jsad;lfjasdf;lkajsf;lksada sl;dksadlkfj
                 sdfaljjjjjjjjjjjjjj jjjjjjjjjjjj jjjjjjjj jjfjlasdkfjasd lkfjsdalfks djflkaaaaa aaaaaaaaa aaaaa
                 </span>
@@ -114,7 +115,7 @@
                         <tbody>
                         <tr data-ng-repeat="event in events">
                             <td>{{event.eventStartDate |  date: "MM/dd/yyyy"}}</td>
-                            <td></td>
+                            <td> href="{{event.albumLink}}}"dfd</td>
                         </tr>
                         </tbody>
                     </table>
@@ -134,20 +135,18 @@
     <div ><br/><br/> </div>
 
 </div>
-    <div class="row"><div><br /><div></div></div>
-    <div class="row" style="width: 900px;">
-        <div class="col-md-3" style="font-family:impact;font-size: 35px;">attendees</div>
-        <div class="col-md-5 col-sm-offset-1 pull-right">
-            <div class="table-search pull-right pull-down"></div>
+    <div class="panel panel-default">
+            <h3 class="panel-title">
+
+        <div><h2>attendees</h2></div>
                 <div class="form-group input-group">
                 <span class="input-group-addon">
                     <i class="glyphicon glyphicon-search"></i>
                 </span>
                     <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search Attendees"/></div>
-            </div>
-        </div>
-    </div>
-        <div class="container" ng-controller="EventDetailsController">
+            </h3>
+        <div class="panel-body">
+        <div class="container pull-left" ng-controller="EventDetailsController">
             <accordion close-others="oneAtATime">
                 <accordion-group ng-repeat="group in groups" is-open="group.expanded">
                     <accordion-heading class="table-title-bg">

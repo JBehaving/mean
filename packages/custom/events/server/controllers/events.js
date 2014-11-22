@@ -61,7 +61,7 @@ exports.all = function(req, res) {
         console.log('Error retrieving event.');
     }
     else {
-        GTDEvent.find().sort('-eventStartDate').exec(function (err, events) {
+        GTDEvent.find().populate('trackId').sort('-eventStartDate').exec(function (err, events) {
             if (err) {
                 return res.json(500, {
                     error: 'Cannot list the events'

@@ -29,13 +29,9 @@ var ManifestSchema = new Schema({
     }
 });
 
-/**
- * Statics
- */
 ManifestSchema.statics.load = function(id, cb) {
     this.findOne({
         _id: id
     }).exec(cb);
 };
-
 mongoose.model('Manifest', ManifestSchema);
