@@ -22,15 +22,15 @@ module.exports = function(MeanUser, app, auth, database, passport) {
 	
   //Updating account
   app.route('/account/:userId')
-    .get(user.me)
-    .put(auth.requiresLogin, accounts.update); //TODO NEED AUTHORIZATION 
+    .get(users.me)
+    .put(auth.requiresLogin, users.update); //TODO NEED AUTHORIZATION 
 
   // Setting up the userId param
   app.param('userId', users.user);
   
   //Account management
   app.route('/accounts')
-    .get(accounts.all);
+    .get(users.all);
 	
   
 
