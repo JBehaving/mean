@@ -62,7 +62,29 @@ var UserSchema = new Schema({
   twitter: {},
   github: {},
   google: {},
-  linkedin: {}
+  linkedin: {},
+  
+  
+  //*******************************************
+  //  GTD Account fields
+  //  Note!: The requirements are all being set to false for testing purposes. Add neccessary requirements back in later!
+  //*******************************************
+  //Birthday wasn't in original schema
+  city: { type: String, required: false },
+  deletionFlag: { type: String, required: false },
+  drivingLevel: { type: String, required: false },
+  emergencyContactName: {  type: String, required: false },
+  primaryEmergencyPhoneNumber: { type: String, required: false },
+  primaryPhoneNumber: {  type: String,  required: false },
+  secondaryEmergencyPhoneNumber: {  type: String, required: false },
+  secondaryPhoneNumber: { type: String, required: false },
+  state: { type: String,  required: false },
+  userCreatedDate: { type: String, default: Date.now },
+  streetAddress: { type: String, required: false },
+  userFirstName: { type: String, required: false },
+  userLastName: { type: String, required: false },
+  zip: { type: String, required: false }
+  //*******************************************
 });
 
 /**
@@ -144,7 +166,24 @@ UserSchema.methods = {
     if (!password || !this.salt) return '';
     var salt = new Buffer(this.salt, 'base64');
     return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+  },
+  
+  //************************************
+  // GTD Methods
+  //************************************
+  
+  isEventManager: function()  {
+    return this.roles.indexOf('event manager') !== -1;
+  },
+  
+  isAccountant: function()  {
+    return this.roles.indexOf('accountant') !== -1;
+  },
+  
+  isEmployee: function()  {
+    return this.roles.indexOf('employee') !== -1;
   }
+  
 };
 
 mongoose.model('User', UserSchema);

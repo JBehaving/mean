@@ -232,4 +232,55 @@ exports.forgotpassword = function(req, res, next) {
       res.json(response);
     }
   );
+ };
+  
+//*************************
+// GTD functions
+//*************************  
+  
+/**
+ * Find all users (For managing accounts)
+ **/
+ 
+ exports.all = function(req, res) 
+ {
+	User.find().sort('userLastName userFirstName').exec(function(err, user) { //Sorted by last,first ascending
+    if (err) 
+	{
+		return res.json(500, { error: 'Error in listing Account information' });
+    }
+    res.json(user);
+
+  });
+ };
+ 
+ /**
+  * Update user
+  **/
+  
+exports.update = function(req, res) 
+{
+	var updatedAccount = new User(req.body); 
+	
+    if (updatedAccount._id !== undefined) 
+	{ 
+		var searchID = updatedAccount._id; 
+        delete updatedAccount._id;
+			
+        User.update(searchID, updatedAccount, function (err) { 
+            if (err) 
+			{ 
+                console.log('Account info update failed: ' + err); 
+                return res.json(500, { error: 'Failed to update account: ' + err } ); 
+            } 
+        }); 
+        res.send('Account successfully updated.'); 
+    } 
+	else 
+	{ //We're updating a non existant account
+		res.send('ERROR: Attempted to update non-existant account');
+	}
+
+
 };
+
