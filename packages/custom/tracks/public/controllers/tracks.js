@@ -7,13 +7,20 @@ angular.module('mean.tracks').controller('TracksController', ['$scope', '$stateP
     $scope.create = function(isValid) {
       if (isValid) {
         var track = new Tracks({
-          trackName: this.name
+          trackName: this.trName,
+          trackAddress: this.trAddr,
+          trackCity: this.trCity,
+          trackState: this.trState,
+          trackZip: this.trZip,
+          trackContactName: this.contactName,
+          trackContactEmail: this.contactEmail,
+          trackContactPhone: this.contactPhone,
+          trackDescription: this.trDesc
         });
         track.$save(function(response) {
-          $location.path('tracks/' + response._id);
+          $location.path('tracks');
         });
 
-        this.trackName = '';
       } else {
         $scope.submitted = true;
       }
@@ -63,6 +70,10 @@ angular.module('mean.tracks').controller('TracksController', ['$scope', '$stateP
       }, function(track) {
         $scope.track = track;
       });
+    };
+
+    $scope.showTrack = function(track) {
+      $scope.currTrack=track;
     };
   }
 ]);

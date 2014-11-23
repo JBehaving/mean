@@ -1,8 +1,8 @@
 'use strict';
 
-var tracks = require('../controllers/tracks');
 // The Package is passed automatically as first parameter
 module.exports = function(Tracks, app, auth, database) {
+    var tracks = require('../controllers/tracks');
 
     app.route('/tracks')
         .get(tracks.findTrack)
