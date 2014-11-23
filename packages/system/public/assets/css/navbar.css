@@ -1,4 +1,8 @@
 /* navbar */
+.nav-text{
+    font-size: 18px;
+    font-family: Impact, Charcoal, sans-serif;
+}
 .navbar {
     position: relative;
     width: 100%;

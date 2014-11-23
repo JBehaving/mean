@@ -10,9 +10,9 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
       return $scope.global.isAdmin || event.user._id === $scope.global.user._id;
     };*/
 
-    $scope.advanced = 20;
-    $scope.intermediate = 20;
-    $scope.novice = 20;
+    $scope.advanced = 25;
+    $scope.intermediate = 25;
+    $scope.novice = 25;
 
     $scope.eventScope = {};
 
