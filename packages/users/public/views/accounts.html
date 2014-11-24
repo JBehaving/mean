@@ -1,0 +1,123 @@
+<div class="panel panel-default" data-ng-controller="AccountController" data-ng-init="find()">
+    <div class="panel-heading table-title-bg">
+        <div class="table-search pull-right">
+            <div class="form-group input-group">
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-search"></i>
+                </span>
+                <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search upcoming events"/></div>
+        </div>
+        <div class="panel-title table-title">accounts<a href="#!/events/create"><span class="glyphicon glyphicon-plus glyphlink-red"></span></a></div>
+    </div>
+
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Type</th>
+            <th>Active<br><small>(Novice :: Intermediate :: Advanced)</small></th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="event in events | filter: searchText">
+            <!--<td>{{event.eventStartDate}}</td>-->
+            <td>{{event.date}}</td>
+            <td>{{event.track}}</td>
+            <td>{{event.location}}</td>
+            <td>{{event.novice}} :: {{event.intermediate}} :: {{event.advanced}}</td>
+            <td>{{event.price | currency}}</td>
+            <td><button class="btn btn-default center-block">attend</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr>
+
+<div data-ng-controller="RegisterCtrl">
+    <div ng-repeat="error in registerError">
+        <div class="alert alert-danger animated fadeIn">{{error.msg}}</div>
+    </div>
+    <div class="alert alert-danger animated fadeIn" ng-show="usernameError">{{usernameError}}</div>
+    <div class="alert alert-danger animated fadeIn" ng-show="emailError">{{emailError}}</div>
+
+
+
+    <table border="1" width="2000" style="width:100%" rules=rows>
+        <tr height="60"bgcolor="#d3d3d3">
+            <td>accounts</td>
+            <td></td>
+            <td></td>
+            <td colspan="3">
+                <div align="right" class="form-group">
+                    <label class="col-md-2 control-label">Search:</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control input-md" ng-model="search">
+                    </div>
+                </div>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr height="40">
+            <td width="150">Last Name</td>
+            <td width="200">First Name</td>
+            <td width="100">Type</td>
+            <td width="100">Active</td>
+            <td width="300">Email</td>
+            <td width="200">Phone</td>
+        </tr>
+        <tr height="40">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr height="40">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr height="40">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr height="40">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr height="40">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr height="40">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+<hr>
