@@ -3,7 +3,6 @@
  */
 'use strict';
 
-
 var mongoose = require('mongoose'),
     GTDEvent = mongoose.model('Event'),
     ObjectId = require('mongoose').Types.ObjectId,
@@ -12,7 +11,6 @@ var mongoose = require('mongoose'),
 
 
 exports.all = function(req, res) {
-
     if (req.query.trackID !== undefined && req.query.eventStartDate !== undefined) {
         var trackid = new ObjectId(req.query.trackID);
         var startdate = new Date(req.query.eventStartDate);

@@ -10,7 +10,9 @@
 .btn-default {
     background: #ffffff;
     border-color: red;
-    font-size: 22px;
+    font-size: 16px;
+    line-height: 16px;
+    height: 32px;
     color: #080808;
     font-family: Impact, Charcoal, sans-serif;
     opacity: 0.9;
@@ -27,7 +29,6 @@
 .glyphicon-space {
     color: transparent;
 }
-
 .glyphlink-red {
     color:red;
     vertical-align:20%;
@@ -51,12 +52,19 @@
     font-size: 26px;
     font-family: Impact, Charcoal, sans-serif;
 }
-.table-title-bg {
-    background-color: #f5f5f5;
-}
 .table-search {
     width: 30%;
     min-width: 250px;
 }
+.clickable-row {
+    cursor: pointer;
+}
+.selected {
+    background-color: #f5f5f5;
+}
 
-
+/* panel css */
+.panel-text {
+    font-size: 14px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

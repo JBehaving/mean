@@ -3,7 +3,7 @@
 angular.module('mean.events').config(['$stateProvider',
   function($stateProvider) {
     $stateProvider
-        .state('events', {
+        .state('events page', {
           url: '/events',
           templateUrl: 'events/views/index.html'
         })

@@ -11,20 +11,28 @@
             <div class="navbar-left">
                 <div class="pull-right">
                     <ul class="nav navbar-nav">
-                        <li ng-class="{'is-active': isActive('/events')}"><a ui-sref='events'>events</a></li>
-                        <li ng-class="{'is-active': isActive('/faq')}"><a ui-sref='faq'>faq</a></li>
+                        <li ng-class="{'is-active': isActive('/events')}"><a ui-sref='events page'>events</a></li>
+                        <li ng-class="{'is-active': isActive('/faq')}"><a ui-sref='faq page'>faq</a></li>
                     </ul>
                 </div>
             </div>
             <div class="navbar-center">
-                <a ui-sref="home" mean-token="'site-title'"><img src="/system/assets/img/blacklogo.jpg" width="140" height="60"/></a>
+                <a ui-sref='home page' mean-token="'site-title'"><img src="/system/assets/img/blacklogo.jpg" width="140" height="60"/></a>
             </div>
             <div class="navbar-right">
                 <div class="pull-left">
                     <ul class="nav navbar-nav">
-                        <li ng-class="{'is-active': isActive('/about')}"><a href="#">about</a></li>
-                        <li ng-class="{'is-active': isActive('/contact')}"><a href="#">contact</a></li>
-                        <li data-ng-hide="global.authenticated"><a href="#">tools</a></li>
+                        <li ng-class="{'is-active': isActive('/about')}"><a ui-sref='about page'>about</a></li>
+                        <li ng-class="{'is-active': isActive('/contact')}"><a ui-sref='contact page'>contact</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle nav-text" data-toggle="dropdown">
+                                tools <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Manage Accounts</a></li>
+                                <li><a ui-sref='tracks page'>Manage Tracks</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <div class="pull-right">

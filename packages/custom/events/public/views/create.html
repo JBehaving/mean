@@ -1,47 +1,44 @@
 <section data-ng-controller="EventsController">
   <p class="page-title">create a new event</p>
 
-
   <form style="float:none; left:25%" name="eventForm" class="form-horizontal col-md-6" role="form" data-ng-submit="create(eventForm.$valid)" novalidate>
 
-    <div data-ng-controller="TracksController" class="form-group" ng-class="{ 'has-error' : submitted && articleForm.track.value == null }">
+    <div data-ng-controller="TracksController" data-ng-init="findAll()" class="form-group" ng-class="{ 'has-error' : submitted && eventForm.evTrack.value == null }">
       <label class="col-md-3 control-label">Track</label>
       <div class="col-md-7">
-        <select id="track" class="form-control glowing-border" data-ng-model="track" name="track">
-          <option style="color:gray" value="" selected>Select a track
-          <div ng-repeat="track in tracks">
-            <option value="{{track.name}}">{{track.name}}
-          </div>
+        <select name="evTrack" class="form-control glowing-border" data-ng-model="eventScope.evTrack" required>
+          <option style="color:gray" value="">Select a track</option>
+          <option data-ng-repeat="track in tracks" value="{{track._id}}">{{track.trackName}}</option>
         </select>
       </div>
     </div>
 
-    <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.date.$invalid }">
-      <label for="date" class="col-md-3 control-label">Date</label>
+    <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.evDate.$invalid }">
+      <label class="col-md-3 control-label">Date</label>
       <div class="col-md-4">
-        <input name="date" type="date" data-ng-model="date" id="date" placeholder="mm/dd/yyyy" class="form-control glowing-border" required>
+        <input name="evDate" type="date" data-ng-model="evDate" placeholder="mm/dd/yyyy" class="form-control glowing-border" required>
       </div>
     </div>
 
-    <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.price.$invalid }">
-      <label for="price" class="col-md-3 control-label">Price</label>
+    <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.evPrice.$invalid }">
+      <label class="col-md-3 control-label">Price</label>
       <div class="col-md-3">
-        <input name="price" type="number" data-ng-model="price" id="price" min="0" placeholder="Price" class="form-control glowing-border" required>
+        <input name="evPrice" type="number" data-ng-model="evPrice" min="0" placeholder="Price" class="form-control glowing-border" required>
       </div>
     </div>
 
-    <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.city.$invalid }">
-      <label for="city" class="col-md-3 control-label">City</label>
+    <!--<div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.city.$invalid }">
+      <label class="col-md-3 control-label">City</label>
       <div class="col-md-5">
-        <input name="city" type="text" data-ng-model="city" id="city" placeholder="City" class="form-control glowing-border" required>
+        <input name="city" data-ng-model="city" placeholder="City" class="form-control glowing-border" required>
       </div>
     </div>
 
-    <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.state.value == null }">
-      <label for="state" class="col-md-3 control-label">State</label>
+    <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.st.value == null }">
+      <label class="col-md-3 control-label">State</label>
       <div class="col-md-5">
-        <select id="state" class="form-control glowing-border" data-ng-model="state" name="state">
-          <option style="color:gray" value="" selected>Select a state
+        <select name="st" class="form-control glowing-border" data-ng-model="st" required>
+          <option style="color:gray" value="">Select a state
           <option value="AL">Alabama
           <option value="AK">Alaska
           <option value="AZ">Arizona
@@ -93,50 +90,49 @@
           <option value="WV">West Virginia
           <option value="WI">Wisconsin
           <option value="WY">Wyoming
-        </SELECT>
-        <!--<input name="state" type="text" data-ng-model="state" id="state" placeholder="State" class="form-control glowing-border" required>-->
+        </select>
       </div>
-    </div>
+    </div>-->
 
     <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.novice.$invalid }">
-      <label for="novice" class="col-md-3 control-label">Novice</label>
+      <label class="col-md-3 control-label">Novice</label>
       <div class="col-md-2">
-        <input name="novice" type="number" data-ng-model="novice" id="novice" value="20" min="0" step="1" class="form-control glowing-border" required>
+        <input name="novice" type="number" data-ng-model="novice" min="0" step="1" class="form-control glowing-border" required>
       </div>
     </div>
 
     <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.intermediate.$invalid }">
-      <label for="intermediate" class="col-md-3 control-label">Intermediate</label>
+      <label class="col-md-3 control-label">Intermediate</label>
       <div class="col-md-2">
-        <input name="intermediate" type="number" data-ng-model="intermediate" id="intermediate" value="20" min="0" step="1" class="form-control glowing-border" required>
+        <input name="intermediate" type="number" data-ng-model="intermediate" min="0" step="1" class="form-control glowing-border" required>
       </div>
     </div>
 
     <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.advanced.$invalid }">
-      <label for="advanced" class="col-md-3 control-label">Advanced</label>
+      <label class="col-md-3 control-label">Advanced</label>
       <div class="col-md-2">
-        <input name="advanced" type="number" data-ng-model="advanced" id="advanced" value="20" min="0" step="1" class="form-control glowing-border" required>
+        <input name="advanced" type="number" data-ng-model="advanced" min="0" step="1" class="form-control glowing-border" required>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="desc" class="col-md-3 control-label">Description</label>
+      <label class="col-md-3 control-label">Description</label>
       <div class="col-md-9">
-        <textarea name="desc" type="text" data-ng-model="desc" id="desc" class="form-control glowing-border" rows="4" placeholder="(optional)"></textarea>
+        <textarea name="evDesc" type="text" data-ng-model="evDesc" class="form-control glowing-border" rows="4" placeholder="(optional)"></textarea>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="fblink" class="col-md-3 control-label">Facebook Link</label>
+      <label class="col-md-3 control-label">Facebook Link</label>
       <div class="col-md-9">
-        <input name="fblink" type="url" data-ng-model="fblink" id="fblink" class="form-control glowing-border" placeholder="(optional)"></textarea>
+        <input name="fblink" type="url" data-ng-model="fblink" class="form-control glowing-border" placeholder="(optional)"></textarea>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="glink" class="col-md-3 control-label">Google+ Link</label>
+      <label class="col-md-3 control-label">Google+ Link</label>
       <div class="col-md-9">
-        <input name="glink" type="url" data-ng-model="glink" id="glink" class="form-control glowing-border" placeholder="(optional)"></textarea>
+        <input name="glink" type="url" data-ng-model="glink" class="form-control glowing-border" placeholder="(optional)"></textarea>
       </div>
     </div>
 
