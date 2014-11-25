@@ -5,7 +5,7 @@
                 <span class="input-group-addon">
                     <i class="glyphicon glyphicon-search"></i>
                 </span>
-                <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search upcoming events"/></div>
+                <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search upcoming accounts"/></div>
         </div>
         <div class="panel-title table-title">accounts<a href="#!/events/create"><span class="glyphicon glyphicon-plus glyphlink-red"></span></a></div>
     </div>
@@ -16,20 +16,19 @@
             <th>Last Name</th>
             <th>First Name</th>
             <th>Type</th>
-            <th>Active<br><small>(Novice :: Intermediate :: Advanced)</small></th>
+            <th>Active</th>
             <th>Email</th>
             <th>Phone</th>
         </tr>
         </thead>
         <tbody>
-        <tr data-ng-repeat="event in events | filter: searchText">
-            <!--<td>{{event.eventStartDate}}</td>-->
-            <td>{{event.date}}</td>
-            <td>{{event.track}}</td>
-            <td>{{event.location}}</td>
-            <td>{{event.novice}} :: {{event.intermediate}} :: {{event.advanced}}</td>
-            <td>{{event.price | currency}}</td>
-            <td><button class="btn btn-default center-block">attend</button></td>
+        <tr data-ng-repeat="user in users | filter: searchText">
+            <td>{{user.lname}}</td>
+            <td>{{user.fname}}</td>
+            <td>{{user.type}}</td>
+            <td>{{user.active}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.phone}}</td>
         </tr>
         </tbody>
     </table>
