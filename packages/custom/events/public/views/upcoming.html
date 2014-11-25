@@ -5,30 +5,31 @@
                 <span class="input-group-addon">
                     <i class="glyphicon glyphicon-search"></i>
                 </span>
-                <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search upcoming events"/></div>
+                <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search upcoming events"/>
+            </div>
         </div>
-        <div class="panel-title table-title">upcoming events <a href="#!/events/create"><span class="glyphicon glyphicon-plus glyphlink-red"></span></a></div>
+        <div class="table-title">upcoming events <a ui-sref='create event'><span class="glyphicon glyphicon-plus glyphlink-red"></span></a></div>
     </div>
 
-    <table class="table table-hover table-bordered">
+    <table style="height: 400px;" class="table table-hover" fixed-header>
         <thead>
         <tr>
             <th>Date</th>
             <th>Track</th>
             <th>Location</th>
-            <th>Spots Remaining<br><small>(Novice :: Intermediate :: Advanced)</small></th>
+            <th>Spots Remaining<br><small>(Novice - Intermediate - Advanced)</small></th>
             <th>Price</th>
-            <th>Attend Event</th>
+            <th style="text-align: right">Attend Event</th>
         </tr>
         </thead>
         <tbody>
-        <tr data-ng-repeat="event in events | filter: searchText">
-            <td>{{event.eventStartDate}}</td>
-            <td>{{event.track}}</td>
-            <td>{{event.location}}</td>
-            <td>{{event.novice}} :: {{event.intermediate}} :: {{event.advanced}}</td>
-            <td>{{event.price | currency}}</td>
-            <td><button class="btn btn-default center-block">attend</button></td>
+        <tr class="clickable-row" data-ng-repeat="event in events | filter: searchText | filterUpcoming | orderBy: 'eventStartDate'" ng-click="showEvent(event)">
+            <td style="vertical-align:middle">{{event.eventStartDate | date:'MM/dd/yyyy'}}</td>
+            <td style="vertical-align:middle">{{event.trackId.trackName}}</td>
+            <td style="vertical-align:middle">{{event.trackId.trackCity}}, {{event.trackId.trackState}}</td>
+            <td style="vertical-align:middle">{{event.noviceCap - event.noviceRegistered}} - {{event.intermediateCap - event.intermediateRegistered}} - {{event.advancedCap - event.advancedRegistered}}</td>
+            <td style="vertical-align:middle">{{event.basePrice | currency}}</td>
+            <td style="text-align: right"><button class="btn btn-default" data-ng-controller="ModalEventController" data-ng-click="open()">attend</button></td></a>
         </tr>
         </tbody>
     </table>

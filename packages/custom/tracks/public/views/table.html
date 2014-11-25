@@ -1,0 +1,35 @@
+<div class="panel panel-default" data-ng-init="findAll()">
+  <div class="panel-heading">
+    <div class="table-search pull-right">
+      <div class="form-group input-group">
+        <span class="input-group-addon">
+            <i class="glyphicon glyphicon-search"></i>
+        </span>
+        <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search tracks"/>
+      </div>
+    </div>
+    <div class="table-title">tracks <a ui-sref='create track'><span class="glyphicon glyphicon-plus glyphlink-red"></span></a></div>
+  </div>
+
+  <table style="height: 400px;" class="table table-hover" fixed-header>
+    <thead>
+      <tr>
+        <th>Track</th>
+        <th>Location</th>
+        <th>Contact Name</th>
+        <th>Contact Email</th>
+        <th>Contact Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="clickable-row" data-ng-repeat="track in tracks | filter: searchText | orderBy: 'trackName'" ng-click="showTrack(track)" ng-class="{selected: track == currTrack}">
+        <td style="vertical-align:middle">{{track.trackName}}</td>
+        <td style="vertical-align:middle">{{track.trackCity}}, {{track.trackState}}</td>
+        <td style="vertical-align:middle">{{track.trackContactName}}</td>
+        <td style="vertical-align:middle">{{track.trackContactEmail}}</td>
+        <td style="vertical-align:middle">{{track.trackContactPhone}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

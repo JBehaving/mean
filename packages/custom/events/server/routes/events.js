@@ -4,17 +4,22 @@
 // The Package is past automatically as first parameter
 module.exports = function(Events, app, auth, database) {
     var events = require('../controllers/events');
-
+    var manifests = require('../controllers/manifests');
     app.route('/events')
         .get(events.all)
-        .post(events.create);
+        .post(events.create)
+        .put(events.update);
 
     app.route('/events/:eventId')
-      .get(events.show);
+        .get(events.show);
 
+    app.route('/manifests')
+        .get(manifests.findByEvent);
+
+    app.route('/attendees')
+        .get(manifests.findByEvent);
     // Finish with setting up the eventId param
     app.param('eventId', events.event);
-
   /*
     app.route('/events/update')
         .post(events.updateEvent);

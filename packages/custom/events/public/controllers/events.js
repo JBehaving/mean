@@ -1,26 +1,50 @@
 'use strict';
 
 
-angular.module('mean.events').controller('EventsController', ['$scope', '$stateParams', '$location', 'Global', 'Events',
-  function($scope, $stateParams, $location, Global, Events) {
+
+angular.module('mean.events').controller('EventsController', ['$scope', '$stateParams', '$location', 'Global', 'Events', 'Tracks',
+  function($scope, $stateParams, $location, Global, Events, Tracks) {
     $scope.global = Global;
-    //$scope.events = Events; //can remove when pulling events from backend
 
     /*$scope.hasAuthorization = function(event) {
       if (!event || !event.user) return false;
       return $scope.global.isAdmin || event.user._id === $scope.global.user._id;
     };*/
 
+    $scope.advanced = 25;
+    $scope.intermediate = 25;
+    $scope.novice = 25;
+
+    $scope.eventScope = {};
+
+    $scope.findTrackById = function(event) {
+      $http.get('/tracks/'+event.trackID)
+          .success(
+          function (tracks) {
+            if (tracks) {
+              console.log(tracks);
+              event.track = tracks;
+            }
+          }
+      );
+    };
+
     $scope.create = function(isValid) {
       if (isValid) {
         var event = new Events({
-          eventStartDate: this.date
+          advancedCap: this.advanced,
+          albumLink: this.fblink,
+          //albumLink2: this.glink,
+          basePrice: this.evPrice,
+          eventDesc: this.evDesc,
+          eventStartDate: this.evDate,
+          intermediateCap: this.intermediate,
+          noviceCap: this.novice,
+          trackID: this.eventScope.evTrack
         });
         event.$save(function(response) {
           $location.path('events/' + response._id);
         });
-
-        this.eventStartDate = '';
       } else {
         $scope.submitted = true;
       }
@@ -60,7 +84,13 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
 
     $scope.find = function() {
       Events.query(function(events) {
-        $scope.events = events;
+          //console.log(events);
+          $scope.events = events;
+          for (var i=0; i < events.length;i = i+1) {
+              console.log(events[i]);
+            if ($scope.events[i].trackID !== undefined)
+              $scope.findTrackById($scope.events[i]);
+          }
       });
     };
 
@@ -71,5 +101,43 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
         $scope.event = event;
       });
     };
+
+
+    $scope.showEvent = function(event) {
+      $location.path('/events/' + event._id);
+    };
+      $scope.findAllTracks = function() {
+          Tracks.query(function(tracks) {
+              $scope.tracks = tracks;
+          });
+      };
+
+      //$scope.package = {
+    //  name: 'events'
+    //};
   }
-]);
+]).filter('filterUpcoming', function() {
+  return function(items) {
+    var upcoming = [];
+
+    angular.forEach(items, function(item){
+      if ( new Date() <= new Date(item.eventStartDate) ) {
+        upcoming.push(item);
+      }
+    });
+
+    return upcoming;
+  };
+}).filter('filterPast', function() {
+    return function(items) {
+        var past = [];
+
+        angular.forEach(items, function(item){
+          if ( new Date() > new Date(item.eventStartDate) ) {
+                past.push(item);
+            }
+        });
+
+        return past;
+    };
+});
