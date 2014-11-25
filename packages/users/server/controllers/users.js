@@ -52,14 +52,14 @@ exports.create = function(req, res, next) {
   user.provider = 'local';
 
   // because we set our user.provider to local our models/user.js validation will always be true
-  req.assert('fname', 'You must enter a first name').notEmpty();
-  req.assert('lname', 'You must enter a last name').notEmpty();
-  req.assert('email', 'You must enter a valid email address').isEmail();
+  //req.assert('fname', 'You must enter a first name').notEmpty();
+  //req.assert('lname', 'You must enter a last name').notEmpty();
+  //req.assert('email', 'You must enter a valid email address').isEmail();
 
-  var errors = req.validationErrors();
-  if (errors) {
-    return res.status(400).send(errors);
-  }
+  //var errors = req.validationErrors();
+  //if (errors) {
+   // return res.status(400).send(errors);
+  //}
 
   // Hard coded for now. Will address this with the user permissions system in v0.3.5
   user.roles = ['authenticated'];

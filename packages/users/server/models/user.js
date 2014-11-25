@@ -70,19 +70,20 @@ var UserSchema = new Schema({
   //  Note!: The requirements are all being set to false for testing purposes. Add neccessary requirements back in later!
   //*******************************************
   //Birthday wasn't in original schema
-  city: { type: String, required: false },
+  birthday: { type: Date, required: false },
+  city: { type: String, required: true },
   deletionFlag: { type: String, required: false },
   drivingLevel: { type: String, required: false },
-  emergencyContactName: {  type: String, required: false },
-  primaryEmergencyPhoneNumber: { type: String, required: false },
-  primaryPhoneNumber: {  type: String,  required: false },
+  emergencyContactName: {  type: String, required: true },
+  primaryEmergencyPhoneNumber: { type: String, required: true },
+  primaryPhoneNumber: {  type: String, required: true },
   secondaryEmergencyPhoneNumber: {  type: String, required: false },
   secondaryPhoneNumber: { type: String, required: false },
-  state: { type: String,  required: false },
-  userCreatedDate: { type: String, default: Date.now },
+  state: { type: String,  required: true },
+  userCreatedDate: { type: Date, default: Date.now },
   streetAddress: { type: String, required: false },
-  userFirstName: { type: String, required: false },
-  userLastName: { type: String, required: false },
+  userFirstName: { type: String, required: true },
+  userLastName: { type: String, required: true },
   zip: { type: String, required: false }
   //*******************************************
 });
