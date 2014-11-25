@@ -4,7 +4,7 @@ angular.module('mean.events').config(['$stateProvider',
   function($stateProvider) {
     $stateProvider
         .state('events page', {
-          url: '/events',
+          url: '/events?registered',
           templateUrl: 'events/views/index.html'
         })
         .state('create event', {
@@ -12,7 +12,7 @@ angular.module('mean.events').config(['$stateProvider',
           templateUrl: 'events/views/create.html'
         })
         .state('event by id', {
-          url: '/events/:eventId',
+          url: '/events/:eventId?registered',
           templateUrl: 'events/views/details.html'
         })
         .state('event detail', {

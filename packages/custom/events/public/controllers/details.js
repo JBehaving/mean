@@ -11,6 +11,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
                 eventId: $stateParams.eventId
             }, function (event) {
                 $scope.event = event;
+                console.log($scope.event);
             });
 
      /*   $scope.find = function () {
@@ -27,6 +28,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
             .error(function (data) {
                 console.log('Error: ' + data);
             });
+
 
 
         //  var eventStartDate = '12/12/14';

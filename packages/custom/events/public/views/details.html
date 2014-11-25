@@ -42,6 +42,7 @@
     </style>
 </head>>
 <section data-ng-controller="EventDetailsController">
+    <div data-ng-controller="ModalRegisteredController" data-ng-init="open()" />
     <div class="container">
         <div data-ng-include="'events/views/share.html'"></div>
     </div>
@@ -58,7 +59,7 @@
             <table>
                 <tbody>
                 <tr><td style="text-align:center"><font face="impact" size="8"> {{event.trackId.trackName}} </font></td></tr>
-                <tr><td style="text-align:center"><font face="impact" size="4"> date </font></td></tr>
+                <tr><td style="text-align:center"><font face="impact" size="4"> {{event.eventStartDate | date : "MM/dd/yyyy"}} </font></td></tr>
                 <tr><td style="text-align:center"><font face="impact" size="2"> locations </font></td></tr>
                 </tbody>
             </table>
@@ -97,7 +98,7 @@
             <div class="col-sm-2 col-md-offset-1">
                 <div ><br/><br/> <br/></div>
                 <span style="font-family: impact; width: 500px; display:block;">
-                    {{event.eventDesc}}}
+                    {{event.eventDesc}}
                 this is the greatested sdsdflksdjflksd fasldkfsdl;kf jsad;lfjasdf;lkajsf;lksada sl;dksadlkfj
                 sdfaljjjjjjjjjjjjjj jjjjjjjjjjjj jjjjjjjj jjfjlasdkfjasd lkfjsdalfks djflkaaaaa aaaaaaaaa aaaaa
                 </span>
@@ -115,7 +116,7 @@
                         <tbody>
                         <tr data-ng-repeat="event in events">
                             <td>{{event.eventStartDate |  date: "MM/dd/yyyy"}}</td>
-                            <td> href="{{event.albumLink}}}"dfd</td>
+                            <td> href="{{event.albumLink}}"dfd</td>
                         </tr>
                         </tbody>
                     </table>
@@ -152,7 +153,7 @@
                     <accordion-heading class="table-title-bg">
                         <span class="glyphicon pull-left" ng-class="{'glyphicon-minus': groups[$index].expanded, 'glyphicon-plus': !group[$index].expanded}"></span>
                         <span style="font-family:impact">{{group.title}}</span>
-                        <a href="#!/events/register"><span class="glyphicon"><button style="background-color:white;border-width:2px; border-color:red; height:30px; width:60px; padding:0px"
+                        <a data-ng-controller="ModalEventController" data-ng-click="open(event)"><span class="glyphicon"><button style="background-color:white;border-width:2px; border-color:red; height:30px; width:60px; padding:0px"
 
                                                                                      type="submit" class="btn btn-small btn-block btn"><font face="impact" color="black" size="4">attend</font></button></span></a>                   </accordion-heading>
                     <div ng-repeat="contents in group.content" data-ng-include src="contents['page']" style="padding-left:0px;"></div>

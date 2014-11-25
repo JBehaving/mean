@@ -15,7 +15,7 @@ paypal.configure({
     'client_secret' : config.paypal.client_secret
 });
 
-var restoreEventState = function(event,transaction) {
+var restoreEventState = function(event,transaction,cb) {
     var skillLevel = transaction.skillClass;
     var update = { $inc : {}};
     update.$inc[skillLevel + 'Registered'] = -1;
@@ -25,11 +25,12 @@ var restoreEventState = function(event,transaction) {
             console.log('Serious errors, event is in inconsistent state : Event(' + event._id + ') Trans(' + transaction._id + ')');
         }
         else if (update) {
+            transaction.remove();
             console.log(update);
             console.log('Event ' + update._id + 'rolled back sucessfully');
         }
     });
-
+    cb();
 };
 
 var createPaypalPayment = function (req,res) {
@@ -110,6 +111,7 @@ var updateEventSlots = function (req,res) {
 
     if (skillClasses.indexOf(skillClass) <= -1) {
         res.status(500).json( {error: 'Invalid skill class specified'});
+        return;
     }
 
     if (req.event[skillClass + 'Registered'] >= req.event[skillClass + 'Cap']) {
@@ -131,7 +133,7 @@ var updateEventSlots = function (req,res) {
         function(err, event) {
             if (err) {
                 console.log(err);
-                res.json(500, {error : 'Error updating event when registering'});
+                res.status(500).json( {error : 'Error updating event when registering'});
             }
             else if (event) {
                 req.event = event;
@@ -223,7 +225,7 @@ var completePaypalPayment = function(req,res) {
                             else {
                                 console.log('Transaction complete');
                                 console.log(transaction);
-                                 res.redirect('/#!' + transaction.returnUrl);
+                                 res.redirect(transaction.returnUrl + '?registered=1');
                             }
                         });
                     }
@@ -246,13 +248,13 @@ exports.completeRegistration = function (req,res) {
 
 
 exports.cancelRegistration = function (req,res) {
-    Manifest.remove( { _id : req.query.transId }, function (err,transaction) {
+
+    Manifest.findOne( { _id : req.query.transId } , function (err,transaction) {
         if (err) {
             console.log('cancelRegistration: failed when finding transaction ' + req.query.transId);
             console.log(err);
             res.status('500').json({error: 'Error when finding transaction'});
         }
-
         else if (transaction) {
             transaction.status='cancelled';
             _Event.findOne({_id : transaction.eventId}, function (err,event) {
@@ -261,17 +263,18 @@ exports.cancelRegistration = function (req,res) {
                     console.log(err);
                 }
                 else if (event) {
-                    restoreEventState(event,transaction);
-                    res.status(200).json(transaction);
+                    restoreEventState(event,transaction, function() {
+                        res.redirect(transaction.returnUrl);
+                    });
                 }
                 else {
-                    console.log('cancelRegistration: Transaction for event that no longer exists');
+                    console.log('cancelRegistration: Transaction is for event that no longer exists');
                     console.log(transaction);
                     res.status(200).json(transaction);
+                    transaction.remove();
                 }
             });
         }
-
         else {
             console.log('cancelRegistration: No transaction with id ' + req.query.transId );
             res.status(404).json({error : 'Transaction not found or already removed'});
