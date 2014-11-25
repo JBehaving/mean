@@ -9,10 +9,10 @@ angular.module('mean.announcements').controller('AnnouncementsController', ['$sc
       name: 'announcements'
     };
 
-    $scope.hasAuthorization = function(announcements) {
-        if (!announcements || !announcements.user) return false;
-        return $scope.global.isAdmin || announcements.user._id === $scope.global.user._id;
-    };
+//    $scope.hasAuthorization = function(announcements) {
+//        if (!announcements || !announcements.user) return false;
+//        return $scope.global.isAdmin || announcements.user._id === $scope.global.user._id;
+//    };
 
     $scope.create = function(isValid) {
         if (isValid) {
@@ -21,7 +21,7 @@ angular.module('mean.announcements').controller('AnnouncementsController', ['$sc
               newsBody: this.newsBody
             });
             announcement.$save(function(response) {
-              $location.path('announcements/' + response._id);
+              $scope.defaultShow();
             });
 
             this.newsTitle = '';
@@ -65,4 +65,32 @@ angular.module('mean.announcements').controller('AnnouncementsController', ['$sc
           });
         };
   },
-]);
+])
+.controller('ModalController', function ($scope, $modal, $log){
+
+    $scope.open = function (size) {
+        var modalInstance = $modal.open({
+          backdrop: true,
+          keyboard: true,
+          templateUrl: 'announcements/views/create.html',
+          controller: 'ModalInstanceCtrl',
+          size: size
+        });
+
+        modalInstance.result.then(function () {
+
+        }, function () {
+          $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+})
+.controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
+
+  $scope.ok = function () {
+
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+});

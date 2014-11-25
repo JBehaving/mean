@@ -1,35 +1,32 @@
 <div class="modal-header">
     <h1>Create Announcement</h1>
 </div>
-<div class="modal-body">
+<div class="modal-body" data-ng-controller="AnnouncementsController">
     <form name="announcementForm" class="form-horizontal col-md-6" role="form" data-ng-submit="create(announcementForm.$valid)" novalidate>
         <div class="form-group" data-ng-class="{ 'has-error' : submitted && announcementForm.newsTitle.$invalid }">
-            <label mean-token="'create-title'" class="col-md-3 control-label">Title</label>
+            <label class="col-md-3 control-label">Title</label>
             <div class="col-md-9">
                 <input name="newsTitle" type="text" class="form-control" data-ng-model="newsTitle" id="title" placeholder="Title" required>
                 <div data-ng-show="submitted && announcementForm.newsTitle.$invalid" class="help-block">
                     <p data-ng-show="announcementForm.newsTitle.$error.required">Title is required</p>
                 </div>
             </div>
-
         </div>
         <div class="form-group" data-ng-class="{ 'has-error' : submitted && announcementForm.newsBody.$invalid }">
-            <label mean-token="'create-newsBody'" for="newsBody" class="col-md-3 control-label">Content</label>
+            <label for="newsBody" class="col-md-3 control-label">Content</label>
             <div class="col-md-9">
-                <textarea name="newsBody" data-ng-model="content" id="newsBody" cols="30" rows="10" placeholder="Content" class="form-control" required></textarea>
+                <textarea name="newsBody" data-ng-model="newsBody" id="newsBody" cols="50" rows="8" placeholder="Content" class="form-control" required></textarea>
                 <div data-ng-show="submitted && announcementForm.newsBody.$invalid" class="help-block">
                     <p data-ng-show="announcementForm.newsBody.$error.required">Content is required</p>
                 </div>
             </div>
         </div>
+
         <div class="form-group">
             <div class="col-md-offset-3 col-md-9">
                 <button type="submit" class="btn btn-info">Create</button>
+                <button class="btn btn-warning" data-ng-click="cancel()">Cancel</button>
             </div>
         </div>
     </form>
-</div>
-<div class="modal-footer">
-    <button type="submit" class="btn btn-primary">Create</button>
-    <button class="btn btn-warning" data-ng-click="cancel()">Cancel</button>
 </div>

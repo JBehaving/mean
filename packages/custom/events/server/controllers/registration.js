@@ -53,6 +53,7 @@ var createPaypalPayment = function (req,res) {
         }]
     };
 
+    console.log(payment_json);
 
     //Create the paypal payment
     paypal.payment.create(payment_json, function (error, payment) {
@@ -131,9 +132,8 @@ var updateEventSlots = function (req,res) {
             if (err) {
                 console.log(err);
                 res.json(500, {error : 'Error updating event when registering'});
-                return;
             }
-            if (event) {
+            else if (event) {
                 req.event = event;
                 createPayment(req, res);
             }
@@ -175,7 +175,7 @@ var updateEventSlots = function (req,res) {
 
 exports.registerForEvent = function (req,res) {
 
-    _Event.find({_id : req.body.eventId}, function (err,event){
+    _Event.findOne({_id : req.body.eventId}, function (err,event){
 
         if (err) {
             console.log('registerForEvent: Error looking up event');
@@ -185,6 +185,7 @@ exports.registerForEvent = function (req,res) {
             req.event = event;
 
             req.transaction = new Manifest(req.body);
+            req.transaction.userId = req.user._id;
             req.transaction.basePrice = req.event.basePrice;
             req.transaction.eventDesc = req.event.eventDesc;
             req.transaction.status = 'created';
@@ -192,7 +193,7 @@ exports.registerForEvent = function (req,res) {
             updateEventSlots(req,res);
         }
         else {
-            req.status(404).json({error : 'No event with ID ' + req.body.eventId});
+            res.status(404).json({error : 'No event with ID ' + req.body.eventId});
         }
     });
 };
@@ -217,11 +218,12 @@ var completePaypalPayment = function(req,res) {
                         transaction.save(function(error) {
                             if (error) {
                                 console.log('Transaction information could not be saved.  Verify transaction information for ' + transaction._id);
+                                res.redirect('/');
                             }
                             else {
                                 console.log('Transaction complete');
                                 console.log(transaction);
-                                 res.json(200, transaction);
+                                 res.redirect('/#!' + transaction.returnUrl);
                             }
                         });
                     }
@@ -253,7 +255,7 @@ exports.cancelRegistration = function (req,res) {
 
         else if (transaction) {
             transaction.status='cancelled';
-            _Event.find({_id : transaction.eventId}, function (err,event) {
+            _Event.findOne({_id : transaction.eventId}, function (err,event) {
                 if (err) {
                     console.log('cancelRegistration: failed when finding event ' + transaction.eventId);
                     console.log(err);
