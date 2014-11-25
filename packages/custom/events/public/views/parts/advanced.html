@@ -1,0 +1,30 @@
+<style>
+    .gtd-attendee-table {
+        max-height: 200px;
+        overflow-y: scroll;
+    }
+
+</style>
+<div class="container" id="advancedAttendees" data-ng-controller="EventDetailsController" style="padding-left:0px; ">
+    <div class="panel panel-default">
+        <table class="table table-hover table-bordered gtd-attendee-table">
+            <thead>
+            <tr>
+                <th>Name</th><th>Vehicle</th><th>Wants Rider</th><th>Allows Riders</th><th>Checked-in</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="attendee in attendees | filter: searchText | filter:{ skillClass: 'advanced' }">
+                <!--<td>{{event.eventStartDate}}</td>-->
+                <td>{{attendee.userId.userFirstName}} {{attendee.userId.userLastName}}</td>
+                <td>{{attendee.vehicleId.vehicleYear}} {{attendee.vehicleId.vehicleColor}} {{attendee.vehicleId.vehicleMake}}</td>
+                <td><input type="checkbox" ng-model="attendee.riderWanted" disabled="true"></td>
+                <td><input type="checkbox" ng-model="advanced.rideAlong" disabled="true"></td>
+                <td><div class="row"><div class="col-sm-1"><input type="checkbox" ng-model="attendee.checkedin"
+                                                                  disabled="true"></div>
+                </div></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

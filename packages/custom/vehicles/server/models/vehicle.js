@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 
 var VehicleSchema = new Schema({
-    userID: { type: Schema.ObjectId,
+    userId: { type: Schema.ObjectId,
         ref: 'User',
         required: true },
     vehicleModel: { type: String, required: true },
@@ -11,5 +11,13 @@ var VehicleSchema = new Schema({
     vehicleColor: { type: String, required: true },
     vehicleYear:  { type: String, required: true }
 });
+/**
+ * Statics
+ */
+VehicleSchema.statics.load = function(id, cb) {
+    this.findOne({
+        _id: id
+    }).exec(cb);
+};
 
 mongoose.model('Vehicle', VehicleSchema);

@@ -29,7 +29,7 @@ var EventSchema = new Schema({
 EventSchema.statics.load = function(id, cb) {
     this.findOne({
         _id: id
-    }).exec(cb);
+    }).populate('trackId').exec(cb);
 };
 
 mongoose.model('Event', EventSchema);

@@ -5,14 +5,33 @@
 
 var mongoose = require('mongoose'),
     GTDEvent = mongoose.model('Event'),
+    Manifest = mongoose.model('Manifest'),
     ObjectId = require('mongoose').Types.ObjectId,
- //   MongoDate = require('mongoose').Types.Date,
     _ = require('lodash');
 
+exports.findManifest = function(req, res) {
+    console.log('finding a manifest');
+    if (req.query.eventID !== undefined) {
+        var query = {eventID: new ObjectId(req.query.eventID)};
+        Manifest.find(query, function (err, tracks) {
+            if (err) {
+                console.log('failed to find a manifest ' + err);
+                res.status(500).json( {error: 'Error while searching ' + err});
+            } else {
+                console.log('tried to find a manifest' + err);
+                res.jsonp(tracks);
+
+            }
+        });
+    }
+    else {
+        console.log('No Manifests found by that ID');
+    }
+};
 
 exports.all = function(req, res) {
-    if (req.query.trackID !== undefined && req.query.eventStartDate !== undefined) {
-        var trackid = new ObjectId(req.query.trackID);
+    if (req.query.trackId !== undefined && req.query.eventStartDate !== undefined) {
+        var trackid = new ObjectId(req.query.trackId);
         var startdate = new Date(req.query.eventStartDate);
        // console.log('Searched for ' + req.query.trackID + ' ' + req.query.eventStartDate);
         GTDEvent.find().where('eventStartDate').equals(startdate).where('trackID').equals(trackid).sort('-eventStartDate').exec(function (err, events) {
@@ -26,9 +45,9 @@ exports.all = function(req, res) {
         });
         console.log('Error retrieving event.');
     }
-    else if (req.query.eventID !== undefined) {
-        var eventid = new ObjectId(req.query.eventID);
-        GTDEvent.find().where('eventID').equals(eventid).sort('-eventStartDate').exec(function (err, events) {
+    else if (req.query.eventId !== undefined) {
+        var eventid = new ObjectId(req.query.eventId);
+        GTDEvent.find({_id: eventid}, function (err, events) {
             if (err) {
                 res.render('error', {
                     status: 500
@@ -40,7 +59,7 @@ exports.all = function(req, res) {
         console.log('Error retrieving event.');
     }
     else {
-        GTDEvent.find().sort('-eventStartDate').exec(function (err, events) {
+        GTDEvent.find().populate('trackId').sort('-eventStartDate').exec(function (err, events) {
             if (err) {
                 return res.json(500, {
                     error: 'Cannot list the events'
@@ -119,12 +138,15 @@ exports.updateEvent = function(req, res) {
  * Create an event
  */
 exports.create = function(req, res) {
+    if(req.body.trackID !== undefined ) {
+        req.body.trackID = new ObjectId(req.body.trackID);
+    }
     var event = new GTDEvent(req.body);
 
     event.save(function(err) {
         if (err) {
             return res.json(500, {
-                error: 'Cannot save the event'
+                error: err
             });
         }
         res.json(event);

@@ -1,3 +1,4 @@
+'use strict';
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
@@ -14,4 +15,14 @@ var TrackSchema = new Schema({
     trackDescription: { type: String, required: false },
     trackName: { type: String, required: true }});
 
+
+/**
+ * Statics
+ */
+TrackSchema.statics.load = function(id, cb) {
+    this.findOne({
+        _id: id
+    }).exec(cb);
+
+};
 mongoose.model('Track',TrackSchema);

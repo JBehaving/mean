@@ -1,58 +1,194 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .item{
+            text-align: center;
+            height: 300px;
+            width: 400px;
+            border-color: red;
+        }
+        .carousel{
+            border-radius: 65px 65px 65px 65px;
+            overflow: hidden;
+            margin-top: 20px;
+            width: 380px;
+            border-color: red;
 
-<section data-ng-controller="EventsController">
-    <h1>
-        {{eventD}}
-    </h1>
+        }
+        .bs-example{
+            margin: 20px;
+        }
+        .carousel-control {
+            background:transparent;
+            overflow: hidden;
+            font-size: 10px;
+            border-color: red;
+        }
+        .carousel .item {
+            border-radius: 65px 65px 65px 65px;
+        }
+        .carousel .item img {
+            border-radius: 65px 65px 65px 65px;
+        }
+        table.strapless{
+            max-width: 30%;
+        }
+        .panel-body{
+            padding : 0px;
+        }
+    </style>
+</head>>
+<section data-ng-controller="EventDetailsController">
+    <div class="container">
+        <div data-ng-include="'events/views/share.html'"></div>
+    </div>
+    <div>
+        <div class="pull-right">
+            <button style="background-color:white; padding: 0px; border-width:2px; border-color:red; height:30px; width:80px;"
+                    type="submit" class="btn btn-small btn-block btn"><font face="impact" size="2">update</font></button>
+            <div style="padding:4px"></div>
+            <button style="background-color:white; padding: 0px; border-width:2px; border-color:red; height:30px; width:80px;"
+                    type="submit" class="btn btn-small btn-block btn"><font face="impact" size="2">cancel</font></button>
+        </div>
 
-    <div class="form-group">
-        <button style="background-color:white; border-width:2px; border-color:red; height:40px; width:200px;"
-                type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">update</font></button>
+        <div style="padding-left:50%">
+            <table>
+                <tbody>
+                <tr><td style="text-align:center"><font face="impact" size="8"> {{event.trackId.trackName}} </font></td></tr>
+                <tr><td style="text-align:center"><font face="impact" size="4"> date </font></td></tr>
+                <tr><td style="text-align:center"><font face="impact" size="2"> locations </font></td></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="form-group">
-        <button style="background-color:white; border-width:2px; border-color:red; height:40px; width:200px;"
-                type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">cancel</font></button>
-    </div>
-    <div class="form-group">
+   <div class="row">
+            <div class="col-md-4 ">
+                    <div id="imageCarousel" class="carousel slide" data-interval="4000" data-ride="carousel">
+                        <!-- Carousel indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#iamgeCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#imageCarousel" data-slide-to="1"></li>
+                            <li data-target="#imageCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+                            <div class="active item">
+                                <span style=" margin: 0;  padding-top: 30px; font-size: 40px;"><img src="http://drewphillipsphotography.com/blog/wp-content/uploads/2012/05/alms-laguna-seca-2012.jpg" width="300" height="200"/></span>
+                            </div>
+                            <div class="item">
+                                <span style=" margin: 0;  padding-top: 30px; font-size: 40px;"><img src="http://www.rfactorcentral.com/screenshots/lge/11-LagunaSeca-9759.jpg" width="300" height="200"/></span>
+                            </div>
+                            <div class="item">
+                                <span style=" margin: 0;  padding-top: 30px; font-size: 40px;"><img src="http://www.rfactorcentral.com/screenshots/lge/11-LagunaSeca-9759.jpg" width="300" height="200"/></span>
+                            </div>
+                        </div>
+                        <!-- Carousel nav -->
+                        <a class="carousel-control" href="#imageCarousel" data-slide="prev" >
+                            <span class="glyphicon glyphicon-chevron-left" style="width:10px"></span>
+                        </a>
+                        <a class="carousel-control" href="#imageCarousel" data-slide="next" >
+                            <span class="glyphicon glyphicon-chevron-right" style="width:10px"></span>
+                        </a>
+                    </div>
+            </div>
+            <div class="col-sm-2 col-md-offset-1">
+                <div ><br/><br/> <br/></div>
+                <span style="font-family: impact; width: 500px; display:block;">
+                    {{event.eventDesc}}}
+                this is the greatested sdsdflksdjflksd fasldkfsdl;kf jsad;lfjasdf;lkajsf;lksada sl;dksadlkfj
+                sdfaljjjjjjjjjjjjjj jjjjjjjjjjjj jjjjjjjj jjfjlasdkfjasd lkfjsdalfks djflkaaaaa aaaaaaaaa aaaaa
+                </span>
+                <div class="form-group  ">
+                    <div ><br/><br/> </div>
+                    <div class="panel panel-default" style="width: 450px">
+                    <div class="panel-heading table-title" style="padding: 5px">past events</div>
+                    <table class="table table-hover table-bordered " width="450" data-height="300" style="overflow-y: scroll;">
+                        <thead>
+                        <tr>
+                            <th>date</th>
+                            <th>gallery</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="event in events">
+                            <td>{{event.eventStartDate |  date: "MM/dd/yyyy"}}</td>
+                            <td> href="{{event.albumLink}}}"dfd</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+<div class="row">
+    <div class="col-md-4 col-md-offset-1">
         <button style="background-color:white; border-width:2px; border-color:red; height:40px; width:200px;"
                 type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">track day calculator</font></button>
     </div>
-    <div>
-        <table ng-table="tableParams" class="table">
-            <tr ng-model="eventer" ng-repeat="attendees in manifests">
-                <td data-title="'Event'" sortable="'event'">{{eventer.eventName}}</td>
-                <td data-title="'Date'" sortable="'date'">{{eventer.eventDate}}</td>
-                <td data-title="'State'" sortable="'state'">{{eventer.eventState}}</td>
-                <td data-title="'Event Status'" sortable="'status'">{{eventer.eventStatus}}</td>
-                <td data-title="'Cost'" sortable="'cost'">{{eventer.eventCost}}</td>
-                <td><form><button ng-submit="filterEvents()" type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">track day calculator</font></button></td>
-            </tr>
-        </table>
-    </div>
-    <div>
-        <table ng-table="tableParams" class="table">
-            <tr ng-model="log" ng-repeat="log in logs">
-                <td data-title="''" >{{log.comment}}</td>
+    <div ><br/><br/> </div>
+    <div ><br/><br/> </div>
+    <div ><br/><br/> </div>
 
-            </tr>
-        </table>
-    </div>
+</div>
+    <div class="panel panel-default">
+            <h3 class="panel-title">
 
-    <div class="container" ng-controller="AccordionCtrl">
-        <img class="center-block" src="/system/assets/img/logo.jpg" width="400" height="175" />
-        <label class="checkbox">
-            <input type="checkbox" ng-model="oneAtATime">
-            Open only one at a time
-        </label>
-        <accordion close-others="oneAtATime">
-            <accordion-group ng-repeat="group in groups" is-open="group.expanded">
-                <accordion-heading>
-                    <span class="glyphicon pull-left" ng-class="{'glyphicon-minus': groups[$index].expanded, 'glyphicon-plus': !group[$index].expanded}"></span>
-                    <span class="pull-left glyphicon-asterisk glyphicon-space"></span>
-                    <strong class="valign-middle">{{group.title}}</strong>
-                    <!--<span class="glyphicon glyphicon-remove-circle pull-right" style="color: red" ng-click="removeGroup(group)"></span>-->
-                </accordion-heading>
-                {{group.content}}
-            </accordion-group>
-        </accordion>
-    </div>
+        <div><h2>attendees</h2></div>
+                <div class="form-group input-group">
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-search"></i>
+                </span>
+                    <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search Attendees"/></div>
+            </h3>
+        <div class="panel-body">
+        <div class="container pull-left" ng-controller="EventDetailsController">
+            <accordion close-others="oneAtATime">
+                <accordion-group ng-repeat="group in groups" is-open="group.expanded">
+                    <accordion-heading class="table-title-bg">
+                        <span class="glyphicon pull-left" ng-class="{'glyphicon-minus': groups[$index].expanded, 'glyphicon-plus': !group[$index].expanded}"></span>
+                        <span style="font-family:impact">{{group.title}}</span>
+                        <a href="#!/events/register"><span class="glyphicon"><button style="background-color:white;border-width:2px; border-color:red; height:30px; width:60px; padding:0px"
+
+                                                                                     type="submit" class="btn btn-small btn-block btn"><font face="impact" color="black" size="4">attend</font></button></span></a>                   </accordion-heading>
+                    <div ng-repeat="contents in group.content" data-ng-include src="contents['page']" style="padding-left:0px;"></div>
+                </accordion-group>
+            </accordion>
+        </div>
+
+
+    <div class="container" ng-include="'events/views/parts/forumlogs.html'"></div>
+
+
+ <!-- inject forum logs here -->
+        <!--
+            <div class="form-group">
+                <button style="background-color:white; border-width:2px; border-color:red; height:40px; width:200px;"
+                        type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">track day calculator</font></button>
+            </div>
+            <div>
+                <table ng-table="tableParams" class="table">
+                    <tr ng-model="eventer" ng-repeat="attendees in manifests">
+                        <td data-title="'Event'" sortable="'event'">{{eventer.eventName}}</td>
+                        <td data-title="'Date'" sortable="'date'">{{eventer.eventDate}}</td>
+                        <td data-title="'State'" sortable="'state'">{{eventer.eventState}}</td>
+                        <td data-title="'Event Status'" sortable="'status'">{{eventer.eventStatus}}</td>
+                        <td data-title="'Cost'" sortable="'cost'">{{eventer.eventCost}}</td>
+                        <td><form><button ng-submit="filterEvents()" type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">track day calculator</font></button></td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <table ng-table="tableParams" class="table">
+                    <tr ng-model="log" ng-repeat="log in logs">
+                        <td data-title="''" >{{log.comment}}</td>
+
+                    </tr>
+                </table>
+            </div>-->
+{{fun}}
 </section>

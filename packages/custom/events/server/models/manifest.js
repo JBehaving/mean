@@ -1,3 +1,5 @@
+'use strict';
+
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
@@ -7,6 +9,8 @@ var ManifestSchema = new Schema({
     eventDesc: {  type: String, required: false },
     giveRideAlongs: { type: String, required: false },
     requestRideAlongs: {  type: String,  required: false },
+    //rideAlong: { type: Boolean, required: false },
+    //riderWanted: {  type: Boolean,  required: false },
     skillClass: {  type: String, required: true },
     userId: { type: Schema.ObjectId,
         ref: 'User',
@@ -26,7 +30,12 @@ var ManifestSchema = new Schema({
         default : Date.now,
     },
     returnUrl : String,
+
 });
 
-
+ManifestSchema.statics.load = function(id, cb) {
+    this.findOne({
+        _id: id
+    }).exec(cb);
+};
 mongoose.model('Manifest', ManifestSchema);

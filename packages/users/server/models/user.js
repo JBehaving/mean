@@ -35,7 +35,20 @@ var validateUniqueEmail = function(value, callback) {
  */
 
 var UserSchema = new Schema({
-  
+    city: { type: String, required: true },
+    deletionFlag: { type: String, required: false },
+    emergencyContactName: {  type: String, required: false },
+    personalEmail: { type: String, required: true },
+    primaryEmergencyPhoneNumber: { type: String, required: false },
+    primaryPhoneNumber: {  type: String,  required: true },
+    secondaryEmergencyPhoneNumber: {  type: String, required: true },
+    secondaryPhoneNumber: { type: String, required: true },
+    state: { type: String,  required: true },
+    userCreatedDate: { type: String, default: Date.now },
+    streetAddress: { type: String, required: true },
+    userFirstName: { type: String, required: true },
+
+    zip: { type: String, required: true },
   email: {
     type: String,
     required: true,
@@ -45,7 +58,7 @@ var UserSchema = new Schema({
   },
   roles: {
     type: Array,
-    default: ['authenticated']
+    default: ['authenticated']  // authenticated, accountManager, owner, eventManager, admin ..
   },
   hashed_password: {
     type: String,
