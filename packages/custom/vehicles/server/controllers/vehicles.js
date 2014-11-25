@@ -4,10 +4,8 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-Vehicle = mongoose.model('Vehicle'),
-User = mongoose.model('User'),
-_ = require('lodash'),
-ObjectId = require('mongoose').Types.ObjectId;
+Vehicle = mongoose.model('Vehicle');
+
 
 /**
  * Create Vehicle
