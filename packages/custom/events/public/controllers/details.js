@@ -41,9 +41,9 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
         $scope.trackname = 'laguna seca';
 
         var myVar = {};
-        myVar['apples'] = 'red';
-        myVar['grapes'] = 'greed';
-        myVar['nuts'] = 'almonds';
+        myVar.apples = 'red';
+        myVar.grapes = 'greed';
+        myVar.nuts = 'almonds';
         $scope.fun = JSON.stringify(myVar);
         console.log(JSON.stringify(myVar));
 
@@ -101,7 +101,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
             }
         };
 
-        var getUsersFromManifests = function (manifest) {
+        /*var getUsersFromManifests = function (manifest) {
             if (manifest !== undefined && manifest !== null) {
                 $http.get('/manifests/' + eventId)
                     .success(function (data) {
@@ -112,7 +112,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
                         return null;
                     });
             }
-        };
+        };*/
 
 
 //-- 546045c251d6b51818cb8a17/
