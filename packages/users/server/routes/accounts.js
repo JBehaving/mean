@@ -18,7 +18,7 @@ module.exports = function(Accounts, app, auth) {
   app.route('/accounts') //Basic listing for employees Need to require authorization for this one
     .get(accounts.all);	 //No limit on number? Handled elsewhere? No authorization for now...
 	
-  app.route('/account/:articleId')
+  app.route('/account/:accountId')
     .get(accounts.show)
     .put(auth.requiresLogin, hasAuthorization, accounts.update);
 

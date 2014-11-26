@@ -2,7 +2,7 @@
 
 angular.module('mean.forumlogs').controller('ForumlogController', ['$scope', 'Global', 'Forumlogs',
   function($scope, Global, Forumlogs) {
-      _ = require('lodash');
+    //var _ = require('lodash');
     $scope.global = Global;
     $scope.package = {
       name: 'forumlogs'
@@ -10,27 +10,27 @@ angular.module('mean.forumlogs').controller('ForumlogController', ['$scope', 'Gl
 
       $scope.logs = [
           {
-              "comment": "Cassi asked questions and showed interest. John stevens seems like.",
-              "dateentered": "12/12/14",
-              "forumlink": "http://vwvortex.com/g5xZTz35k",
-              "username": "Cody Lanier"
+              comment: 'Cassi asked questions and showed interest. John stevens seems like.',
+              dateentered: '12/12/14',
+              forumlink: 'http://vwvortex.com/g5xZTz35k',
+              username: 'Cody Lanier'
           },
           {
-              "comment": "Initial Post",
-              "dateentered": "12/12/14",
-              "forumlink": "http://vwvortex.com/g5xZTz35k",
-              "username": "Juan"
+              comment: 'Initial Post',
+              dateentered: '12/12/14',
+              forumlink: 'http://vwvortex.com/g5xZTz35k',
+              username: 'Juan'
           },
           {
-              "comment": "John says he will go. Posted more links.",
-              "dateentered": "12/12/14",
-              "forumlink": "http://nasoic.com",
-              "username": "asdfsdfasdfasdf"
+              comment: 'John says he will go. Posted more links.',
+              dateentered: '12/12/14',
+              forumlink: 'http://nasoic.com',
+              username: 'asdfsdfasdfasdf'
           }
 
 
       ];
-      $scope.links = _.groupBy(logs, 'forumlink');
+      //$scope.links = _.groupBy(logs, 'forumlink');
       $scope.logGroups = [
           {
               content: [{'page':'events/views/parts/advanced.html'}],
