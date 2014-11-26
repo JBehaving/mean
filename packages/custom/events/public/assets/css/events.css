@@ -1,28 +1,10 @@
-.events-example h1 {
-  background-color: purple
-}
-
 /* share button css */
-.mobile-social-share {
-  background: none repeat scroll 0 0 #EEEEEE;
-  display: block !important;
-  min-height: 70px !important;
-  margin: 50px 0;
-}
-.mobile-social-share h3 {
-  color: inherit;
-  float: left;
-  font-size: 15px;
-  line-height: 20px;
-  margin: 25px 25px 0 25px;
-}
-
 .share-group {
   float: right;
-  margin: 18px 25px 0 0;
+  margin: 0 0 0 0;
 }
 
-.mobile-social-share ul {
+.share-group ul {
   float: right;
   list-style: none outside none;
   margin: 0;
@@ -34,7 +16,7 @@
   min-width: 17px;
 }
 
-.mobile-social-share li {
+.share-group li {
   display: block;
   font-size: 18px;
   list-style: none outside none;
@@ -70,42 +52,6 @@
   margin-left: 2px;
   vertical-align: middle;
   width: 0;
-}
-
-.socialShare {
-  max-width:59px;
-  margin-bottom:18px;
-}
-
-.socialShare > a{
-  padding: 6px 10px 6px 10px;
-}
-
-@media (max-width : 320px) {
-  .socialHolder{
-    padding-left:5px;
-    padding-right:5px;
-  }
-
-  .mobile-social-share h3 {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .socialShare{
-    margin-left:5px;
-    margin-right:5px;
-  }
-
-  .mobile-social-share h3 {
-    font-size: 15px;
-  }
-}
-
-@media (max-width : 238px) {
-  .mobile-social-share h3 {
-    font-size: 12px;
-  }
 }
 
 

@@ -8,7 +8,7 @@ var TrackSchema = new Schema({
     trackAddress: { type: String, required: true },
     trackCity: { type: String, required: true },
     trackState: { type: String, required: true },
-    trackZip: { type: Number, required: true},
+    trackZip: { type: String, required: true},
     trackContactName: { type: String, required: false },
     trackContactEmail: { type: String, required: false },
     trackContactPhone: { type: String, required: false },

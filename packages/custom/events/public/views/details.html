@@ -1,71 +1,73 @@
 
-<section data-ng-controller="EventDetailsController">
+<section style="background-color: orangered" data-ng-controller="EventDetailsController">
 
-    <div data-ng-controller="ModalRegisteredController" data-ng-init="open()">
-        <h1>{{event.trackId.trackName}}hello moto</h1>
-        <h2>{{event.eventStartDate | date : "MM/dd/yyyy"}}</h2>
-        <h3>{{event.trackId.trackCity}}, {{event.trackId.trackState}}</h3>
-
-        <div class="pull-right">
-            <button type="submit" class="btn btn-default">update</button>
-            <div style="padding:4px"></div>
-            <button type="submit" class="btn btn-default">cancel</button>
-
-            <div class="row mobile-social-share">
-                <div class="btn-group share-group">
-                    <a data-toggle="dropdown" class="btn btn-info">
-                        <i class="fa fa-share-alt fa-inverse"></i>
-                    </a>
-                    <button href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle share">
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a data-original-title="Twitter" rel="tooltip"  href="#" class="btn btn-twitter" data-placement="left">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-original-title="Facebook" rel="tooltip"  href="#" class="btn btn-facebook" data-placement="left">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-original-title="Google+" rel="tooltip"  href="#" class="btn btn-google" data-placement="left">
-                                <i class="fa fa-google-plus"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <div style="background-color: green" data-ng-controller="ModalRegisteredController" data-ng-init="open()">
+        <div style="position: absolute; background-color: #1884BB; margin: 0 auto; left: 0; right: 0;">
+            <h1>{{event.trackId.trackName}}</h1>
+            <h2>{{event.eventStartDate | date : "MM/dd/yyyy"}}</h2>
+            <h3>{{event.trackId.trackCity}}, {{event.trackId.trackState}}</h3>
         </div>
 
+        <div style="background-color: #00b3ee;" class="pull-right">
+            <div style="padding: 3px">
+                <button type="submit" class="btn btn-default">update</button>
+            </div>
+            <div style="padding: 3px">
+                <button type="submit" class="btn btn-default">cancel</button>
+            </div>
 
-
+            <div style="background-color: orange" class="btn-group share-group">
+                <a data-toggle="dropdown" class="btn btn-info">
+                    <i class="fa fa-share-alt fa-inverse"></i>
+                </a>
+                <button href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle share">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a data-original-title="Twitter" rel="tooltip"  href="#" class="btn btn-twitter" data-placement="left">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-original-title="Facebook" rel="tooltip"  href="#" class="btn btn-facebook" data-placement="left">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-original-title="Google+" rel="tooltip"  href="#" class="btn btn-google" data-placement="left">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<!--
 
         <div class="row">
             <div class="col-md-4 ">
                 <div id="imageCarousel" class="carousel slide" data-interval="4000" data-ride="carousel">
                     <!-- Carousel indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#imageCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#imageCarousel" data-slide-to="1"></li>
-                        <li data-target="#imageCarousel" data-slide-to="2"></li>
-                    </ol>
-                    <!-- Carousel items -->
-                    <div class="carousel-inner">
-                        <div class="active item">
-                            <span style=" margin: 0;  padding-top: 30px; font-size: 40px;"><img src="http://drewphillipsphotography.com/blog/wp-content/uploads/2012/05/alms-laguna-seca-2012.jpg" width="300" height="200"/></span>
-                        </div>
-                        <div class="item">
-                            <span style=" margin: 0;  padding-top: 30px; font-size: 40px;"><img src="http://www.rfactorcentral.com/screenshots/lge/11-LagunaSeca-9759.jpg" width="300" height="200"/></span>
-                        </div>
-                        <div class="item">
-                            <span style=" margin: 0;  padding-top: 30px; font-size: 40px;"><img src="http://www.rfactorcentral.com/screenshots/lge/11-LagunaSeca-9759.jpg" width="300" height="200"/></span>
-                        </div>
-                    </div>
-                    <!-- Carousel nav -->
-                    <a class="carousel-control" href="#imageCarousel" data-slide="prev" >
+        <!--                  <ol class="carousel-indicators">
+                              <li data-target="#imageCarousel" data-slide-to="0" class="active"></li>
+                              <li data-target="#imageCarousel" data-slide-to="1"></li>
+                              <li data-target="#imageCarousel" data-slide-to="2"></li>
+                          </ol>
+                          <!-- Carousel items -->
+        <!--                   <div class="carousel-inner">
+                               <div class="active item">
+                                   <span style=" margin: 0;  padding-top: 30px; font-size: 40px;"><img src="http://drewphillipsphotography.com/blog/wp-content/uploads/2012/05/alms-laguna-seca-2012.jpg" width="300" height="200"/></span>
+                               </div>
+                               <div class="item">
+                                   <span style=" margin: 0;  padding-top: 30px; font-size: 40px;"><img src="http://www.rfactorcentral.com/screenshots/lge/11-LagunaSeca-9759.jpg" width="300" height="200"/></span>
+                               </div>
+                               <div class="item">
+                                   <span style=" margin: 0;  padding-top: 30px; font-size: 40px;"><img src="http://www.rfactorcentral.com/screenshots/lge/11-LagunaSeca-9759.jpg" width="300" height="200"/></span>
+                               </div>
+                           </div>
+                           <!-- Carousel nav -->
+  <!--                  <a class="carousel-control" href="#imageCarousel" data-slide="prev" >
                         <span class="glyphicon glyphicon-chevron-left" style="width:10px"></span>
                     </a>
                     <a class="carousel-control" href="#imageCarousel" data-slide="next" >
@@ -174,5 +176,4 @@
                     </tr>
                 </table>
             </div>-->
-{{fun}}
 </section>
