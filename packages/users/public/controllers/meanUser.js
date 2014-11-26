@@ -60,16 +60,16 @@ angular.module('mean.users')
 		  //birthday: $scope.user.dob,
 		  city: $scope.user.city,
 		  drivingLevel: $scope.user.level,
-		  emergencyContactName: $scope.user.icename,
+		  emergencyContactName: $scope.user.icefname + ' ' + $scope.icelname,
 		  primaryEmergencyPhoneNumber: $scope.user.icephone1,
 		  primaryPhoneNumber: $scope.user.phone,
 	  	  secondaryEmergencyPhoneNumber: $scope.user.icephone2,
 		  secondaryPhoneNumber: $scope.user.phone2,
 		  state: $scope.user.state,
 		  streetAddress: $scope.user.streetAddress,
-		  userFirstName: $scope.user.fname,
-		  userLastName: $scope.user.lname,
-		  zip: $scope.user.zip
+		  userFirstName: $scope.user.firstname,
+		  userLastName: $scope.user.lastname,
+		  zip: $scope.user.ZIP
         })
           .success(function() {
             // authentication OK
