@@ -2,12 +2,8 @@
 
 
 var mongoose = require('mongoose'),
-    Manifest = mongoose.model('Manifest'),
-    Account = mongoose.model('Account'),
-    Vehicle = mongoose.model('Vehicle'),
-    ObjectId = require('mongoose').Types.ObjectId
-    ;//,    _ = require('lodash');
-
+    ObjectId = require('mongoose').Types.ObjectId,
+    Manifest = mongoose.model('Manifest');
 
 
 /*
@@ -53,7 +49,7 @@ exports.findAttendeesByEvent = function(req, res) {
     ];
     res.jsonp(attendees);
 
-};*/
+};
 function retrieveManifests(eventId, callback) {
     Manifest.find().where('eventId').equals(eventId).exec(function (err, manifests) {
         if (err) {
@@ -260,7 +256,7 @@ exports.findByUser = function(req, res) {
         }
     });
 };
-
+*/
 //-- This function is the meat and potatoes of this controller
 exports.findByEvent = function(req, res) {
     Manifest.find().where('eventId').equals(new ObjectId(req.query.eventId)).populate('vehicleId')
