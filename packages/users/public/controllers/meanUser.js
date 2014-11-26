@@ -56,7 +56,20 @@ angular.module('mean.users')
           password: $scope.user.password,
           confirmPassword: $scope.user.confirmPassword,
           username: $scope.user.username,
-          name: $scope.user.name
+          name: $scope.user.name,
+		  //birthday: $scope.user.dob,
+		  city: $scope.user.city,
+		  drivingLevel: $scope.user.level,
+		  emergencyContactName: $scope.user.icename,
+		  primaryEmergencyPhoneNumber: $scope.user.icephone1,
+		  primaryPhoneNumber: $scope.user.phone,
+	  	  secondaryEmergencyPhoneNumber: $scope.user.icephone2,
+		  secondaryPhoneNumber: $scope.user.phone2,
+		  state: $scope.user.state,
+		  streetAddress: $scope.user.streetAddress,
+		  userFirstName: $scope.user.fname,
+		  userLastName: $scope.user.lname,
+		  zip: $scope.user.zip
         })
           .success(function() {
             // authentication OK
