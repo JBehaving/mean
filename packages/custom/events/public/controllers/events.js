@@ -2,8 +2,8 @@
 
 
 
-angular.module('mean.events').controller('EventsController', ['$scope', '$stateParams', '$location', 'Global', 'Events', 'Tracks',
-  function($scope, $stateParams, $location, Global, Events, Tracks) {
+angular.module('mean.events').controller('EventsController', ['$scope', '$stateParams', '$location', '$http', 'Global', 'Events', 'Tracks',
+  function($scope, $stateParams, $location, $http, Global, Events, Tracks) {
     $scope.global = Global;
 
     /*$scope.hasAuthorization = function(event) {

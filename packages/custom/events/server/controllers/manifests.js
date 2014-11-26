@@ -5,8 +5,8 @@ var mongoose = require('mongoose'),
     Manifest = mongoose.model('Manifest'),
     Account = mongoose.model('Account'),
     Vehicle = mongoose.model('Vehicle'),
-    ObjectId = require('mongoose').Types.ObjectId,
-    _ = require('lodash');
+    ObjectId = require('mongoose').Types.ObjectId
+    ;//,    _ = require('lodash');
 
 
 
@@ -20,7 +20,7 @@ var attendee = {
     "checkedin": false
 
 };*/
-var attendee = {};
+//var attendee = {};
 
 
 /*
@@ -66,18 +66,6 @@ function retrieveManifests(eventId, callback) {
 
         }
     });
-};
-
-function extractUserNameFromAccount(manifest, callback) {
-    findAccountByUserId(manifest, function(err, name) {
-        if (err) {
-            console.log(manifest.userId + 'Call was bad' );
-            callback(err, null);
-        } else {
-            console.log(manifest.userId +'Call was good, calling back');
-            callback(null, name);
-        }
-    });
 }
 
 function findAccountByUserId(manifest, callback) {
@@ -91,7 +79,19 @@ function findAccountByUserId(manifest, callback) {
             callback(null, name);
         }
     });
-};
+}
+
+function extractUserNameFromAccount(manifest, callback) {
+    findAccountByUserId(manifest, function(err, name) {
+        if (err) {
+            console.log(manifest.userId + 'Call was bad' );
+            callback(err, null);
+        } else {
+            console.log(manifest.userId +'Call was good, calling back');
+            callback(null, name);
+        }
+    });
+}
 
 function extractVehicleFromManifest(manifest, callback) {
     Vehicle.find().where('_id').equals(manifest.vehicleId).exec(function (err, vehicle) {
@@ -106,15 +106,15 @@ function extractVehicleFromManifest(manifest, callback) {
 }
 
 function addAttendeeNammesToManifests(manifests, callback) {
-    var m, thisManifests = {}, thisManifest = {};
+    var m, thisManifests = {};//, thisManifest = {};
     thisManifests = manifests;
     //-- for each manifest, add username and vehicle name
     for(m in manifests) {
         extractUserNameFromAccount(manifests[m], function(err, name){
             if (err) {
-                manifests[m]['name'] = 'John Doe';
+                manifests[m].name = 'John Doe';
                 console.log(err);
-                callback(err, manifests)
+                callback(err, manifests);
             }
             else {
 
@@ -133,25 +133,16 @@ function addVehicleToManifests(manifests, callback) {
     for (m in manifests) {
         extractVehicleFromManifest(manifests[m], function (err, vehicle) {
             if (err) {
-                manifests[m]['vehicle'] = '1988 Black Lamborghini Countach';
-                concole.log(err);
+                manifests[m].vehicle = '1988 Black Lamborghini Countach';
+                console.log(err);
             }
             else {
                 console.log('Call was good, found ' + vehicle);
-                manifests[m]['vehicle'] = vehicle;
+                manifests[m].vehicle = vehicle;
             }
         });
     }
 }
-function attendees(manifests) {
-    var usersInAllManifests = null;
-
-
-    for(var i = 0; i < manifests.length; i++){
-        usersInAllManifests[i] = getAttendee(manifests[i]);
-    }
-    return usersInAllManifests;
-};
 
 function getAttendee(manifest, callback) {
 
@@ -185,17 +176,27 @@ function getAttendee(manifest, callback) {
     if (vehicle === null || vehicle === undefined) { vehicle = '1988 Lamborghini Countach'; }
 
     var thisAttendee = {};
-    thisAttendee['skill'] = manifest.skillClass;
-    thisAttendee['name'] = userName;
-    thisAttendee['vehicle'] = vehicle.vehicleYear + ' ' + vehicle.vehicleColor + ' ' + vehicle.vehicleMake + ' ' + vehicle.vehicleModel;
-    thisAttendee['allowed'] = manifest.rideAlong;
-    thisAttendee['riderWanted'] = manifest.riderWanted;
-    thisAttendee['checkedin'] = true;
+    thisAttendee.skill = manifest.skillClass;
+    thisAttendee.name = userName;
+    thisAttendee.vehicle = vehicle.vehicleYear + ' ' + vehicle.vehicleColor + ' ' + vehicle.vehicleMake + ' ' + vehicle.vehicleModel;
+    thisAttendee.allowed = manifest.rideAlong;
+    thisAttendee.riderWanted = manifest.riderWanted;
+    thisAttendee.checkedin = true;
     // thisAttendee['checkedin'] = manifest.isCheckedin;
 
     return thisAttendee;
+}
 
-};
+function attendees(manifests) {
+    var usersInAllManifests = null;
+
+
+    for(var i = 0; i < manifests.length; i++){
+        usersInAllManifests[i] = getAttendee(manifests[i]);
+    }
+    return usersInAllManifests;
+}
+
 exports.findAttendeesByEvent = function(req, res) {
     if (req.query.eventId !== undefined && req.query.eventId !== null) {
         var eventId = new ObjectId(req.query.eventId);

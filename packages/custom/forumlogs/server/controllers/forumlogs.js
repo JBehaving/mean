@@ -75,7 +75,7 @@ exports.update = function(req, res) {
 };
 
 exports.forumlog = function(req, res, next, id) {
-    Forumlog.findOne({ _id : id },function(err, forumlog) {
+    ForumLog.findOne({ _id : id },function(err, forumlog) {
         if (err) {
             console.log('Error loading forumlog from database');
             console.log(err);
@@ -108,10 +108,10 @@ exports.delete = function(req, res) {
 };
 
 exports.findByUser = function(req, res, id) {
-    ForumLog.find({userId : ObjectId(id)}, function(err, forumLog){});
+    ForumLog.find({userId : new ObjectId(id)}, function(err, forumLog){});
 };
 
 exports.findByEvent = function(req, res, id) {
-    ForumLog.find({eventId : ObjectId(id)}, function(err, forumLog){});
+    ForumLog.find({eventId : new ObjectId(id)}, function(err, forumLog){});
 };
 
