@@ -1,10 +1,10 @@
 'use strict';
 
-// The Package is past automatically as first parameter
 module.exports = function(Vehicles, app, auth, database) {
 
-  var vehicles = require('../controllers/vehicles');
 
+  var vehicles = require('../controllers/vehicles');
+/*
   app.route('/vehicles')
       .get(vehicles.all)
       .post(vehicles.create);
@@ -18,4 +18,10 @@ module.exports = function(Vehicles, app, auth, database) {
       .get(vehicles.findByUser);
 
   app.param('vehicleId', vehicles.vehicle);
+*/
+  app.route('/garage')
+  .get(auth.requiresLogin, vehicles.findByUser)
+  .put(auth.requiresLogin, vehicles.update)
+  .post(auth.requiresLogin, vehicles.create);
+
 };

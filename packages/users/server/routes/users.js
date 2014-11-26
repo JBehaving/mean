@@ -19,9 +19,20 @@ module.exports = function(MeanUser, app, auth, database, passport) {
 
   app.route('/reset/:token')
     .post(users.resetpassword);
+	
+  //Updating account
+  app.route('/account/:userId')
+    .get(users.me)
+    .put(auth.requiresLogin, users.update); //TODO NEED AUTHORIZATION 
 
   // Setting up the userId param
   app.param('userId', users.user);
+  
+  //Account management
+  app.route('/accounts')
+    .get(users.all);
+	
+  
 
   // AngularJS route to check for authentication
   app.route('/loggedin')
