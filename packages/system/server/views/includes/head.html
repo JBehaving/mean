@@ -19,7 +19,9 @@
 
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="/modules/aggregated.css">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> <!-- accordion -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> <!-- share button -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"> <!-- share button -->
   <link rel="stylesheet" href="/users/assets/css/login.css">
   <link rel="stylesheet" href="/system/assets/css/default.css">
   <link rel="stylesheet" href="/system/assets/css/navbar.css">
@@ -27,6 +29,9 @@
   <!-- Inline javascript. Can set the src /modules/aggregated.js?group=header-->
   <script type="text/javascript">{{headerJs|raw}}</script>
 
+  <!-- share button -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
   {% for file in assets.core.css %}
     <link rel="stylesheet" href="/{{file}}">
