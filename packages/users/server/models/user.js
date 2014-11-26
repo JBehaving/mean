@@ -30,6 +30,19 @@ var validateUniqueEmail = function(value, callback) {
   });
 };
 
+var validateUserRole = function(value, callback) {
+  var possibleRoles = ['authenticated', 'member', 'eventManager', 'accountManager', 'employee', 'accountant'],
+    valid = false, i;
+  for (i = 0; i < value.length; i++) {
+    if (possibleRoles.indexOf(value[i]) !== -1) {
+      valid = true;
+    }
+    else {
+      valid = false;
+    }
+  }
+  callback(valid);
+};
 /**
  * User Schema
  */
@@ -58,7 +71,8 @@ var UserSchema = new Schema({
   },
   roles: {
     type: Array,
-    default: ['authenticated']  // authenticated, accountManager, owner, eventManager, admin ..
+    default: ['authenticated'],  // authenticated, accountManager, owner, eventManager, admin ..
+    validate: [validateUserRole, 'Role does not exist']
   },
   hashed_password: {
     type: String,
@@ -187,7 +201,7 @@ UserSchema.methods = {
   //************************************
   
   isEventManager: function()  {
-    return this.roles.indexOf('event manager') !== -1;
+    return this.roles.indexOf('eventManager') !== -1;
   },
   
   isAccountant: function()  {
@@ -196,8 +210,24 @@ UserSchema.methods = {
   
   isEmployee: function()  {
     return this.roles.indexOf('employee') !== -1;
+  },
+
+  isMember: function()  {
+    return this.roles.indexOf('member') !== -1;
+  },
+
+  isOwner: function()  {
+    return this.roles.indexOf('owner') !== -1;
+  },
+
+  isAccountManager: function()  {
+    return this.roles.indexOf('accountManager') !== -1;
+  },
+
+  isThisUser: function(id)  {
+    return this._id === id;
   }
-  
+
 };
 
 mongoose.model('User', UserSchema);
