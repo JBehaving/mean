@@ -160,3 +160,17 @@ exports.updateTrack = function(req, res) {
     }
     res.send('error updating event');
 };
+
+exports.destroy = function(req, res) {
+  var track = req.track;
+
+  track.remove(function(err) {
+    if (err) {
+      return res.json(500, {
+        error: 'Cannot delete the track'
+      });
+    }
+    res.json(track);
+
+  });
+};
