@@ -1,8 +1,7 @@
 'use strict';
 
-angular.module('mean.events').controller('CarouselCtrl', ['$scope', '$animate',
-    function ($scope, $animate){
-        $animate.enabled(false);
+angular.module('mean.events').controller('CarouselCtrl', ['$scope',
+    function ($scope){
         $scope.myInterval = 3000;
         $scope.slides = [
             {
@@ -10,12 +9,6 @@ angular.module('mean.events').controller('CarouselCtrl', ['$scope', '$animate',
             },
             {
                 image: 'http://www.rfactorcentral.com/screenshots/lge/11-LagunaSeca-9759.jpg'
-            },
-            {
-                image: 'http://lorempixel.com/400/200/sports'
-            },
-            {
-                image: 'http://lorempixel.com/400/200/people'
             }
         ];
 }]);
