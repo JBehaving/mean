@@ -62,3 +62,31 @@
 .size-static {
   height: 225px;
 }
+
+.carousel{
+  border-radius: 65px 65px 65px 65px;
+  overflow: hidden;
+  border-color: red;
+  border-width: thick;
+}
+/*
+.bs-example{
+  margin: 20px;
+}
+
+/*
+.carousel-control {
+  background:transparent;
+  overflow: hidden;
+  border-color: red;
+  border-width: thick;
+}
+
+/*
+.carousel .item {
+  border-radius: 65px 65px 65px 65px;
+}
+/*
+.carousel .item img {
+  border-radius: 65px 65px 65px 65px;
+}

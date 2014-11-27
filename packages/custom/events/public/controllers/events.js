@@ -140,4 +140,16 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
 
         return past;
     };
-});
+}).filter('filterPast2', function() {
+    return function(items, eventId) {
+      var past = [];
+
+      angular.forEach(items, function(item){
+        if ( (new Date() > new Date(item.eventStartDate)) && (item._id !== eventId) ) {
+          past.push(item);
+        }
+      });
+
+      return past;
+    };
+  });

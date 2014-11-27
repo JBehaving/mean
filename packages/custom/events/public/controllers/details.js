@@ -40,13 +40,6 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
         $scope.trackN = [];
         $scope.trackname = 'laguna seca';
 
-        var myVar = {};
-        myVar.apples = 'red';
-        myVar.grapes = 'greed';
-        myVar.nuts = 'almonds';
-        $scope.fun = JSON.stringify(myVar);
-        console.log(JSON.stringify(myVar));
-
 
             $http.get('/attendees?'+'eventId=' + thisEventId)
                 .success(function (data) {

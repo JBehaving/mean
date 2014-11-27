@@ -1,53 +1,98 @@
-<section data-ng-controller="EventDetailsController">
-    <h1>{{event.trackId.trackName}}</h1>
-    <h2>{{event.eventStartDate | date : "MM/dd/yyyy"}}</h2>
-    <h3>{{event.trackId.trackAddress}}</h3>
-    <h3>{{event.trackId.trackCity}}, {{event.trackId.trackState}} {{event.trackId.trackZip}}</h3>
+<div class="container" data-ng-controller="EventDetailsController">
+   <div>
+       <div class="pull-right">
+           <div style="padding: 3px">
+               <button type="submit" class="btn btn-default">update</button>
+           </div>
+           <div style="padding: 3px">
+               <button type="submit" class="btn btn-default">cancel</button>
+           </div>
 
-    <div class="pull-right">
-        <div style="padding: 3px">
-            <button type="submit" class="btn btn-default">update</button>
-        </div>
-        <div style="padding: 3px">
-            <button type="submit" class="btn btn-default">cancel</button>
+           <div style="padding: 3px" class="btn-group share-group">
+               <a data-toggle="dropdown" class="btn btn-info">
+                   <i class="fa fa-share-alt fa-inverse"></i>
+               </a>
+               <button href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle share">
+                   <span class="caret"></span>
+               </button>
+               <ul class="dropdown-menu">
+                   <li>
+                       <a data-original-title="Twitter" rel="tooltip"  href="#" class="btn btn-twitter" data-placement="left">
+                           <i class="fa fa-twitter"></i>
+                       </a>
+                   </li>
+                   <li>
+                       <a data-original-title="Facebook" rel="tooltip"  href="#" class="btn btn-facebook" data-placement="left">
+                           <i class="fa fa-facebook"></i>
+                       </a>
+                   </li>
+                   <li>
+                       <a data-original-title="Google+" rel="tooltip"  href="#" class="btn btn-google" data-placement="left">
+                           <i class="fa fa-google-plus"></i>
+                       </a>
+                   </li>
+               </ul>
+           </div>
+       </div>
+
+       <div style="margin-left: 80px">
+           <h1>{{event.trackId.trackName}}</h1>
+           <h2>{{event.eventStartDate | date : "MM/dd/yyyy"}}</h2>
+           <h3>{{event.trackId.trackAddress}}</h3>
+           <h3>{{event.trackId.trackCity}}, {{event.trackId.trackState}} {{event.trackId.trackZip}}</h3>
+       </div>
+   </div>
+
+    <div style="height: 300px">
+        <div ng-controller="CarouselCtrl" style="margin-top:14px; background-color: #00d4b4; width:50%;" class="pull-left">
+            <div class="slides-control">
+                <carousel interval="myInterval">
+                    <slide ng-repeat="slide in slides" active="slide.active">
+                        <img ng-src="{{slide.image}}"/>
+                    </slide>
+                </carousel>
+            </div>
         </div>
 
-        <div style="padding: 3px" class="btn-group share-group">
-            <a data-toggle="dropdown" class="btn btn-info">
-                <i class="fa fa-share-alt fa-inverse"></i>
-            </a>
-            <button href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle share">
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li>
-                    <a data-original-title="Twitter" rel="tooltip"  href="#" class="btn btn-twitter" data-placement="left">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                </li>
-                <li>
-                    <a data-original-title="Facebook" rel="tooltip"  href="#" class="btn btn-facebook" data-placement="left">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                </li>
-                <li>
-                    <a data-original-title="Google+" rel="tooltip"  href="#" class="btn btn-google" data-placement="left">
-                        <i class="fa fa-google-plus"></i>
-                    </a>
-                </li>
-            </ul>
+        <div style="margin-top:10px; background-color: #00b3ee; width: 50%" class="pull-left">
+            <div style="width: 70%; margin: 0 auto">
+                {{event.eventDesc}}
+            </div>
+
+            <div style="width: 50%; margin: 0 auto; min-width: 200px" class="panel panel-default" data-ng-controller="EventsController" data-ng-init="find()">
+                <div class="panel-heading">
+                    <div class="table-title">past events</div>
+                </div>
+
+                <table style="" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th style="text-align: right">Gallery</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="clickable-row" data-ng-repeat="event in events | filterPast2: event._id | orderBy: '-eventStartDate' | filter: event.trackId.trackName" ng-click="showEvent(event)">
+                        <td>{{event.eventStartDate | date:'MM/dd/yyyy'}}</td>
+                        <td style="text-align: right">
+                            <a href="http://www.facebook.com"><img width="25" src="/events/assets/img/facebook_circle_color-128.png"/></a>
+                            <a href="http://www.google.com"><img width="23" src="/events/assets/img/circle-google-plus-128.png"/></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
-    <div ng-controller="CarouselCtrl" style="position: relative;" class="pull-left">
-        <div class="slides-control">
-            <carousel interval="myInterval">
-                <slide ng-repeat="slide in slides" active="slide.active">
-                    <img ng-src="{{slide.image}}"/>
-                </slide>
-            </carousel>
-        </div>
+
+    <div style="margin-top: 20px; text-align: center" class="col-md-4">
+        <a href="#" class="btn btn-default">track day calculator</a><br>
+        <a href="#" style="color: darkred">financial_report.csv</a><br>
+        <a href="#" style="color: darkred">event_manifest.csv</a>
     </div>
+
+
 
 <!--<div style="background-color: green" data-ng-controller="ModalRegisteredController" data-ng-init="open()">
             <div class="col-sm-2 col-md-offset-1">
@@ -150,4 +195,4 @@
                     </tr>
                 </table>
             </div>-->
-</section>
+</div>
