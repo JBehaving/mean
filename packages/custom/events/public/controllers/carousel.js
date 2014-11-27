@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.events').controller('CarouselCtrl', ['$scope', 'ngAnimate',
+angular.module('mean.events').controller('CarouselCtrl', ['$scope', '$animate',
     function ($scope, $animate){
         $animate.enabled(false);
         $scope.myInterval = 3000;
