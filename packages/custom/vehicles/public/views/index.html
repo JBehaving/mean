@@ -8,11 +8,18 @@
 
 <div data-ng-controller="VehiclesController" data-ng-init="">
     <div class="container">
-        <div class="col-md-12" data-ng-repeat="vehicle in vehicles">
+        <div class="border-align col-md-12" data-ng-repeat="vehicle in vehicles">
             <hr>
-            <h3>{{vehicle.vehicleColor}} {{vehicle.vehicleMake}} {{vehicle.vehicleModel}} {{vehicle.vehicleYear}}
-                <!-- Vehicle Privacy Checkbox -->
-                <span title="Check to have your vehicle hidden from other users."><input type="checkbox"></span>
+            <h3>
+            <a class="btn">
+                <i class="glyphicon glyphicon-plus-sign"></i>
+            </a>
+            {{vehicle.vehicleColor}} {{vehicle.vehicleMake}} {{vehicle.vehicleModel}} {{vehicle.vehicleYear}}
+            <!-- Vehicle Privacy Checkbox -->
+            <span title="Check to have your vehicle hidden from other users."><input type="checkbox"></span>
+            <a class="btn pull-right" data-ng-click="remove(vehicle)">
+                <i class="glyphicon glyphicon-remove-circle"></i>
+            </a>
             </h3>
             <hr>
         </div>
