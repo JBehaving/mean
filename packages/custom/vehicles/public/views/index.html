@@ -1,27 +1,20 @@
-<div class="" data-ng-controller="VehiclesController">
-  <h1>Example view from your new awesome package</h1>
-  <h2>Package: {{package.name}}</h2>
-  <ol>
-    <li>
-      <a href="vehicles/example/anyone">Server route that anyone can access</a>
-    </li>
-    <li>
-      <a href="vehicles/example/auth">Server route that requires authentication</a>
-    </li>
-    <li>
-      <a href="vehicles/example/admin">Server route that requires admin user</a>
-    </li>
-    <li>
-      <a href="vehicles/example/render">Raw Html rendering example from using swig</a>
-    </li>
-  </ol>
-  <h3><img src="/vehicles/assets/img/logo.png" /></h3>
-  </br>
-  <p class="alert alert-info">You can find your package in /packages/vehicles</p>
-  </br>
-  <p class="alert alert-warning">MEAN versions prior to 0.3.2 will be in /node_modules/vehicles</p>
-  </br>
-  <h3><a href="http://www.mean.io/#!/docs">Documentation</a></h3>
-  </br>
+<div>
+   <h2 class="page-title">Garage</h2>
+   <a data-ng-controller="ModalVehiclesController" data-ng-click="open()">
+        <i class="glyphicon glyphicon-plus-sign glyphlink-red"></i>
+   </a>
+</div>
+
+<div data-ng-controller="VehiclesController" data-ng-init="">
+    <div class="container">
+        <!--<div class="col-md-12" data-ng-repeat="vehicle in vehicles">-->
+        <div>
+            <hr>
+            <h3>{{vehicle.vehicleColor}} {{vehicle.vehicleMake}} {{vehicle.vehicleModel}} {{vehicle.vehicleYear}}</h3>
+            <!-- Vehicle Privacy Checkbox -->
+            <span title="Check to have your vehicle hidden from other users."><input type="checkbox"></span>
+            <hr>
+        </div>
+    </div>
 </div>
 
