@@ -10,7 +10,7 @@ var ManifestSchema = new Schema({
     //giveRideAlongs: { type: String, required: false },
     //requestRideAlongs: {  type: String,  required: false },
     rideAlong: { type: Boolean, required: false },
-    riderWanted: {  type: Boolean,  required: false },
+    riderWelcome: {  type: Boolean,  required: false },
     skillClass: {  type: String, required: true },
     userId: { type: Schema.ObjectId,
         ref: 'User',

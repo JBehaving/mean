@@ -41,8 +41,8 @@ angular.module('mean.events').controller('ModalEventController', ['$scope','$mod
               //userId : $rootScope.user._id,
               vehicleId : $scope.vehicleId,
               skillClass : this.skillClass,
-              giveRideAlongs : this.giveRideAlongs,
-              requestRideAlongs : this.requestRideAlongs,
+              riderWelcome : this.riderWelcome,
+              rideAlong : this.rideAlong,
               paymentMethod : method,
               returnUrl : $location.absUrl()
           };

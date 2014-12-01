@@ -123,19 +123,19 @@
                         <table style="max-height: 400px;" class="table" fixed-header>
                             <thead>
                                 <tr>
-                                    <th>Name</th><th>Vehicle</th><th style="text-align: right">Wants Rider</th><th style="text-align: right">Allows Rider</th><th style="text-align: right">Checked-In</th>
+                                    <th>Name</th><th>Vehicle</th><th style="text-align: right">Wants to Ride</th><th style="text-align: right">Allows Rider</th><th style="text-align: right">Checked-In</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td style="vertical-align:middle; color: gray">user name{{user.name}}</td>
                                 <td style="vertical-align:middle">
-                                    <select data-ng-controller="VehiclesController" class="form-control glowing-border" ng-model="user.vehicles">
+                                    <select data-ng-controller="VehiclesController" class="form-control glowing-border" ng-model="evVehicle">
                                         <option style="color: gray" value="">Select a vehicle</option>
-                                        <option data-ng-repeat="vehicle in vehicles" value="{{vehicle}}">{{vehicle.vehicleYear}} {{vehicle.vehicleMake}} {{vehicle.vehicleModel}}, {{vehicle.vehicleColor}}</option>
+                                        <option data-ng-repeat="vehicle in vehicles" value="{{vehicle._id}}">{{vehicle.vehicleYear}} {{vehicle.vehicleMake}} {{vehicle.vehicleModel}}, {{vehicle.vehicleColor}}</option>
                                     </select>
                                 </td>
-                                <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="riderWanted"></td>
+                                <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="riderWelcome"></td>
                                 <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="rideAlong"></td>
                                 <td style="text-align: right">
                                     <button data-ng-controller="ModalEventController" data-ng-click="open(event)" class="btn btn-default">attend</button>
@@ -144,8 +144,8 @@
                             <tr class="" data-ng-repeat="attendee in attendees | filter: searchText | filter:{ skillClass: group.title }" ng-click="showEvent(event)">
                                     <td style="vertical-align:middle">{{attendee.userId.userFirstName}} {{attendee.userId.userLastName}}</td>
                                     <td style="vertical-align:middle">{{attendee.vehicleId.vehicleYear}} {{attendee.vehicleId.vehicleMake}} {{attendee.vehicleId.vehicleModel}}, {{attendee.vehicleId.vehicleColor}}</td>
-                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.giveRideAlongs"></td>
-                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.requestRideAlongs"></td>
+                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.riderWelcome"></td>
+                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.rideAlong"></td>
                                     <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.checkedIn"></td>
                                 </tr>
                             </tbody>

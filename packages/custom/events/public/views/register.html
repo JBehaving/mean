@@ -24,15 +24,15 @@
                 <div class="col-md-9">
                     <select name="vehicle" data-ng-model="vehicleId" id="vehicle" class="form-control" required>
                         <option value="">Pick a vehicle</option>
-                        <option ng-repeat="vehicle in vehicles" value="{{vehicle._id}}">{{vehicle.year}} {{vehicle.make}} {{vehicle.model}}</option>
+                        <option ng-repeat="vehicle in vehicles" value="{{vehicle._id}}">{{vehicle.vehicleYear}} {{vehicle.vehicleMake}} {{vehicle.vehicleModel}}</option>
                     </select>
                     <div data-ng-show="submitted && registerForm.vehicle.$invalid" class="help-block">
                         <p data-ng-show="registerForm.vehicle.$error.required">Vehicle is required</p>
                     </div>
                 </div>
             </div>
-                <input type="checkbox" data-ng-model="giveRideAlongs" name="giveRideAlongs" value="giveRideAlongs">Ride alongs welcome!<br>
-                <input type="checkbox" data-ng-model="requestRideAlongs" name="requestRideAlongs" value="requestRideAlongs">Request to ride along<br>
+                <input type="checkbox" data-ng-model="riderWelcome" name="riderWelcome" value="riderWelcome">Ride alongs welcome!<br>
+                <input type="checkbox" data-ng-model="rideAlong" name="rideAlong" value="rideAlong">Request to ride along<br>
             </form>
         </div>
         <div class="modal-footer">
