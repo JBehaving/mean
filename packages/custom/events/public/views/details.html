@@ -1,6 +1,6 @@
 <section data-ng-controller="EventDetailsController">
-    <div class="container" style="background-color: red">
-        <div class="pull-right" style="background-color: #2b542c">
+    <div class="container">
+        <div class="pull-right">
             <div style="padding: 3px">
                 <button type="submit" class="btn btn-default">update</button>
             </div>
@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <div style="margin-left: 60px; background-color: orange">
+        <div style="margin-left: 60px">
             <h1>{{event.trackId.trackName}}</h1>
             <h2>{{event.eventStartDate | date : "MM/dd/yyyy"}}</h2>
             <h3>{{event.trackId.trackAddress}}</h3>
@@ -43,9 +43,9 @@
         </div>
     </div>
 
-    <div class="container" style="background-color: purple; min-height: 300px">
-        <div ng-controller="CarouselCtrl" style="min-width: 400px; margin-top:10px; background-color: #00d4b4; width:50%;" class="pull-left">
-            <div class="slides-control">
+    <div class="container" style="min-height: 300px">
+        <div ng-controller="CarouselCtrl" style="min-width: 400px; margin-top:10px; width:50%;" class="pull-left">
+            <div class="slides-control" style="margin: 0 auto">
                 <carousel interval="myInterval">
                     <slide ng-repeat="slide in slides" active="slide.active">
                         <img ng-src="{{slide.image}}"/>
@@ -54,12 +54,12 @@
             </div>
         </div>
 
-        <div style="margin-top:10px; background-color: #00b3ee; width: 50%" class="pull-left">
+        <div style="margin-top:10px; width: 50%" class="pull-left">
             <div style="width: 70%; margin: 0 auto">
                 {{event.eventDesc}}
             </div>
 
-            <div style="width: 50%; margin: 0 auto; min-width: 200px" class="panel panel-default" data-ng-controller="EventsController" data-ng-init="find()">
+            <div style="width: 50%; min-width: 200px; margin: 0 auto" class="panel panel-default" data-ng-controller="EventsController" data-ng-init="find()">
                 <div class="panel-heading">
                     <div class="table-title">past events</div>
                 </div>
@@ -85,16 +85,16 @@
         </div>
     </div>
 
-    <div class="container" style="background-color: greenyellow">
-        <div style="background-color: #ffff00; margin: 10px; text-align: center" class="col-md-4">
+    <div class="container">
+        <div style="margin: 10px; text-align: center" class="col-md-4">
             <a href="#" class="btn btn-default">track day calculator</a><br>
             <a href="#" style="color: darkred">financial_report.csv</a><br>
             <a href="#" style="color: darkred">event_manifest.csv</a>
         </div>
     </div>
 
-    <div class="container" style="background-color: orchid">
-        <div class="panel panel-default">
+    <div class="container">
+        <div class="panel panel-default" style="margin-top: 10px">
             <div class="panel-heading table-title-bg">
                 <div class="table-search pull-right">
                     <div class="form-group input-group">
