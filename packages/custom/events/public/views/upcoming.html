@@ -13,20 +13,42 @@
 
     <table style="max-height: 400px;" class="table table-hover" fixed-header>
         <thead>
-        <tr>
-            <th>Date</th>
-            <th>Track</th>
-            <th>Location</th>
+        <tr data-ng-model="glyph">
+            <th>
+                <li style="list-style-type: none; cursor: pointer" ng-click="newOrder('eventStartDate')">
+                    Date <span ng-show="activeOrder == 'eventStartDate'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                </li>
+            </th>
+            <th>
+                <li style="list-style-type: none; cursor: pointer" ng-click="newOrder('trackId.trackName')">
+                    Track <span ng-show="activeOrder == 'trackId.trackName'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                </li>
+            </th>
+            <th>
+                <li style="list-style-type: none; cursor: pointer" ng-click="newOrder('trackId.trackCity')">
+                    City <span ng-show="activeOrder == 'trackId.trackCity'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                </li>
+            </th>
+            <th>
+                <li style="list-style-type: none; cursor: pointer" ng-click="newOrder('trackId.trackState')">
+                    State <span ng-show="activeOrder == 'trackId.trackState'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                </li>
+            </th>
             <th>Spots Remaining<br><small>(Novice - Intermediate - Advanced)</small></th>
-            <th>Price</th>
+            <th>
+                <li style="list-style-type: none; cursor: pointer" ng-click="newOrder('basePrice')">
+                    Price <span ng-show="activeOrder == 'basePrice'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                </li>
+            </th>
             <th style="text-align: right">Attend Event</th>
         </tr>
         </thead>
         <tbody>
-        <tr class="clickable-row" data-ng-repeat="event in events | filter: searchText | filterUpcoming | orderBy: 'eventStartDate'" ng-click="showEvent(event)">
+        <tr class="clickable-row" data-ng-repeat="event in events | filter: searchText | filterUpcoming | orderBy: [orderBy, 'eventStartDate']" ng-click="showEvent(event)">
             <td style="vertical-align:middle">{{event.eventStartDate | date:'MM/dd/yyyy'}}</td>
             <td style="vertical-align:middle">{{event.trackId.trackName}}</td>
-            <td style="vertical-align:middle">{{event.trackId.trackCity}}, {{event.trackId.trackState}}</td>
+            <td style="vertical-align:middle">{{event.trackId.trackCity}}</td>
+            <td style="vertical-align:middle">{{event.trackId.trackState}}</td>
             <td style="vertical-align:middle">{{event.noviceCap - event.noviceRegistered}} - {{event.intermediateCap - event.intermediateRegistered}} - {{event.advancedCap - event.advancedRegistered}}</td>
             <td style="vertical-align:middle">{{event.basePrice | currency}}</td>
             <td style="text-align: right"><button class="btn btn-default" data-ng-controller="ModalEventController" data-ng-click="open()">attend</button></td>

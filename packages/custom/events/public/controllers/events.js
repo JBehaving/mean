@@ -11,6 +11,22 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
       return $scope.global.isAdmin || event.user._id === $scope.global.user._id;
     };*/
 
+    $scope.glyph = 'glyphicon-chevron-down';
+    $scope.activeOrder = 'eventStartDate';
+    $scope.orderBy = 'eventStartDate';
+    $scope.newOrder = function(str) {
+      if (this.orderBy === str) {
+        this.orderBy = '-' + str;
+        this.glyph = 'glyphicon-chevron-up';
+      }
+      else {
+        this.orderBy = str;
+        this.glyph = 'glyphicon-chevron-down';
+      }
+      this.activeOrder = str;
+      console.log(this.glyph);
+    };
+
     $scope.advanced = 25;
     $scope.intermediate = 25;
     $scope.novice = 25;
