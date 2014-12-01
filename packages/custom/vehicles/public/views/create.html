@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <h3 class="modal-title" align="center">Add New Vehicle</h3>
+</div>
+<div class="modal-body">
+    <form name="addForm" class="form-horizontal" role="form" data-ng-submit="create(addForm.$valid)" method="post" novalidate>
+        <div align="center">
+            <p><input type="checkbox">Make primary</p>
+        </div>
+        <div class="form-group" data-ng-class="{ 'has-error' : submitted && addForm.vehicleMake.$invalid }">
+            <label class="control-label border-align">Make</label>
+            <div class="border-align">
+                <input name="vehicleMake" type="text" class="form-control" data-ng-model="vehicleMake" id="vehicleMake" placeholder="Make" required>
+                <div data-ng-show="submitted && addForm.vehicleMakeClass.$invalid" class="help-block">
+                    <p data-ng-show="addForm.vehicleMakeClass.$error.required">Make is required</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" data-ng-class="{ 'has-error' : submitted && addForm.vehicleModel.$invalid }">
+            <label class="control-label border-align">Model</label>
+            <div class="border-align">
+                <input name="vehicleModel" type="text" class="form-control" data-ng-model="vehicleModel" id="vehicleModel" placeholder="Model" required>
+                <div data-ng-show="submitted && addForm.vehicleModelClass.$invalid" class="help-block">
+                    <p data-ng-show="addForm.vehicleModelClass.$error.required">Model is required</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" data-ng-class="{ 'has-error' : submitted && addForm.vehicleColor.$invalid }">
+            <label class="control-label border-align">Color</label>
+            <div class="border-align">
+                <input name="vehicleColor" type="text" class="form-control" data-ng-model="vehicleColor" id="vehicleColor" placeholder="Color" required>
+                <div data-ng-show="submitted && addForm.vehicleColorClass.$invalid" class="help-block">
+                    <p data-ng-show="addForm.vehicleColorClass.$error.required">Color is required</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" data-ng-class="{ 'has-error' : submitted && addForm.vehicleYear.$invalid }">
+            <label class="control-label border-align">Year</label>
+            <div class="border-align">
+                <input name="vehicleYear" type="text" class="form-control" data-ng-model="vehicleYear" id="vehicleYear" placeholder="Year" required>
+                <div data-ng-show="submitted && addForm.vehicleYearClass.$invalid" class="help-block">
+                    <p data-ng-show="addForm.vehicleYearClass.$error.required">Year is required</p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary btn-default" data-ng-click="add">Add</button>
+    <button class="btn btn-warning btn-default" data-ng-click="cancel()">Cancel</button>
+</div>
