@@ -131,17 +131,5 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
 
 
     }
-]).filter('filterSkill', function() {
-    return function (items, skill) {
-        var peeps = [];
-
-        angular.forEach(items, function (item) {
-            if (item.skillClass === skill) {
-                peeps.push(item);
-            }
-        });
-
-        return peeps;
-    };
-});
+]);
 
