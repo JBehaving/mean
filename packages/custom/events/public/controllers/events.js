@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 
 
 
@@ -16,18 +16,6 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
     $scope.novice = 25;
 
     $scope.eventScope = {};
-
-    $scope.findTrackById = function(event) {
-      $http.get('/tracks/'+event.trackID)
-          .success(
-          function (tracks) {
-            if (tracks) {
-              console.log(tracks);
-              event.track = tracks;
-            }
-          }
-      );
-    };
 
     $scope.create = function(isValid) {
       if (isValid) {
@@ -86,11 +74,6 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
       Events.query(function(events) {
           //console.log(events);
           $scope.events = events;
-          for (var i=0; i < events.length;i = i+1) {
-              console.log(events[i]);
-            if ($scope.events[i].trackId !== undefined)
-              $scope.findTrackById($scope.events[i]);
-          }
       });
     };
 
