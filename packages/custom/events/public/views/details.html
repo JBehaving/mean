@@ -112,19 +112,33 @@
                     <input type="checkbox" ng-model="oneAtATime">
                     Open only one at a time
                 </label>
-                <div ng-controller="EventDetailsController">
-                    <accordion close-others="oneAtATime">
-                        <accordion-group ng-repeat="group in groups" is-open="group.expanded">
-                            <accordion-heading>
-                                <span class="pull-right">{{group.spots}} spots left</span>
-                                <span class="glyphicon-group glyphicon clickable-row pull-left" ng-class="{'glyphicon-minus': groups[$index].expanded, 'glyphicon-plus': !group[$index].expanded}"></span>
-                                <span class="glyphicon-group glyphicon-asterisk glyphicon-space clickable-row pull-left"></span>
-                                <span class="table-subtitle clickable-row">{{group.title}}</span>
-                            </accordion-heading>
-                            <!--<div ng-repeat="contents in group.content" data-ng-include src="contents['page']" style="padding-left:0"></div>-->
-                        </accordion-group>
-                    </accordion>
-                </div>
+                <accordion close-others="oneAtATime">
+                    <accordion-group ng-repeat="group in groups" is-open="group.expanded">
+                        <accordion-heading>
+                            <span class="pull-right">{{group.spots}} spots left</span>
+                            <span class="glyphicon-group glyphicon clickable-row pull-left" ng-class="{'glyphicon-minus': groups[$index].expanded, 'glyphicon-plus': !group[$index].expanded}"></span>
+                            <span class="glyphicon-group glyphicon-asterisk glyphicon-space clickable-row pull-left"></span>
+                            <span class="table-subtitle clickable-row">{{group.title}}</span>
+                        </accordion-heading>
+                        <!--<div ng-repeat="contents in group.content" data-ng-include src="contents['page']" style="padding-left:0"></div>-->
+                        <table style="max-height: 400px;" class="table table-hover" fixed-header>
+                            <thead>
+                                <tr>
+                                    <th>Name</th><th>Vehicle</th><th style="text-align: right">Wants Rider</th><th style="text-align: right">Allows Rider</th><th style="text-align: right">Checked-In</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="" data-ng-repeat="attendee in attendees | filterSkill: group.skillClass | filter: searchText" ng-click="showEvent(event)">
+                                    <td style="vertical-align:middle">{{attendee.userId.userFirstName}} {{attendee.userId.userLastName}}</td>
+                                    <td style="vertical-align:middle">{{attendee.vehicleId.vehicleYear}}</td>
+                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.riderWanted"></td>
+                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.rideAlong"></td>
+                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.checkedIn"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </accordion-group>
+                </accordion>
             </div>
         </div>
     </div>

@@ -106,11 +106,12 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
     $scope.showEvent = function(event) {
       $location.path('/events/' + event._id);
     };
-      $scope.findAllTracks = function() {
-          Tracks.query(function(tracks) {
-              $scope.tracks = tracks;
-          });
-      };
+
+    $scope.findAllTracks = function() {
+        Tracks.query(function(tracks) {
+            $scope.tracks = tracks;
+        });
+    };
 
       //$scope.package = {
     //  name: 'events'

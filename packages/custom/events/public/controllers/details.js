@@ -11,16 +11,43 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
         }, function (event) {
             $scope.event = event;
             console.log($scope.event);
+            $scope.groups = [
+                {
+                    title: 'advanced',
+                    spots: $scope.event.advancedCap - $scope.event.advancedRegistered,
+                    content: [
+                        {'page': 'events/views/parts/advanced.html'}
+                    ],
+                    expanded: true
+                },
+                {
+                    title: 'intermediate',
+                    spots: $scope.event.intermediateCap - $scope.event.intermediateRegistered,
+                    content: [
+                        {'page': 'events/views/parts/intermediate.html'}
+                    ],
+                    expanded: false
+                },
+                {
+                    title: 'novice',
+                    spots: $scope.event.noviceCap - $scope.event.noviceRegistered,
+                    content: [
+                        {'page': 'events/views/parts/novice.html'}
+                    ],
+                    expanded: false
+                }
+            ];
         });
 
-        $http.get('/events')
+        /*$http.get('/events')
             .success(function (data, status, header, config) {
                 console.log('made it' + data);
                 $scope.events = data;
+
             })
             .error(function (data) {
                 console.log('Error: ' + data);
-            });
+            });*/
 
         $http.get('/attendees?'+'eventId=' + thisEventId)
             .success(function (data) {
@@ -61,7 +88,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
               ];*/
 
 
-        $scope.getTrack = function (trackId) {
+        /*$scope.getTrack = function (trackId) {
             if (trackId !== undefined && trackId !== null) {
                 $http.get('/tracks/' + trackId)
                     .success(function (data) {
@@ -73,7 +100,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
                         return null;
                     });
             }
-        };
+        };*/
 
         /*var getUsersFromManifests = function (manifest) {
             if (manifest !== undefined && manifest !== null) {
@@ -101,69 +128,20 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
          });*/
 
         $scope.oneAtATime = true;
-        $scope.groups = [
-            {
-                title: 'advanced',
-                spots: event.advancedCap,
-                content: [
-                    {'page': 'events/views/parts/advanced.html'}
-                ],
-                expanded: true
-            },
-            {
-                title: 'intermediate',
-                spots: event.intermediateCap,
-                content: [
-                    {'page': 'events/views/parts/intermediate.html'}
-                ],
-                expanded: false
-            },
-            {
-                title: 'novice',
-                spots: event.noviceCap,
-                content: [
-                    {'page': 'events/views/parts/novice.html'}
-                ],
-                expanded: false
-            }
-        ];
+
 
     }
-]).filter('filterAdv', function() {
-    return function (items) {
-        var adv = [];
+]).filter('filterSkill', function() {
+    return function (items, skill) {
+        var peeps = [];
 
         angular.forEach(items, function (item) {
-            if (item.skillClass === 'advanced') {
-                adv.push(item);
+            if (item.skillClass === skill) {
+                peeps.push(item);
             }
         });
 
-        return adv;
-    };
-}).filter('filterInt', function() {
-    return function (items) {
-        var int = [];
-
-        angular.forEach(items, function (item) {
-            if (item.skillClass === 'intermediate') {
-                int.push(item);
-            }
-        });
-
-        return int;
-    };
-}).filter('filterNov', function() {
-    return function (items) {
-        var nov = [];
-
-        angular.forEach(items, function (item) {
-            if (item.skillClass === 'novice') {
-                nov.push(item);
-            }
-        });
-
-        return nov;
+        return peeps;
     };
 });
 
