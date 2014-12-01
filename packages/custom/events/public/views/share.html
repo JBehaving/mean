@@ -1,3 +1,4 @@
+<head>
 <style>
     .mobile-social-share {
         background: none repeat scroll 0 0 #EEEEEE;
@@ -6,7 +7,7 @@
         margin: 50px 0;
     }
 
-{
+    body {
         color: #777777;
         font-family: "Lato","Helvetica Neue","Arial","Helvetica",sans-serif;
         font-size: 13px;
@@ -35,7 +36,7 @@
         white-space: nowrap;
     }
 
-    .mobile-social-share ul {
+    .share-group ul {
         float: right;
         list-style: none outside none;
         margin: 0;
@@ -47,7 +48,7 @@
         min-width: 17px;
     }
 
-    .mobile-social-share li {
+    .share-group li {
         display: block;
         font-size: 18px;
         list-style: none outside none;
@@ -151,12 +152,10 @@
         }
     }
 </style>
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container" style="color: #777777;  font-family: Helvetica Neue sans-serif; font-size: 13px; line-height: 19px;">
-    <div class="row mobile-social-share">
-        <div class="col-md-9">
-            <h3>Share this content</h3>
-        </div>
+</head>
+
+<div class="container">
+    <div class="row">
         <div id="socialHolder" class="col-md-3">
             <div id="socialShare" class="btn-group share-group">
                 <a data-toggle="dropdown" class="btn btn-info">
@@ -200,5 +199,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

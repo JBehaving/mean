@@ -6,12 +6,35 @@
     text-align: center;
 }
 
+h1 {
+    font-size: 44px;
+    color: #010101;
+    font-family: Impact, Charcoal, sans-serif;
+    text-align: center;
+    margin: 0;
+}
+h2 {
+    font-size: 24px;
+    color: #010101;
+    font-family: Impact, Charcoal, sans-serif;
+    text-align: center;
+    margin: 0;
+}
+h3 {
+    font-size: 18px;
+    color: #010101;
+    font-family: Impact, Charcoal, sans-serif;
+    text-align: center;
+    margin: 0;
+}
+
 /* button css */
 .btn-default {
     background: #ffffff;
     border-color: red;
     font-size: 16px;
     line-height: 16px;
+    min-width: 80px;
     height: 32px;
     color: #080808;
     font-family: Impact, Charcoal, sans-serif;
@@ -50,6 +73,11 @@
 .table-title {
     color: #080808;
     font-size: 26px;
+    font-family: Impact, Charcoal, sans-serif;
+}
+.table-subtitle {
+    color: #080808;
+    font-size: 18px;
     font-family: Impact, Charcoal, sans-serif;
 }
 .table-search {

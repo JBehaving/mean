@@ -34,7 +34,7 @@ exports.all = function(req, res) {
         var trackid = new ObjectId(req.query.trackId);
         var startdate = new Date(req.query.eventStartDate);
        // console.log('Searched for ' + req.query.trackID + ' ' + req.query.eventStartDate);
-        GTDEvent.find().where('eventStartDate').equals(startdate).where('trackID').equals(trackid).sort('-eventStartDate').exec(function (err, events) {
+        GTDEvent.find().where('eventStartDate').equals(startdate).where('trackId').equals(trackid).sort('-eventStartDate').exec(function (err, events) {
             if (err) {
                 res.render('error', {
                     status: 500
@@ -138,8 +138,8 @@ exports.updateEvent = function(req, res) {
  * Create an event
  */
 exports.create = function(req, res) {
-    if(req.body.trackID !== undefined ) {
-        req.body.trackID = new ObjectId(req.body.trackID);
+    if(req.body.trackId !== undefined ) {
+        req.body.trackId = new ObjectId(req.body.trackId);
     }
     var event = new GTDEvent(req.body);
 

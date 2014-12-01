@@ -6,56 +6,57 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
 
         var thisEventId = $stateParams.eventId;
 
+        Events.get({
+            eventId: $stateParams.eventId
+        }, function (event) {
+            $scope.event = event;
+            console.log($scope.event);
+            $scope.groups = [
+                {
+                    title: 'advanced',
+                    spots: $scope.event.advancedCap - $scope.event.advancedRegistered,
+                    content: [
+                        {'page': 'events/views/parts/advanced.html'}
+                    ],
+                    expanded: true
+                },
+                {
+                    title: 'intermediate',
+                    spots: $scope.event.intermediateCap - $scope.event.intermediateRegistered,
+                    content: [
+                        {'page': 'events/views/parts/intermediate.html'}
+                    ],
+                    expanded: false
+                },
+                {
+                    title: 'novice',
+                    spots: $scope.event.noviceCap - $scope.event.noviceRegistered,
+                    content: [
+                        {'page': 'events/views/parts/novice.html'}
+                    ],
+                    expanded: false
+                }
+            ];
+        });
 
-            Events.get({
-                eventId: $stateParams.eventId
-            }, function (event) {
-                $scope.event = event;
-                console.log($scope.event);
-            });
-
-     /*   $scope.find = function () {
-            Events.query(function (events) {
-                $scope.events = events;
-            });
-        }; */
-
-        $http.get('/events')
+        /*$http.get('/events')
             .success(function (data, status, header, config) {
                 console.log('made it' + data);
                 $scope.events = data;
+
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });*/
+
+        $http.get('/attendees?'+'eventId=' + thisEventId)
+            .success(function (data) {
+                console.log('Got data: ' + data);
+                $scope.attendees = data;
             })
             .error(function (data) {
                 console.log('Error: ' + data);
             });
-
-
-
-        //  var eventStartDate = '12/12/14';
-        //  var trackID = '1';
-
-
-        //-- set up variables
-        $scope.eventD = [];
-        $scope.trackN = [];
-        $scope.trackname = 'laguna seca';
-
-        var myVar = {};
-        myVar.apples = 'red';
-        myVar.grapes = 'greed';
-        myVar.nuts = 'almonds';
-        $scope.fun = JSON.stringify(myVar);
-        console.log(JSON.stringify(myVar));
-
-
-            $http.get('/attendees?'+'eventId=' + thisEventId)
-                .success(function (data) {
-                    console.log('Got data: ' + data);
-                    $scope.attendees = data;
-                })
-                .error(function (data) {
-                    console.log('Error: ' + data);
-                });
 
 
 
@@ -87,7 +88,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
               ];*/
 
 
-        $scope.getTrack = function (trackId) {
+        /*$scope.getTrack = function (trackId) {
             if (trackId !== undefined && trackId !== null) {
                 $http.get('/tracks/' + trackId)
                     .success(function (data) {
@@ -99,7 +100,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
                         return null;
                     });
             }
-        };
+        };*/
 
         /*var getUsersFromManifests = function (manifest) {
             if (manifest !== undefined && manifest !== null) {
@@ -115,7 +116,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
         };*/
 
 
-//-- 546045c251d6b51818cb8a17/
+
         /*
          $http.get('/tracks?trackID='+trackID)
          .success(function (track) {
@@ -125,30 +126,22 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
          .error(function (err) {
          console.log('Error: ' + err);
          });*/
+
         $scope.oneAtATime = true;
-        $scope.groups = [
-            {
-                title: 'advanced',
-                content: [
-                    {'page': 'events/views/parts/advanced.html'}
-                ],
-                expanded: true
-            },
-            {
-                title: 'intermediate',
-                content: [
-                    {'page': 'events/views/parts/intermediate.html'}
-                ],
-                expanded: false
-            },
-            {
-                title: 'novice',
-                content: [
-                    {'page': 'events/views/parts/novice.html'}
-                ],
-                expanded: false
-            }
-        ];
+
 
     }
-]);
+]).filter('filterSkill', function() {
+    return function (items, skill) {
+        var peeps = [];
+
+        angular.forEach(items, function (item) {
+            if (item.skillClass === skill) {
+                peeps.push(item);
+            }
+        });
+
+        return peeps;
+    };
+});
+

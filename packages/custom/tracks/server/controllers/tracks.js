@@ -66,7 +66,7 @@ exports.create = function(req, res) {
     });
 };
 var findByID = function(req, res) {
-    if (req.query.trackID !== undefined) {
+    if (req.query.trackId !== undefined) {
         var query = {_id: new ObjectId(req.query.trackID)};
         Track.find(query, function (err, tracks) {
             if (err) {
@@ -105,7 +105,7 @@ exports.findTrack = function(req, res) {
             }
         });
     }
-    else if (req.query.trackID !== undefined) {
+    else if (req.query.trackId !== undefined) {
         findByID(req, res);
     }
     else {

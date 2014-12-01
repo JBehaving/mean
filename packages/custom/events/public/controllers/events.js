@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 
 
 
@@ -17,18 +17,6 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
 
     $scope.eventScope = {};
 
-    $scope.findTrackById = function(event) {
-      $http.get('/tracks/'+event.trackID)
-          .success(
-          function (tracks) {
-            if (tracks) {
-              console.log(tracks);
-              event.track = tracks;
-            }
-          }
-      );
-    };
-
     $scope.create = function(isValid) {
       if (isValid) {
         var event = new Events({
@@ -40,7 +28,7 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
           eventStartDate: this.evDate,
           intermediateCap: this.intermediate,
           noviceCap: this.novice,
-          trackID: this.eventScope.evTrack
+          trackId: this.eventScope.evTrack
         });
         event.$save(function(response) {
           $location.path('events/' + response._id);
@@ -86,11 +74,6 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
       Events.query(function(events) {
           //console.log(events);
           $scope.events = events;
-          for (var i=0; i < events.length;i = i+1) {
-              console.log(events[i]);
-            if ($scope.events[i].trackID !== undefined)
-              $scope.findTrackById($scope.events[i]);
-          }
       });
     };
 
@@ -106,11 +89,12 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
     $scope.showEvent = function(event) {
       $location.path('/events/' + event._id);
     };
-      $scope.findAllTracks = function() {
-          Tracks.query(function(tracks) {
-              $scope.tracks = tracks;
-          });
-      };
+
+    $scope.findAllTracks = function() {
+        Tracks.query(function(tracks) {
+            $scope.tracks = tracks;
+        });
+    };
 
       //$scope.package = {
     //  name: 'events'
@@ -140,4 +124,16 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
 
         return past;
     };
-});
+}).filter('filterPast2', function() {
+    return function(items, eventId) {
+      var past = [];
+
+      angular.forEach(items, function(item){
+        if ( (new Date() > new Date(item.eventStartDate)) && (item._id !== eventId) ) {
+          past.push(item);
+        }
+      });
+
+      return past;
+    };
+  });
