@@ -4,7 +4,7 @@
 <div class="modal-body" data-ng-controller="AnnouncementsController">
     <form name="announcementForm" class="form-horizontal " role="form" data-ng-submit="create(announcementForm.$valid)" novalidate>
         <div class="form-group" data-ng-class="{ 'has-error' : submitted && announcementForm.newsTitle.$invalid }">
-            <label class=" control-label">Title</label>
+            <label class="control-label">Title</label>
             <div>
                 <input name="newsTitle" type="text" class="form-control" data-ng-model="newsTitle" id="title" placeholder="Title" required>
                 <div data-ng-show="submitted && announcementForm.newsTitle.$invalid" class="help-block">
