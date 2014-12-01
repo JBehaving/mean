@@ -43,18 +43,23 @@
         </div>
     </div>
 
-    <div class="container" style="min-height: 300px">
-        <div ng-controller="CarouselCtrl" style="min-width: 400px; margin-top:10px; width:50%;" class="pull-left">
-            <div class="slides-control" style="margin: 0 auto">
+    <div class="container" style="margin-top: 20px">
+        <div ng-controller="CarouselCtrl" style="width:50%" class="pull-left">
+            <div class="slides-control" style="min-height: 300px; margin: 0 auto">
                 <carousel interval="myInterval">
                     <slide ng-repeat="slide in slides" active="slide.active">
                         <img ng-src="{{slide.image}}"/>
                     </slide>
                 </carousel>
             </div>
+            <div style="margin: 20px; text-align: center;" class="">
+                <a href="#" class="btn btn-default">track day calculator</a><br>
+                <a href="#" style="color: darkred">financial report.csv</a><br>
+                <a href="#" style="color: darkred">event manifest.csv</a>
+            </div>
         </div>
 
-        <div style="margin-top:10px; width: 50%" class="pull-left">
+        <div style="width: 50%" class="pull-left">
             <div style="width: 70%; margin: 0 auto">
                 {{event.eventDesc}}
             </div>
@@ -85,16 +90,10 @@
         </div>
     </div>
 
-    <div class="container">
-        <div style="margin: 10px; text-align: center" class="col-md-4">
-            <a href="#" class="btn btn-default">track day calculator</a><br>
-            <a href="#" style="color: darkred">financial_report.csv</a><br>
-            <a href="#" style="color: darkred">event_manifest.csv</a>
-        </div>
-    </div>
 
-    <div class="container">
-        <div class="panel panel-default" style="margin-top: 10px">
+
+    <div class="container" style="margin-top: 10px">
+        <div class="panel panel-default">
             <div class="panel-heading table-title-bg">
                 <div class="table-search pull-right">
                     <div class="form-group input-group">
