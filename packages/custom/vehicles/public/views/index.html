@@ -1,6 +1,6 @@
 <div>
    <h2 class="page-title">garage
-   <a data-ng-controller="ModalVehicleController" data-ng-click="open()">
+   <a href="#" data-ng-controller="ModalVehicleController" data-ng-click="open()">
         <i class="glyphicon glyphicon-plus-sign glyphlink-red"></i>
    </a>
    </h2>
@@ -11,13 +11,13 @@
         <div class="border-align col-md-12" data-ng-repeat="vehicle in vehicles">
             <hr>
             <h3>
-            <a class="btn">
+            <a href="#" class="btn">
                 <i class="glyphicon glyphicon-plus-sign"></i>
             </a>
             {{vehicle.vehicleColor}} {{vehicle.vehicleMake}} {{vehicle.vehicleModel}} {{vehicle.vehicleYear}}
             <!-- Vehicle Privacy Checkbox -->
             <span title="Check to have your vehicle hidden from other users."><input type="checkbox"></span>
-            <a class="btn pull-right" data-ng-click="remove(vehicle)">
+            <a href="#" class="btn pull-right" data-ng-click="remove(vehicle)">
                 <i class="glyphicon glyphicon-remove-circle"></i>
             </a>
             </h3>
