@@ -1,4 +1,4 @@
- 'use strict';
+'use strict';
 
 
 
@@ -24,7 +24,6 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
         this.glyph = 'glyphicon-chevron-down';
       }
       this.activeOrder = str;
-      console.log(this.glyph);
     };
 
     $scope.advanced = 25;
@@ -152,4 +151,5 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
 
       return past;
     };
-  });
+  })
+;
