@@ -6,19 +6,12 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
 
         var thisEventId = $stateParams.eventId;
 
-
-            Events.get({
-                eventId: $stateParams.eventId
-            }, function (event) {
-                $scope.event = event;
-                console.log($scope.event);
-            });
-
-     /*   $scope.find = function () {
-            Events.query(function (events) {
-                $scope.events = events;
-            });
-        }; */
+        Events.get({
+            eventId: $stateParams.eventId
+        }, function (event) {
+            $scope.event = event;
+            console.log($scope.event);
+        });
 
         $http.get('/events')
             .success(function (data, status, header, config) {
@@ -29,26 +22,14 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
                 console.log('Error: ' + data);
             });
 
-
-
-        //  var eventStartDate = '12/12/14';
-        //  var trackID = '1';
-
-
-        //-- set up variables
-        $scope.eventD = [];
-        $scope.trackN = [];
-        $scope.trackname = 'laguna seca';
-
-
-            $http.get('/attendees?'+'eventId=' + thisEventId)
-                .success(function (data) {
-                    console.log('Got data: ' + data);
-                    $scope.attendees = data;
-                })
-                .error(function (data) {
-                    console.log('Error: ' + data);
-                });
+        $http.get('/attendees?'+'eventId=' + thisEventId)
+            .success(function (data) {
+                console.log('Got data: ' + data);
+                $scope.attendees = data;
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
 
 
 
@@ -108,7 +89,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
         };*/
 
 
-//-- 546045c251d6b51818cb8a17/
+
         /*
          $http.get('/tracks?trackID='+trackID)
          .success(function (track) {
@@ -118,10 +99,12 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
          .error(function (err) {
          console.log('Error: ' + err);
          });*/
+
         $scope.oneAtATime = true;
         $scope.groups = [
             {
                 title: 'advanced',
+                spots: event.advancedCap,
                 content: [
                     {'page': 'events/views/parts/advanced.html'}
                 ],
@@ -129,6 +112,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
             },
             {
                 title: 'intermediate',
+                spots: event.intermediateCap,
                 content: [
                     {'page': 'events/views/parts/intermediate.html'}
                 ],
@@ -136,6 +120,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
             },
             {
                 title: 'novice',
+                spots: event.noviceCap,
                 content: [
                     {'page': 'events/views/parts/novice.html'}
                 ],
@@ -144,4 +129,41 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
         ];
 
     }
-]);
+]).filter('filterAdv', function() {
+    return function (items) {
+        var adv = [];
+
+        angular.forEach(items, function (item) {
+            if (item.skillClass === 'advanced') {
+                adv.push(item);
+            }
+        });
+
+        return adv;
+    };
+}).filter('filterInt', function() {
+    return function (items) {
+        var int = [];
+
+        angular.forEach(items, function (item) {
+            if (item.skillClass === 'intermediate') {
+                int.push(item);
+            }
+        });
+
+        return int;
+    };
+}).filter('filterNov', function() {
+    return function (items) {
+        var nov = [];
+
+        angular.forEach(items, function (item) {
+            if (item.skillClass === 'novice') {
+                nov.push(item);
+            }
+        });
+
+        return nov;
+    };
+});
+
