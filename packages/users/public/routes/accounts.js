@@ -3,9 +3,9 @@
 angular.module('mean.users').config(['$stateProvider',
   function($stateProvider) {
     $stateProvider
-        .state('manage accounts', {
+        .state('accounts page', {
           url: '/accounts',
-          templateUrl: 'users/public/views/manage.html' //todo
+          templateUrl: 'users/public/views/accounts.html'
         })
         .state('account detail', {
           url: '/accounts/:accountId',
@@ -15,7 +15,5 @@ angular.module('mean.users').config(['$stateProvider',
           url: '/account',
           templateUrl: 'users/public/views/account.html'
         });
-
-
   }
 ]);

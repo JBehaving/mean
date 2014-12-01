@@ -1,3 +1,65 @@
+<div class="panel panel-default" data-ng-controller="AccountsController" data-ng-init="">
+    <div class="panel-heading table-title-bg">
+        <div class="table-search pull-right">
+            <div class="form-group input-group">
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-search"></i>
+                </span>
+                <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search accounts"/>
+            </div>
+        </div>
+        <div class="table-title">accounts</div>
+    </div>
+
+    <table style="max-height: 400px;" class="table table-hover" fixed-header>
+        <thead>
+        <tr data-ng-model="glyph">
+            <th>
+                <label style="cursor: pointer;" ng-click="newOrder('userLastName')">
+                    Last Name <span ng-show="activeOrder == 'userLastName'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                </label>
+            </th>
+            <th>
+                <label style="cursor: pointer" ng-click="newOrder('userFirstName')">
+                    First Name <span ng-show="activeOrder == 'userFirstName'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                </label>
+            </th>
+            <th>
+                <label style="cursor: pointer" ng-click="newOrder('acctType')">
+                    Type <span ng-show="activeOrder == 'acctType'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                </label>
+            </th>
+            <th style="text-align: center">
+                <label style="cursor: pointer" ng-click="newOrder('active')">
+                    Active <span ng-show="activeOrder == 'active'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                </label>
+            </th>
+            <th>
+                <label style="cursor: pointer" ng-click="newOrder('email')">
+                    Email <span ng-show="activeOrder == 'email'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                </label>
+            </th>
+            <th>
+                <label style="cursor: pointer" ng-click="newOrder('primaryPhoneNumber')">
+                    Phone <span ng-show="activeOrder == 'primaryPhoneNumber'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                </label>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="clickable-row" data-ng-repeat="account in accounts | filter: searchText | filterUpcoming | orderBy: [orderBy, 'userLastName']" ng-click="showEvent(event)">
+            <td style="vertical-align:middle">{{account.userLastName}}</td>
+            <td style="vertical-align:middle">{{account.userFirstName}}</td>
+            <td style="vertical-align:middle">{{account.acctType}}</td>
+            <td style="vertical-align:middle; text-align: center">{{account.status}}</td>
+            <td style="vertical-align:middle">{{account.email}}</td>
+            <td style="vertical-align:middle">{{account.primaryPhoneNumber | '(###) ###-####'}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--
 <div class="panel panel-default" data-ng-controller="AccountController" data-ng-init="find()">
     <div class="panel-heading table-title-bg">
         <div class="table-search pull-right">

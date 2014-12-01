@@ -29,8 +29,8 @@
                                 tools <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Manage Accounts</a></li>
-                                <li><a ui-sref='tracks page'>Manage Tracks</a></li>
+                                <li style="text-align: right"><a ui-sref="accounts page">Manage Accounts</a></li>
+                                <li style="text-align: right"><a ui-sref='tracks page'>Manage Tracks</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -45,7 +45,7 @@
                                 {{global.user.userFirstName}} {{global.user.userLastName}} <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">My Account</a></li>
+                                <li><a ui-sref="my account">My Account</a></li>
                                 <li><a ui-sref="garage page">My Virtual Garage</a></li>
                                 <li class="divider"></li>
                                 <li><a href="/logout">Log out</a></li>
