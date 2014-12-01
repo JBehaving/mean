@@ -24,14 +24,22 @@ angular.module('mean.events').controller('ModalEventController', ['$scope','$mod
         });
     };
 }])
-.controller('ModalEventInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '$http', '$location', 'usSpinnerService', 'eventId',
-    function ($scope, $modalInstance, $rootScope, $http, $location, usSpinnerService,  eventId) {
+.controller('ModalEventInstanceCtrl', ['$scope', '$modalInstance', '$http', '$location', 'Global', 'usSpinnerService', 'eventId',
+    function ($scope, $modalInstance, $rootScope, $http, $location, Global, usSpinnerService,  eventId) {
+
+      $scope.vehicles = [];
+
+      $scope.getGarage = function() {
+          $http.get('/garage').success(function(vehicles) {
+              $scope.vehicles = vehicles;
+          });
+      };
 
       $scope.ok = function (method) {
           var registration = {
               eventId : eventId,
               //userId : $rootScope.user._id,
-              //vehicleId : $scope.vehicle._id,
+              vehicleId : $scope.vehicleId,
               skillClass : this.skillClass,
               giveRideAlongs : this.giveRideAlongs,
               requestRideAlongs : this.requestRideAlongs,

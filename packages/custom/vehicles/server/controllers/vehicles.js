@@ -116,14 +116,16 @@ exports.findByUser = function(req,res,id) {
 exports.create = function(req,res) 
 {
 	var vehicle = new Vehicle(req.body); 
-	vehicle.userID = req.user;
+	vehicle.userId = req.user;
  
-	vehicle.save(function(err) {
-    if (err) 
-	{
-      return res.json(500, { error: 'Error in creating new car' });
-    }
-    res.json(vehicle);
+	vehicle.save(function(err,vehicle) {
+        if (err)
+        {
+          console.log("Error creating vehicle");
+          console.log(err);
+          return res.json(500, { error: 'Error in creating new car' });
+        }
+        res.json(vehicle);
 	});
 };
 
@@ -161,8 +163,14 @@ exports.update = function(req, res)
 /**
  * Find user's garage
  */
-exports.findByUser = function(req,res,id) {
-    Vehicle.find({userId : new ObjectId(id)}, function(err,vehicles){});
+exports.findByUser = function(req,res) {
+    Vehicle.find({userId : new ObjectId(req.user._id)}, function(err,vehicles){
+        if (err) {
+            return res.status(500).json({ error : 'Error getting vehicles'});
+        }
+        console.log(vehicles);
+        return res.status(200).json( vehicles ? vehicles : []);
+    });
 };
 
 

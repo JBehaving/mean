@@ -22,9 +22,9 @@
             <div class="form-group" data-ng-class="{ 'has-error' : submitted && registerForm.vehicle.$invalid }">
                 <label mean-token="'register-vehicle'" for="vehicle" class="col-md-3 control-label">Vehicle</label>
                 <div class="col-md-9">
-                    <select name="vehicle" data-ng-model="vehicle" id="vehicle" class="form-control" required>
-                        <option value="Blue BMW 2008">Blue BMW 2008</option>
-                        <option value="Red BRZ 2014">Red BRZ 2014</option>
+                    <select name="vehicle" data-ng-model="vehicleId" id="vehicle" class="form-control" required>
+                        <option value="">Pick a vehicle</option>
+                        <option ng-repeat="vehicle in vehicles" value="{{vehicle._id}}">{{vehicle.year}} {{vehicle.make}} {{vehicle.model}}</option>
                     </select>
                     <div data-ng-show="submitted && registerForm.vehicle.$invalid" class="help-block">
                         <p data-ng-show="registerForm.vehicle.$error.required">Vehicle is required</p>
