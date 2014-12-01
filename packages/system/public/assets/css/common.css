@@ -50,3 +50,8 @@ footer p {
 .valign-middle {
 	vertical-align: middle;
 }
+
+.border-align {
+    margin-left: 50px;
+    margin-right: 50px;
+}
