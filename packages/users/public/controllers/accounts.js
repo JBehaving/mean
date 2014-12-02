@@ -21,5 +21,9 @@ angular.module('mean.users').controller('AccountsController', ['$scope', 'Accoun
             }
             this.activeOrder = str;
         };
+
+        $scope.showAcct = function(account) {
+            $scope.currAcct = account;
+        };
     }
 ]);

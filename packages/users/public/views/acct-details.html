@@ -1,0 +1,48 @@
+<div ng-show="currAcct">
+    <div class="panel panel-default pull-left" style="margin: 0 10px auto; width: 400px;" >
+        <div class="panel-heading table-title">
+            account info
+            <div class="panel-body panel-text">
+                <label style="width: 120px">First Name: </label> {{currAcct.userFirstName}}<br>
+                <label style="width: 120px">Last Name: </label> {{currAcct.userLastName}}<br>
+                <label style="width: 120px">Email: </label> {{currAcct.userEmail}}<br>
+                <label style="width: 120px">Phone: </label> {{currAcct.primaryPhoneNumber}}<br>
+                <label style="width: 120px">Birthday: </label> {{currAcct.birthday}}<br>
+                <label style="width: 120px">Street Address: </label> {{currAcct.streetAddress}}<br>
+                <label style="width: 120px">City: </label> {{currAcct.city}}<br>
+                <label style="width: 120px">State: </label> {{currAcct.state}}<br>
+                <label style="width: 120px">Zip: </label> {{currAcct.zip}}<br>
+                <label style="width: 120px">Skill Level: </label> {{currAcct.drivingLevel}}<br>
+            </div>
+        </div>
+        <!--<div class="panel-heading table-title">
+            emergency contact
+            <div class="panel-body panel-text">
+                {{currAcct.trackDescription}}
+            </div>
+        </div>-->
+    </div>
+
+    <div class="pull-left">
+        <div class="panel panel-default" style="width:300px">
+            <div class="panel-heading table-title">
+                emergency contact
+                <div class="panel-body panel-text">
+                    <label style="width: 60px">Name: </label> {{currAcct.emergencyContactName}}<br>
+                    <label style="width: 60px">Email: </label> {{currAcct.emergencyContactEmail}}<br>
+                    <label style="width: 60px">Phone: </label> {{currAcct.primaryEmergencyPhoneNumber}}<br>
+                </div>
+            </div>
+        </div>
+        <div style="margin: 0 20px 0 20px">
+            <button class="btn btn-primary btn-block btn-default">
+                suspend account
+            </button>
+        </div>
+        <div style="margin: 10px 20px 0 20px">
+            <button class="btn btn-primary btn-block btn-default">
+                delete account
+            </button>
+        </div>
+    </div>
+</div>
