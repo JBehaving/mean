@@ -2,7 +2,6 @@
 
 angular.module('mean.users').controller('AccountsController', ['$scope', 'Accounts',
     function($scope, Accounts) {
-        $scope.global = Global;
 
         Accounts.get(function (accounts) {
             $scope.accounts = accounts;

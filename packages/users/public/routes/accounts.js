@@ -5,15 +5,15 @@ angular.module('mean.users').config(['$stateProvider',
     $stateProvider
         .state('accounts page', {
           url: '/accounts',
-          templateUrl: 'users/public/views/accounts.html'
+          templateUrl: 'users/views/accounts.html'
         })
         .state('account detail', {
           url: '/accounts/:accountId',
-          templateUrl: 'users/public/views/detail.html'
+          templateUrl: 'users/views/detail.html'
         })
         .state('my account', {
           url: '/account',
-          templateUrl: 'users/public/views/account.html'
+          templateUrl: 'users/views/account.html'
         });
   }
 ]);
