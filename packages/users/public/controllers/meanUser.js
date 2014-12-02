@@ -52,8 +52,8 @@ angular.module('mean.users')
         $scope.usernameError = null;
         $scope.registerError = null;
         $http.post('/register', {
-          email: $scope.user.email,
-          password: $scope.user.password,
+          email: this.userEmail,
+          password: this.password1,
           confirmPassword: $scope.user.confirmPassword,
           username: $scope.user.username,
           name: $scope.user.name,
