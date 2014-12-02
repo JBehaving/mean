@@ -1,5 +1,14 @@
-<div class="container" data-ng-controller="EventsController">
-  <div data-ng-controller="ModalRegisteredController" data-ng-init="open()" />
+<div style="margin-left: -90px" ng-controller="CarouselCtrl">
+  <div class="slides-control" style="margin: 40px auto">
+    <carousel style="width:500px; height:300px" interval="myInterval">
+      <slide style="width:500px; height:300px" ng-repeat="slide in slides" active="slide.active">
+        <img ng-src="{{slide.image}}"/>
+      </slide>
+    </carousel>
+  </div>
+</div>
+
+<div class="container">
   <div data-ng-include="'events/views/upcoming.html'"></div>
   <div data-ng-include="'events/views/past.html'"></div>
 </div>
