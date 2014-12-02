@@ -54,22 +54,22 @@ angular.module('mean.users')
         $http.post('/register', {
           email: this.userEmail,
           password: this.password1,
-          confirmPassword: $scope.user.confirmPassword,
-          username: $scope.user.username,
-          name: $scope.user.name,
-		  //birthday: $scope.user.dob,
-		  city: $scope.user.city,
-		  drivingLevel: $scope.user.level,
-		  emergencyContactName: $scope.user.icefname + ' ' + $scope.icelname,
-		  primaryEmergencyPhoneNumber: $scope.user.icephone1,
-		  primaryPhoneNumber: $scope.user.phone,
-	  	  secondaryEmergencyPhoneNumber: $scope.user.icephone2,
-		  secondaryPhoneNumber: $scope.user.phone2,
-		  state: $scope.user.state,
-		  streetAddress: $scope.user.streetAddress,
-		  userFirstName: $scope.user.firstname,
-		  userLastName: $scope.user.lastname,
-		  zip: $scope.user.ZIP
+          confirmPassword: this.password2, //need?
+          username: this.userEmail, //need?
+          name: this.userFirst + ' ' + this.userLast, //need?
+		  birthday: this.userBday,
+		  city: this.userCity,
+		  drivingLevel: this.userSkillLvl,
+		  emergencyContactName: this.emerFirst + ' ' + this.emerLast,
+		  primaryEmergencyPhoneNumber: this.emerPhone,
+		  primaryPhoneNumber: this.userPhone,
+	  	  secondaryEmergencyPhoneNumber: this.emerPhone,
+		  //secondaryPhoneNumber: $scope.user.phone2, //need?
+		  state: this.userState,
+		  streetAddress: this.userAddr,
+		  userFirstName: this.userFirst,
+		  userLastName: this.userLast,
+		  zip: this.userZip
         })
           .success(function() {
             // authentication OK
