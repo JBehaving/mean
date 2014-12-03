@@ -8,8 +8,8 @@ angular.module('mean.users').controller('AccountsController', ['$scope', 'Accoun
         });*/
 
         $scope.glyph = 'glyphicon-chevron-down';
-        $scope.activeOrder = 'Last Name';
-        $scope.orderBy = 'Last Name';
+        $scope.activeOrder = 'userLastName';
+        $scope.orderBy = 'userLastName';
         $scope.newOrder = function(str) {
             if (this.orderBy === str) {
                 this.orderBy = '-' + str;
