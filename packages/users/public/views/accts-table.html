@@ -47,7 +47,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="clickable-row" data-ng-repeat="account in accounts | filter: searchText | filterUpcoming | orderBy: [orderBy, 'userLastName']" ng-click="showAcct(account)" ng-class="{selected: account == currAcct}" >
+        <tr class="clickable-row" data-ng-repeat="account in accounts | filter: searchText | orderBy: [orderBy, 'userLastName']" ng-click="showAcct(account)" ng-class="{selected: account == currAcct}" >
             <td style="vertical-align:middle">{{account.userLastName}}</td>
             <td style="vertical-align:middle">{{account.userFirstName}}</td>
             <td style="vertical-align:middle">{{account.acctType}}</td>
