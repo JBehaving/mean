@@ -53,8 +53,8 @@ angular.module('mean.users')
         $scope.registerError = null;
         $http.post('/register', {
           email: this.userEmail,
-          password: this.password1,
-          confirmPassword: this.password2, //need?
+          password: this.pw1,
+          confirmPassword: this.pw2, //need?
           username: this.userEmail, //need?
           name: this.userFirst + ' ' + this.userLast, //need?
 		  birthday: this.userDOBmm + '/' + this.userDOBdd + '/' + this.userDOByyyy,
@@ -84,7 +84,7 @@ angular.module('mean.users')
               $scope.usernameError = error;
             } else if (error === 'Email already taken') {
               $scope.emailError = error;
-            } else $scope.registerError = error;
+            } else $scope.registerError = error; $scope.next=false;
           });
       };
     }
