@@ -3,9 +3,9 @@
 angular.module('mean.users').controller('AccountsController', ['$scope', 'Accounts',
     function($scope, Accounts) {
 
-        Accounts.get(function (accounts) {
+        /*Accounts.get(function(accounts) {
             $scope.accounts = accounts;
-        });
+        });*/
 
         $scope.glyph = 'glyphicon-chevron-down';
         $scope.activeOrder = 'Last Name';
@@ -24,6 +24,12 @@ angular.module('mean.users').controller('AccountsController', ['$scope', 'Accoun
 
         $scope.showAcct = function(account) {
             $scope.currAcct = account;
+        };
+
+        $scope.find = function() {
+            Accounts.query(function(accounts) {
+                $scope.accounts = accounts;
+            });
         };
     }
 ]);
