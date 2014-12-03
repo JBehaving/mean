@@ -57,7 +57,7 @@ angular.module('mean.users')
           confirmPassword: this.password2, //need?
           username: this.userEmail, //need?
           name: this.userFirst + ' ' + this.userLast, //need?
-		  birthday: this.userBday,
+		  birthday: this.userDOBmm + '/' + this.userDOBdd + '/' + this.userDOByyyy,
 		  city: this.userCity,
 		  drivingLevel: this.userSkillLvl,
 		  emergencyContactName: this.emerFirst + ' ' + this.emerLast,

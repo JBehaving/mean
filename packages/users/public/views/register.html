@@ -35,14 +35,14 @@
             </div>
         </div>
         <!-- Password -->
-        <div class="form-group" ng-class="{ 'has-error' : submitted && password1 != password2 }">
+        <div class="form-group" ng-class="{ 'has-error' : notMatched }">
             <label class="col-md-4 control-label">Password:</label>
             <div class="col-md-3">
                 <input type="password" pattern=".{8,20}" title="The password must be between 8 and 20 characters" placeholder="must be 8-20 characters" class="form-control glowing-border" ng-model="password1" required>
             </div>
         </div>
         <!-- Confirm Password -->
-        <div class="form-group" ng-class="{ 'has-error' : submitted && password1 != password2 }">
+        <div class="form-group" ng-class="{ 'has-error' : notMatched }">
             <label class="col-md-4 control-label">Confirm Password:</label>
             <div class="col-md-3">
                 <input type="password" placeholder="re-enter your password" ng-blur="notMatched = password1 != password2" class="form-control glowing-border" ng-model="password2" required>
@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <div class="form-group" ng-class="{ 'has-error' : submitted && !userAddr }">
+        <div class="form-group">
             <label class="col-md-4 control-label">Street Address:</label>
             <div class="col-md-4">
                 <input data-ng-model="userAddr" placeholder="Street address" class="form-control glowing-border" required>
@@ -64,14 +64,14 @@
         </div>
 
         <div class="form-group">
-            <div ng-class="{ 'has-error' : submitted && !userCity }">
+            <div>
                 <label class="col-md-4 control-label">City:</label>
                 <div class="col-md-2">
                     <input data-ng-model="userCity" placeholder="City" class="form-control glowing-border" required>
                 </div>
             </div>
 
-            <div ng-class="{ 'has-error' : submitted && userState == null }">
+            <div>
                 <label class="col-md-1 control-label">State:</label>
                 <div class="col-md-2">
                     <select class="form-control glowing-border" data-ng-model="userState" required>
@@ -136,7 +136,7 @@
             <div>
                 <label class="col-md-4 control-label">Zip:</label>
                 <div class="col-md-2">
-                    <input type="number" pattern="[0-9]*" max="99999" min="10000" placeholder="Zip" class="form-control glowing-border" ng-model="userZip" required>
+                    <input style="width: 100px" type="number" pattern="[0-9]*" max="99999" min="10000" placeholder="Zip" class="form-control glowing-border" ng-model="userZip" required>
                 </div>
             </div>
 
@@ -144,20 +144,26 @@
             <div>
                 <label class="col-md-1 control-label">Phone:</label>
                 <div class="col-md-2">
-                    <input type="tel" class="form-control glowing-border" placeholder="##########" ng-model="userPhone" required>
+                    <input  style="width: 105px" type="tel" class="form-control glowing-border" placeholder="##########" ng-model="userPhone" required>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            <div ng-class="{ 'has-error' : submitted && !userBday }">
+            <div>
                 <label class="col-md-4 control-label">Birthday:</label>
-                <div class="col-md-2">
-                    <input type="date" data-ng-model="userBday" class="form-control glowing-border" required>
+                <div class="col-md-1">
+                    <input type="number" min="1" max="12" data-ng-model="userDOBmm" placeholder="mm" class="form-control glowing-border" required>
+                </div>
+                <div class="col-md-1">
+                    <input type="number" min="1" max="31" data-ng-model="userDOBdd" placeholder="dd" class="form-control glowing-border" required>
+                </div>
+                <div class="col-md-1">
+                    <input style="width: 75px" type="number" min="1900" max="2015" data-ng-model="userDOByyyy" placeholder="yyyy" class="form-control glowing-border" required>
                 </div>
             </div>
 
-            <div ng-class="{ 'has-error' : submitted && !userSkillLvl }">
+            <div>
                 <label class="col-md-1 control-label">Skill:</label>
                 <div class="col-md-2">
                     <select data-ng-model="userSkillLvl" class="form-control glowing-border" required>
@@ -193,17 +199,17 @@
 
         <div class="form-group">
             <!-- Emer Email -->
-            <div class="">
-                <label class="col-md-3 control-label">Email:</label>
-                <div class="col-md-3">
+            <div>
+                <label class="col-md-4 control-label">Email:</label>
+                <div class="col-sm-3">
                     <input type="email" class="form-control glowing-border" placeholder="Email" ng-model="emerEmail" required>
                 </div>
             </div>
             <!-- Emer Phone -->
-            <div class="">
+            <div>
                 <label class="col-md-1 control-label">Phone:</label>
                 <div class="col-md-2">
-                    <input type="tel" class="form-control glowing-border" placeholder="##########" ng-model="emerPhone" required>
+                    <input style="width: 105px" type="tel" class="form-control glowing-border" placeholder="##########" ng-model="emerPhone" required>
                 </div>
             </div>
         </div>
@@ -215,14 +221,24 @@
         <div class="form-group">
             <!-- Year -->
             <div>
-                <label class="col-md-1 control-label">Year:</label>
+                <label class="col-md-4 control-label">Year:</label>
                 <div class="col-md-2">
-                    <input type="number" min="1900" max="2015" class="form-control glowing-border" placeholder="Year" ng-model="vYear" required>
+                    <input style="width: 75px" type="number" min="1900" max="2016" class="form-control glowing-border" placeholder="Year" ng-model="vYear" required>
                 </div>
             </div>
+            <!-- Color -->
+            <div class="">
+                <label class="col-md-1 control-label">Color:</label>
+                <div class="col-md-2">
+                    <input  style="width: 100px" class="form-control glowing-border" placeholder="Color" ng-model="vColor" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
             <!-- Make -->
             <div>
-                <label class="col-md-1 control-label">Make:</label>
+                <label class="col-md-4 control-label">Make:</label>
                 <div class="col-md-2">
                     <input class="form-control glowing-border" placeholder="Make" ng-model="vMake" required>
                 </div>
@@ -232,14 +248,6 @@
                 <label class="col-md-1 control-label">Model:</label>
                 <div class="col-md-2">
                     <input class="form-control glowing-border" placeholder="Model" ng-model="vModel" required>
-                </div>
-            </div>
-
-            <!-- Color -->
-            <div class="">
-                <label class="col-md-1 control-label">Color:</label>
-                <div class="col-md-2">
-                    <input class="form-control glowing-border" placeholder="Color" ng-model="vColor" required>
                 </div>
             </div>
         </div>
@@ -480,13 +488,13 @@
                            <button style="background-color:white; border-width:2px; border-color:red; height:50px; width:200px;"
                                    type="submit" class="btn btn-small btn-block btn"><font face="impact" size="5">submit</font></button>
                            <!-- &nbsp;or&nbsp;<a ui-sref='auth.login' class="show-login">login</a> -->
-                        </div>
-<!--                 </div>
+<!--                      </div>
+               </div>
 
-             </fieldset>
-         </form>
-     </div>
- </div>
+           </fieldset>
+       </form>
+   </div>
+</div>
 </form>
 </div>
 </div>
