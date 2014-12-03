@@ -24,11 +24,6 @@
                     First Name <span ng-show="activeOrder == 'userFirstName'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
                 </label>
             </th>
-            <th>
-                <label style="cursor: pointer" ng-click="newOrder('acctType')">
-                    Type <span ng-show="activeOrder == 'acctType'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
-                </label>
-            </th>
             <th style="text-align: center">
                 <label style="cursor: pointer" ng-click="newOrder('active')">
                     Active <span ng-show="activeOrder == 'active'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
@@ -50,7 +45,6 @@
         <tr class="clickable-row" data-ng-repeat="account in accounts | filter: searchText | orderBy: [orderBy, 'userLastName']" ng-click="showAcct(account)" ng-class="{selected: account == currAcct}" >
             <td style="vertical-align:middle">{{account.userLastName}}</td>
             <td style="vertical-align:middle">{{account.userFirstName}}</td>
-            <td style="vertical-align:middle">{{account.acctType}}</td>
             <td style="vertical-align:middle; text-align: center">{{account.status}}</td>
             <td style="vertical-align:middle">{{account.email}}</td>
             <td style="vertical-align:middle">{{account.primaryPhoneNumber}}</td>
