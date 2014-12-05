@@ -3,7 +3,7 @@
         <div class="panel-heading table-title">
             account info
             <div class="panel-body panel-text">
-                <label style="width: 120px">First Name: </label>{{currAcct.userFirstName}} {{currAcct.userLastName}}<br>
+                <label style="width: 120px">Name: </label>{{currAcct.userFirstName}} {{currAcct.userLastName}}<br>
                 <label style="width: 120px">Email: </label>{{currAcct.userEmail}}<br><br>
                 <label style="width: 120px">Phone: </label>{{currAcct.primaryPhoneNumber}}<br>
                 <label style="width: 120px">Address: </label>{{currAcct.streetAddress}}<br>
@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <div class="panel panel-default pull-left" style="margin: 0 10px auto; width: 280px;" >
+    <div class="panel panel-default pull-left" style="margin: 0 10px auto; width: 280px;">
         <div class="panel-heading table-title">
             account roles
             <div ng-hide="editting" ng-click="editting=true" style="font-size: 12px" class="panel-text clickable-row pull-right"><span class="glyphicon glyphicon-edit"></span> edit</div>
@@ -46,9 +46,9 @@
                 <div ng-hide="editting" ng-repeat="role in currAcct.roles">
                     <label style="width: 200px">{{role}}</label>
                 </div>
-                <div ng-show="editting" ng-repeat="possRole in possibleRoles">
-                    <label style="width: 200px">{{possRole}}</label>
-                    <input type="checkbox" value="member" ng-model="currAcct.roles.member">
+                <div ng-show="editting" ng-repeat="role in possibleRoles">
+                    <label style="width: 200px">{{role}}</label>
+                    <input type="checkbox" value="{{role}}" ng-model="hasRole(role)">
                 </div>
             </div>
         </div>

@@ -3,10 +3,6 @@
 angular.module('mean.users').controller('AccountsController', ['$scope', 'Accounts',
     function($scope, Accounts) {
 
-        /*Accounts.get(function(accounts) {
-            $scope.accounts = accounts;
-        });*/
-
         $scope.glyph = 'glyphicon-chevron-down';
         $scope.activeOrder = 'userLastName';
         $scope.orderBy = 'userLastName';
@@ -31,5 +27,15 @@ angular.module('mean.users').controller('AccountsController', ['$scope', 'Accoun
                 $scope.accounts = accounts;
             });
         };
+
+        $scope.possibleRoles = [
+            'Member',
+            'Standard Employee',
+            'Event Manager',
+            'Accountant',
+            'Account Manager'
+        ];
+
+        $scope.editting = false;
     }
 ]);
