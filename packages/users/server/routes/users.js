@@ -29,8 +29,11 @@ module.exports = function(MeanUser, app, auth, database, passport) {
   app.param('userId', users.user);
   
   //Account management
-  app.route('/accounts')
+  app.route('/accounts/:userId')
     .get(users.all);
+
+  app.route('/roles/:userId')
+    .put(auth.requiresAccountManager, users.setRoles);
 	
   
 
