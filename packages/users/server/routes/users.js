@@ -29,7 +29,7 @@ module.exports = function(MeanUser, app, auth, database, passport) {
   app.param('userId', users.user);
   
   //Account management
-  app.route('/accounts/:userId')
+  app.route('/accounts')
     .get(users.all);
 
   app.route('/roles/:userId')
