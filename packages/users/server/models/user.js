@@ -30,18 +30,20 @@ var validateUniqueEmail = function(value, callback) {
   });
 };
 
-var validateUserRole = function(value, callback) {
+var validateUserRole = function(value) {
   var possibleRoles = ['authenticated', 'member', 'eventManager', 'accountManager', 'employee', 'accountant'],
     valid = false, i;
-  for (i = 0; i < value.length; i++) {
-    if (possibleRoles.indexOf(value[i]) !== -1) {
-      valid = true;
+  if (value.length !== undefined) {
+    for (i = 0; i < value.length; i++) {
+      if (possibleRoles.indexOf(value[i]) !== -1) {
+        valid = true;
+      }
+      else {
+        valid = false;
+      }
     }
-    else {
-      valid = false;
-    }
-  }
-  callback(valid);
+  } else if (possibleRoles.indexOf(value) !== -1) { valid = true;}
+  return valid;
 };
 /**
  * User Schema
@@ -98,19 +100,19 @@ var UserSchema = new Schema({
   //*******************************************
   //Birthday wasn't in original schema
   birthday: { type: Date, required: false },
-  city: { type: String, required: true },
+  city: { type: String, required: false },
   deletionFlag: { type: String, required: false },
   drivingLevel: { type: String, required: false },
-  emergencyContactName: {  type: String, required: true },
-  primaryEmergencyPhoneNumber: { type: String, required: true },
-  primaryPhoneNumber: {  type: String, required: true },
+  emergencyContactName: {  type: String, required: false },
+  primaryEmergencyPhoneNumber: { type: String, required: false },
+  primaryPhoneNumber: {  type: String, required: false },
   secondaryEmergencyPhoneNumber: {  type: String, required: false },
   secondaryPhoneNumber: { type: String, required: false },
-  state: { type: String,  required: true },
+  state: { type: String,  required: false },
   userCreatedDate: { type: Date, default: Date.now },
   streetAddress: { type: String, required: false },
-  userFirstName: { type: String, required: true },
-  userLastName: { type: String, required: true },
+  userFirstName: { type: String, required: false },
+  userLastName: { type: String, required: false },
   zip: { type: String, required: false }
   //*******************************************
 });
