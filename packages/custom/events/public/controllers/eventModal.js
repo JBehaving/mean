@@ -24,13 +24,13 @@ angular.module('mean.events').controller('ModalEventController', ['$scope','$mod
         });
     };
 }])
-.controller('ModalEventInstanceCtrl', ['$scope', '$modalInstance', '$http', '$location', 'Global', 'usSpinnerService', 'eventId',
-    function ($scope, $modalInstance, $rootScope, $http, $location, Global, usSpinnerService,  eventId) {
+.controller('ModalEventInstanceCtrl', ['$scope', '$modalInstance', '$http', '$location', 'Global', 'usSpinnerService', 'eventId','Garage',
+    function ($scope, $modalInstance, $http, $location, Global, usSpinnerService,  eventId, Garage) {
 
       $scope.vehicles = [];
 
       $scope.getGarage = function() {
-          $http.get('/garage').success(function(vehicles) {
+          Garage.query(function(vehicles) {
               $scope.vehicles = vehicles;
           });
       };
@@ -88,10 +88,11 @@ angular.module('mean.events').controller('ModalEventController', ['$scope','$mod
         });
     };
 }])
-    .controller('ModalRegisteredInstanceCtrl', ['$scope', '$modalInstance',
-        function ($scope, $modalInstance) {
+    .controller('ModalRegisteredInstanceCtrl', ['$scope', '$modalInstance', '$location',
+        function ($scope, $modalInstance,$location) {
             $scope.finish = function () {
                 $modalInstance.dismiss('finished');
+                $location.url($location.url().split('?')[0]);
             };
         }
     ]);

@@ -6,14 +6,15 @@ module.exports = function(Tracks, app, auth, database) {
 
     app.route('/tracks')
         .get(tracks.findTrack)
-        .post(tracks.create);
+        .post(auth.requiresEventManager, tracks.create);
 
     //app.route('/tracks/:trackName')
         //.get(tracks.findTrack);
 
     app.route('/tracks/:trackID')
         .get(tracks.show)
-        .put(tracks.update);
+        .put(auth.requiresEventManager, tracks.update)
+        .delete(auth.requiresEventManager, tracks.destroy);
 
 
     //app.param('trackName', tracks.findTrack);

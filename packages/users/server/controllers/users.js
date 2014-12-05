@@ -11,6 +11,7 @@ var mongoose = require('mongoose'),
   nodemailer = require('nodemailer'),
   templates = require('../template');
 
+
 /**
  * Auth callback
  */
@@ -253,7 +254,32 @@ exports.forgotpassword = function(req, res, next) {
 
   });
  };
- 
+
+exports.setRoles = function(req, res, next) {
+  User.findOne({
+    _id: req.params.userId
+  }, function(err, user) {
+    if (err) {
+      return res.status(400).json({
+        msg: err
+      });
+    }
+    if (!user) {
+      return res.status(400).json({
+        msg: 'Bad userId'
+      });
+    }
+    var errors = req.validationErrors();
+    if (errors) {
+      return res.status(400).send(errors);
+    }
+    user.roles = req.body.roles;
+    user.save(function(err) {
+      if (err) return next(err);
+      return res.send({ roles: user.roles });
+    });
+  });
+};
  /**
   * Update user
   **/
@@ -262,25 +288,21 @@ exports.update = function(req, res)
 {
 	var updatedAccount = new User(req.body); 
 	
-    if (updatedAccount._id !== undefined) 
-	{ 
-		var searchID = updatedAccount._id; 
+    if (updatedAccount._id !== undefined) {
+		var searchID = updatedAccount._id;
+
         delete updatedAccount._id;
-			
-        User.update(searchID, updatedAccount, function (err) { 
-            if (err) 
-			{ 
+        User.update(searchID, updatedAccount, function (err) {
+            if (err)
+            {
                 console.log('Account info update failed: ' + err); 
                 return res.json(500, { error: 'Failed to update account: ' + err } ); 
             } 
         }); 
         res.send('Account successfully updated.'); 
-    } 
-	else 
-	{ //We're updating a non existant account
+    } else { //We're updating a non existant account
 		res.send('ERROR: Attempted to update non-existant account');
 	}
-
 
 };
 
