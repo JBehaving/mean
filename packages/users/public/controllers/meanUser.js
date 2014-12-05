@@ -63,7 +63,7 @@ angular.module('mean.users')
 		  emergencyContactName: this.emerFirst + ' ' + this.emerLast,
 		  primaryEmergencyPhoneNumber: this.emerPhone,
 		  primaryPhoneNumber: this.userPhone,
-	  	  secondaryEmergencyPhoneNumber: this.emerPhone,
+	  	  secondaryEmergencyPhoneNumber: this.emerPhone, //need?
 		  //secondaryPhoneNumber: $scope.user.phone2, //need?
 		  state: this.userState,
 		  streetAddress: this.userAddr,
