@@ -2,12 +2,12 @@
 
 angular.module('mean.vehicles').config(['$stateProvider',
   function($stateProvider) {
-    $stateProvider.state('vehicles example page', {
-      url: '/vehicles/example',
+    $stateProvider.state('user garage', {
+      url: '/garage',
       templateUrl: 'vehicles/views/index.html'
     })
     .state('create vehicle', {
-          url: '/vehicles/create',
+          url: '/garage/create',
           templateUrl: 'vehicles/views/create.html',
         });
   }

@@ -1,65 +1,13 @@
 'use strict';
 
+/**
+ * Module dependencies.
+ */
 
 var mongoose = require('mongoose'),
     Vehicle = mongoose.model('Vehicle'),
-    //_ = require('lodash'),
     ObjectId = mongoose.Types.ObjectId;
 /*
-
-exports.all = function (req,res) {
-    Vehicle.find().exec(function (err, vehicles){
-        if (err) {
-            console.log('Error loading vehicles from database');
-            console.log(err);
-            res.status(500).json({error : 'Error loading vehicles from database'});
-        }
-        else {
-            res.status(200).json(vehicles);
-        }
-    });
-};
-
-
-exports.show = function(req,res) {
-    if (req.vehicle) {
-        res.status(200).json(req.vehicle);
-    }
-    else {
-        res.status(404).json({error : 'Requested vehicle ID not found in database'});
-    }
-};
-
-
-exports.create = function(req,res) {
-    var vehicle = new Vehicle(req.body);
-    vehicle.save(function (err,vehicle) {
-        if (err) {
-            console.log('Error saving vehicle');
-            console.log(err);
-            res.status(500).json(err);
-        }
-        if (vehicle) {
-            res.status(200).json(vehicle);
-        }
-    });
-};
-
-exports.vehicle = function(req,res,next,id) {
-    Vehicle.findOne({ _id : id },function(err,vehicle) {
-        if (err) {
-            console.log('Error loading vehicle from database');
-            console.log(err);
-            res.status(500).json({error : 'Error loading vehicle from database'});
-        }
-        if (vehicle) {
-            req.vehicle = vehicle;
-            next();
-        }
-        else res.status(404).json({error : 'Requested vehicle ID not found in database'});
-    });
-};
-
 exports.update = function(req,res) {
     if (req.vehicle) {
         var vehicle = req.vehicle;
@@ -79,35 +27,7 @@ exports.update = function(req,res) {
 
     else res.status(404);
 };
-
-exports.delete = function(req,res) {
-    if (req.vehicle) {
-        req.vehicle.remove(function (err,vehicle) {
-            if (err) {
-                console.log('Error occured deleting vehicle ' + req.vehicle._id);
-                console.log(err);
-                res.status(500).json(err);
-            }
-            if (vehicle) {
-                res.status(200).json(vehicle);
-            }
-            else res.status(404);
-        });
-    }
-
-    else res.status(404);
-};
-
-exports.findByUser = function(req,res,id) {
-    Vehicle.find({userId : new ObjectId(id)}, function(err,vehicles){});
-};
 ======= */
-/**
- * Module dependencies.
- */
-//var mongoose = require('mongoose'),
-//Vehicle = mongoose.model('Vehicle');
-
 
 /**
  * Create Vehicle
@@ -117,7 +37,7 @@ exports.create = function(req,res)
 {
 	var vehicle = new Vehicle(req.body); 
 	vehicle.userID = req.user;
- 
+    console.log('Creating car');
 	vehicle.save(function(err) {
     if (err) 
 	{
@@ -162,7 +82,74 @@ exports.update = function(req, res)
  * Find user's garage
  */
 exports.findByUser = function(req,res,id) {
-    Vehicle.find({userId : new ObjectId(id)}, function(err,vehicles){});
+	//var uid = req.user;
+    Vehicle.find({userID : new ObjectId(id)}, function(err,vehicles){});
+	//userID : new ObjectId(id)
+};
+
+/**
+ * Find vehicle
+ */
+ 
+ /*exports.vehicle = function(req,res,next,id) {
+    Vehicle.findOne({ _id : id },function(err,vehicle) {
+        if (err) {
+            console.log('Error loading vehicle from database');
+            console.log(err);
+            res.status(500).json({error : 'Error loading vehicle from database'});
+        }
+        if (vehicle) {
+            req.vehicle = vehicle;
+            next();
+        }
+        else res.status(404).json({error : 'Requested vehicle ID not found in database'});
+    });
+};*/
+
+exports.vehicle = function(req, res, next, id) {
+  Vehicle.load(id, function(err, vehicle) {
+    if (err) return next(err);
+    if (!vehicle) return next(new Error('Failed to load vehicle ' + id));
+    req.vehicle = vehicle;
+    next();
+  });
+};
+
+/**
+ * Find all vehicles
+ */
+ 
+ exports.all = function(req,res) {
+    Vehicle.find().exec(function(err, vehicles) {
+        if (err) {
+          return res.json(500, {
+            error: 'Cannot list the announcements'
+          });
+        }
+        res.json(vehicles);
+      });
+};
+
+/**
+ * Delete vehicle
+ */
+ 
+ exports.remove = function(req,res) {
+    if (req.vehicle) {
+        req.vehicle.remove(function (err,vehicle) {
+            if (err) {
+                console.log('Error occured deleting vehicle ' + req.vehicle._id);
+                console.log(err);
+                res.status(500).json(err);
+            }
+            if (vehicle) {
+                res.status(200).json(vehicle);
+            }
+            else res.status(404);
+        });
+    }
+
+    else res.status(404);
 };
 
 
