@@ -273,6 +273,7 @@ exports.setRoles = function(req, res, next) {
     if (errors) {
       return res.status(400).send(errors);
     }
+    console.log('new roles' + req.body.roles);
     user.roles = req.body.roles;
     user.save(function(err) {
       if (err) return next(err);

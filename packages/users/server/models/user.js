@@ -33,16 +33,20 @@ var validateUniqueEmail = function(value, callback) {
 var validateUserRole = function(value) {
   var possibleRoles = ['authenticated', 'Member', 'Event Manager', 'Account Manager', 'Standard Employee', 'Accountant'],
     valid = false, i;
-  if (value.length !== undefined) {
+  if ( value !== undefined && value !== null && value instanceof Array) {
+      console.log('Validating user role ' + value + ' for ' + this._id);
     for (i = 0; i < value.length; i++) {
       if (possibleRoles.indexOf(value[i]) !== -1) {
         valid = true;
       }
       else {
-        valid = false;
+        return false;
       }
     }
-  } else if (possibleRoles.indexOf(value) !== -1) { valid = true;}
+  } else if (possibleRoles.indexOf(value) !== -1) {
+      valid = true;
+  } else {valid = false;}
+
   return valid;
 };
 /**
