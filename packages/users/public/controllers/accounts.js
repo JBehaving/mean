@@ -108,34 +108,16 @@ angular.module('mean.users')
                     setter(scope.$parent, remove(current, value));
                 }
             });
-
-            // watch original model change
-            scope.$parent.$watch(attrs.checklistModel, function(newArr, oldArr) {
-                scope.checked = contains(newArr, value);
-            }, true);
-        }
-
-        return {
-            restrict: 'A',
-            priority: 1000,
-            terminal: true,
-            scope: true,
-            compile: function(tElement, tAttrs) {
-                if (tElement[0].tagName !== 'INPUT' || !tElement.attr('type', 'checkbox')) {
-                    throw 'checklist-model should be applied to `input[type="checkbox"]`.';
-                }
-
-                if (!tAttrs.checklistValue) {
-                    throw 'You should provide `checklist-value`.';
-                }
-
-                // exclude recursion
-                tElement.removeAttr('checklist-model');
-
-                // local scope var storing individual checkbox model
-                tElement.attr('ng-model', 'checked');
-
-                return postLinkFn;
-            }
         };
-    }]);
+
+        $scope.possibleRoles = [
+            'Member',
+            'Standard Employee',
+            'Event Manager',
+            'Accountant',
+            'Account Manager'
+        ];
+
+        $scope.editting = false;
+    }
+]);
