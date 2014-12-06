@@ -14,23 +14,6 @@
         </div>
     </div>
 
-    <div class="panel panel-default pull-left" style="margin: 0 10px auto; width: 280px;" >
-        <div class="panel-heading table-title">
-            account roles
-            <div ng-hide="editting" ng-click="editting=true" style="font-size: 12px" class="panel-text clickable-row pull-right"><span class="glyphicon glyphicon-edit"></span> edit</div>
-            <div ng-show="editting" ng-click="editting=false" style="font-size: 12px" class="panel-text clickable-row pull-right"><span class="glyphicon glyphicon-floppy-saved"></span> save</div>
-            <div class="panel-body panel-text">
-                <div ng-hide="editting" ng-repeat="role in currAcct.roles">
-                    <label style="width: 200px">{{role}}</label>
-                </div>
-                <div ng-show="editting" ng-repeat="role in possibleRoles">
-                    <label style="width: 200px">{{role}}</label>
-                    <input type="checkbox" value="{{role}}" checked="hasRole(role)">
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="pull-left">
         <div class="panel panel-default" style="width:300px">
             <div class="panel-heading table-title">
@@ -51,6 +34,23 @@
             <button class="btn btn-primary btn-block btn-default">
                 delete account
             </button>
+        </div>
+    </div>
+
+    <div class="panel panel-default pull-left" style="margin: 0 10px auto; width: 280px;" >
+        <div class="panel-heading table-title">
+            account roles
+            <div ng-hide="editting" ng-click="editting=true" style="font-size: 12px" class="panel-text clickable-row pull-right"><span class="glyphicon glyphicon-edit"></span> edit</div>
+            <div ng-show="editting" ng-click="setRoles(currAcct.roles)" style="font-size: 12px" class="panel-text clickable-row pull-right"><span class="glyphicon glyphicon-floppy-saved"></span> save</div>
+            <div class="panel-body panel-text">
+                <div ng-hide="editting" ng-repeat="role in currAcct.roles">
+                    <label style="width: 200px">{{role}}</label>
+                </div>
+                <div ng-show="editting" ng-repeat="role in possibleRoles">
+                    <label style="width: 200px">{{role}}</label>
+                    <input type="checkbox" checklist-model="currAcct.roles" checklist-value="role">
+                </div>
+            </div>
         </div>
     </div>
 </div>
