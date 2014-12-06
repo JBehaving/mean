@@ -63,7 +63,7 @@ exports.create = function(req, res, next) {
   //}
 
   // Hard coded for now. Will address this with the user permissions system in v0.3.5
-  user.roles = ['member'];
+  user.roles = ['Member'];
   user.save(function(err) {
     if (err) {
       switch (err.code) {

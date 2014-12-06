@@ -31,7 +31,7 @@ var validateUniqueEmail = function(value, callback) {
 };
 
 var validateUserRole = function(value) {
-  var possibleRoles = ['authenticated', 'member', 'eventManager', 'accountManager', 'employee', 'accountant'],
+  var possibleRoles = ['authenticated', 'Member', 'Event Manager', 'Account Manager', 'Standard Employee', 'Accountant'],
     valid = false, i;
   if (value.length !== undefined) {
     for (i = 0; i < value.length; i++) {
@@ -145,12 +145,13 @@ UserSchema.methods = {
   /**
    * HasRole - check if the user has required role
    *
-   * @param {String} plainText
+   * @param {String} role
    * @return {Boolean}
    * @api public
    */
   hasRole: function(role) {
     var roles = this.roles;
+    console.log(roles);
     return roles.indexOf('admin') !== -1 || roles.indexOf(role) !== -1;
   },
 
@@ -203,27 +204,23 @@ UserSchema.methods = {
   //************************************
   
   isEventManager: function()  {
-    return this.roles.indexOf('eventManager') !== -1;
+    return this.roles.indexOf('Event Manager') !== -1;
   },
   
   isAccountant: function()  {
-    return this.roles.indexOf('accountant') !== -1;
+    return this.roles.indexOf('Accountant') !== -1;
   },
   
   isEmployee: function()  {
-    return this.roles.indexOf('employee') !== -1;
+    return this.roles.indexOf('Standard Employee') !== -1;
   },
 
   isMember: function()  {
-    return this.roles.indexOf('member') !== -1;
-  },
-
-  isOwner: function()  {
-    return this.roles.indexOf('owner') !== -1;
+    return this.roles.indexOf('Member') !== -1;
   },
 
   isAccountManager: function()  {
-    return this.roles.indexOf('accountManager') !== -1;
+    return this.roles.indexOf('Account Manager') !== -1;
   },
 
   isThisUser: function(id)  {

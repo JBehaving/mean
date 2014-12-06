@@ -1,41 +1,136 @@
 'use strict';
 
-angular.module('mean.users').controller('AccountsController', ['$scope', 'Accounts',
-    function($scope, Accounts) {
+angular.module('mean.users')
+    .controller('AccountsController', ['$scope', 'Accounts',
+        function($scope, Accounts) {
 
-        $scope.glyph = 'glyphicon-chevron-down';
-        $scope.activeOrder = 'userLastName';
-        $scope.orderBy = 'userLastName';
-        $scope.newOrder = function(str) {
-            if (this.orderBy === str) {
-                this.orderBy = '-' + str;
-                this.glyph = 'glyphicon-chevron-up';
+            $scope.glyph = 'glyphicon-chevron-down';
+            $scope.activeOrder = 'userLastName';
+            $scope.orderBy = 'userLastName';
+            $scope.newOrder = function(str) {
+                if (this.orderBy === str) {
+                    this.orderBy = '-' + str;
+                    this.glyph = 'glyphicon-chevron-up';
+                }
+                else {
+                    this.orderBy = str;
+                    this.glyph = 'glyphicon-chevron-down';
+                }
+                this.activeOrder = str;
+            };
+
+            $scope.showAcct = function(account) {
+                $scope.currAcct = account;
+            };
+
+            $scope.find = function() {
+                Accounts.query(function(accounts) {
+                    $scope.accounts = accounts;
+                });
+            };
+
+            $scope.possibleRoles = [
+                'Member',
+                'Standard Employee',
+                'Event Manager',
+                'Accountant',
+                'Account Manager'
+            ];
+
+            $scope.editting = false;
+
+        }
+    ])
+    .directive('checklistModel', ['$parse', '$compile', function($parse, $compile) {
+        // contains
+        function contains(arr, item) {
+            if (angular.isArray(arr)) {
+                for (var i = 0; i < arr.length; i++) {
+                    if (angular.equals(arr[i], item)) {
+                        return true;
+                    }
+                }
             }
-            else {
-                this.orderBy = str;
-                this.glyph = 'glyphicon-chevron-down';
+            return false;
+        }
+
+        // add
+        function add(arr, item) {
+            arr = angular.isArray(arr) ? arr : [];
+            for (var i = 0; i < arr.length; i++) {
+                if (angular.equals(arr[i], item)) {
+                    return arr;
+                }
             }
-            this.activeOrder = str;
-        };
+            arr.push(item);
+            return arr;
+        }
 
-        $scope.showAcct = function(account) {
-            $scope.currAcct = account;
-        };
+        // remove
+        function remove(arr, item) {
+            if (angular.isArray(arr)) {
+                for (var i = 0; i < arr.length; i++) {
+                    if (angular.equals(arr[i], item)) {
+                        arr.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+            return arr;
+        }
 
-        $scope.find = function() {
-            Accounts.query(function(accounts) {
-                $scope.accounts = accounts;
+        // http://stackoverflow.com/a/19228302/1458162
+        function postLinkFn(scope, elem, attrs) {
+            // compile with `ng-model` pointing to `checked`
+            $compile(elem)(scope);
+
+            // getter / setter for original model
+            var getter = $parse(attrs.checklistModel);
+            var setter = getter.assign;
+
+            // value added to list
+            var value = $parse(attrs.checklistValue)(scope.$parent);
+
+            // watch UI checked change
+            scope.$watch('checked', function(newValue, oldValue) {
+                if (newValue === oldValue) {
+                    return;
+                }
+                var current = getter(scope.$parent);
+                if (newValue === true) {
+                    setter(scope.$parent, add(current, value));
+                } else {
+                    setter(scope.$parent, remove(current, value));
+                }
             });
+
+            // watch original model change
+            scope.$parent.$watch(attrs.checklistModel, function(newArr, oldArr) {
+                scope.checked = contains(newArr, value);
+            }, true);
+        }
+
+        return {
+            restrict: 'A',
+            priority: 1000,
+            terminal: true,
+            scope: true,
+            compile: function(tElement, tAttrs) {
+                if (tElement[0].tagName !== 'INPUT' || !tElement.attr('type', 'checkbox')) {
+                    throw 'checklist-model should be applied to `input[type="checkbox"]`.';
+                }
+
+                if (!tAttrs.checklistValue) {
+                    throw 'You should provide `checklist-value`.';
+                }
+
+                // exclude recursion
+                tElement.removeAttr('checklist-model');
+
+                // local scope var storing individual checkbox model
+                tElement.attr('ng-model', 'checked');
+
+                return postLinkFn;
+            }
         };
-
-        $scope.possibleRoles = [
-            'Member',
-            'Standard Employee',
-            'Event Manager',
-            'Accountant',
-            'Account Manager'
-        ];
-
-        $scope.editting = false;
-    }
-]);
+    }]);
