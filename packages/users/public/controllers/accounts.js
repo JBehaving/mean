@@ -39,9 +39,9 @@ angular.module('mean.users')
 
             $scope.editting = false;
 
-            $scope.setRoles = function(roles) {
+            $scope.setRoles = function(roles, newRoles) {
                 this.editting = false;
-                $http.put(roles/$scope.currAcct.id);
+                $http.put(roles/$scope.currAcct.id, newRoles);
             };
 
         }
