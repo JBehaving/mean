@@ -2,10 +2,10 @@
     <div data-ng-controller="ModalRegisteredController" data-ng-init="open()" />
     <div class="container">
         <div class="pull-right">
-            <div style="padding: 3px">
+            <div style="padding: 3px" ng-show="global.isEventManager">
                 <button type="submit" class="btn btn-default">update</button>
             </div>
-            <div style="padding: 3px">
+            <div style="padding: 3px" data-ng-show="global.isEventManager">
                 <button type="submit" class="btn btn-default">cancel</button>
             </div>
 
@@ -55,11 +55,11 @@
             </div>
             <div style="margin: 20px; text-align: center;" class="">
                 <a href="#" class="btn btn-default">track day calculator</a><br>
-                <a href="#" style="color: darkred">financial report.csv</a><br>
-                <a href="#" style="color: darkred">event manifest.csv</a>
+                <span data-ng-show="global.isEventManager"><a href="#" style="color: darkred" >financial report.csv</a><br>
+                <a href="#" style="color: darkred">event manifest.csv</a></span>
             </div>
         </div>
-
+        
         <div style="width: 50%" class="pull-left">
             <div style="width: 80%; margin: 0 auto">
                 {{event.eventDesc}}

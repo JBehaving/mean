@@ -1,9 +1,15 @@
 'use strict';
 
-angular.module('mean.events').controller('EventDetailsController', ['$scope', '$stateParams', '$location', '$http', 'Global', 'Events',
-    function($scope, $stateParams, $location, $http, Global, Events) {
+angular.module('mean.events').controller('EventDetailsController', ['$scope', '$rootScope', '$stateParams', '$location', '$http', 'Global', 'Events',
+    function($scope, $rootScope, $stateParams, $location, $http, Global, Events) {
         $scope.global = Global;
 
+        //-- set up rootscope for this controller
+        $scope.global = {
+            authenticated: !! $rootScope.user,
+            isEventManager: !! $rootScope.user,
+            user: $rootScope.user
+        };
         var thisEventId = $stateParams.eventId;
 
         Events.get({
