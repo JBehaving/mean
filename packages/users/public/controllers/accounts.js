@@ -40,7 +40,6 @@ angular.module('mean.users')
             $scope.editting = false;
 
             $scope.setNewRoles = function(newRoles) {
-
                 this.editting = false;
                 var thisUsersRoles = {};
                 thisUsersRoles.roles = newRoles;
