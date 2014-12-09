@@ -51,7 +51,7 @@
                 <td style="vertical-align:middle; text-align: center">{{event.trackId.trackState}}</td>
                 <td style="vertical-align:middle; text-align: center">{{event.noviceCap - event.noviceRegistered}} - {{event.intermediateCap - event.intermediateRegistered}} - {{event.advancedCap - event.advancedRegistered}}</td>
                 <td style="vertical-align:middle; text-align: right">{{event.basePrice | currency}}</td>
-                <td style="text-align: right"><button class="btn btn-default" data-ng-controller="ModalEventController" data-ng-click="open(event)">attend</button></td>
+                <td style="text-align: right"><button class="btn btn-default" data-ng-controller="ModalEventController" data-ng-click="$event.preventDefault(); $event.stopPropagation(); open(event)">attend</button></td>
             </tr>
         </tbody>
     </table>

@@ -3,7 +3,6 @@
 angular.module('mean.events').controller('ModalEventController', ['$scope','$modal', '$log', function ($scope, $modal, $log){
 
     $scope.open = function (event) {
-
         var modalInstance = $modal.open({
           backdrop: true,
           keyboard: true,
