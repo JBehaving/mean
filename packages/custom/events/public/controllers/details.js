@@ -6,7 +6,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
         $scope.vehicles = [];
 
         $scope.updateEvent = function() {
-            $location.url('/events/details/'+$stateParams.eventId)
+            $location.url('/events/details/'+$stateParams.eventId);
         };
 
         //-- set up rootscope for this controller

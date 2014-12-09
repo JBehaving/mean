@@ -4,33 +4,33 @@
             <h3 class="modal-title">Register for Event</h3>
         </div>
         <div class="modal-body">
-           <!-- <span us-spinner spinner-key="registration-spinner"></span> -->
+            <!-- <span us-spinner spinner-key="registration-spinner"></span> -->
             <form name="registerForm" class="form-horizontal col-md-6" role="form" data-ng-submit="create(registerForm.$valid)" action="https://www.paypal.com/cgi-bin/webscr" method="post" novalidate>
-            <div class="form-group" data-ng-class="{ 'has-error' : submitted && registerForm.skill.$invalid }">
-                <label mean-token="'register-skill'" for="skillClass" class="col-md-3 control-label">Skill</label>
-                <div class="col-md-9">
-                    <select name="skillClass" data-ng-model="skillClass" id="skillClass" class="form-control" required>
-                        <option value="novice">Novice</option>
-                        <option value="intermediate">Intermediate</option>
-                        <option value="idvanced">Advanced</option>
-                    </select>
-                    <div data-ng-show="submitted && registerForm.skillClass.$invalid" class="help-block">
-                        <p data-ng-show="registerForm.skillClass.$error.required">Skill is required</p>
+                <div class="form-group" data-ng-class="{ 'has-error' : submitted && registerForm.skill.$invalid }">
+                    <label mean-token="'register-skill'" for="skillClass" class="col-md-3 control-label">Skill</label>
+                    <div class="col-md-9">
+                        <select name="skillClass" data-ng-model="skillClass" id="skillClass" class="form-control" required>
+                            <option value="novice">Novice</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="idvanced">Advanced</option>
+                        </select>
+                        <div data-ng-show="submitted && registerForm.skillClass.$invalid" class="help-block">
+                            <p data-ng-show="registerForm.skillClass.$error.required">Skill is required</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group" data-ng-class="{ 'has-error' : submitted && registerForm.vehicle.$invalid }" ng-init="getGarage()">
-                <label mean-token="'register-vehicle'" for="vehicle" class="col-md-3 control-label">Vehicle</label>
-                <div class="col-md-9">
-                    <select name="vehicle" data-ng-model="vehicleId" id="vehicle" class="form-control" required>
-                        <option value="">Pick a vehicle</option>
-                        <option ng-repeat="vehicle in vehicles" value="{{vehicle._id}}">{{vehicle.vehicleYear}} {{vehicle.vehicleMake}} {{vehicle.vehicleModel}}</option>
-                    </select>
-                    <div data-ng-show="submitted && registerForm.vehicle.$invalid" class="help-block">
-                        <p data-ng-show="registerForm.vehicle.$error.required">Vehicle is required</p>
+                <div class="form-group" data-ng-class="{ 'has-error' : submitted && registerForm.vehicle.$invalid }" ng-init="getGarage()">
+                    <label mean-token="'register-vehicle'" for="vehicle" class="col-md-3 control-label">Vehicle</label>
+                    <div class="col-md-9">
+                        <select name="vehicle" data-ng-model="vehicleId" id="vehicle" class="form-control" required>
+                            <option value="">Pick a vehicle</option>
+                            <option ng-repeat="vehicle in vehicles" value="{{vehicle._id}}">{{vehicle.vehicleYear}} {{vehicle.vehicleMake}} {{vehicle.vehicleModel}}</option>
+                        </select>
+                        <div data-ng-show="submitted && registerForm.vehicle.$invalid" class="help-block">
+                            <p data-ng-show="registerForm.vehicle.$error.required">Vehicle is required</p>
+                        </div>
                     </div>
                 </div>
-            </div>
                 <input type="checkbox" data-ng-model="riderWelcome" name="riderWelcome" value="riderWelcome">Ride alongs welcome!<br>
                 <input type="checkbox" data-ng-model="rideAlong" name="rideAlong" value="rideAlong">Request to ride along<br>
             </form>
@@ -39,5 +39,6 @@
             <button class="btn btn-primary" data-ng-click="ok('paypal')"><img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;"></button>
             <button class="btn btn-warning" data-ng-click="cancel()">Cancel</button>
         </div>
+
     <!--</script>-->
 <!--</div>-->
