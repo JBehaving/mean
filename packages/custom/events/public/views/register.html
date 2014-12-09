@@ -1,5 +1,3 @@
-<!--<div ng-controller="ModalDemoCtrl">-->
-    <!--<script type="text/ng-template" id="myModalContent.html">-->
         <div class="modal-header">
             <h3 class="modal-title">Register for Event</h3>
         </div>
@@ -9,10 +7,7 @@
                 <div class="form-group" data-ng-class="{ 'has-error' : submitted && registerForm.skill.$invalid }">
                     <label mean-token="'register-skill'" for="skillClass" class="col-md-3 control-label">Skill</label>
                     <div class="col-md-9">
-                        <select name="skillClass" data-ng-model="skillClass" id="skillClass" class="form-control" required>
-                            <option value="novice">Novice</option>
-                            <option value="intermediate">Intermediate</option>
-                            <option value="idvanced">Advanced</option>
+                        <select name="skillClass" data-ng-model="skillClass" id="skillClass" class="form-control" ng-options="value as name for (name,value) in skillLevels" required>
                         </select>
                         <div data-ng-show="submitted && registerForm.skillClass.$invalid" class="help-block">
                             <p data-ng-show="registerForm.skillClass.$error.required">Skill is required</p>
@@ -42,3 +37,4 @@
 
     <!--</script>-->
 <!--</div>-->
+

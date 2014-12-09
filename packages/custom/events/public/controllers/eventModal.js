@@ -4,7 +4,7 @@ angular.module('mean.events').controller('ModalEventController', ['$scope','$mod
 
     $scope.open = function (event) {
         var modalInstance = $modal.open({
-          backdrop: true,
+          backdrop: false,
           keyboard: true,
           templateUrl: 'events/views/register.html',
           controller: 'ModalEventInstanceCtrl',
@@ -27,6 +27,18 @@ angular.module('mean.events').controller('ModalEventController', ['$scope','$mod
     function ($scope, $modalInstance, $http, $location, Global, usSpinnerService,  eventId, Garage) {
 
       $scope.vehicles = [];
+      $scope.skillLevels = {
+          'Novice' : 'novice',
+          'Intermediate':'intermediate',
+          'Advanced': 'advanced'
+        };
+
+      $http.get('/loggedin')
+          .success(function (user) {
+              console.log(user);
+              $scope.user = user;
+              $scope.skillClass = user.drivingLevel;
+          });
 
       $scope.getGarage = function() {
           Garage.query(function(vehicles) {
@@ -62,7 +74,7 @@ angular.module('mean.events').controller('ModalEventController', ['$scope','$mod
       };
     }
 ])
-.controller('ModalRegisteredController', ['$scope','$modal', '$log', '$stateParams', function ($scope, $modal, $log, $stateParams){
+.controller('ModalRegisteredController', ['$scope','$modal', '$log', '$stateParams','$location', function ($scope, $modal, $log, $stateParams,$location){
 
     $scope.open = function () {
 
@@ -73,7 +85,7 @@ angular.module('mean.events').controller('ModalEventController', ['$scope','$mod
         console.log('opening modal');
 
         var modalInstance = $modal.open({
-            backdrop: true,
+            backdrop: false,
             keyboard: true,
             templateUrl: 'events/views/registered.html',
             controller: 'ModalRegisteredInstanceCtrl',
@@ -84,6 +96,7 @@ angular.module('mean.events').controller('ModalEventController', ['$scope','$mod
 
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
+            $location.url($location.url().split('?')[0]);
         });
     };
 }])
@@ -91,7 +104,6 @@ angular.module('mean.events').controller('ModalEventController', ['$scope','$mod
         function ($scope, $modalInstance,$location) {
             $scope.finish = function () {
                 $modalInstance.dismiss('finished');
-                $location.url($location.url().split('?')[0]);
             };
         }
     ]);

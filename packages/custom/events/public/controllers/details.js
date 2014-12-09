@@ -4,7 +4,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
     function($scope, $rootScope, $stateParams, $location, $http, Global, Events, Garage) {
         $scope.global = Global;
         $scope.vehicles = [];
-
+        //console.log($scope.global.user);
         $scope.updateEvent = function() {
             $location.url('/events/details/'+$stateParams.eventId);
         };
@@ -12,7 +12,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
         //-- set up rootscope for this controller
         $scope.global = {
             authenticated: !! Global.user,
-            isEventManager: !! Global.user,
+            isEventManager: !! Global.isEventManager,
             user: Global.user
         };
         var thisEventId = $stateParams.eventId;

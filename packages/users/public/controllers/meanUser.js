@@ -74,6 +74,12 @@ angular.module('mean.users')
           .success(function() {
             // authentication OK
             $scope.registerError = 0;
+            $http.post('/garage',{
+                vehicleYear: $scope.vYear,
+                vehicleMake: $scope.vMake,
+                vehicleModel: $scope.vModel,
+                vehicleColor: $scope.vColor
+            });
             $rootScope.user = $scope.user;
             $rootScope.$emit('loggedin');
             $location.url('/');

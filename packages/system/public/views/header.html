@@ -24,7 +24,7 @@
                     <ul class="nav navbar-nav">
                         <li ng-class="{'is-active': isActive('/about')}"><a ui-sref='about page'>about</a></li>
                         <li ng-class="{'is-active': isActive('/contact')}"><a ui-sref='contact page'>contact</a></li>
-                        <li class="dropdown">
+                        <li class="dropdown" data-ng-show="showTools()">
                             <a href="#" class="dropdown-toggle nav-text" data-toggle="dropdown">
                                 tools <b class="caret"></b>
                             </a>
