@@ -32,6 +32,8 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
 
     $scope.eventScope = {};
 
+    $scope.vehicles = [];
+
     $scope.create = function(isValid) {
       if (isValid) {
         var event = new Events({

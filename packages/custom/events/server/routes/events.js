@@ -11,7 +11,8 @@ module.exports = function(Events, app, auth, database) {
         .put(events.update);
 
     app.route('/events/:eventId')
-        .get(events.show);
+        .get(events.show)
+        .put(events.update);
 
     app.route('/manifests')
         .get(manifests.findByEvent);

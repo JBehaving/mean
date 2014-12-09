@@ -7,6 +7,14 @@ angular.module('mean.events').factory('Events', ['$resource',
     }, {
       update: {
         method: 'PUT'
+      },
+      'get': {
+          transformResponse : function(event) {
+              event = angular.fromJson(event);
+              event.eventStartDate = new Date(event.eventStartDate);
+              event.basePrice = parseInt(event.basePrice);
+              return event;
+          }
       }
     });
   }

@@ -39,7 +39,7 @@ angular.module('mean.events').controller('ModalEventController', ['$scope','$mod
           var registration = {
               eventId : eventId,
               //userId : $rootScope.user._id,
-              vehicleId : $scope.vehicleId,
+              vehicleId : this.vehicleId,
               skillClass : this.skillClass,
               riderWelcome : this.riderWelcome,
               rideAlong : this.rideAlong,

@@ -3,7 +3,7 @@
     <div class="container">
         <div class="pull-right">
             <div style="padding: 3px" ng-show="global.isEventManager">
-                <button type="submit" class="btn btn-default">update</button>
+                <button type="submit" class="btn btn-default" data-ng-click="updateEvent()">update</button>
             </div>
             <div style="padding: 3px" data-ng-show="global.isEventManager">
                 <button type="submit" class="btn btn-default">cancel</button>
@@ -131,7 +131,7 @@
                             <tr>
                                 <td style="vertical-align:middle; color: gray">{{global.user.userFirstName}} {{global.user.userLastName}}</td>
                                 <td style="vertical-align:middle">
-                                    <select data-ng-controller="VehiclesController" class="form-control glowing-border" ng-model="evVehicle">
+                                    <select class="form-control glowing-border" ng-model="evVehicle">
                                         <option style="color: gray" value="">Select a vehicle</option>
                                         <option data-ng-repeat="vehicle in vehicles" value="{{vehicle._id}}">{{vehicle.vehicleYear}} {{vehicle.vehicleMake}} {{vehicle.vehicleModel}}, {{vehicle.vehicleColor}}</option>
                                     </select>
@@ -145,9 +145,9 @@
                             <tr class="" data-ng-repeat="attendee in attendees | filter: searchText | filter:{ skillClass: group.title }" ng-click="showEvent(event)">
                                     <td style="vertical-align:middle">{{attendee.userId.userFirstName}} {{attendee.userId.userLastName}}</td>
                                     <td style="vertical-align:middle">{{attendee.vehicleId.vehicleYear}} {{attendee.vehicleId.vehicleMake}} {{attendee.vehicleId.vehicleModel}}, {{attendee.vehicleId.vehicleColor}}</td>
-                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.riderWelcome"></td>
-                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.rideAlong"></td>
-                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.checkedIn"></td>
+                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.riderWelcome" disabled="true"></td>
+                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.rideAlong" disabled="true"></td>
+                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.checkedIn" disabled="true"></td>
                                 </tr>
                             </tbody>
                         </table>

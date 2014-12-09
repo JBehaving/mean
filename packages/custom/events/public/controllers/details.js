@@ -1,14 +1,19 @@
 'use strict';
 
-angular.module('mean.events').controller('EventDetailsController', ['$scope', '$rootScope', '$stateParams', '$location', '$http', 'Global', 'Events',
-    function($scope, $rootScope, $stateParams, $location, $http, Global, Events) {
+angular.module('mean.events').controller('EventDetailsController', ['$scope', '$rootScope', '$stateParams', '$location', '$http', 'Global', 'Events', 'Garage',
+    function($scope, $rootScope, $stateParams, $location, $http, Global, Events, Garage) {
         $scope.global = Global;
+        $scope.vehicles = [];
+
+        $scope.updateEvent = function() {
+            $location.url('/events/details/'+$stateParams.eventId)
+        };
 
         //-- set up rootscope for this controller
         $scope.global = {
-            authenticated: !! $rootScope.user,
-            isEventManager: !! $rootScope.user,
-            user: $rootScope.user
+            authenticated: !! Global.user,
+            isEventManager: !! Global.user,
+            user: Global.user
         };
         var thisEventId = $stateParams.eventId;
 
@@ -63,6 +68,12 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
             .error(function (data) {
                 console.log('Error: ' + data);
             });
+
+
+       Garage.query( function (vehicles) {
+            $scope.vehicles = vehicles;
+       });
+
 
 
 

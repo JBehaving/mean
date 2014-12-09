@@ -17,7 +17,7 @@ var ManifestSchema = new Schema({
         required: true },
     vehicleId: { type: Schema.ObjectId,
         ref:'Vehicle',
-        required: false },
+        required: true },
     eventId: { type: Schema.ObjectId,
         ref: 'Event',
         required: true },
