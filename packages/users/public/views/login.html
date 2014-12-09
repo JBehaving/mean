@@ -1,9 +1,9 @@
 
 <div data-ng-controller="LoginCtrl">
-  <div class="alert alert-danger animated fadeIn" ng-show="loginerror">{{loginerror}}</div>
-  <div class="container" style="margin-left: -30px">
-      <div class="omb_login">
 
+  <div class="container" style="margin-left: -30px">
+      <div class="alert alert-danger animated fadeIn" ng-show="loginerror">{{loginerror}}</div>
+      <div class="omb_login">
           <div class="row omb_row-sm-offset-3 omb_login omb_socialButtons">
               <div class="col-sm-3">
                   <a href="/auth/facebook" class="btn btn-lg btn-block">
@@ -27,7 +27,7 @@
           <div class="row omb_row-sm-offset-3">
               <div ng-controller="SwitcherCtrl" class="col-xs-12 col-sm-6">
                   <div data-fold-toggle="active" class="primary-form">
-                      <form ng-submit="login()" class="omb_loginForm" action="" autocomplete="off" accept-charset="UTF-8" role="form" id="login-form" method="post">
+                      <form ng-submit="login()" class="omb_loginForm" autocomplete="off" accept-charset="UTF-8" role="form" id="login-form">
                           <fieldset>
                               <div class="form-group input-group">
                                   <span class="input-group-addon">
