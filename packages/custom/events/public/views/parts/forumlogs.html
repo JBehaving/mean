@@ -1,0 +1,13 @@
+<div class="container" ng-controller="ForumLogController">
+    hello moto
+    <accordion close-others="oneAtATime">
+        <accordion-group ng-repeat="(forumlink, flinks) in links" is-open="group.expanded">
+            <accordion-heading class="table-title-bg">
+                <span class="glyphicon pull-left" ng-class="{'glyphicon-minus': logs[$index].expanded, 'glyphicon-plus': !log[$index].expanded}"></span>
+                <span style="font-family:impact">{{link.forumlink}}</span>
+                <a href="#!/forumlogs/create"><span class="glyphicon"></span></a>
+            </accordion-heading>
+            <div ng-repeat="link in flinks" data-ng-include src="'events/views/parts/forumlinks.html'" style="padding-left:0px;"></div>
+        </accordion-group>
+    </accordion>
+</div>

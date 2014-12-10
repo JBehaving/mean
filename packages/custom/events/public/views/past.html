@@ -1,0 +1,29 @@
+<div style="width:70%;" class="panel panel-default center-block" data-ng-controller="EventsController" data-ng-init="find()">
+    <div class="panel-heading">
+        <div class="table-search pull-right">
+            <div class="form-group input-group">
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-search"></i>
+                </span>
+                <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search past events"/></div>
+        </div>
+        <div class="table-title">past events</div>
+    </div>
+
+    <table style="max-height: 250px" class="table table-hover" fixed-header>
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Track</th>
+            <th>Location</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="clickable-row" data-ng-repeat="event in events | filterPast | orderBy: '-eventStartDate' | filter: searchText" ng-click="showEvent(event)">
+            <td>{{event.eventStartDate | date:'MM/dd/yyyy'}}</td>
+            <td>{{event.trackId.trackName}}</td>
+            <td>{{event.trackId.trackCity}}, {{event.trackId.trackState}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

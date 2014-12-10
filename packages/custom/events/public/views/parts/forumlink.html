@@ -1,0 +1,14 @@
+<div class="container" id="forumLogsPerEvent" data-ng-controller="ForumLogController" style="padding-left:0px; ">
+    <div class="panel panel-default">
+        <table class="table table-hover table-bordered">
+            <tbody>
+            <tr data-ng-repeat="link in links">
+                <td>{{link.dateentered}}</td>
+                <td>{{link.username}}</td>
+                <td>{{link.comment}}</td>
+                <td>></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

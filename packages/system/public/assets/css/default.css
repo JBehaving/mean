@@ -1,0 +1,95 @@
+/*  */
+.page-title {
+    font-size: 40px;
+    color: #080808;
+    font-family: Impact, Charcoal, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    font-size: 44px;
+    color: #010101;
+    font-family: Impact, Charcoal, sans-serif;
+    margin: 0;
+}
+h2 {
+    font-size: 24px;
+    color: #010101;
+    font-family: Impact, Charcoal, sans-serif;
+    margin: 0;
+}
+h3 {
+    font-size: 18px;
+    color: #010101;
+    font-family: Impact, Charcoal, sans-serif;
+    margin: 0;
+}
+
+/* button css */
+.btn-default {
+    background: #ffffff;
+    border-color: red;
+    font-size: 16px;
+    line-height: 16px;
+    min-width: 80px;
+    height: 32px;
+    color: #080808;
+    font-family: Impact, Charcoal, sans-serif;
+    opacity: 0.9;
+}
+
+.btn-default:hover {
+    border-color: red;
+    background: #f5f5f5;
+    color: #080808;
+    opacity: 1;
+}
+
+/* glyphicons */
+.glyphicon-space {
+    color: transparent;
+}
+.glyphlink-red {
+    color:red;
+    vertical-align:20%;
+    font-size:16px;
+    text-decoration: none;
+}
+
+/* input css */
+.glowing-border:focus {
+    outline: none;
+    border-color: lightgray;
+    box-shadow: 0 0 10px lightgray;
+}
+
+/* table css */
+.table {
+    table-layout: auto;
+}
+.table-title {
+    color: #080808;
+    font-size: 26px;
+    font-family: Impact, Charcoal, sans-serif;
+}
+.table-subtitle {
+    color: #080808;
+    font-size: 18px;
+    font-family: Impact, Charcoal, sans-serif;
+}
+.table-search {
+    width: 30%;
+    min-width: 250px;
+}
+.clickable-row {
+    cursor: pointer;
+}
+.selected {
+    background-color: #f5f5f5;
+}
+
+/* panel css */
+.panel-text {
+    font-size: 14px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

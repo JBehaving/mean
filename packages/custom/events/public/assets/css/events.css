@@ -1,0 +1,91 @@
+/* share button css */
+.share-group {
+  float: right;
+  margin: 0 0 0 0;
+}
+
+.share-group ul {
+  float: right;
+  list-style: none outside none;
+  margin: 0;
+  min-width: 61px;
+  padding: 0;
+}
+
+.share {
+  min-width: 17px;
+}
+
+.share-group li {
+  display: block;
+  font-size: 18px;
+  list-style: none outside none;
+  margin-bottom: 3px;
+  margin-left: 4px;
+  margin-top: 3px;
+}
+
+.btn-twitter {
+  background-color: #3399CC !important;
+  width: 51px;
+  color:#FFFFFF!important;
+}
+
+.btn-facebook {
+  background-color: #3D5B96 !important;
+  width: 51px;
+  color:#FFFFFF!important;
+}
+
+.btn-google {
+  background-color: #DD3F34 !important;
+  width: 51px;
+  color:#FFFFFF!important;
+}
+
+.caret {
+  border-left: 4px solid;
+  border-right: 4px solid;
+  border-top: 4px solid;
+  display: inline-block;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  width: 0;
+}
+
+/* carosel css */
+.slides-control {
+  width: 400px;
+}
+.size-static {
+  height: 225px;
+}
+
+.carousel{
+  border-radius: 65px 65px 65px 65px;
+  overflow: hidden;
+  border-color: red;
+  border-width: thick;
+}
+/*
+.bs-example{
+  margin: 20px;
+}
+
+/*
+.carousel-control {
+  background:transparent;
+  overflow: hidden;
+  border-color: red;
+  border-width: thick;
+}
+
+/*
+.carousel .item {
+  border-radius: 65px 65px 65px 65px;
+}
+/*
+.carousel .item img {
+  border-radius: 65px 65px 65px 65px;
+}

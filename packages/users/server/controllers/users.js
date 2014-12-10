@@ -11,6 +11,7 @@ var mongoose = require('mongoose'),
   nodemailer = require('nodemailer'),
   templates = require('../template');
 
+
 /**
  * Auth callback
  */
@@ -52,19 +53,17 @@ exports.create = function(req, res, next) {
   user.provider = 'local';
 
   // because we set our user.provider to local our models/user.js validation will always be true
-  req.assert('name', 'You must enter a name').notEmpty();
-  req.assert('email', 'You must enter a valid email address').isEmail();
-  req.assert('password', 'Password must be between 8-20 characters long').len(8, 20);
-  req.assert('username', 'Username cannot be more than 20 characters').len(1, 20);
-  req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+  //req.assert('fname', 'You must enter a first name').notEmpty();
+  //req.assert('lname', 'You must enter a last name').notEmpty();
+  //req.assert('email', 'You must enter a valid email address').isEmail();
 
-  var errors = req.validationErrors();
-  if (errors) {
-    return res.status(400).send(errors);
-  }
+  //var errors = req.validationErrors();
+  //if (errors) {
+   // return res.status(400).send(errors);
+  //}
 
   // Hard coded for now. Will address this with the user permissions system in v0.3.5
-  user.roles = ['authenticated'];
+  user.roles = ['Member'];
   user.save(function(err) {
     if (err) {
       switch (err.code) {
@@ -234,4 +233,77 @@ exports.forgotpassword = function(req, res, next) {
       res.json(response);
     }
   );
+ };
+  
+//*************************
+// GTD functions
+//*************************  
+  
+/**
+ * Find all users (For managing accounts)
+ **/
+ 
+ exports.all = function(req, res) 
+ {
+	User.find().sort('userLastName userFirstName').exec(function(err, user) { //Sorted by last,first ascending
+    if (err) 
+	{
+		return res.json(500, { error: 'Error in listing Account information' });
+    }
+    res.json(user);
+
+  });
+ };
+
+exports.setRoles = function(req, res, next) {
+  User.findOne({
+    _id: req.params.userId
+  }, function(err, user) {
+    if (err) {
+      return res.status(400).json({
+        msg: err
+      });
+    }
+    if (!user) {
+      return res.status(400).json({
+        msg: 'Bad userId'
+      });
+    }
+    var errors = req.validationErrors();
+    if (errors) {
+      return res.status(400).send(errors);
+    }
+    console.log('new roles' + req.body.roles);
+    user.roles = req.body.roles;
+    user.save(function(err) {
+      if (err) return next(err);
+      return res.send({ roles: user.roles });
+    });
+  });
 };
+ /**
+  * Update user
+  **/
+  
+exports.update = function(req, res) 
+{
+	var updatedAccount = new User(req.body); 
+	
+    if (updatedAccount._id !== undefined) {
+		var searchID = updatedAccount._id;
+
+        delete updatedAccount._id;
+        User.update(searchID, updatedAccount, function (err) {
+            if (err)
+            {
+                console.log('Account info update failed: ' + err); 
+                return res.json(500, { error: 'Failed to update account: ' + err } ); 
+            } 
+        }); 
+        res.send('Account successfully updated.'); 
+    } else { //We're updating a non existant account
+		res.send('ERROR: Attempted to update non-existant account');
+	}
+
+};
+

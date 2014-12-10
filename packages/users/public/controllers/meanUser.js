@@ -1,7 +1,7 @@
 'use strict';
 angular.module('mean.users')
-  .controller('LoginCtrl', ['$scope', '$rootScope', '$http', '$location',
-    function($scope, $rootScope, $http, $location) {
+  .controller('LoginCtrl', ['$scope', '$document', '$rootScope', '$http', '$location',
+    function($scope, $document, $rootScope, $http, $location) {
       // This object will be filled by the form
       $scope.user = {};
 
@@ -31,6 +31,17 @@ angular.module('mean.users')
             $scope.loginerror = 'Authentication failed.';
           });
       };
+      $scope.forgotpw = function() {
+        $http.post('/forgot-password', {
+          text: $scope.text
+        })
+          .success(function(response) {
+            $scope.response = response;
+          })
+          .error(function(error) {
+            $scope.response = error;
+          });
+      };
     }
   ])
   .controller('RegisterCtrl', ['$scope', '$rootScope', '$http', '$location',
@@ -41,15 +52,34 @@ angular.module('mean.users')
         $scope.usernameError = null;
         $scope.registerError = null;
         $http.post('/register', {
-          email: $scope.user.email,
-          password: $scope.user.password,
-          confirmPassword: $scope.user.confirmPassword,
-          username: $scope.user.username,
-          name: $scope.user.name
+          email: this.userEmail,
+          password: this.pw1,
+          confirmPassword: this.pw2, //need?
+          username: this.userEmail, //need?
+          name: this.userFirst + ' ' + this.userLast, //need?
+		  birthday: this.userDOBmm + '/' + this.userDOBdd + '/' + this.userDOByyyy,
+		  city: this.userCity,
+		  drivingLevel: this.userSkillLvl,
+		  emergencyContactName: this.emerFirst + ' ' + this.emerLast,
+		  primaryEmergencyPhoneNumber: this.emerPhone,
+		  primaryPhoneNumber: this.userPhone,
+	  	  secondaryEmergencyPhoneNumber: this.emerPhone, //need?
+		  //secondaryPhoneNumber: $scope.user.phone2, //need?
+		  state: this.userState,
+		  streetAddress: this.userAddr,
+		  userFirstName: this.userFirst,
+		  userLastName: this.userLast,
+		  zip: this.userZip
         })
           .success(function() {
             // authentication OK
             $scope.registerError = 0;
+            $http.post('/garage',{
+                vehicleYear: $scope.vYear,
+                vehicleMake: $scope.vMake,
+                vehicleModel: $scope.vModel,
+                vehicleColor: $scope.vColor
+            });
             $rootScope.user = $scope.user;
             $rootScope.$emit('loggedin');
             $location.url('/');
@@ -60,12 +90,12 @@ angular.module('mean.users')
               $scope.usernameError = error;
             } else if (error === 'Email already taken') {
               $scope.emailError = error;
-            } else $scope.registerError = error;
+            } else $scope.registerError = error; $scope.next=false;
           });
       };
     }
   ])
-  .controller('ForgotPasswordCtrl', ['$scope', '$rootScope', '$http', '$location',
+  /*.controller('ForgotPWCtrl', ['$scope', '$rootScope', '$http', '$location',
     function($scope, $rootScope, $http, $location) {
       $scope.user = {};
       $scope.forgotpassword = function() {
@@ -80,7 +110,7 @@ angular.module('mean.users')
           });
       };
     }
-  ])
+  ])*/
   .controller('ResetPasswordCtrl', ['$scope', '$rootScope', '$http', '$location', '$stateParams',
     function($scope, $rootScope, $http, $location, $stateParams) {
       $scope.user = {};

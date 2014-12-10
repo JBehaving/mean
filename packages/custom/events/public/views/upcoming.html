@@ -1,0 +1,58 @@
+<div class="panel panel-default" data-ng-controller="EventsController" data-ng-init="find()">
+    <div class="panel-heading table-title-bg">
+        <div class="table-search pull-right">
+            <div class="form-group input-group">
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-search"></i>
+                </span>
+                <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search upcoming events"/>
+            </div>
+        </div>
+        <div class="table-title">upcoming events <a ui-sref='create event'><span class="glyphicon glyphicon-plus glyphlink-red"></span></a></div>
+    </div>
+
+    <table style="max-height: 400px;" class="table table-hover" fixed-header>
+        <thead>
+            <tr data-ng-model="glyph">
+                <th>
+                    <label style="cursor: pointer;" ng-click="newOrder('eventStartDate')">
+                        Date <span ng-show="activeOrder == 'eventStartDate'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                    </label>
+                </th>
+                <th>
+                    <label style="cursor: pointer" ng-click="newOrder('trackId.trackName')">
+                        Track <span ng-show="activeOrder == 'trackId.trackName'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                    </label>
+                </th>
+                <th>
+                    <label style="cursor: pointer" ng-click="newOrder('trackId.trackCity')">
+                        City <span ng-show="activeOrder == 'trackId.trackCity'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                    </label>
+                </th>
+                <th style="text-align: center">
+                    <label style="list-style-type: none; cursor: pointer" ng-click="newOrder('trackId.trackState')">
+                        State <span ng-show="activeOrder == 'trackId.trackState'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                    </label>
+                </th>
+                <th style="text-align: center"><label>Spots Remaining<br><small>(Novice - Intermediate - Advanced)</small></label></th>
+                <th style="text-align: right">
+                    <label style="cursor: pointer" ng-click="newOrder('basePrice')">
+                        Price <span ng-show="activeOrder == 'basePrice'" style="font-size: 10px" class="glyphicon {{glyph}}"></span>
+                    </label>
+                </th>
+                <th style="text-align: right"><label>Attend Event</label></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="clickable-row" data-ng-repeat="event in events | filter: searchText | filterUpcoming | orderBy: [orderBy, 'eventStartDate']" ng-click="showEvent(event)">
+                <td style="vertical-align:middle">{{event.eventStartDate | date:'MM/dd/yyyy'}}</td>
+                <td style="vertical-align:middle">{{event.trackId.trackName}}</td>
+                <td style="vertical-align:middle">{{event.trackId.trackCity}}</td>
+                <td style="vertical-align:middle; text-align: center">{{event.trackId.trackState}}</td>
+                <td style="vertical-align:middle; text-align: center">{{event.noviceCap - event.noviceRegistered}} - {{event.intermediateCap - event.intermediateRegistered}} - {{event.advancedCap - event.advancedRegistered}}</td>
+                <td style="vertical-align:middle; text-align: right">{{event.basePrice | currency}}</td>
+                <td style="text-align: right"><button class="btn btn-default" data-ng-controller="ModalEventController" data-ng-click="$event.preventDefault(); $event.stopPropagation(); open(event)">attend</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,38 @@
+<div ng-show="currTrack">
+    <div class="panel panel-default pull-left" style="margin: 0 10px auto; width: 400px;" >
+        <div class="panel-heading table-title">track info
+            <div class="panel-body panel-text">
+                <label style="width: 120px">Track Name: </label> {{currTrack.trackName}}<br>
+                <label style="width: 120px">Address: </label> {{currTrack.trackAddress}}<br>
+                <label style="width: 120px"> </label> {{currTrack.trackCity}}, {{currTrack.trackState}} {{currTrack.trackZip}}<br>
+            </div>
+        </div>
+        <div class="panel-heading table-title">description
+            <div class="panel-body panel-text">
+                {{currTrack.trackDescription}}
+            </div>
+        </div>
+    </div>
+
+    <div class="pull-left">
+        <div class="panel panel-default" style="width:300px">
+            <div class="panel-heading table-title">contact info
+                <div class="panel-body panel-text">
+                    <label style="width: 60px">Name: </label> {{currTrack.trackContactName}}<br>
+                    <label style="width: 60px">Email: </label> {{currTrack.trackContactEmail}}<br>
+                    <label style="width: 60px">Phone: </label> {{currTrack.trackContactPhone}}<br>
+                </div>
+            </div>
+        </div>
+        <div style="margin: 0 20px 0 20px">
+            <button class="btn btn-primary btn-block btn-default">
+                edit track
+            </button>
+        </div>
+        <div style="margin: 10px 20px 0 20px">
+            <button class="btn btn-primary btn-block btn-default">
+                delete track
+            </button>
+        </div>
+    </div>
+</div>

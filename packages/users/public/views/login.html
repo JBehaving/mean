@@ -1,29 +1,93 @@
+
 <div data-ng-controller="LoginCtrl">
-  <div class="alert alert-danger animated fadeIn" ng-show="loginerror">{{loginerror}}</div>
-  <h1>Sign in</h1>
-  <form  ng-submit="login()" class="signin form-horizontal">
-    <div class="form-group">
-      <label for="email" class="col-md-4 control-label">Email</label>
-      <div class="col-md-8">
-        <input required id="email" type="email" name="email" placeholder="Email" class="form-control" ng-model="user.email"/>
+
+  <div class="container" style="margin-left: -30px">
+      <div class="alert alert-danger animated fadeIn" ng-show="loginerror">{{loginerror}}</div>
+      <div class="omb_login">
+          <div class="row omb_row-sm-offset-3 omb_login omb_socialButtons">
+              <div class="col-sm-3">
+                  <a href="/auth/facebook" class="btn btn-lg btn-block">
+                      <img width="240px" src="/system/assets/img/fblogin.png">
+                  </a>
+              </div>
+              <div class="col-sm-3">
+                  <a href="/auth/google" class="btn btn-lg btn-block">
+                      <img width="240px" src="/system/assets/img/g+login.png">
+                  </a>
+              </div>
+          </div>
+
+          <div class="row omb_row-sm-offset-3 omb_loginOr">
+              <div class="col-xs-12 col-sm-6">
+                  <hr class="omb_hrOr">
+                  <span class="omb_spanOr">or</span>
+              </div>
+          </div>
+
+          <div class="row omb_row-sm-offset-3">
+              <div ng-controller="SwitcherCtrl" class="col-xs-12 col-sm-6">
+                  <div data-fold-toggle="active" class="primary-form">
+                      <form ng-submit="login()" class="omb_loginForm" autocomplete="off" accept-charset="UTF-8" role="form" id="login-form">
+                          <fieldset>
+                              <div class="form-group input-group">
+                                  <span class="input-group-addon">
+                                    @
+                                  </span>
+                                  <input class="form-control glowing-border" ng-model="user.email" placeholder="Email" name="email" type="email" required="" autofocus="">
+                              </div>
+                              <div class="form-group input-group">
+                                  <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-lock">
+                                    </i>
+                                  </span>
+                                  <input class="form-control glowing-border" ng-model="user.password" placeholder="Password" name="password" type="password" value="" required="">
+                              </div>
+                              <div class="form-group">
+                                  <button type="submit" class="btn btn-primary btn-block btn-default">
+                                      login
+                                  </button>
+                              </div>
+                              <div class="pull-left">
+                                  <label class="form-group">
+                                      <input type="checkbox" value="remember-me" checked> Remember Me
+                                  </label>
+                              </div>
+                              <div>
+                                  <a ng-click="active=!active" class="pull-right text-muted" href="#"><small>Forgot your password?</small></a>
+                                  <br>
+                                  <a ui-sref='auth.register' class="pull-right text-muted"><small>New User? Register</small></a>
+                              </div>
+                          </fieldset>
+                      </form>
+                  </div>
+                  <div data-fold-toggle="active" class="secondary-form">
+                      <h4>Forgot your password?</h4>
+                      <form ng-submit="forgotpw()" accept-charset="UTF-8" role="form" id="forgotpw" method="post">
+                          <fieldset>
+                              <span class="help-block">
+                                Input the email address you use to log in to your account.
+                                <br>
+                                We'll send you an email with instructions to choose a new password.
+                               </span>
+                              <div class="form-group input-group">
+                                  <span class="input-group-addon">
+                                    @
+                                  </span>
+                                  <input class="form-control glowing-border" placeholder="Email" name="email" type="email" required="">
+                              </div>
+                              <button type="submit" class="btn btn-primary btn-block btn-default">
+                                  continue
+                              </button>
+                              <a ng-click="active=!active" class="pull-right text-muted"  href="#"><small>Return to Login</small></a>
+                          </fieldset>
+                      </form>
+                  </div>
+              </div>
+          </div>
+
       </div>
-    </div>
-    <div class="form-group">
-      <label for="password" class="col-md-4 control-label">Password</label>
-      <div class="col-md-8">
-        <input required id="password" type="password" name="password" placeholder="Password" class="form-control" ng-model="user.password"/>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-md-offset-4 col-md-8">
-        <button type="submit" class="btn btn-primary">Sign in</button>&nbsp;
-        or&nbsp;<a ui-sref='auth.register' class="show-signup">Sign up</a>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-md-offset-4 col-md-8">
-        <a ui-sref='forgot-password'>Forgot your password?</a>
-      </div>
-    </div>
-  </form>
+  </div>
 </div>
+
+
+

@@ -1,0 +1,129 @@
+<section data-ng-controller="TracksController">
+  <p class="page-title">create a new track</p>
+
+  <form name="trackForm" class="form-horizontal" role="form" data-ng-submit="create(trackForm.$valid)" novalidate>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && trackForm.trName.$invalid }">
+      <label class="col-md-4 control-label">Track Name</label>
+      <div class="col-md-3">
+        <input name="trName" data-ng-model="trName" placeholder="Track name" class="form-control glowing-border" required>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && trackForm.trAddr.$invalid }">
+      <label class="col-md-4 control-label">Street Address</label>
+      <div class="col-md-4">
+        <input name="trAddr" data-ng-model="trAddr" placeholder="Street address" class="form-control glowing-border" required>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && trackForm.trCity.$invalid }">
+      <label class="col-md-4 control-label">City</label>
+      <div class="col-md-3">
+        <input name="trCity" data-ng-model="trCity" placeholder="City" class="form-control glowing-border" required>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && trackForm.trState.value == null }">
+      <label class="col-md-4 control-label">State</label>
+      <div class="col-md-2">
+        <select name="trState" class="form-control glowing-border" data-ng-model="trState" required>
+          <option style="color:lightgray" value="">Select a state
+          <option value="AL">Alabama
+          <option value="AK">Alaska
+          <option value="AZ">Arizona
+          <option value="AR">Arkansas
+          <option value="CA">California
+          <option value="CO">Colorado
+          <option value="CT">Connecticut
+          <option value="DE">Delaware
+          <option value="FL">Florida
+          <option value="GA">Georgia
+          <option value="HI">Hawaii
+          <option value="ID">Idaho
+          <option value="IL">Illinois
+          <option value="IN">Indiana
+          <option value="IA">Iowa
+          <option value="KS">Kansas
+          <option value="KY">Kentucky
+          <option value="LA">Louisiana
+          <option value="ME">Maine
+          <option value="MD">Maryland
+          <option value="MA">Massachusetts
+          <option value="MI">Michigan
+          <option value="MN">Minnesota
+          <option value="MS">Mississippi
+          <option value="MO">Missouri
+          <option value="MT">Montana
+          <option value="NE">Nebraska
+          <option value="NV">Nevada
+          <option value="NH">New Hampshire
+          <option value="NJ">New Jersey
+          <option value="NM">New Mexico
+          <option value="NY">New York
+          <option value="NC">North Carolina
+          <option value="ND">North Dakota
+          <option value="OH">Ohio
+          <option value="OK">Oklahoma
+          <option value="OR">Oregon
+          <option value="PA">Pennsylvania
+          <option value="RI">Rhode Island
+          <option value="SC">South Carolina
+          <option value="SD">South Dakota
+          <option value="TN">Tennessee
+          <option value="TX">Texas
+          <option value="UT">Utah
+          <option value="VT">Vermont
+          <option value="VA">Virginia
+          <option value="WA">Washington
+          <option value="DC">Washington D.C.
+          <option value="WV">West Virginia
+          <option value="WI">Wisconsin
+          <option value="WY">Wyoming
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{ 'has-error' : submitted && trackForm.trZip.$invalid }">
+      <label class="col-md-4 control-label">Zip</label>
+      <div class="col-md-2">
+        <input name="trZip" data-ng-model="trZip" type="number" pattern="[0-9]*" max="99999" min="10000" placeholder="Zip" class="form-control glowing-border" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label">Contact Name</label>
+      <div class="col-md-3">
+        <input name="contactName" data-ng-model="contactName" placeholder="(optional)" class="form-control glowing-border">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label">Contact Email</label>
+      <div class="col-md-3">
+        <input name="contactEmail" type="email" data-ng-model="contactEmail" placeholder="(optional)" class="form-control glowing-border">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label">Contact Phone</label>
+      <div class="col-md-3">
+        <input name="contactPhone" type="tel" data-ng-model="contactPhone" placeholder="(optional)" class="form-control glowing-border">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label">Description</label>
+      <div class="col-md-5">
+        <textarea name="trDesc" data-ng-model="trDesc" class="form-control glowing-border" rows="4" placeholder="(optional)"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label"> </label>
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-default">submit</button>
+      </div>
+    </div>
+  </form>
+</section>

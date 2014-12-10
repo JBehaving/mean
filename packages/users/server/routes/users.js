@@ -19,9 +19,23 @@ module.exports = function(MeanUser, app, auth, database, passport) {
 
   app.route('/reset/:token')
     .post(users.resetpassword);
+	
+  //Updating account
+  app.route('/account/:userId')
+    .get(users.me)
+    .put(auth.requiresLogin, users.update); //TODO NEED AUTHORIZATION 
 
   // Setting up the userId param
   app.param('userId', users.user);
+  
+  //Account management
+  app.route('/accounts')
+    .get(users.all);
+
+  app.route('/roles/:userId')
+    .put(auth.requiresAccountManager, users.setRoles);
+	
+  
 
   // AngularJS route to check for authentication
   app.route('/loggedin')
@@ -36,7 +50,7 @@ module.exports = function(MeanUser, app, auth, database, passport) {
     }), function(req, res) {
       res.send({
         user: req.user,
-        redirect: (req.user.roles.indexOf('admin') !== -1) ? req.get('referer') : false
+        redirect: (req.user.roles.indexOf('Admin') !== -1) ? req.get('referer') : '/'
       });
     });
 

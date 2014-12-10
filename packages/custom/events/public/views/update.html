@@ -1,0 +1,78 @@
+<section data-ng-controller="EventsController" data-ng-init="findOne()">
+    <p class="page-title">update an event</p>
+
+    <form style="float:none; left:25%" name="eventForm" class="form-horizontal col-md-6" role="form" data-ng-submit="update(eventForm.$valid)" novalidate>
+
+        <div data-ng-controller="TracksController" data-ng-init="findAll()" class="form-group" ng-class="{ 'has-error' : submitted && eventForm.evTrack.value == null }">
+            <label class="col-md-3 control-label">Track</label>
+            <div class="col-md-7">
+                <select name="evTrack" class="form-control glowing-border" data-ng-model="event.trackId" required>
+                    <!--<option style="color:gray" value="">Select a track</option>-->
+                    <option data-ng-repeat="track in tracks" value="{{track._id}}" ng-selected="event.trackId._id == track._id">{{track.trackName}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.evDate.$invalid }">
+            <label class="col-md-3 control-label">Date</label>
+            <div class="col-md-4">
+                <input name="evDate" type="date" data-ng-model="event.eventStartDate" placeholder="mm/dd/yyyy" class="form-control glowing-border" required>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.evPrice.$invalid }">
+            <label class="col-md-3 control-label">Price</label>
+            <div class="col-md-3">
+                <input name="evPrice" type="number" data-ng-model="event.basePrice" min="0" placeholder="Price" class="form-control glowing-border" required>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.novice.$invalid }">
+            <label class="col-md-3 control-label">Novice</label>
+            <div class="col-md-2">
+                <input name="novice" type="number" data-ng-model="event.noviceCap" min="0" step="1" class="form-control glowing-border" required>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.intermediate.$invalid }">
+            <label class="col-md-3 control-label">Intermediate</label>
+            <div class="col-md-2">
+                <input name="intermediate" type="number" data-ng-model="event.intermediateCap" min="0" step="1" class="form-control glowing-border" required>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.advanced.$invalid }">
+            <label class="col-md-3 control-label">Advanced</label>
+            <div class="col-md-2">
+                <input name="advanced" type="number" data-ng-model="event.advancedCap" min="0" step="1" class="form-control glowing-border" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">Description</label>
+            <div class="col-md-9">
+                <textarea name="evDesc" type="text" data-ng-model="event.eventDesc" class="form-control glowing-border" rows="4" placeholder="(optional)"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">Facebook Link</label>
+            <div class="col-md-9">
+                <input name="fblink" type="url" data-ng-model="event.albumLink" class="form-control glowing-border" placeholder="(optional)"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">Google+ Link</label>
+            <div class="col-md-9">
+                <input name="glink" type="url" data-ng-model="glink" class="form-control glowing-border" placeholder="(optional)"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn btn-default">submit</button>
+            </div>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,264 @@
+<section data-ng-controller="EventDetailsController">
+    <div data-ng-controller="ModalRegisteredController" data-ng-init="open()" />
+    <div class="container">
+        <div class="pull-right">
+            <div style="padding: 3px" ng-show="global.isEventManager">
+                <button type="submit" class="btn btn-default" data-ng-click="updateEvent()">update</button>
+            </div>
+            <div style="padding: 3px" data-ng-show="global.isEventManager">
+                <button type="submit" class="btn btn-default">cancel</button>
+            </div>
+
+            <div style="padding: 3px" class="btn-group share-group">
+                <a data-toggle="dropdown" class="btn btn-info">
+                    <i class="fa fa-share-alt fa-inverse"></i>
+                </a>
+                <button href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle share">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a data-original-title="Twitter" rel="tooltip"  href="#" class="btn btn-twitter" data-placement="left">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-original-title="Facebook" rel="tooltip"  href="#" class="btn btn-facebook" data-placement="left">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-original-title="Google+" rel="tooltip"  href="#" class="btn btn-google" data-placement="left">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-left: 60px" class="text-center">
+            <h1>{{event.trackId.trackName}}</h1>
+            <h2>{{event.eventStartDate | date : "MM/dd/yyyy"}}</h2>
+            <h3>{{event.trackId.trackAddress}}</h3>
+            <h3>{{event.trackId.trackCity}}, {{event.trackId.trackState}} {{event.trackId.trackZip}}</h3>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: 20px">
+        <div ng-controller="CarouselCtrl" style="width:50%" class="pull-left">
+            <div class="slides-control" style="min-height: 300px; margin: 0 auto;">
+                <carousel interval="myInterval">
+                    <slide ng-repeat="slide in slides" active="slide.active">
+                        <img style="border: 1px solid red;" ng-src="{{slide.image}}"/>
+                    </slide>
+                </carousel>
+            </div>
+            <div style="margin: 20px; text-align: center;" class="">
+                <a href="#" class="btn btn-default">track day calculator</a><br>
+                <span data-ng-show="global.isEventManager"><a href="#" style="color: darkred" >financial report.csv</a><br>
+                <a href="#" style="color: darkred">event manifest.csv</a></span>
+            </div>
+        </div>
+        
+        <div style="width: 50%" class="pull-left">
+            <div style="width: 80%; margin: 0 auto">
+                {{event.eventDesc}}
+            </div>
+
+            <div style="width: 50%; min-width: 200px; margin: 30px auto" class="panel panel-default" data-ng-controller="EventsController" data-ng-init="find()">
+                <div class="panel-heading">
+                    <div class="table-title">past events</div>
+                </div>
+
+                <table style="" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th style="text-align: right">Gallery</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="clickable-row" data-ng-repeat="event in events | filterPast2: event._id | orderBy: '-eventStartDate' | filter: event.trackId.trackName" ng-click="showEvent(event)">
+                        <td>{{event.eventStartDate | date:'MM/dd/yyyy'}}</td>
+                        <td style="text-align: right">
+                            <a href="http://www.facebook.com"><img width="25" src="/events/assets/img/facebook_circle_color-128.png"/></a>
+                            <a href="http://www.google.com"><img width="23" src="/events/assets/img/circle-google-plus-128.png"/></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container" style="margin-top: 10px">
+        <div class="panel panel-default">
+            <div class="panel-heading table-title-bg">
+                <div class="table-search pull-right">
+                    <div class="form-group input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </span>
+                        <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search attendees"/>
+                    </div>
+                </div>
+                <div class="table-title">attendees</div>
+            </div>
+
+            <div class="panel-body">
+                <label>
+                    <input type="checkbox" ng-model="oneAtATime">
+                    Open only one at a time
+                </label>
+                <accordion close-others="oneAtATime">
+                    <accordion-group ng-repeat="group in groups" is-open="group.expanded">
+                        <accordion-heading>
+                            <span class="pull-right">{{group.spots}} spots left</span>
+                            <span class="glyphicon-group glyphicon clickable-row pull-left" ng-class="{'glyphicon-minus': groups[$index].expanded, 'glyphicon-plus': !group[$index].expanded}"></span>
+                            <span class="glyphicon-group glyphicon-asterisk glyphicon-space clickable-row pull-left"></span>
+                            <span class="table-subtitle clickable-row">{{group.title}}</span>
+                        </accordion-heading>
+                        <!--<div ng-repeat="contents in group.content" data-ng-include src="contents['page']" style="padding-left:0"></div>-->
+                        <table style="max-height: 400px;" class="table" fixed-header>
+                            <thead>
+                                <tr>
+                                    <th>Name</th><th>Vehicle</th><th style="text-align: right">Wants to Ride</th><th style="text-align: right">Allows Rider</th><th style="text-align: right">Checked-In</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="vertical-align:middle; color: gray">{{global.user.userFirstName}} {{global.user.userLastName}}</td>
+                                <td style="vertical-align:middle">
+                                    <select class="form-control glowing-border" ng-model="evVehicle">
+                                        <option style="color: gray" value="">Select a vehicle</option>
+                                        <option data-ng-repeat="vehicle in vehicles" value="{{vehicle._id}}">{{vehicle.vehicleYear}} {{vehicle.vehicleMake}} {{vehicle.vehicleModel}}, {{vehicle.vehicleColor}}</option>
+                                    </select>
+                                </td>
+                                <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="riderWelcome"></td>
+                                <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="rideAlong"></td>
+                                <td style="text-align: right">
+                                    <button data-ng-controller="ModalEventController" data-ng-click="open(event)" class="btn btn-default">attend</button>
+                                </td>
+                            </tr>
+                            <tr class="" data-ng-repeat="attendee in attendees | filter: searchText | filter:{ skillClass: group.title }" ng-click="showEvent(event)">
+                                    <td style="vertical-align:middle">{{attendee.userId.userFirstName}} {{attendee.userId.userLastName}}</td>
+                                    <td style="vertical-align:middle">{{attendee.vehicleId.vehicleYear}} {{attendee.vehicleId.vehicleMake}} {{attendee.vehicleId.vehicleModel}}, {{attendee.vehicleId.vehicleColor}}</td>
+                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.riderWelcome" disabled="true"></td>
+                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.rideAlong" disabled="true"></td>
+                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.checkedIn" disabled="true"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </accordion-group>
+                </accordion>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!--<div style="background-color: green" data-ng-controller="ModalRegisteredController" data-ng-init="open()">
+            <div class="col-sm-2 col-md-offset-1">
+                <div ><br/><br/> <br/></div>
+                <span style="font-family: impact; width: 500px; display:block;">
+                    {{event.eventDesc}}
+                this is the greatested sdsdflksdjflksd fasldkfsdl;kf jsad;lfjasdf;lkajsf;lksada sl;dksadlkfj
+                sdfaljjjjjjjjjjjjjj jjjjjjjjjjjj jjjjjjjj jjfjlasdkfjasd lkfjsdalfks djflkaaaaa aaaaaaaaa aaaaa
+                </span>
+                <div class="form-group">
+                    <div>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="panel panel-default" style="width: 450px">
+                        <div class="panel-heading table-title" style="padding: 5px">past events</div>
+                        <table class="table table-hover table-bordered " width="450" data-height="300" style="overflow-y: scroll;">
+                            <thead>
+                            <tr>
+                                <th>date</th>
+                                <th>gallery</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr data-ng-repeat="event in events">
+                                <td>{{event.eventStartDate |  date: "MM/dd/yyyy"}}</td>
+                                <td> href="{{event.albumLink}}"dfd</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-1">
+                <button style="background-color:white; border-width:2px; border-color:red; height:40px; width:200px;"
+                        type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">track day calculator</font></button>
+            </div>
+            <div ><br/><br/> </div>
+            <div ><br/><br/> </div>
+            <div ><br/><br/> </div>
+        </div>
+        <div class="panel panel-default">
+            <h3 class="panel-title">
+                <div><h2>attendees</h2></div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </span>
+                        <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search Attendees"/>
+                </div>
+            </h3>
+            <div class="panel-body">
+                <div class="container pull-left" ng-controller="EventDetailsController">
+                    <accordion close-others="oneAtATime">
+                        <accordion-group ng-repeat="group in groups" is-open="group.expanded">
+                            <accordion-heading class="table-title-bg">
+                                <span class="glyphicon pull-left" ng-class="{'glyphicon-minus': groups[$index].expanded, 'glyphicon-plus': !group[$index].expanded}"></span>
+                                <span style="font-family:impact">{{group.title}}</span>
+                                <a data-ng-controller="ModalEventController" data-ng-click="open(event)">
+                                    <span class="glyphicon"><button type="submit" class="btn btn-default">attend</button></span>
+                                </a>
+                            </accordion-heading>
+                            <div ng-repeat="contents in group.content" data-ng-include src="contents['page']" style="padding-left:0px;"></div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container" ng-include="'events/views/parts/forumlogs.html'"></div>
+
+
+ <!-- inject forum logs here -->
+        <!--
+            <div class="form-group">
+                <button style="background-color:white; border-width:2px; border-color:red; height:40px; width:200px;"
+                        type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">track day calculator</font></button>
+            </div>
+            <div>
+                <table ng-table="tableParams" class="table">
+                    <tr ng-model="eventer" ng-repeat="attendees in manifests">
+                        <td data-title="'Event'" sortable="'event'">{{eventer.eventName}}</td>
+                        <td data-title="'Date'" sortable="'date'">{{eventer.eventDate}}</td>
+                        <td data-title="'State'" sortable="'state'">{{eventer.eventState}}</td>
+                        <td data-title="'Event Status'" sortable="'status'">{{eventer.eventStatus}}</td>
+                        <td data-title="'Cost'" sortable="'cost'">{{eventer.eventCost}}</td>
+                        <td><form><button ng-submit="filterEvents()" type="submit" class="btn btn-small btn-block btn"><font face="impact" size="4">track day calculator</font></button></td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <table ng-table="tableParams" class="table">
+                    <tr ng-model="log" ng-repeat="log in logs">
+                        <td data-title="''" >{{log.comment}}</td>
+
+                    </tr>
+                </table>
+            </div>-->
+

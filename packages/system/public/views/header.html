@@ -1,38 +1,58 @@
-<div class="page-header" data-ng-controller="HeaderController">
-  <div class="logo pull-left">
-    <a class="navbar-brand" ui-sref="home" mean-token="'site-title'">MEAN</a>
-  </div>
+    <div class="container-fluid nav-border" data-ng-controller="HeaderController">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
 
-  <div class="left pull-left">
-    <ul class="navbar-nav nav">
-      <li data-ng-repeat="item in menus.main" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
-        <a mean-token="item.link" ui-sref='{{item.link}}'>{{item.title}}</a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="account">
-    <div class="text-edit">
-      <div class="pull-right" data-ng-show="global.authenticated" mean-token-editable></div>
-      <div class="pull-right" data-ng-show="global.authenticated" mean-translate></div>
+        <div class="navbar-collapse collapse" data-ng-controller="ActiveCtrl">
+            <div class="navbar-left">
+                <div class="pull-right">
+                    <ul class="nav navbar-nav">
+                        <li ng-class="{'is-active': isActive('/events')}"><a ui-sref='events page'>events</a></li>
+                        <li ng-class="{'is-active': isActive('/faq')}"><a ui-sref='faq page'>faq</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="navbar-center">
+                <a ui-sref='home page' mean-token="'site-title'"><img src="/system/assets/img/blacklogo.jpg" width="140" height="60"/></a>
+            </div>
+            <div class="navbar-right">
+                <div class="pull-left">
+                    <ul class="nav navbar-nav">
+                        <li ng-class="{'is-active': isActive('/about')}"><a ui-sref='about page'>about</a></li>
+                        <li ng-class="{'is-active': isActive('/contact')}"><a ui-sref='contact page'>contact</a></li>
+                        <li class="dropdown" data-ng-show="showTools()">
+                            <a href="#" class="dropdown-toggle nav-text" data-toggle="dropdown">
+                                tools <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="text-align: right"><a ui-sref="accounts page">Manage Accounts</a></li>
+                                <li style="text-align: right"><a ui-sref='tracks page'>Manage Tracks</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="pull-right">
+                    <ul class="navbar-nav nav" data-ng-hide="global.authenticated">
+                        <li><a ui-sref='auth.login'>login</a></li>
+                    </ul>
+                    <ul class="navbar-nav nav" data-ng-show="global.authenticated">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                {{global.user.userFirstName}} {{global.user.userLastName}} <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a ui-sref="my account">My Account</a></li>
+                                <li><a ui-sref="garage page">My Virtual Garage</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/logout">Log out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <ul class="navbar-nav nav" data-ng-hide="global.authenticated">
-      <li><a ui-sref='auth.register'>Register</a>
-      </li>
-      <li class="divider-vertical"></li>
-      <li><a ui-sref='auth.login'>Login</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav nav" data-ng-show="global.authenticated">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          {{global.user.name}} <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="/logout">Sign out</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</div>
