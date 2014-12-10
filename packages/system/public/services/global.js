@@ -23,6 +23,7 @@ angular.module('mean.system').factory('Global', [
       _this._data.isEventManager = window.user.roles.indexOf('Event Manager') !== -1;
       _this._data.isOwner = window.user.roles.indexOf('Owner') !== -1;
       _this._data.isMember = window.user.roles.indexOf('Member') !== -1;
+      _this._data.isEmployee = window.user.roles.indexOf('Standard Employee') !== -1;
      // _this._data.hasRole = window.user.roles.indexOf(r) !== -1;
     }
     return _this._data;

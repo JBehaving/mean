@@ -18,14 +18,14 @@
             <div>
                 <span class="badge">Posted {{announcement.newsEditedDate}} {{announcement.newsEditedTime}}</span>
             </div>
-            <!--<div data-ng-if="hasAuthorization(announcement)">-->
+            <div data-ng-show="global.isEmployee">
                 <a class="btn" href="/#!/announcements/{{announcements._id}}/edit">
                     <i class="glyphicon glyphicon-edit"></i>
                 </a>
                 <a class="btn" data-ng-click="remove(announcement);">
                     <i class="glyphicon glyphicon-remove-circle"></i>
                 </a>
-            <!--</div>-->
+            </div>
             <hr>
         </div>
     </div>
