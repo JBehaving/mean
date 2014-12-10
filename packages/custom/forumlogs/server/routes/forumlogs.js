@@ -6,19 +6,16 @@ module.exports = function(Forumlogs, app, auth, database) {
   var forumlogs = require('../controllers/forumlogs');
 
     app.route('/forumlogs')
-      .get(forumlogs.all)
-      .post(forumlogs.create);
-
-    app.route('/forumlogs')
-        .get(forumlogs.all)
-        .post(forumlogs.create)
-        .put(forumlogs.update);
+        .get(auth.requiresEmployee, forumlogs.all)
+        .post(auth.requiresEmployee, forumlogs.create)
+        .put(auth.requiresEmployee, forumlogs.update)
+        .delete(auth.requiresEmployee, forumlogs.destroy);
 
     app.route('event/forumlogs/:eventId')
-        .get(forumlogs.findByEvent);
+        .get(auth.requiresEmployee, forumlogs.findByEvent);
 
     app.route('user/forumlogs/:userId')
-        .get(forumlogs.findByUser);
+        .get(auth.requiresEmployee, forumlogs.findByUser);
 
     app.param('forumlogId', forumlogs.forumlog);
 

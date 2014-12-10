@@ -7,8 +7,9 @@ module.exports = function(Events, app, auth, database) {
     var manifests = require('../controllers/manifests');
     app.route('/events')
         .get(events.all)
-        .post(events.create)
-        .put(events.update);
+        .post(auth.requiresEventManager, events.create)
+        .put(auth.requiresEventManager,events.update)
+      .delete(auth.requiresEventManager, events.destroy);
 
     app.route('/events/:eventId')
         .get(events.show);

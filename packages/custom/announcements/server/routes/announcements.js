@@ -4,7 +4,7 @@ var announcement = require('../controllers/announcements');
 
 // Announcement authorization helper
 var hasAuthorization = function(req, res, next) {
-    if (!req.user.isAdmin && req.announcement.user.id !== req.user.id) {
+    if (req.announcement.user.id !== req.user.id) {
         return res.send(401, 'User is not authorized to access Announcements');
     }
     next();
@@ -19,8 +19,8 @@ module.exports = function(Announcements, app, auth, database) {
 
   app.route('announcements/:announcementId')
     .get(announcement.show)
-    .put(auth.requiresLogin, hasAuthorization, announcement.update)
-    .delete(auth.requiresLogin, hasAuthorization, announcement.destroy);
+    .put(auth.requiresEmployee, hasAuthorization, announcement.update)
+    .delete(auth.requiresEmployee, hasAuthorization, announcement.destroy);
 
   app.get('/announcements/render', function(req, res, next) {
     announcement.render('index', {

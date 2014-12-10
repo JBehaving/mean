@@ -20,8 +20,8 @@ module.exports = function(Vehicles, app, auth, database) {
   app.param('vehicleId', vehicles.vehicle);
 */
   app.route('/garage')
-  .get(auth.requiresLogin, vehicles.findByUser)
-  .put(auth.requiresLogin, vehicles.update)
-  .post(auth.requiresLogin, vehicles.create);
+  .get(auth.requiresMember, vehicles.findByUser)
+  .put(auth.requiresMember, vehicles.update)
+  .post(auth.requiresMember, vehicles.create);
 
 };

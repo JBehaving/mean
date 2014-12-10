@@ -5,7 +5,7 @@ module.exports = function(Tracks, app, auth, database) {
     var tracks = require('../controllers/tracks');
 
     app.route('/tracks')
-        .get(tracks.findTrack)
+        .get(auth.requiresEmployee, tracks.findTrack)
         .post(auth.requiresEventManager, tracks.create);
 
     //app.route('/tracks/:trackName')
