@@ -5,14 +5,6 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
     $scope.global = Global;
     $scope.menus = {};
 
-    // Default hard coded menu items for main menu
-    var defaultMainMenu = [];
-
-
-
-    // Query server for menus and check permissions
-    //queryMenu('main', defaultMainMenu);
-
     $scope.isCollapsed = false;
 
     $rootScope.$on('loggedin', function() {

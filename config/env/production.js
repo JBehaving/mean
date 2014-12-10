@@ -61,5 +61,12 @@ module.exports = {
       user: 'EMAIL_ID',
       pass: 'PASSWORD'
     }
-  }
+  },
+    paypal: {
+        'mode' : 'sandbox',
+        'client_id' : 'ARblYBAFKYEnLKmBkrnMGlhX70gpNwIBX0GtbBXC5fVeiAWHC9c4tVeXn23K',
+        'client_secret' : 'EDvGjhBwlIbHFDwhy8S7bz04r-l6krTyxtf0O2xtovBH4sb1DkSgOuUA_X06',
+        'return_url' : 'http://localhost:3000/events/register/complete',
+        'cancel_url' : 'http://localhost:3000/events/register/cancel'
+    }
 };
