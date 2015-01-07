@@ -2,7 +2,7 @@
   <h2>
       Announcements
       <a data-ng-controller="ModalController" data-ng-click="open()">
-          <i class="glyphicon glyphicon-plus-sign glyphlink-red"></i>
+          <i data-ng-show="global.isEmployee" class="glyphicon glyphicon-plus-sign glyphlink-red"></i>
       </a>
   </h2>
 <!--    <select name="sort" data-ng-model="sort" id="sort">
