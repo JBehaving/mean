@@ -51,9 +51,7 @@ var createPaypalPayment = function (req,res) {
                 'currency': 'USD',
                 'total': req.event.basePrice
             },
-            'description': 'GotTrackDays.com\nTrack Day Event on '
-                + req.event.eventStartDate.getMonth() + '/' + req.event.eventStartDate.getDate()
-                + '/' + req.event.eventStartDate.getYear()
+            'description': 'GotTrackDays.com\nTrack Day Event on ' + req.event.eventStartDate.getMonth() + '/' + req.event.eventStartDate.getDate() + '/' + req.event.eventStartDate.getYear()
         }]
     };
 
