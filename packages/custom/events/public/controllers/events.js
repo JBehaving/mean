@@ -154,4 +154,8 @@ angular.module('mean.events').controller('EventsController', ['$scope', '$stateP
       return past;
     };
   })
-;
+    .filter('hideName', function() {
+        return function(nameString) {
+            return nameString.charAt(0);
+        };
+    });

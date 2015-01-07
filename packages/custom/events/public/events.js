@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('mean.events', []);
+angular.module('mean.events', ['ngCsv']);

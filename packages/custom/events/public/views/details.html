@@ -41,6 +41,7 @@
             <h2>{{event.eventStartDate | date : "MM/dd/yyyy"}}</h2>
             <h3>{{event.trackId.trackAddress}}</h3>
             <h3>{{event.trackId.trackCity}}, {{event.trackId.trackState}} {{event.trackId.trackZip}}</h3>
+            <h3>{{event.basePrice | currency}}</h3>
         </div>
     </div>
 
@@ -54,9 +55,10 @@
                 </carousel>
             </div>
             <div style="margin: 20px; text-align: center;" class="">
-                <a href="#" class="btn btn-default">track day calculator</a><br>
+                <button data-ng-controller="ModalEventController" data-ng-click="open(event)" class="btn btn-default">attend this event!</button>
+                <a href="#" class="btn btn-default" data-ng-show="false">track day calculator</a><br>
                 <span data-ng-show="global.isEventManager"><a href="#" style="color: darkred" >financial report.csv</a><br>
-                <a href="#" style="color: darkred">event manifest.csv</a></span>
+                <a href="#" style="color: darkred" ng-csv="attendees">event manifest.csv</a></span>
             </div>
         </div>
         
@@ -129,24 +131,24 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td style="vertical-align:middle; color: gray">{{global.user.userFirstName}} {{global.user.userLastName}}</td>
+                                <td style="vertical-align:middle; color: gray">Your name could be here!</td>
                                 <td style="vertical-align:middle">
-                                    <select class="form-control glowing-border" ng-model="evVehicle">
+                                    <!--<select class="form-control glowing-border" ng-model="evVehicle">
                                         <option style="color: gray" value="">Select a vehicle</option>
                                         <option data-ng-repeat="vehicle in vehicles" value="{{vehicle._id}}">{{vehicle.vehicleYear}} {{vehicle.vehicleMake}} {{vehicle.vehicleModel}}, {{vehicle.vehicleColor}}</option>
-                                    </select>
+                                    </select>-->
                                 </td>
-                                <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="riderWelcome"></td>
-                                <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="rideAlong"></td>
+                                <td style="vertical-align:middle; text-align: right"><!--<input type="checkbox" ng-model="riderWelcome">--></td>
+                                <td style="vertical-align:middle; text-align: right"><!--<input type="checkbox" ng-model="rideAlong">--></td>
                                 <td style="text-align: right">
                                     <button data-ng-controller="ModalEventController" data-ng-click="open(event)" class="btn btn-default">attend</button>
                                 </td>
                             </tr>
                             <tr class="" data-ng-repeat="attendee in attendees | filter: searchText | filter:{ skillClass: group.title }" ng-click="showEvent(event)">
-                                    <td style="vertical-align:middle">{{attendee.userId.userFirstName}} {{attendee.userId.userLastName}}</td>
+                                    <td style="vertical-align:middle">{{attendee.userId.userFirstName}} {{attendee.userId.userLastName | hideName}}</td>
                                     <td style="vertical-align:middle">{{attendee.vehicleId.vehicleYear}} {{attendee.vehicleId.vehicleMake}} {{attendee.vehicleId.vehicleModel}}, {{attendee.vehicleId.vehicleColor}}</td>
-                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.riderWelcome" disabled="true"></td>
                                     <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.rideAlong" disabled="true"></td>
+                                    <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.riderWelcome" disabled="true"></td>
                                     <td style="vertical-align:middle; text-align: right"><input type="checkbox" ng-model="attendee.checkedIn" disabled="true"></td>
                                 </tr>
                             </tbody>

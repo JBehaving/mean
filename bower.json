@@ -12,6 +12,7 @@
     "angular-bootstrap": "0.11.0",
     "angular-ui-router": "#master",
     "angu-fixed-header-table" : "latest",
-    "angular-spinner" : "latest"
+    "angular-spinner" : "latest",
+    "ng-csv" : "0.2.5"
   }
 }

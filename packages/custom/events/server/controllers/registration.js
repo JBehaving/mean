@@ -30,7 +30,8 @@ var restoreEventState = function(event,transaction,cb) {
             console.log('Event ' + update._id + 'rolled back sucessfully');
         }
     });
-    cb();
+    if (cb !== undefined)
+        cb();
 };
 
 var createPaypalPayment = function (req,res) {
@@ -50,7 +51,9 @@ var createPaypalPayment = function (req,res) {
                 'currency': 'USD',
                 'total': req.event.basePrice
             },
-            'description': req.event.eventDesc
+            'description': 'GotTrackDays.com\nTrack Day Event on '
+                + req.event.eventStartDate.getMonth() + '/' + req.event.eventStartDate.getDate()
+                + '/' + req.event.eventStartDate.getYear()
         }]
     };
 

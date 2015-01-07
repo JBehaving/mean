@@ -8,7 +8,7 @@
                 <input ng-model="searchText" type="search" class="text-right form-control glowing-border no-validate" placeholder="Search upcoming events"/>
             </div>
         </div>
-        <div class="table-title">upcoming events <a ui-sref='create event'><span class="glyphicon glyphicon-plus glyphlink-red"></span></a></div>
+        <div class="table-title">upcoming events <a ui-sref='create event' ng-show="global.isEventManager"><span class="glyphicon glyphicon-plus glyphlink-red"></span></a></div>
     </div>
 
     <table style="max-height: 400px;" class="table table-hover" fixed-header>

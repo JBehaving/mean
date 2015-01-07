@@ -29,7 +29,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
                     content: [
                         {'page': 'events/views/parts/advanced.html'}
                     ],
-                    expanded: true
+                    expanded: false
                 },
                 {
                     title: 'intermediate',
@@ -62,7 +62,7 @@ angular.module('mean.events').controller('EventDetailsController', ['$scope', '$
 
         $http.get('/attendees?'+'eventId=' + thisEventId)
             .success(function (data) {
-                console.log('Got data: ' + data);
+                console.log(data);
                 $scope.attendees = data;
             })
             .error(function (data) {
